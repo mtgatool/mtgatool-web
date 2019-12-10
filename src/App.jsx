@@ -2,6 +2,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
+// REDUX 
+import { setDb } from './actions';
+import { useDispatch, } from 'react-redux'
+
 import Video from './components/video';
 import {
   WrapperInner,
@@ -43,31 +47,46 @@ function App() {
   const artist = 'Bedevil by Seb Mckinnon';
   const [image, setImage] = React.useState(keyArt);
   const [queryState, setQueryState] = React.useState(0);
+  const dispatch = useDispatch();
 
   const getDatabase = () => {
-    setQueryState(STATE_DOWNLOAD);
-    const xhr = new XMLHttpRequest();
-    xhr.onload = () => {
-      if (xhr.status !== 200) {
-        setQueryState(xhr.status);
-      } else {
-        try {
-          const jsonData = JSON.parse(xhr.responseText);
-          setDatabase(jsonData);
-          setQueryState(STATE_IDLE);
-        } catch (e) {
-          console.log(e);
-          setQueryState(STATE_ERROR);
+    if (new Date(localStorage.databaseTime) < new Date()) {
+      const dbJson = JSON.parse(localStorage.database);
+      console.log("database from cache: v" + dbJson.version);
+      dispatch(setDb(dbJson));
+    } else {
+      setQueryState(STATE_DOWNLOAD);
+      const xhr = new XMLHttpRequest();
+      xhr.onload = () => {
+        if (xhr.status !== 200) {
+          setQueryState(xhr.status);
+        } else {
+          try {
+            const jsonData = JSON.parse(xhr.responseText);
+            console.log("Database download ok!");
+            localStorage.database = xhr.responseText;
+            localStorage.databaseTime = new Date();
+            dispatch(setDb(jsonData));
+            // Query state could be in redux too
+            setQueryState(STATE_IDLE);
+          } catch (e) {
+            console.log(e);
+            setQueryState(STATE_ERROR);
+          }
         }
-      }
-    };
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && queryState !== STATE_ERROR) {
-        setQueryState(STATE_IDLE);
-      }
-    };
-    xhr.open('GET', DATABASE_URL);
-    xhr.send();
+      };
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && queryState !== STATE_ERROR) {
+          setQueryState(STATE_IDLE);
+        }
+      };
+      xhr.open('GET', DATABASE_URL);
+      xhr.send();
+    }
+  };
+
+  function setDatabase(db) {
+    console.log("setDatabase", db);
   };
 
   React.useEffect(() => {

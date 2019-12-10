@@ -1,40 +1,36 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { WrapperInner, WrapperOuter } from '../wrapper';
-import keyArt from '../../images/key-art.jpg';
-import css from './metagame.css';
-import TopTitle from '../title';
-import { ManaCost } from '../card-tile';
+import React from "react";
+import { WrapperInner, WrapperOuter } from "../wrapper";
+import keyArt from "../../images/key-art.jpg";
+import css from "./metagame.css";
+import TopTitle from "../title";
+import { ManaCost } from "../card-tile";
 
-const METAGAME_URL = 'https://mtgatool.com/api/get_metagame.php';
+import { useSelector } from "react-redux";
+
+const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 const STATE_IDLE = 0;
 const STATE_DOWNLOAD = 1;
 const STATE_ERROR = 2;
-/*
-const EVENTS = [
-  {
-    name: 'Standard BO1',
-    link: 'BO1',
-  },
-  {
-    name: 'Standard BO3',
-    link: 'BO3',
-  },
-  {
-    name: 'Historic BO1',
-    link: 'HBO1',
-  },
-  {
-    name: 'Historic BO3',
-    link: 'HBO3',
-  },
-];
-*/
+
+export const getCard = grpId => {
+  // Default card not found to undefined
+  return useSelector(state =>
+    state.database.cards ? state.database.cards[grpId] : undefined
+  );
+};
+
 function Metagame(props) {
   const { setImage } = props;
   const [queryState, setQueryState] = React.useState(STATE_IDLE);
-  const [metagameData, setMetagameDataa] = React.useState(null);
+  const [metagameData, setMetagameData] = React.useState(null);
+  // Little debug here
+  /*
+  const database = useSelector(state => {
+    console.log("new state; ", state);
+  });
+  */
 
   const getMetagameData = () => {
     setQueryState(STATE_DOWNLOAD);
@@ -44,8 +40,11 @@ function Metagame(props) {
         setQueryState(xhr.status);
       } else {
         try {
-          const jsonData = JSON.parse(xhr.responseText);
-          setMetagameDataa(jsonData);
+          let jsonData = JSON.parse(xhr.responseText);
+          jsonData.meta = jsonData.meta.sort((a, b) => {
+            a.total > b.total;
+          })
+          setMetagameData(jsonData);
           setQueryState(STATE_IDLE);
         } catch (e) {
           console.log(e);
@@ -58,7 +57,7 @@ function Metagame(props) {
         setQueryState(STATE_IDLE);
       }
     };
-    xhr.open('GET', METAGAME_URL);
+    xhr.open("GET", METAGAME_URL);
     xhr.send();
   };
 
@@ -68,10 +67,10 @@ function Metagame(props) {
   }, []);
 
   return (
-    <WrapperOuter style={{ minHeight: 'calc(100vh - 5px)' }}>
-      <TopTitle title={'Metagame (' + queryState + ')'} />
+    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
+      <TopTitle title={"Metagame (" + queryState + ")"} />
       <WrapperInner>
-        <div className={css['metagame-div']}>
+        <div className={css["metagame-div"]}>
           {metagameData && metagameData.meta ? (
             metagameData.meta.map((arch, index) => {
               return <Archetype key={arch.name + index} arch={arch} />;
@@ -87,25 +86,26 @@ function Metagame(props) {
 
 function Archetype(props) {
   const { arch } = props;
-
-  const cardImage =
-    'https://img.scryfall.com/cards/art_crop/front/8/a/8a81e889-490b-4aeb-8e84-ea9a390bb8fe.jpg?1572893192';
+  const cardObj = getCard(arch.tile);
+  const cardImage = cardObj
+    ? `https://img.scryfall.com/cards${cardObj.images.art_crop}`
+    : "https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/thumb/c/c4/Fblthp.jpg/250px-Fblthp.jpg";
   const tileStyle = {
-    backgroundImage: `url(${cardImage})`,
+    backgroundImage: `url(${cardImage})`
   };
 
-  const winrate = ((arch.wins + arch.losses) / arch.total) * 100;
+  const winrate = (arch.win / arch.total) * 100;
   return (
-    <div className={css['archetype-div']}>
-      <div className={css['archetype-tile']} style={tileStyle}></div>
-      <div className={css['archetype-name']}>{arch.name}</div>
-      <div className={css['archetype-colors']}>
+    <div className={css["archetype-div"]}>
+      <div className={css["archetype-tile"]} style={tileStyle}></div>
+      <div className={css["archetype-name"]}>{arch.name}</div>
+      <div className={css["archetype-colors"]}>
         <ManaCost colors={arch.colors} />
       </div>
-      <div className={css['archetype-desc']}>
-        {winrate.toFixed(2) + '% winrate'}
+      <div className={css["archetype-desc"]}>
+        {arch.share + "% - " + winrate.toFixed(2) + "% winrate"}
       </div>
-      <div className={css['archetype-desc']}>{arch.matches + ' matches'}</div>
+      <div className={css["archetype-desc"]}>{arch.total + " matches"}</div>
     </div>
   );
 }

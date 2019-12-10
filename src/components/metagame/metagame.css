@@ -23,9 +23,10 @@
   /* box-shadow: rgba(0, 0, 0, 0.25) 0 6px 8px 0px; */
   cursor: pointer;
   color: white;
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0,0.7);
   margin: 8px;
   font-size: 14px;
+  line-height: 16px;
   /* max-width: 200px; */
   width: -webkit-fill-available;
   align-items: center;
@@ -37,7 +38,7 @@
 }
 
 .archetype-div:hover {
-  background-color: rgba(40,40,40, 0.85);
+  background-color: rgba(40,40,40, 0.8);
 }
 
 #archetype-selector {
