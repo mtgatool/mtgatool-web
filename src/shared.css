@@ -1,0 +1,175 @@
+:root {
+  --main-font-name:  'lato', sans-serif;
+  --main-font-name-it:  'lato-italic', sans-serif;
+  --main-font-name-bold:  'lato-bold', sans-serif;
+  --main-font-name-bold-it:  'lato-bold-italic', sans-serif;
+  --sub-font-name:  'roboto', sans-serif;
+  --sub-font-name-it:  'roboto-italic', sans-serif;
+  --sub-font-name-bold:  'roboto-bold', sans-serif;
+  --sub-font-name-bold-it:  'roboto-bold-italic', sans-serif;
+  --main-font-style-it: normal;
+  --color-w: #E7CA8E;
+  --color-u: #AABEDF;
+  --color-b: #A18E87;
+  --color-r: #DD8263;
+  --color-g: #B7C89E;
+  --color-c: #B6A59E;
+  --color-m: #FFCD70;
+  --color-highlight: #d2e7fa;
+
+  --color-light: rgba(250, 229, 210, 1);
+  --color-light-20: rgba(250, 229, 210, 0.20);
+  --color-light-40: rgba(250, 229, 210, 0.40);
+  --color-light-50: rgba(250, 229, 210, 0.50);
+  --color-light-66: rgba(250, 229, 210, 0.66);
+  --color-light-75: rgba(250, 229, 210, 0.75);
+
+  --color-mid: rgba(145, 121, 97, 1);
+  --color-mid-20: rgba(145, 121, 97, 0.20);
+  --color-mid-40: rgba(145, 121, 97, 0.40);
+  --color-mid-50: rgba(145, 121, 97, 0.50);
+  --color-mid-66: rgba(145, 121, 97, 0.66);
+  --color-mid-75: rgba(145, 121, 97, 0.75);
+
+  --color-back: rgba(51, 40, 30, 0.75);
+  --color-back-alpha: rgba(51, 40, 30, 0.35);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+@font-face {
+    font-family: 'belerenbold';
+    src: url('./fonts/belerenbold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('./fonts/roboto-v18-latin-regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'roboto-italic';
+    src: url('./fonts/roboto-v18-latin-italic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'roboto-bold';
+    src: url('./fonts/roboto-v18-latin-500.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'roboto-bold-italic';
+    src: url('./fonts/roboto-v18-latin-500italic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'lato';
+    src: url('./fonts/Lato-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'lato-italic';
+    src: url('./fonts/Lato-Italic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'lato-bold';
+    src: url('./fonts/Lato-Bold.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'lato-bold-italic';
+    src: url('./fonts/Lato-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Mplantin';
+    src: url('./fonts/Mplantin.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Mplantin-italic';
+    src: url('./fonts/mplantinit.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Mplantin-bold';
+    src: url('./fonts/mplantinbold.woff') format('woff');
+}
+ 
+@media screen and (min-width: 600px) {
+    .home-desc {
+        height: calc(50vh - 80px);
+    }
+    .text-description {
+        margin: 0 48px;
+    }
+    .video-container {
+        margin: 0 48px;
+    }
+    .button-pause, .button-play {
+        background-position: calc(100% - 64px) !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .text-description {
+        width: 1024px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 1120px) {
+    .video-container {
+        width: 1024px;
+        height: 768px;
+        margin: auto;
+    }
+    .button-pause, .button-play {
+        background-position: calc(100% - 24px) !important;
+    }
+}
+
+.text-light {
+    color: var(--color-light);
+}
+
+.text-dark {
+    color: var(--color-back);
+    /* #33281E; */
+}
+
+.text-centered {
+    display: block;
+    margin: auto;
+}
+
+.text-description {
+    text-align: center;
+    font-weight: 100;
+    font-family: var(--main-font-name);
+    font-size: 1.5rem;
+    padding-bottom: 0.5em;
+}
+
+.text-title {
+    width: 100%;
+    text-align: center;
+    font-family: var(--main-font-name);
+    font-size: 2rem;
+    padding: 1em 0 0.25em 0;
+}
+
+.text-title-nopad {
+    width: 100%;
+    text-align: center;
+    font-family: var(--main-font-name);
+    font-size: 2rem;
+}
+
+  

@@ -1,0 +1,32 @@
+.wrapper-outer {
+  justify-content: center;
+  flex-direction: column;
+  background-color: #33281ebf;
+  color: var(--color-light);
+  display: flex;
+  flex-grow: 2;
+}
+
+.wrapper-outer-light {
+  justify-content: center;
+  flex-direction: column;
+  background-color: #ecddce;
+  color: var(--color-back);
+  display: flex;
+  flex-grow: 2;
+}
+
+.wrapper-inner {
+  margin: auto;
+  flex-grow: 2;
+  display: contents;
+}
+
+.wrapper-outer a {
+  color: rgba(231, 202, 142, 1);
+  margin-top: 10px;
+  font-size: 1rem;
+  font-family: var(--sub-font-name);
+  display: block;
+  text-align: center;
+}

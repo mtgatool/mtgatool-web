@@ -1,0 +1,137 @@
+.releases-container {
+  /*max-width: fit-content;*/
+  padding-top: 16px;
+  padding: 16px 8px 24px 8px;
+  /* margin-left: 13px; */
+  margin: auto;
+  display: block;
+  background: -moz-linear-gradient(
+    left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 8%,
+    var(--color-mid-40) 8%,
+    var(--color-mid-40) 9%,
+    rgba(0, 0, 0, 0) 9%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    right top,
+    color-stop(0%, rgba(0, 0, 0, 0)),
+    color-stop(8%, rgba(0, 0, 0, 0)),
+    color-stop(8%, var(--color-mid-40)),
+    color-stop(9%, var(--color-mid-40)),
+    color-stop(9%, rgba(0, 0, 0, 0)),
+    color-stop(100%, rgba(0, 0, 0, 0))
+  );
+  background: -webkit-linear-gradient(
+    left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 8%,
+    var(--color-mid-40) 8%,
+    var(--color-mid-40) 9%,
+    rgba(0, 0, 0, 0) 9%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.releases-container-line {
+  background-color: #e7ca8e;
+  width: 4px;
+  opacity: 0.5;
+  margin-left: 2.3em;
+  z-index: -1;
+}
+
+.releases-title {
+  border-bottom: solid #b1896554 1px;
+  padding-bottom: 1em;
+}
+
+.version-div {
+  color: rgb(0, 0, 0);
+  margin: 1em 0.25em;
+  align-items: center;
+  height: 2em;
+  display: flex;
+}
+
+.version-number {
+  background-color: rgba(231, 202, 142, 1);
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 2em;
+  width: 5.5em;
+  height: 2em;
+  border-radius: 0.25em;
+  font-family: var(--sub-font-name);
+}
+
+.version-release {
+  font-size: 1rem;
+  margin-left: 1em;
+  color: #ffeedcc9;
+  font-family: var(--sub-font-name-it);
+}
+
+.version-end {
+  height: 2em;
+}
+
+.commit-div {
+  color: rgb(0, 0, 0);
+  margin-top: 0.5em;
+  display: flex;
+}
+
+@media screen and (min-width: 500px) {
+  .commit-div {
+    margin-left: 4em;
+  }
+}
+
+.commit-div a {
+  color: rgba(231, 202, 142, 1);
+  font-size: 1rem;
+  font-family: var(--sub-font-name-it);
+  margin-top: 0;
+}
+
+.commit-type {
+  font-size: 0.8rem;
+  text-align: center;
+  min-width: 6.5em;
+  height: 2em;
+  line-height: 2em;
+  border-radius: 0.25em;
+  font-family: var(--sub-font-name);
+}
+
+.type-added {
+  background-color: rgba(183, 200, 158, 1) !important;
+}
+
+.type-fixed {
+  background-color: rgba(170, 190, 223, 1) !important;
+}
+
+.type-removed {
+  background-color: rgba(221, 130, 99, 1) !important;
+}
+
+.type-improved {
+  background-color: rgba(220, 170, 220, 1) !important;
+}
+
+.type-error {
+  font-size: 1rem;
+  color: rgba(221, 130, 99, 1) !important;
+  text-align: center;
+}
+
+.commit-desc {
+  margin: 0 10px;
+  font-size: 1rem;
+  color: white;
+  font-family: var(--sub-font-name-it);
+}

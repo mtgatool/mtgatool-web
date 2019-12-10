@@ -1,0 +1,25 @@
+.title-notfound {
+  color: var(--color-r);
+  font-size: 36px;
+  font-family: var(--main-font-name-bold-it);
+  text-align: center;
+  margin-top: auto;
+}
+
+.subtitle-notfound {
+  color: var(--color-light-75);
+  font-size: 18px;
+  font-family: var(--main-font-name-it);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.subtitle-errorcode {
+  color: var(--color-light-75);
+  font-size: 18px;
+  font-family: var(--main-font-name-it);
+  text-align: center;
+  justify-self: start;
+  margin-top: auto;
+  margin-bottom: 1em;
+}

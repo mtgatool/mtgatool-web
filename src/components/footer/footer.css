@@ -1,0 +1,31 @@
+.footer-main {
+  background-image: url(../../cssimages/riboon.png);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% 5px;
+  top: 0;
+  background-color: var(--color-back);
+  padding-top: 24px;
+}
+
+.footer-wrapper {
+  display: flex;
+  max-width: 720px;
+  margin: auto;
+  justify-content: space-around;
+  padding: 0 24px 24px 24px;
+  padding-bottom: 24px;
+}
+
+.footer-logo {
+  display: block;
+  width: 2em;
+  height: 2em;
+}
+
+.footer-text {
+  text-align: center;
+  font-family: var(--main-font-name-it);
+  font-size: 1rem;
+  color: var(--color-light);
+}

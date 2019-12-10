@@ -1,0 +1,244 @@
+version
+2.14.2
+November 29th, 2019
+fixed
+Draft event and date
+2cf67cbb3fb366c50dda3746757980f27b3a843f
+fixed
+Overlay mis-tracking used cards
+7084a3fd60aca3cd092ef599f957e5ee52604f1e
+improved
+Overlay bounds calculation
+9cf990194261706c11f812f376c8f69a0b47e124
+removed
+Metadata scripts
+2401d7ae73b1fe6716113d583a526b06ab99d6e6
+
+version
+2.14.0
+November 24th, 2019
+added
+Overlay borders
+812ed49708e7f6e890d466ed745fc20c22a9996c
+added
+Overlay solid color background
+812ed49708e7f6e890d466ed745fc20c22a9996c
+fixed
+Edit mode button
+2c86f8618f624d641353bfcd8fe054e059033ba7
+fixed
+Sideboarding in history
+3dd01d222170e04d6936849b4a6a6ba27b1d6662
+fixed
+Reset overlays position
+3ef2a0804011b2b2e87210c63d5e636fe70f112b
+fixed
+Misc bugfixes
+d92303045ff1d45a436e85d26a7ee7f29f22baa3
+
+version
+2.13.4
+November 23th, 2019
+improved
+Full displays overlay
+70afc98b502e9041c876404017ffd3dd9eb42d0d
+fixed
+Grouped lands
+a257a1850958cf3662a92cec955528bae03f0e74
+fixed
+Parse new logs
+f30d653ec39c10fef20bf3374c91ca6a53aecd34
+
+version
+2.13.3
+November 20th, 2019
+fixed
+Overlay decklist sort
+d2fb6387d7cf5a651dc7d89e2828f0085cc0ef55
+fixed
+Fix forceOpenSettings
+b1559b09b4b6f18a1d9205df722707dc5327adb5
+
+version
+2.13.2
+November 18th, 2019
+fixed
+Wildcards required display
+c841e62988b767b592d394069340b504aab59db5
+
+version
+2.13.0
+November 16th, 2019
+improved
+React/Typescript migrations
+c5ddc0041f1de707fb8c3b8ba82d344d6a99651e
+improved
+Edit mode discoverability
+817146684c13366c70f249e2be04f5fb41cf3387
+fixed
+Display of aetherized cards
+14e12665e5b0ee9a88a1c20fbb6ed585e923931e
+fixed
+overlays visiblity
+ffe65f22e3fd2acde0febbb16f2911ff90bc5cc0
+fixed
+commander display
+b4cec68a8d45f5e44a5a5f7d8900d24c43b7a386
+
+version
+2.12.8
+October 29th, 2019
+fixed
+Explore undefined event
+84cc6f7794fdd7aa5c8c850f8bbffa25b4e7d6c0
+fixed
+overlay sizing
+5907b09675b720fb7ea11079ae0cfec3c2651674
+fixed
+More economy orbs fixes
+b18e82012b112c70e2860be19c425e342860987c
+
+version
+2.12.5
+October 26th, 2019
+added
+Rare drafting information
+01731f7f918f6377aeff44da87af11175fa36d21
+added
+Cards filter: Owned quantity
+1beb3d8f63e30d37da634b297a1b262d030c69d6
+added
+Set completion tables
+a927a41206a1aba0b29569c846f3e4e36e67c3e2
+added
+Deck sort by Wildcards
+d5cf1644259ee55eda7f1c42ce619722be14c355
+improved
+Show cards only in boosters toggle
+8e723820c4cf77dd6301d86a9371e81617960081
+improved
+Stats panel frequency toggle
+a92c69ba03ff37689798cc34379b6247c4f4401c
+fixed
+Economy fixes (24/10 patch)
+f8335dc74e16eaf531212a604d6c7ba80f1626b5
+fixed
+Misc overlay fixes
+d52ae864b37beb2ad6f7b7e7d551492ed4a1456c
+fixed
+Gem icon display
+dd4da7a77fe6a11b9dc0d76a1216f91dff161daa
+added
+Make Chinese functional again
+4662782ce635b7164fefeada509cbc88b77403b3
+
+version
+2.11.0
+September 29th, 2019
+added
+Deck share
+128a27d1eed05a8e4ef650ae2b0055b2959dafbc
+added
+Sync deck tags
+534dc12f12e2a4584d0e1f72d1f2003022f4b6e4
+added
+Bedevil key art
+3fa8fd82302e54f5c010504c70375e3a0ebe9b8f
+added
+Show play events in explore
+ca6dac0de988e34e7548a975c12252473072b2a0
+fixed
+Eldraine set release data
+9de9daff4633453b54c1845e8b97bd46c773ef16
+improved
+Show HTTP error codes
+b75f3f240b19a0b066c2d94621ae81f0fb7db7e9
+removed
+Chinese database language
+7dd2e8c7101da18cf469470d8415cfb005c5dd0e
+
+version
+2.10.2
+September 22nd, 2019
+added
+Multilanguage cards database
+f106ed27fab52e5a045f99c9bfb84dbad93a24e6
+added
+Draft pool in replay
+4c668770b01b4d892622435b33e0985f39918962
+added
+Show commanders
+169c39cfd55e56c667aaccbf1afad70583260ec0
+added
+Leyline abilities in action log
+462cbbaf96675b735517309acf59d56f3e9e310e
+improved
+Small sample sizes
+ac12200e2db0f08cad98299269e7f5b4d60caf42
+improved
+Hide share if offline
+db1cedb99ab9bb8c82aac6c17d96ce653b5ccb75
+improved
+Hide overlays when unused
+6ace54caf1b5a54ebba9cb65defb9ab6be8b067f
+improved
+Draft arrows navigation
+0e3f247e0de59919d93e25cf0524f3087ab2e806
+fixed
+First pass reads
+603ece0c6d2bd32816e37915ad464a5be2c5ac01
+fixed
+Read deck from GRE (momir decklists)
+349fd3c5a2d3f6fa69a4e65378e57a1e50bfe4e8
+fixed
+Date parse settings page
+3628e5a9d617c5977f5e4782735558a0a0f14549
+fixed
+Aero peek close
+bec80a23d90ed8e5719eb9051234541fa417cdff
+fixed
+Hide overlay until log in
+62a249b0c0e5734539aa8d5b4fb211a1034ea47f
+
+version
+2.9.3
+September 4th, 2019
+added
+Throne of Eldraine
+1e415cdc9611b049d8c622cd4616829f166b9776
+added
+Overlays v3
+f609cb9d6ff1fb20bc2ce98231f61d0e3b0d5164
+added
+Keyboard shortcuts
+50d95d681f6194f89a1a4fb183c8fea11540fdde
+added
+Multiple log parsing script (Thanks AnnanFay!)
+4cc999f3430bffaf9add9f227292cc9ea19df2bc
+added
+Winrate confidence intervals
+8883ee41df292341e19ba65e8200dae636a4451e
+added
+Resize hover cards
+825906298e4353d66c7fde0f0965d727486005de
+improved
+Mythic rank signifiers
+674cb69af30cf8f2a8b77e14d26bbcc87b879641
+improved
+Lands show infinity
+269c63cd7954046e96d7a23c9f2ed0a6541c7636
+improved
+Version in all screens
+2b880d70c278c64f0923b263b9c1fc74ba17b105
+improved
+Date parsing
+ef0a0702d73a0583f22425746391414bdf0a8fff
+improved
+Events page
+06c8626e175dfb59f906ff91bfa08a878f45b6f8
+fixed
+Overlay sort order
+f823b18d6416cc872423274d46409541813e186e
+fixed
+Visual view spacing
+c8271a2b775ee8c1e3ecdae89a348ac44f314298
