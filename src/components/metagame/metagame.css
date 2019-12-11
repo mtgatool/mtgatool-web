@@ -59,6 +59,16 @@
   grid-auto-rows: 200px;
 }
 
+.metagame-div a {
+  color: inherit;
+  margin-top: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  display: inherit;
+  text-align: inherit;
+  text-decoration: none;
+}
+
 .archetype-desc {
   font-size: 11px;
 }
