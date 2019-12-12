@@ -14,3 +14,14 @@
   padding-bottom: 16px;
   font-family: var(--sub-font-name-it);
 }
+
+.top-subtitle-container {
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  font-size: 1em;
+  margin: auto;
+  color: #fae5d2;
+  padding-bottom: 8px;
+  font-family: var(--sub-font-name-it);
+}

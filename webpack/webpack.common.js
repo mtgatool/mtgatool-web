@@ -12,7 +12,7 @@ module.exports = {
     rules: [
       {
         enforce: 'pre',
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         loader: 'eslint-loader',
         exclude: /(node_modules)/,
         options: {
@@ -23,6 +23,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
+        exclude: /(node_modules)/,
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
         exclude: /(node_modules)/,
       },
       {
@@ -69,7 +74,7 @@ module.exports = {
   },
   resolve: {
     modules: ['src', 'node_modules'],
-    extensions: ['*', '.js', '.jsx', '.css', '.scss'],
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.css', '.scss'],
   },
   plugins: [
     new webpack.ProgressPlugin(),

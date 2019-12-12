@@ -47,7 +47,7 @@ function CostSymbols(props) {
     card.cost.forEach((cost, index) => {
       if (hasSplitCost) {
         if (/^(x|\d)+$/.test(cost) && prevc === false) {
-          costSymbols.push(<span key={card.id + '_cost_separator'}>\/\/</span>);
+          costSymbols.push(<span key={card.id + '_cost_separator'}>{'//'}</span>);
         }
         prevc = /^\d+$/.test(cost);
       }
@@ -60,7 +60,7 @@ function CostSymbols(props) {
     });
   }
   if (card.dfc === FACE_ADVENTURE_MAIN && dfcCard && dfcCard.cost) {
-    costSymbols.push(<span key={dfcCard.id + '_cost_separator'}>\/\/</span>);
+    costSymbols.push(<span key={dfcCard.id + '_cost_separator'}>{'//'}</span>);
     dfcCard.cost.forEach((cost, index) => {
       costSymbols.push(
         <div

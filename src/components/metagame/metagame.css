@@ -1,4 +1,4 @@
-#archetype-selector {
+.archetype-selector {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
 }
@@ -41,7 +41,7 @@
   background-color: rgba(40,40,40, 0.8);
 }
 
-#archetype-selector {
+.archetype-selector {
   left: 16px;
   top: 16px;
   position: fixed;
@@ -72,3 +72,116 @@
 .archetype-desc {
   font-size: 11px;
 }
+
+.decklist-div {
+  flex-direction: column;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  max-width: 600px;
+  margin: 16px auto 32px auto;
+  padding: 0 32px;
+  text-align: center;
+}
+
+.archetype-decks-list-div {
+  margin: 0 32px;
+}
+
+.archetype-decks-div {
+  flex-direction: column;
+  display: flex;
+}
+
+@media screen and (min-width: 800px) {
+  .archetype-decks-div {
+      flex-direction: initial;
+  }
+  .decklist-div {
+      padding: 0;
+      padding-left: 24px;
+      margin: 24px 24px 24px auto;
+  }
+  .archetype-decks-list-div {
+      max-width: 400px;
+      width: 50%;
+      margin: 24px auto 24px 24px;
+      padding-right: 24px;
+  }
+}
+
+
+.deck-link {
+  cursor: pointer;
+  display: flex !important;
+  overflow: hidden;
+  height: 25px;
+  line-height: 25px;
+  font-size: 14px !important;
+  font-family: var(--sub-font-name-it) !important;
+  text-decoration: none !important;
+}
+
+.deck-link:hover {
+  text-decoration: underline !important;
+}
+
+.deck-link-desc {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: inherit;
+  width: min-content;
+  color: #fae5d2;
+  margin-left: 8px;
+  margin-right: 4px;
+  overflow: hidden;
+}
+
+.deck-link-wr {
+  white-space: nowrap;
+  text-decoration: inherit;
+  width: min-content;
+  color: #fae5d2;
+  margin-left: auto;
+  overflow: hidden;
+}
+
+.deck-link-colors {
+  display: flex;
+  height: fit-content;
+}
+
+
+.deck-desc {
+  font-family: var(--main-font-name);
+  text-align: center;
+  margin: auto;
+  color: #fae5d2;
+  margin-bottom: 8px;
+}
+
+.deck-desc-b {
+  font-family: var(--sub-font-name-it);
+  opacity: 0.8;
+  font-size: 14px;
+  text-align: center;
+  margin: auto;
+  color: #fae5d2;
+  margin-bottom: 16px;
+}
+
+.deck-container {
+  overflow: hidden;
+  width: 600px;
+  margin: auto;
+  height: 0px;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.deck-name {
+  color: #fae5d2;
+  text-align: center;
+  cursor: pointer;
+  margin: 4px;
+}
+

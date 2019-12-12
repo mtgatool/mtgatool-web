@@ -86,7 +86,8 @@
   font-family: var(--main-font-name);
   line-height: 32px;
   margin: auto 8px;
-  opacity: 0.7;
+  opacity: 0.8;
+  text-decoration: none;
 }
 
 .nav-link-a:hover {

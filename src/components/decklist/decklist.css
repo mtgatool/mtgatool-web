@@ -1,0 +1,12 @@
+.card-tile-separator {
+  color: var(--color-light);
+  max-width: 800px;
+  margin: auto;
+  height: 32px;
+  vertical-align: middle;
+  line-height: 32px;
+  text-align: center;
+  font-family: "belerenbold";
+  align-self: center;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
