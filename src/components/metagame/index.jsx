@@ -1,7 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React from "react";
-import { BrowserRouter as Router, useRouteMatch, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  useRouteMatch,
+  useLocation,
+  Link
+} from "react-router-dom";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import keyArt from "../../images/key-art.jpg";
 import css from "./metagame.css";
@@ -9,7 +14,6 @@ import topNavCss from "../topnav/topnav.css";
 import TopTitle from "../title";
 import { ManaCost } from "../card-tile";
 import DeckList from "../decklist";
-import Deck from "../../shared/deck";
 import getCard from "../../shared/getCard";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 
@@ -28,6 +32,7 @@ function Metagame(props) {
   const { setImage } = props;
   const [queryState, setQueryState] = React.useState(STATE_IDLE);
   const [metagameData, setMetagameData] = React.useState(null);
+  const [deckToDraw, setDeckToDraw] = React.useState(null);
   // Little debug here
   /*
   const database = useSelector(state => {
@@ -35,53 +40,102 @@ function Metagame(props) {
   });
   */
 
-  const getMetagameData = () => {
-    if (localStorage.metagame) {
-      let jsonData = JSON.parse(localStorage.metagame);
-      setMetagameData(jsonData);
-    } else {
-      setQueryState(STATE_DOWNLOAD);
-      const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-        if (xhr.status !== 200) {
-          setQueryState(xhr.status);
-        } else {
-          try {
-            localStorage.metagame = xhr.responseText;
-            let jsonData = JSON.parse(xhr.responseText);
-            setMetagameData(jsonData);
-            setQueryState(STATE_IDLE);
-          } catch (e) {
-            console.log(e);
-            setQueryState(STATE_ERROR);
-          }
-        }
-      };
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && queryState !== STATE_ERROR) {
+  const getArchetypeDeck = match => {
+    const URL = `https://mtgatool.com/metagame/get_deck.php?id=${match}`;
+    setQueryState(STATE_DOWNLOAD);
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+      if (xhr.status !== 200) {
+        setQueryState(xhr.status);
+      } else {
+        try {
+          let deckData = JSON.parse(xhr.responseText);
+          setDeckToDraw(deckData);
           setQueryState(STATE_IDLE);
+        } catch (e) {
+          console.log(e);
+          setQueryState(STATE_ERROR);
         }
-      };
-
-      let URL = METAGAME_URL;
-      if (dayMatch) {
-        URL = `${METAGAME_URL}?event=${dayMatch.format}&days=${dayMatch.day}`;
       }
-      if (formatMatch) {
-        URL = `${METAGAME_URL}?event=${dayMatch.format}`;
+    };
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        setQueryState(STATE_IDLE);
       }
-      xhr.open("GET", URL);
-      xhr.send();
-    }
+    };
+    xhr.open("GET", URL);
+    xhr.send();
   };
+
+  const getMetagameData = () => {
+    setQueryState(STATE_DOWNLOAD);
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+      if (xhr.status !== 200) {
+        setQueryState(xhr.status);
+      } else {
+        try {
+          localStorage.metagame = xhr.responseText;
+          let jsonData = JSON.parse(xhr.responseText);
+          console.log("setMetagameData");
+          setMetagameData(jsonData);
+          setQueryState(STATE_IDLE);
+        } catch (e) {
+          console.log(e);
+          setQueryState(STATE_ERROR);
+        }
+      }
+    };
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4 && queryState !== STATE_ERROR) {
+        setQueryState(STATE_IDLE);
+      }
+    };
+
+    let URL = METAGAME_URL;
+    if (dayMatch) {
+      URL = `${METAGAME_URL}?event=${dayMatch.params.format}&days=${dayMatch.params.day}`;
+    } else if (formatMatch) {
+      URL = `${METAGAME_URL}?event=${formatMatch.params.format}`;
+    }
+    console.log(URL);
+    xhr.open("GET", URL);
+    xhr.send();
+  };
+
+  const location = useLocation();
 
   React.useEffect(() => {
     console.log("match", match);
-    console.log("formatMatch", formatMatch);
-    console.log("dayMatch", dayMatch);
-    console.log("archMatch", archMatch);
-    console.log("deckMatch", deckMatch);
-    getMetagameData();
+    //console.log("formatMatch", formatMatch);
+    //console.log("dayMatch", dayMatch);
+    //console.log("archMatch", archMatch);
+    //console.log("deckMatch", deckMatch);
+
+    if (metagameData && metagameData.meta) {
+      if (deckMatch) {
+        const openedDeck = deckMatch.params.deck;
+        const archName = archMatch.params.arch;
+        const archetypeData = metagameData.meta.filter(
+          arch => arch.name == archName
+        )[0];
+        const matchId = archetypeData.decks[openedDeck].match;
+        console.log("get deck", matchId);
+        getArchetypeDeck(matchId);
+      } else if (archMatch) {
+        const archName = archMatch.params.arch;
+        const archetypeData = metagameData.meta.filter(
+          arch => arch.name == archName
+        )[0];
+        console.log("set best deck", archetypeData.best_deck);
+        setDeckToDraw(archetypeData.best_deck);
+      }
+    } else {
+      getMetagameData();
+    }
+  }, [metagameData, location]);
+
+  React.useEffect(() => {
     setImage(keyArt);
   }, []);
 
@@ -104,7 +158,10 @@ function Metagame(props) {
       <WrapperInner>
         {metagameData && metagameData.meta && archMatch ? (
           <ArchetypeDecks
+            deckToDraw={deckToDraw}
+            archMatch={archMatch}
             archName={archMatch.params.arch}
+            opened={deckMatch ? deckMatch.params.deck : undefined}
             metagame={metagameData}
           />
         ) : (
@@ -115,7 +172,7 @@ function Metagame(props) {
                 .sort(sortArchetypes)
                 .map((arch, index) => {
                   return (
-                    <Archetype
+                    <ArchetypeTile
                       id={metagameData._id}
                       key={arch.name + index}
                       arch={arch}
@@ -132,7 +189,7 @@ function Metagame(props) {
   );
 }
 
-function Archetype(props) {
+function ArchetypeTile(props) {
   const { arch, id } = props;
   const cardObj = getCard(arch.tile);
   const cardImage = cardObj
@@ -172,17 +229,20 @@ function Archetype(props) {
 export default Metagame;
 
 function ArchetypeDecks(props) {
-  const { archName, metagame, opened } = props;
+  const { deckToDraw, archName, archMatch, metagame, opened } = props;
   const archetype = metagame.meta.filter(arch => arch.name == archName)[0];
-  let deckToDraw, deckName, deckOwner, deckWinrate, deckMatches;
+
+  let deckName, deckOwner, deckWinrate, deckMatches;
   if (!opened) {
     deckName = archetype.best_deck.name;
     deckOwner = archetype.best_deck.owner;
     deckWinrate = archetype.best_deck_wr * 100;
     deckMatches = archetype.best_deck_wrt;
-    deckToDraw = new Deck(archetype.best_deck);
   } else {
-    //deckToDraw
+    deckName = archetype.decks[opened].name;
+    deckOwner = archetype.decks[opened].owner;
+    deckWinrate = archetype.decks[opened].wr * 100;
+    deckMatches = archetype.decks[opened].wrt;
   }
 
   return (
@@ -200,7 +260,7 @@ function ArchetypeDecks(props) {
               {deckWinrate.toFixed(2)}% winrate across {deckMatches} matches.
             </div>
             <div className={css["button-simple"]}>Copy to clipboard</div>
-            <DeckList deck={deckToDraw} subTitle={archetype.best_deck.name} />
+            <DeckList deck={deckToDraw} />
           </>
         ) : (
           <></>
@@ -210,7 +270,9 @@ function ArchetypeDecks(props) {
         {archetype.decks.map((deck, index) => {
           return (
             <Link
-              to={""}
+              to={location =>
+                `/metagame/${archMatch.params.format}/${archMatch.params.day}/${archMatch.params.arch}/${index}`
+              }
               key={deck.name + "-" + index}
               className={css["deck-link"]}
             >

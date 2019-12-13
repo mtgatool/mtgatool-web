@@ -18,6 +18,7 @@ function Separator(props) {
 }
 
 function getDeckComponents(deck, setHoverCardCallback) {
+  //console.log(deck);
   const components = [];
   if (deck.commandZoneGRPIds && deck.commandZoneGRPIds.length > 0) {
     //
@@ -25,15 +26,10 @@ function getDeckComponents(deck, setHoverCardCallback) {
 
     deck.commandZoneGRPIds.forEach((id, index) => {
       if (index % 2 == 0) {
-        let fullCard = getCard(id) || undefined;
-        let dfcCard =
-          fullCard && fullCard.dfcId ? getCard(fullCard.dfcId) : undefined;
         components.push(
           <CardTile
-            card={fullCard}
-            dfcCard={dfcCard}
+            grpId={id}
             key={"commandercardtile" + index + "_" + card.id}
-            indent="a"
             quantity={1}
             setHoverCardCallback={setHoverCardCallback}
           />
@@ -45,6 +41,7 @@ function getDeckComponents(deck, setHoverCardCallback) {
   // draw maindeck grouped by cardType
   const cardsByGroup = _(deck.mainDeck)
     .map(card => ({ data: getCard(card.id), ...card }))
+    .map(card => ({ dfc: getCard(card.data.dfcId), ...card }))
     .filter(card => card.data.type)
     .groupBy(card => {
       const type = cardType(card.data);
@@ -89,15 +86,12 @@ function getDeckComponents(deck, setHoverCardCallback) {
         .filter(card => card.quantity > 0)
         .orderBy(["data.cmc", "data.name"])
         .forEach((card, index) => {
-          let fullCard = getCard(card.id) || undefined;
-          let dfcCard =
-            fullCard && fullCard.dfcId ? getCard(fullCard.dfcId) : undefined;
           components.push(
             <CardTile
-              card={fullCard}
-              dfcCard={dfcCard}
+              grpId={card.id}
+              cardData={card.data}
+              dfcData={card.dfc}
               key={"mainboardcardtile" + index + "_" + card.id}
-              indent="a"
               quantity={card.quantity}
               setHoverCardCallback={setHoverCardCallback}
             />
@@ -114,17 +108,15 @@ function getDeckComponents(deck, setHoverCardCallback) {
     _(deck.sideboard)
       .filter(card => card.quantity > 0)
       .map(card => ({ data: getCard(card.id), ...card }))
+      .map(card => ({ dfc: getCard(card.data.dfcId), ...card }))
       .orderBy(["data.cmc", "data.name"])
       .forEach((card, index) => {
-        let fullCard = getCard(card.id) || undefined;
-        let dfcCard =
-          fullCard && fullCard.dfcId ? getCard(fullCard.dfcId) : undefined;
         components.push(
           <CardTile
-            card={fullCard}
-            dfcCard={dfcCard}
+            grpId={card.id}
+            cardData={card.data}
+            dfcData={card.dfc}
             key={"sideboardcardtile" + index + "_" + card.id}
-            indent="a"
             quantity={card.quantity}
             setHoverCardCallback={setHoverCardCallback}
           />
@@ -139,70 +131,6 @@ export default function DeckList(props) {
   const { deck, setHoverCardCallback = () => {} } = props;
   if (!deck) return <></>;
 
-  const renderComponents = getDeckComponents(deck.getSave(), setHoverCardCallback);
+  const renderComponents = getDeckComponents(deck, setHoverCardCallback);
   return <div className="decklist">{renderComponents}</div>;
-  /*
-  mainCards.get().sort(sortFunc);
-  mainCards.get().forEach((card, index) => {
-    const quantity = card.quantity;
-    let fullCard = card;
-    if (card && card.id) {
-      fullCard = getCard(card.id);
-    }
-    let dfcCard;
-    if (card && card.dfcId) {
-      dfcCard = getCard(card.dfcId) || undefined;
-    }
-
-    mainCardTiles.push(
-      <CardTile
-        card={fullCard}
-        dfcCard={dfcCard}
-        key={"maincardtile_" + card.id}
-        indent="a"
-        quantity={quantity}
-        setHoverCardCallback={setHoverCardCallback}
-      />
-    );
-  });
-
-  const sideboardCardTiles = [];
-  if (deckClone.getSideboard().count() > 0) {
-    const sideCards = deckClone.getSideboard();
-    sideCards.removeDuplicates();
-    sideCards.get().sort(sortFunc);
-    sideCards.get().forEach((card, index) => {
-      const quantity = card.quantity;
-      let fullCard = card;
-      if (card && card.id) {
-        fullCard = getCard(card.id) || undefined;
-      }
-      let dfcCard;
-      if (card && card.dfcId) {
-        dfcCard = getCard(card.dfcId) || undefined;
-      }
-      sideboardCardTiles.push(
-        <CardTile
-          card={fullCard}
-          dfcCard={dfcCard}
-          key={"sideboardcardtile_" + index + "_" + card.id}
-          indent="a"
-          quantity={quantity}
-          setHoverCardCallback={setHoverCardCallback}
-        />
-      );
-    });
-  }
-
-  return (
-    <div className="overlay_decklist click-on">
-      <div className="decklist_title">{subTitle}</div>
-      {mainCardTiles}
-      {sideboardCardTiles.length && (
-        <div className="card_tile_separator">Sideboard</div>
-      )}
-      {sideboardCardTiles}
-    </div>
-  );
-*/
 }
