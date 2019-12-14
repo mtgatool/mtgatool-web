@@ -16,6 +16,7 @@ import TopTitle from "../title";
 import { ManaCost } from "../card-tile";
 import DeckList from "../decklist";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
+import NotFound from "../notfound";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -119,16 +120,20 @@ function Metagame(props) {
         const archetypeData = metagameData.meta.filter(
           arch => arch.name == archName
         )[0];
-        const matchId = archetypeData.decks[openedDeck].match;
-        console.log("get deck", matchId);
-        getArchetypeDeck(matchId);
+        if (openedDeck < archetypeData.decks.length) {
+          const matchId = archetypeData.decks[openedDeck].match;
+          console.log("get deck", matchId);
+          getArchetypeDeck(matchId);
+        }
       } else if (archMatch) {
         const archName = archMatch.params.arch;
         const archetypeData = metagameData.meta.filter(
           arch => arch.name == archName
         )[0];
-        console.log("set best deck", archetypeData.best_deck);
-        setDeckToDraw(archetypeData.best_deck);
+        if (archetypeData) {
+          console.log("set best deck", archetypeData.best_deck);
+          setDeckToDraw(archetypeData.best_deck);
+        }
       }
     } else {
       getMetagameData();
@@ -139,7 +144,16 @@ function Metagame(props) {
     setImage(keyArt);
   }, []);
 
-  return (
+  return archMatch &&
+    metagameData &&
+    metagameData.meta &&
+    (metagameData.meta.filter(arch => arch.name == archMatch.params.arch)
+      .length === 0 ||
+      (deckMatch &&
+        metagameData.meta.filter(arch => arch.name == archMatch.params.arch)[0]
+          .decks.length <= parseInt(deckMatch.params.deck))) ? (
+    <NotFound setImage={setImage} />
+  ) : (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <TopTitle
         title={

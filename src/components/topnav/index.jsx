@@ -20,9 +20,6 @@ export function TopNav(props) {
           <Link to="/metagame" className={css['nav-link-a']}>
             Metagame
           </Link>
-          <Link to="/test" className={css['nav-link-a']}>
-            404
-          </Link>
           <Link to="/register" className={css['nav-link-a']}>
             Register
           </Link>
