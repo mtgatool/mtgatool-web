@@ -4,7 +4,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import css from './video.css';
-import videoSource from '../../images/2213.webm';
+
+const videoSource = 'https://mtgatool.com/video/2213.webm';
 
 function PlayPause(props) {
   const { state } = props;
