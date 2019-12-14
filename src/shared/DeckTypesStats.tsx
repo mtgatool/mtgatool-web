@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { CARD_TYPES, CARD_TYPE_CODES } from "./constants";
-import getCard from './getCard';
+import db from './database';
 import Deck from "../shared/deck";
 import { CardObject } from "../shared/types/Deck";
 
@@ -17,7 +17,7 @@ function getDeckTypesAmount(deck: Deck): { [key: string]: number } {
     if (card.id.id && card.id.id == 100) {
       return;
     }
-    const c = getCard(card.id);
+    const c = db.card(card.id);
     if (c) {
       if (c.type.includes("Land", 0)) types.lan += card.quantity;
       else if (c.type.includes("Creature", 0)) types.cre += card.quantity;

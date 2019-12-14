@@ -14,7 +14,6 @@ import topNavCss from "../topnav/topnav.css";
 import TopTitle from "../title";
 import { ManaCost } from "../card-tile";
 import DeckList from "../decklist";
-import getCard from "../../shared/getCard";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
@@ -191,7 +190,7 @@ function Metagame(props) {
 
 function ArchetypeTile(props) {
   const { arch, id } = props;
-  const cardObj = getCard(arch.tile);
+  const cardObj = db.card(arch.tile);
   const cardImage = cardObj
     ? `https://img.scryfall.com/cards${cardObj.images.art_crop}`
     : "https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/thumb/c/c4/Fblthp.jpg/250px-Fblthp.jpg";

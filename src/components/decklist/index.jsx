@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React from "react";
-import getCard from "../../shared/getCard";
+import db from "../../shared/database";
 import { cardType } from "../../shared/cardTypes";
 import css from "./decklist.css";
 
@@ -40,8 +40,7 @@ function getDeckComponents(deck, setHoverCardCallback) {
 
   // draw maindeck grouped by cardType
   const cardsByGroup = _(deck.mainDeck)
-    .map(card => ({ data: getCard(card.id), ...card }))
-    .map(card => ({ dfc: getCard(card.data.dfcId), ...card }))
+    .map(card => ({ data: db.card(card.id), ...card }))
     .filter(card => card.data.type)
     .groupBy(card => {
       const type = cardType(card.data);
@@ -89,8 +88,6 @@ function getDeckComponents(deck, setHoverCardCallback) {
           components.push(
             <CardTile
               grpId={card.id}
-              cardData={card.data}
-              dfcData={card.dfc}
               key={"mainboardcardtile" + index + "_" + card.id}
               quantity={card.quantity}
               setHoverCardCallback={setHoverCardCallback}
@@ -107,15 +104,11 @@ function getDeckComponents(deck, setHoverCardCallback) {
     // draw the cards
     _(deck.sideboard)
       .filter(card => card.quantity > 0)
-      .map(card => ({ data: getCard(card.id), ...card }))
-      .map(card => ({ dfc: getCard(card.data.dfcId), ...card }))
       .orderBy(["data.cmc", "data.name"])
       .forEach((card, index) => {
         components.push(
           <CardTile
             grpId={card.id}
-            cardData={card.data}
-            dfcData={card.dfc}
             key={"sideboardcardtile" + index + "_" + card.id}
             quantity={card.quantity}
             setHoverCardCallback={setHoverCardCallback}

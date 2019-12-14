@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import getCard from './getCard';
+import db from './database';
 import Colors from "./colors";
 
 function isV2CardsList (list) {
@@ -69,9 +69,9 @@ class CardsList {
    **/
   remove(grpId, quantity = 1, byName = false) {
     if (byName) {
-      const cardToFind = getCard(grpId);
+      const cardToFind = db.card(grpId);
       this.list.forEach(function (card) {
-        let cardInList = getCard(card.id);
+        let cardInList = db.card(card.id);
         if (cardInList && cardToFind && cardToFind.name === cardInList.name) {
           let remove = Math.min(card.quantity, quantity);
           card.quantity -= remove;
@@ -114,7 +114,7 @@ class CardsList {
     let types = { art: 0, cre: 0, enc: 0, ins: 0, lan: 0, pla: 0, sor: 0 };
 
     this.list.forEach(function (card) {
-      let c = getCard(card.id);
+      let c = db.card(card.id);
       if (c) {
         if (c.type.includes("Land", 0))
           types.lan += card.measurable ? card.quantity : 1;
@@ -160,7 +160,7 @@ class CardsList {
 
     this.list.forEach(function (card) {
       if (card.quantity > 0) {
-        let dbCard = getCard(card.id);
+        let dbCard = db.card(card.id);
         if (dbCard) {
           dbCard.cost.forEach(function (c) {
             if (c.indexOf("w") !== -1) {
@@ -203,7 +203,7 @@ class CardsList {
 
     this.list.forEach(function (cardEntry) {
       var quantity = cardEntry.quantity;
-      let card = getCard(cardEntry.id);
+      let card = db.card(cardEntry.id);
       if (card && quantity > 0) {
         if (
           card.type.indexOf("Land") != -1 ||
@@ -260,7 +260,7 @@ class CardsList {
   getColors() {
     let colors = new Colors();
     this.list.forEach(card => {
-      let cardData = getCard(card.id);
+      let cardData = db.card(card.id);
       if (cardData) {
         let isLand = cardData.type.indexOf("Land") !== -1;
         if (isLand && cardData.frame.length < 3) {
@@ -282,9 +282,9 @@ class CardsList {
     var newList = [];
 
     this.list.forEach(function (card) {
-      let cardObj = getCard(card.id);
+      let cardObj = db.card(card.id);
       let found = newList.find((c) => {
-        let dbCard = getCard(c.id);
+        let dbCard = db.card(c.id);
         return dbCard && cardObj && dbCard.name === (cardObj).name;
       });
       if (found) {

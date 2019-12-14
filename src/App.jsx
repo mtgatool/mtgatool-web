@@ -2,9 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
-// REDUX
-import { setDb } from "./actions";
-import { useDispatch } from "react-redux";
+import db from './shared/database';
 
 import Video from "./components/video";
 import {
@@ -44,13 +42,12 @@ function App() {
   const artist = "Bedevil by Seb Mckinnon";
   const [image, setImage] = React.useState(keyArt);
   const [queryState, setQueryState] = React.useState(0);
-  const dispatch = useDispatch();
 
   const getDatabase = () => {
     if (new Date(localStorage.databaseTime) < new Date()) {
       const dbJson = JSON.parse(localStorage.database);
       console.log("database from cache: v" + dbJson.version);
-      dispatch(setDb(dbJson));
+      db.setDatabase(localStorage.database)
     } else {
       setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
@@ -59,12 +56,11 @@ function App() {
           setQueryState(xhr.status);
         } else {
           try {
-            const jsonData = JSON.parse(xhr.responseText);
             console.log("Database download ok!");
             localStorage.database = xhr.responseText;
             localStorage.databaseTime = new Date();
-            dispatch(setDb(jsonData));
-            // Query state could be in redux too
+            db.setDatabase(xhr.responseText);
+            // Query state could be in redux
             setQueryState(STATE_IDLE);
           } catch (e) {
             console.log(e);

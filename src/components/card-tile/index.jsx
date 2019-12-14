@@ -4,7 +4,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import css from "./cardtile.css";
-import getCard from "../../shared/getCard";
+import db from '../../shared/database';
 import { COLORS_ALL, FACE_SPLIT_FULL, FACE_ADVENTURE_MAIN } from "./constants";
 
 function openScryfallCard() {
@@ -93,10 +93,10 @@ function CardQuantityDisplay(props) {
 }
 
 export default function CardTile(props) {
-  const { cardData, dfcData, grpId, quantity, setHoverCardCallback } = props;
+  const { grpId, quantity, setHoverCardCallback } = props;
   const [isMouseHovering, setMouseHovering] = React.useState(false);
-  const [card, setCard] = React.useState(null);
-  const [dfcCard, setdfcCard] = React.useState(null);
+  const [card, setCard] = React.useState(undefined);
+  const [dfcCard, setdfcCard] = React.useState(undefined);
 
   const handleMouseEnter = React.useCallback(() => {
     setMouseHovering(true);
@@ -115,25 +115,21 @@ export default function CardTile(props) {
   }, [card]);
 
   React.useEffect(() => {
-    if (!cardData) {
-      console.log("getCard " + grpId);
-      let cardObj = getCard(grpId);
-      setCard(cardObj);
-    } else {
-      setCard(cardData);
-      setdfcCard(dfcData);
+    if (!card) {
+      console.log("get card: " + grpId);
+      const cardObj = db.card(grpId);
+      if (cardObj) {
+        setCard(cardObj);
+        const dfcObj = db.card(cardObj.dfcId);
+        if (dfcObj) {
+          setdfcCard(dfcObj);
+        }
+      }
     }
   }, []);
 
-  const cardTileStyle = { backgroundImage: "", borderImage: "" };
-  const tileStyle = { backgroundColor: "rgba(0, 0, 0, 0.75)" };
-  React.useEffect(() => {
-    console.log("card", card);
-    if (card && card.dfcId && !dfcData) {
-      console.log("getCard dfcId " + card.dfcId);
-      let dfcObj = getCard(card.dfcId);
-      setdfcCard(dfcObj);
-    }
+  const getCardTileStyle = () => {
+    let cardTileStyle = { backgroundImage: "", borderImage: "" };
     if (card) {
       try {
         if (card.type === "Special") {
@@ -166,6 +162,11 @@ export default function CardTile(props) {
       }
     }
 
+    return cardTileStyle;
+  };
+
+  const getTileStyle = () => {
+    let tileStyle = { backgroundColor: "rgba(0, 0, 0, 0.75)" };
     if (isMouseHovering) {
       try {
         tileStyle.backgroundColor = "rgba(65, 50, 40, 0.75)";
@@ -173,7 +174,8 @@ export default function CardTile(props) {
         console.log(e);
       }
     }
-  }, [card, isMouseHovering]);
+    return tileStyle;
+  };
 
   return (
     <div
@@ -183,11 +185,11 @@ export default function CardTile(props) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleMouseClick}
-      style={tileStyle}
+      style={getTileStyle()}
       role="link"
     >
       <CardQuantityDisplay quantity={quantity} />
-      <div className="card_tile_crop_flat" style={cardTileStyle} />
+      <div className="card_tile_crop_flat" style={getCardTileStyle()} />
       <div className="card_tile_name_flat">{card ? card.name : "Unknown"}</div>
       <div className="cart_tile_mana_flat">
         <CostSymbols card={card} dfcCard={dfcCard} />

@@ -1,4 +1,4 @@
-import getCard from "./getCard";
+import db from "./database";
 
 export function getCardTypeSort(a) {
   if (a == undefined) return 0;
@@ -15,8 +15,8 @@ export function getCardTypeSort(a) {
 
 export function compareCards(a, b) {
   // Yeah this is lazy.. I know
-  a = getCard(a.id);
-  b = getCard(b.id);
+  a = db.card(a.id);
+  b = db.card(b.id);
 
   if (!a) return 1;
   if (!b) return -1;

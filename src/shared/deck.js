@@ -6,7 +6,7 @@ import {
   objectClone
 } from "./util";
 
-import getCard from './getCard';
+import db from './database';
 import getSets from './getSets';
 const DEFAULT_TILE = 67003;
 
@@ -146,7 +146,7 @@ class Deck {
     let mainList = this.mainboard.removeDuplicates(false);
     mainList.forEach(function(card) {
       let grpid = card.id;
-      let card_name = (getCard(grpid)).name;
+      let card_name = (db.card(grpid)).name;
 
       str += (card.measurable ? card.quantity : 1) + " " + card_name + "\r\n";
     });
@@ -156,7 +156,7 @@ class Deck {
     let sideList = this.sideboard.removeDuplicates(false);
     sideList.forEach(function(card) {
       let grpid = card.id;
-      let card_name = (getCard(grpid)).name;
+      let card_name = (db.card(grpid)).name;
 
       str += (card.measurable ? card.quantity : 1) + " " + card_name + "\r\n";
     });
@@ -172,11 +172,11 @@ class Deck {
     let listMain = this.mainboard.removeDuplicates(false);
     listMain.forEach(function(card) {
       let grpid = card.id;
-      let cardObj = getCard(grpid);
+      let cardObj = db.card(grpid);
 
       if (cardObj.set == "Mythic Edition") {
         grpid = (cardObj.reprints)[0];
-        cardObj = getCard(grpid);
+        cardObj = db.card(grpid);
       }
 
       let card_name = cardObj.name;
@@ -194,11 +194,11 @@ class Deck {
     let listSide = this.sideboard.removeDuplicates(false);
     listSide.forEach(function(card) {
       let grpid = card.id;
-      let cardObj = getCard(grpid);
+      let cardObj = db.card(grpid);
 
       if (cardObj.set == "Mythic Edition") {
         grpid = (cardObj.reprints)[0];
-        cardObj = getCard(grpid);
+        cardObj = db.card(grpid);
       }
 
       let card_name = cardObj.name;
