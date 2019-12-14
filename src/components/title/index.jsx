@@ -8,10 +8,11 @@ function TopTitle(props) {
   return (
     <>
       <div className={css["top-title-container"]}>{title}</div>
-      {
-        subtitle ? <div className={css["top-subtitle-container"]}>{subtitle}</div> : <></>
-      }
-      
+      {subtitle ? (
+        <div className={css["top-subtitle-container"]}>{subtitle}</div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

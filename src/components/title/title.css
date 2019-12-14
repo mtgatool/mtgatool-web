@@ -1,6 +1,6 @@
 @media screen and (min-width: 680px) {
   .top-title-container {
-    margin: 7em auto auto auto;
+    margin: 4em auto auto auto !important;
   }
 }
 
@@ -9,7 +9,7 @@
   line-height: 32px;
   text-align: center;
   font-size: 1.33em;
-  margin: 4em auto auto auto;
+  margin: 7em auto auto auto;
   color: #fae5d2;
   padding-bottom: 16px;
   font-family: var(--sub-font-name-it);

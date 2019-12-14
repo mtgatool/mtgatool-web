@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import keyArt from "../../images/key-art.jpg";
+import db from "../../shared/database";
 import css from "./metagame.css";
 import topNavCss from "../topnav/topnav.css";
 import TopTitle from "../title";

@@ -57,6 +57,7 @@
   display: grid;
   grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
   grid-auto-rows: 200px;
+  flex-grow: 2;
 }
 
 .metagame-div a {
@@ -119,6 +120,7 @@
   font-size: 14px !important;
   font-family: var(--sub-font-name-it) !important;
   text-decoration: none !important;
+  margin-top: 0px !important;
 }
 
 .deck-link:hover {
