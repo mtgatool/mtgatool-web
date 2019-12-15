@@ -43,8 +43,8 @@ function Register(props) {
     xhr.send(
       JSON.stringify({
         pasword: passHash,
-        email: passHash.email,
-        'g-recaptcha-response': passHash.recaptcha,
+        email: formData.email,
+        'g-recaptcha-response': formData.recaptcha,
       }),
     );
   };
