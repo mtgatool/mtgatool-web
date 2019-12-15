@@ -24,6 +24,25 @@ function sortArchetypes(a, b) {
   return b.name === "Unknown" ? -1 : parseFloat(b.share) - parseFloat(a.share);
 }
 
+const formats = [
+  {
+    id: "BO1",
+    name: "Standard BO1"
+  },
+  {
+    id: "BO3",
+    name: "Standard BO3"
+  },
+  {
+    id: "HBO1",
+    name: "Historic BO1"
+  },
+  {
+    id: "HBO3",
+    name: "Historic BO3"
+  }
+];
+
 function Metagame(props) {
   const match = useRouteMatch();
   const formatMatch = useRouteMatch("/metagame/:format");
@@ -95,9 +114,11 @@ function Metagame(props) {
 
     let URL = METAGAME_URL;
     if (dayMatch) {
-      URL = `${METAGAME_URL}?event=${dayMatch.params.format}&days=${dayMatch.params.day}`;
+      URL = `${METAGAME_URL}?event=${dayMatch.params.format.toUpperCase()}&days=${
+        dayMatch.params.day
+      }`;
     } else if (formatMatch) {
-      URL = `${METAGAME_URL}?event=${formatMatch.params.format}`;
+      URL = `${METAGAME_URL}?event=${formatMatch.params.format.toUpperCase()}`;
     }
     console.log(URL);
     xhr.open("GET", URL);
@@ -113,7 +134,9 @@ function Metagame(props) {
     //console.log("archMatch", archMatch);
     //console.log("deckMatch", deckMatch);
 
-    if (metagameData && metagameData.meta) {
+    if (formatMatch && metagameData && metagameData.format !== formatMatch.params.format) {
+      getMetagameData();
+    } else if (metagameData && metagameData.meta) {
       if (deckMatch) {
         const openedDeck = deckMatch.params.deck;
         const archName = archMatch.params.arch;
@@ -158,7 +181,7 @@ function Metagame(props) {
       <TopTitle
         title={
           metagameData
-            ? `${metagameData._id.split(".")[1]} Metagame (${new Date(
+            ? `${formats.filter(f => f.id == metagameData.format)[0].name} Metagame (${new Date(
                 metagameData.date
               ).toUTCString()})`
             : "Metagame"
@@ -169,6 +192,7 @@ function Metagame(props) {
             : ""
         }
       />
+      <MetagameNav format={formatMatch} />
       <WrapperInner>
         {metagameData && metagameData.meta && archMatch ? (
           <ArchetypeDecks
@@ -200,6 +224,20 @@ function Metagame(props) {
         )}
       </WrapperInner>
     </WrapperOuter>
+  );
+}
+
+function MetagameNav(props) {
+  const { format } = props;
+  let formatId = format ? format.params.format : "BO1";
+  return (
+    <div className={css["metagame-nav"]}>
+      {formats.map(format => {
+        if (formatId !== format.id) {
+          return <Link key={format.id} to={"/metagame/" + format.id}>{format.name}</Link>;
+        }
+      })}
+    </div>
   );
 }
 

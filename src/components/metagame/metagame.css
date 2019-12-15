@@ -49,6 +49,25 @@
   width: 230px;
 }
 
+.metagame-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.metagame-nav a {
+  color: var(--color-light) !important;
+  font-family: var(--main-font-name) !important;
+  line-height: 32px !important;
+  margin: auto 8px !important;
+  opacity: 0.8 !important;
+  text-decoration: none !important;
+}
+
+.metagame-nav a:hover {
+  opacity: 1 !important;
+  text-decoration: underline !important;
+}
+
 .metagame-div {
   max-width: 1024px;
   width: calc(100% - 128px);
