@@ -76,8 +76,13 @@
 }
 
 .metagame-nav {
+  max-width: 1024px;
+  width: calc(100% - 128px);
+  padding-bottom: 8px;
   display: flex;
   justify-content: center;
+  margin: auto;
+  border-bottom: solid 1px var(--color-mid-40);
 }
 
 .metagame-nav a {

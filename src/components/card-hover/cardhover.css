@@ -1,4 +1,5 @@
 .card-hover-main {
+  pointer-events: none;
   position: fixed;
   background-size: contain;
   width: 15.8em;
