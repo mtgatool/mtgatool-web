@@ -11,6 +11,7 @@ import ReleaseNotes from "./components/release-notes";
 import Home from "./components/home";
 import Metagame from "./components/metagame";
 import Register from "./components/register";
+import DeckView from "./components/deck-view";
 import CardHover from "./components/card-hover";
 import { WebProvider } from "./web-provider";
 
@@ -92,6 +93,9 @@ function App() {
           </Route>
           <Route exact path="/release-notes">
             <ReleaseNotes setImage={setImage} />
+          </Route>
+          <Route path="/deck">
+            <DeckView setImage={setImage} />
           </Route>
           <Route>
             <NotFound setImage={setImage} />

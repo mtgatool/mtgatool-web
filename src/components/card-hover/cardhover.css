@@ -1,4 +1,5 @@
 .card-hover-main {
+  z-index: 20;
   pointer-events: none;
   position: fixed;
   background-size: contain;
