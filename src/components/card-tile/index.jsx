@@ -5,6 +5,7 @@
 import React from "react";
 import css from "./cardtile.css";
 import db from '../../shared/database';
+import { useWebDispatch } from '../../web-provider';
 import { COLORS_ALL, FACE_SPLIT_FULL, FACE_ADVENTURE_MAIN } from "./constants";
 
 function openScryfallCard() {
@@ -93,19 +94,23 @@ function CardQuantityDisplay(props) {
 }
 
 export default function CardTile(props) {
-  const { grpId, quantity, setHoverCardCallback } = props;
+  const { grpId, quantity } = props;
   const [isMouseHovering, setMouseHovering] = React.useState(false);
   const [card, setCard] = React.useState(undefined);
   const [dfcCard, setdfcCard] = React.useState(undefined);
+  const hoverDispatch = useWebDispatch(card);
 
   const handleMouseEnter = React.useCallback(() => {
     setMouseHovering(true);
-    setHoverCardCallback(card);
-  }, [setHoverCardCallback]);
+    hoverDispatch({type: 'setHoverCard', HoverGrpId: grpId});
+    hoverDispatch({type: 'setHoverOpacity', HoverOpacity: 1});
+  }, []);
+
   const handleMouseLeave = React.useCallback(() => {
     setMouseHovering(false);
-    setHoverCardCallback();
-  }, [setHoverCardCallback]);
+    hoverDispatch({type: 'setHoverOpacity', HoverOpacity: 0});
+  }, []);
+  
   const handleMouseClick = React.useCallback(() => {
     let cardOpen = card;
     if (card.dfc === FACE_SPLIT_FULL) {

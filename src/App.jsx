@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
-import db from './shared/database';
+import db from "./shared/database";
 
 import Video from "./components/video";
 import {
@@ -16,6 +16,8 @@ import NotFound from "./components/notfound";
 import ReleaseNotes from "./components/release-notes";
 import Metagame from "./components/metagame";
 import Register from "./components/register";
+import CardHover from "./components/card-hover";
+import {WebProvider} from "./web-provider";
 
 // Import once so all CSS can use it thanks to webpack magic
 // eslint-disable-next-line no-unused-vars
@@ -44,11 +46,15 @@ function App() {
   const [queryState, setQueryState] = React.useState(0);
 
   const getDatabase = () => {
-    if (new Date(localStorage.databaseTime) < new Date()) {
+    if (localStorage.databaseTime) {
       const dbJson = JSON.parse(localStorage.database);
       console.log("database from cache: v" + dbJson.version);
-      db.setDatabase(localStorage.database)
-    } else {
+      db.setDatabase(localStorage.database);
+    }
+    if (
+      !localStorage.database ||
+      new Date(Date.now() - 864e5) < new Date(localStorage.databaseTime)
+    ) {
       setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
       xhr.onload = () => {
@@ -87,28 +93,31 @@ function App() {
   };
 
   return (
-    <Router>
-      <div style={wrapperStyle} className={css["wrapper-image"]} />
-      <TopNav artist={artist} />
-      <Switch>
-        <Route exact path="/">
-          <Home setImage={setImage} />
-        </Route>
-        <Route path="/metagame">
-          <Metagame setImage={setImage} />
-        </Route>
-        <Route exact path="/register">
-          <Register setImage={setImage} />
-        </Route>
-        <Route exact path="/release-notes">
-          <ReleaseNotes setImage={setImage} />
-        </Route>
-        <Route>
-          <NotFound setImage={setImage} />
-        </Route>
-      </Switch>
-      <Footer />
-    </Router>
+    <WebProvider>
+      <Router>
+        <div style={wrapperStyle} className={css["wrapper-image"]} />
+        <TopNav artist={artist} />
+        <CardHover />
+        <Switch>
+          <Route exact path="/">
+            <Home setImage={setImage} />
+          </Route>
+          <Route path="/metagame">
+            <Metagame setImage={setImage} />
+          </Route>
+          <Route exact path="/register">
+            <Register setImage={setImage} />
+          </Route>
+          <Route exact path="/release-notes">
+            <ReleaseNotes setImage={setImage} />
+          </Route>
+          <Route>
+            <NotFound setImage={setImage} />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+    </WebProvider>
   );
 }
 

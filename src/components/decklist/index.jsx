@@ -17,7 +17,7 @@ function Separator(props) {
   return <div className={css["card-tile-separator"]}>{children}</div>;
 }
 
-function getDeckComponents(deck, setHoverCardCallback) {
+function getDeckComponents(deck) {
   //console.log(deck);
   const components = [];
   if (deck.commandZoneGRPIds && deck.commandZoneGRPIds.length > 0) {
@@ -31,7 +31,6 @@ function getDeckComponents(deck, setHoverCardCallback) {
             grpId={id}
             key={"commandercardtile" + index + "_" + card.id}
             quantity={1}
-            setHoverCardCallback={setHoverCardCallback}
           />
         );
       }
@@ -90,7 +89,6 @@ function getDeckComponents(deck, setHoverCardCallback) {
               grpId={card.id}
               key={"mainboardcardtile" + index + "_" + card.id}
               quantity={card.quantity}
-              setHoverCardCallback={setHoverCardCallback}
             />
           );
         });
@@ -111,7 +109,6 @@ function getDeckComponents(deck, setHoverCardCallback) {
             grpId={card.id}
             key={"sideboardcardtile" + index + "_" + card.id}
             quantity={card.quantity}
-            setHoverCardCallback={setHoverCardCallback}
           />
         );
       });
@@ -121,9 +118,9 @@ function getDeckComponents(deck, setHoverCardCallback) {
 }
 
 export default function DeckList(props) {
-  const { deck, setHoverCardCallback = () => {} } = props;
+  const { deck } = props;
   if (!deck) return <></>;
 
-  const renderComponents = getDeckComponents(deck, setHoverCardCallback);
+  const renderComponents = getDeckComponents(deck);
   return <div className="decklist">{renderComponents}</div>;
 }
