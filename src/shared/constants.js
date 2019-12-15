@@ -611,7 +611,7 @@ const Color = {
   "3": "Black",
   "4": "Red",
   "5": "Green"
-}
+};
 
 export const ENUMS = {
   CounterType,

@@ -1,13 +1,8 @@
 import CardsList from "./cardsList";
 import Colors from "./colors";
-import {
-  compareCards,
-  getSetCode,
-  objectClone
-} from "./util";
+import { compareCards, getSetCode, objectClone } from "./util";
 
-import db from './database';
-import getSets from './getSets';
+import db from "./database";
 const DEFAULT_TILE = 67003;
 
 class Deck {
@@ -42,7 +37,7 @@ class Deck {
   get colors() {
     return this._colors;
   }
-  
+
   /**
    * Sort the mainboard of this deck.
    * @param func sort function.
@@ -70,7 +65,7 @@ class Deck {
   getName() {
     return this.name;
   }
-  
+
   /**
    * Returns if this deck has a commander (0) or the number of commanders it has.
    */
@@ -146,7 +141,7 @@ class Deck {
     let mainList = this.mainboard.removeDuplicates(false);
     mainList.forEach(function(card) {
       let grpid = card.id;
-      let card_name = (db.card(grpid)).name;
+      let card_name = db.card(grpid).name;
 
       str += (card.measurable ? card.quantity : 1) + " " + card_name + "\r\n";
     });
@@ -156,7 +151,7 @@ class Deck {
     let sideList = this.sideboard.removeDuplicates(false);
     sideList.forEach(function(card) {
       let grpid = card.id;
-      let card_name = (db.card(grpid)).name;
+      let card_name = db.card(grpid).name;
 
       str += (card.measurable ? card.quantity : 1) + " " + card_name + "\r\n";
     });
@@ -175,7 +170,7 @@ class Deck {
       let cardObj = db.card(grpid);
 
       if (cardObj.set == "Mythic Edition") {
-        grpid = (cardObj.reprints)[0];
+        grpid = cardObj.reprints[0];
         cardObj = db.card(grpid);
       }
 
@@ -184,8 +179,10 @@ class Deck {
       let card_cn = cardObj.cid;
       let card_q = card.measurable ? card.quantity : 1;
 
-      let sets = getSets();
-      let set_code = sets ? sets[card_set].arenacode : false || getSetCode(card_set);
+      let sets = db.sets;
+      let set_code = sets
+        ? sets[card_set].arenacode
+        : false || getSetCode(card_set);
       str += `${card_q} ${card_name} (${set_code}) ${card_cn} \r\n`;
     });
 
@@ -197,7 +194,7 @@ class Deck {
       let cardObj = db.card(grpid);
 
       if (cardObj.set == "Mythic Edition") {
-        grpid = (cardObj.reprints)[0];
+        grpid = cardObj.reprints[0];
         cardObj = db.card(grpid);
       }
 
@@ -206,21 +203,23 @@ class Deck {
       let card_cn = cardObj.cid;
       let card_q = card.measurable ? card.quantity : 1;
 
-      let sets = getSets();
-      let set_code = sets ? sets[card_set].arenacode : false || getSetCode(card_set);
+      let sets = db.sets;
+      let set_code = sets
+        ? sets[card_set].arenacode
+        : false || getSetCode(card_set);
       str += `${card_q} ${card_name} (${set_code}) ${card_cn} \r\n`;
     });
 
     return str;
   }
-  
+
   /**
    * Returns a copy of this deck as an object.
    */
   getSave() {
     return objectClone(this.getSaveRaw());
   }
-  
+
   /**
    * Returns a copy of this deck as an object, but maintains variables references.
    */
@@ -238,7 +237,7 @@ class Deck {
       commandZoneGRPIds: this.commandZoneGRPIds
     };
   }
-  
+
   /**
    * Returns a unique string for this deck. (not hashed)
    * @param checkSide weter or not to use the sideboard (default: true)

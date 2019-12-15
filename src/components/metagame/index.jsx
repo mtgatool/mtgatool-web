@@ -12,6 +12,7 @@ import { ManaCost } from "../card-tile";
 import DeckList from "../decklist";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 import NotFound from "../notfound";
+import Deck from "../../shared/deck";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -305,7 +306,6 @@ function ArchetypeDecks(props) {
   }
 
   if (deckToDraw) {
-    console.log(deckToDraw);
     try {
       const cardObj = db.card(deckToDraw.deckTileId);
       setImage("https://img.scryfall.com/cards" + cardObj.images.art_crop);
@@ -313,6 +313,13 @@ function ArchetypeDecks(props) {
       console.log("Card image not found ", e);
     }
   }
+
+  const copyDeck = React.useCallback(() => {
+    console.log("Copy");
+    console.log(deckToDraw, str);
+    const str = new Deck(deckToDraw).getExportArena();
+    navigator.clipboard.writeText(str);
+  }, [deckToDraw]);
 
   return (
     <div className={css["archetype-decks-div"]}>
@@ -328,7 +335,9 @@ function ArchetypeDecks(props) {
             <div className={css["deck-desc-b"]}>
               {deckWinrate.toFixed(2)}% winrate across {deckMatches} matches.
             </div>
-            <div className={css["button-simple"]}>Copy to clipboard</div>
+            <div onClick={copyDeck} className={css["button-simple"]}>
+              Copy to clipboard
+            </div>
             <DeckList deck={deckToDraw} />
           </>
         ) : (

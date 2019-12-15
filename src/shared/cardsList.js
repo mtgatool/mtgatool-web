@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import db from './database';
+import _ from "lodash";
+import db from "./database";
 import Colors from "./colors";
 
-function isV2CardsList (list) {
+function isV2CardsList(list) {
   const first = list[0];
   return first && first.quantity !== undefined;
 }
@@ -19,7 +19,7 @@ class CardsList {
   constructor(newList) {
     this.list = [];
     if (isV2CardsList(newList)) {
-      this.list = newList.map((obj) => {
+      this.list = newList.map(obj => {
         return {
           quantity: 1, // TODO remove group lands hack
           id: obj, // TODO remove group lands hack
@@ -47,7 +47,7 @@ class CardsList {
       throw new Error("quantity must be a number");
     }
     if (merge) {
-      this.list.forEach((card) => {
+      this.list.forEach(card => {
         if (card.id == grpId) {
           card.quantity += quantity;
           return card;
@@ -70,7 +70,7 @@ class CardsList {
   remove(grpId, quantity = 1, byName = false) {
     if (byName) {
       const cardToFind = db.card(grpId);
-      this.list.forEach(function (card) {
+      this.list.forEach(function(card) {
         let cardInList = db.card(card.id);
         if (cardInList && cardToFind && cardToFind.name === cardInList.name) {
           let remove = Math.min(card.quantity, quantity);
@@ -79,7 +79,7 @@ class CardsList {
         }
       });
     } else {
-      this.list.forEach(function (card) {
+      this.list.forEach(function(card) {
         if (grpId == card.id) {
           let remove = Math.min(card.quantity, quantity);
           card.quantity -= remove;
@@ -113,7 +113,7 @@ class CardsList {
   countTypesAll() {
     let types = { art: 0, cre: 0, enc: 0, ins: 0, lan: 0, pla: 0, sor: 0 };
 
-    this.list.forEach(function (card) {
+    this.list.forEach(function(card) {
       let c = db.card(card.id);
       if (c) {
         if (c.type.includes("Land", 0))
@@ -158,11 +158,11 @@ class CardsList {
   getColorsAmounts() {
     let colors = { total: 0, w: 0, u: 0, b: 0, r: 0, g: 0, c: 0 };
 
-    this.list.forEach(function (card) {
+    this.list.forEach(function(card) {
       if (card.quantity > 0) {
         let dbCard = db.card(card.id);
         if (dbCard) {
-          dbCard.cost.forEach(function (c) {
+          dbCard.cost.forEach(function(c) {
             if (c.indexOf("w") !== -1) {
               colors.w += card.quantity;
               colors.total += card.quantity;
@@ -187,8 +187,8 @@ class CardsList {
               colors.c += card.quantity;
               colors.total += card.quantity;
             }
-          })
-        };
+          });
+        }
       }
     });
 
@@ -201,7 +201,7 @@ class CardsList {
   getLandsAmounts() {
     var colors = { total: 0, w: 0, u: 0, b: 0, r: 0, g: 0, c: 0 };
 
-    this.list.forEach(function (cardEntry) {
+    this.list.forEach(function(cardEntry) {
       var quantity = cardEntry.quantity;
       let card = db.card(cardEntry.id);
       if (card && quantity > 0) {
@@ -210,7 +210,7 @@ class CardsList {
           card.type.indexOf("land") != -1
         ) {
           if (card.frame.length < 5) {
-            card.frame.forEach(function (c) {
+            card.frame.forEach(function(c) {
               if (c == 1) {
                 colors.w += quantity;
                 colors.total += quantity;
@@ -253,7 +253,6 @@ class CardsList {
     });
   }
 
-
   /**
    * Get all colors in the list as a Colors object.
    **/
@@ -281,11 +280,11 @@ class CardsList {
   removeDuplicates(replaceList = true) {
     var newList = [];
 
-    this.list.forEach(function (card) {
+    this.list.forEach(function(card) {
       let cardObj = db.card(card.id);
-      let found = newList.find((c) => {
+      let found = newList.find(c => {
         let dbCard = db.card(c.id);
-        return dbCard && cardObj && dbCard.name === (cardObj).name;
+        return dbCard && cardObj && dbCard.name === cardObj.name;
       });
       if (found) {
         if (found.measurable) {

@@ -1,12 +1,4 @@
-import {
-  WHITE,
-  BLUE,
-  BLACK,
-  RED,
-  GREEN,
-  MULTI,
-  COLORLESS
-} from "./constants";
+import { WHITE, BLUE, BLACK, RED, GREEN, MULTI, COLORLESS } from "./constants";
 
 class Colors {
   /**
@@ -141,7 +133,7 @@ class Colors {
       this.b == color.b &&
       this.r == color.r &&
       this.g == color.g
-    )
+    );
   }
 }
 

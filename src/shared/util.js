@@ -50,14 +50,14 @@ export function compareCards(a, b) {
 
   return 0;
 }
-/*
+
 export function getSetCode(set) {
   if (set == undefined) return "";
   let s = db.sets[set].code;
   if (s == undefined) s = set;
   return s;
 }
-*/
+
 export function objectClone(originalObject) {
   return JSON.parse(JSON.stringify(originalObject));
 }
