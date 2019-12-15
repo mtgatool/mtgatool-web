@@ -1,51 +1,50 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import crypto from 'crypto';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { WrapperInner, WrapperOuter } from '../wrapper';
-import css from './register.css';
-import keyArt from '../../images/key-art.jpg';
+import React from "react";
+import crypto from "crypto";
+import ReCAPTCHA from "react-google-recaptcha";
+import { WrapperInner, WrapperOuter } from "../wrapper";
+import css from "./register.css";
+import keyArt from "../../images/key-art.jpg";
 
 function Register(props) {
   const { setImage } = props;
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState("");
   const [formData, setFormData] = React.useState({
-    email: '',
-    pass: '',
-    passc: '',
-    recaptcha: '',
+    email: "",
+    pass: "",
+    passc: "",
+    recaptcha: ""
   });
 
   const recaptchaRef = React.createRef();
 
   const doSubmit = () => {
-    const shasum = crypto.createHash('sha1');
+    const shasum = crypto.createHash("sha1");
     shasum.update(formData.pass);
-    const passHash = shasum.digest('hex');
+    const passHash = shasum.digest("hex");
     // Send request
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', () => {
+    xhr.addEventListener("load", () => {
       // Handle response
       try {
         const response = JSON.parse(xhr.responseText);
         if (!response.ok && response.error) {
           setErrorMessage(response.error);
         } else {
-          setErrorMessage('Sucess! You may now log in.');
+          setErrorMessage("Sucess! You may now log in.");
         }
       } catch (e) {
         console.log(e, xhr.responseText);
-        setErrorMessage('Error reading response.');
+        setErrorMessage("Error reading response.");
       }
     });
-    xhr.open('POST', 'https://mtgatool.com/register.php');
+    xhr.open("POST", "https://mtgatool.com/register.php");
     xhr.send(
       JSON.stringify({
         pasword: passHash,
         email: formData.email,
-        'g-recaptcha-response': formData.recaptcha,
-      }),
+        "g-recaptcha-response": formData.recaptcha
+      })
     );
   };
 
@@ -64,18 +63,18 @@ function Register(props) {
   const handleCaptchaChange = () => {
     setFormData({
       ...formData,
-      recaptcha: recaptchaRef.current.getValue(),
+      recaptcha: recaptchaRef.current.getValue()
     });
   };
 
   const onSubmit = event => {
     // Submit the form
     if (formData.pass !== formData.passc) {
-      setErrorMessage('Passwords dont match');
+      setErrorMessage("Passwords dont match");
     } else if (formData.pass.length < 8) {
-      setErrorMessage('Passwords must contain at least 8 characters.');
+      setErrorMessage("Passwords must contain at least 8 characters.");
     } else {
-      setErrorMessage('');
+      setErrorMessage("");
       doSubmit();
     }
     event.preventDefault();
@@ -86,13 +85,13 @@ function Register(props) {
   }, []);
 
   return (
-    <WrapperOuter style={{ minHeight: 'calc(100vh - 5px)' }}>
+    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <WrapperInner>
-        <div className={css['form-authenticate']}>
-          <div className={css['form-icon']} />
+        <div className={css["form-authenticate"]}>
+          <div className={css["form-icon"]} />
           <form onSubmit={onSubmit} id="registerform" method="POST">
-            <label className={css['form-label']}>Email</label>
-            <div className={css['form-input-container']}>
+            <label className={css["form-label"]}>Email</label>
+            <div className={css["form-input-container"]}>
               <input
                 onChange={handleEmailChange}
                 type="email"
@@ -100,8 +99,8 @@ function Register(props) {
                 autoComplete="off"
               />
             </div>
-            <label className={css['form-label']}>Password</label>
-            <div className={css['form-input-container']}>
+            <label className={css["form-label"]}>Password</label>
+            <div className={css["form-input-container"]}>
               <input
                 onChange={handlePassChange}
                 type="password"
@@ -109,10 +108,10 @@ function Register(props) {
                 autoComplete="off"
               />
             </div>
-            <label className={css['form-label']}>Confirm Password</label>
+            <label className={css["form-label"]}>Confirm Password</label>
             <div
-              style={{ paddingBottom: '20px' }}
-              className={css['form-input-container']}
+              style={{ paddingBottom: "20px" }}
+              className={css["form-input-container"]}
             >
               <input
                 onChange={handlePasscChange}
@@ -127,10 +126,10 @@ function Register(props) {
               sitekey="6LesQnQUAAAAABMfGoGiJRgWJLYlBJI6_6sSKaDL"
             />
             ,
-            <button className={css['form-button']} type="submit" id="submit">
+            <button className={css["form-button"]} type="submit" id="submit">
               Register
             </button>
-            <div className={css['form-error']}>{errorMessage}</div>
+            <div className={css["form-error"]}>{errorMessage}</div>
           </form>
         </div>
       </WrapperInner>

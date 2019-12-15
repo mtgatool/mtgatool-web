@@ -1,12 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React from "react";
-import {
-  BrowserRouter as Router,
-  useRouteMatch,
-  useLocation,
-  Link
-} from "react-router-dom";
+import { useRouteMatch, useLocation, Link } from "react-router-dom";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import keyArt from "../../images/key-art.jpg";
 import db from "../../shared/database";
@@ -134,7 +129,14 @@ function Metagame(props) {
     //console.log("archMatch", archMatch);
     //console.log("deckMatch", deckMatch);
 
-    if (formatMatch && metagameData && metagameData.format !== formatMatch.params.format) {
+    if (!archMatch) {
+      setImage(keyArt);
+    }
+    if (
+      formatMatch &&
+      metagameData &&
+      metagameData.format !== formatMatch.params.format
+    ) {
       getMetagameData();
     } else if (metagameData && metagameData.meta) {
       if (deckMatch) {
@@ -181,9 +183,9 @@ function Metagame(props) {
       <TopTitle
         title={
           metagameData
-            ? `${formats.filter(f => f.id == metagameData.format)[0].name} Metagame (${new Date(
-                metagameData.date
-              ).toUTCString()})`
+            ? `${
+                formats.filter(f => f.id == metagameData.format)[0].name
+              } Metagame (${new Date(metagameData.date).toUTCString()})`
             : "Metagame"
         }
         subtitle={
@@ -196,6 +198,7 @@ function Metagame(props) {
       <WrapperInner>
         {metagameData && metagameData.meta && archMatch ? (
           <ArchetypeDecks
+            setImage={setImage}
             deckToDraw={deckToDraw}
             archMatch={archMatch}
             archName={archMatch.params.arch}
@@ -234,7 +237,11 @@ function MetagameNav(props) {
     <div className={css["metagame-nav"]}>
       {formats.map(format => {
         if (formatId !== format.id) {
-          return <Link key={format.id} to={"/metagame/" + format.id}>{format.name}</Link>;
+          return (
+            <Link key={format.id} to={"/metagame/" + format.id}>
+              {format.name}
+            </Link>
+          );
         }
       })}
     </div>
@@ -281,7 +288,7 @@ function ArchetypeTile(props) {
 export default Metagame;
 
 function ArchetypeDecks(props) {
-  const { deckToDraw, archName, archMatch, metagame, opened } = props;
+  const { setImage, deckToDraw, archName, archMatch, metagame, opened } = props;
   const archetype = metagame.meta.filter(arch => arch.name == archName)[0];
 
   let deckName, deckOwner, deckWinrate, deckMatches;
@@ -295,6 +302,16 @@ function ArchetypeDecks(props) {
     deckOwner = archetype.decks[opened].owner;
     deckWinrate = archetype.decks[opened].wr * 100;
     deckMatches = archetype.decks[opened].wrt;
+  }
+
+  if (deckToDraw) {
+    console.log(deckToDraw);
+    try {
+      const cardObj = db.card(deckToDraw.deckTileId);
+      setImage("https://img.scryfall.com/cards" + cardObj.images.art_crop);
+    } catch (e) {
+      console.log("Card image not found ", e);
+    }
   }
 
   return (
@@ -322,7 +339,7 @@ function ArchetypeDecks(props) {
         {archetype.decks.map((deck, index) => {
           return (
             <Link
-              to={location =>
+              to={() =>
                 `/metagame/${archMatch.params.format}/${archMatch.params.day}/${archMatch.params.arch}/${index}`
               }
               key={deck.name + "-" + index}

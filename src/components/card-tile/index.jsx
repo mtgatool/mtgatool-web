@@ -1,11 +1,10 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-else-return */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React from "react";
 import css from "./cardtile.css";
-import db from '../../shared/database';
-import { useWebDispatch } from '../../web-provider';
+import db from "../../shared/database";
+import { useWebDispatch } from "../../web-provider";
 import { COLORS_ALL, FACE_SPLIT_FULL, FACE_ADVENTURE_MAIN } from "./constants";
 
 function openScryfallCard() {
@@ -102,15 +101,15 @@ export default function CardTile(props) {
 
   const handleMouseEnter = React.useCallback(() => {
     setMouseHovering(true);
-    hoverDispatch({type: 'setHoverCard', HoverGrpId: grpId});
-    hoverDispatch({type: 'setHoverOpacity', HoverOpacity: 1});
+    hoverDispatch({ type: "setHoverCard", HoverGrpId: grpId });
+    hoverDispatch({ type: "setHoverOpacity", HoverOpacity: 1 });
   }, []);
 
   const handleMouseLeave = React.useCallback(() => {
     setMouseHovering(false);
-    hoverDispatch({type: 'setHoverOpacity', HoverOpacity: 0});
+    hoverDispatch({ type: "setHoverOpacity", HoverOpacity: 0 });
   }, []);
-  
+
   const handleMouseClick = React.useCallback(() => {
     let cardOpen = card;
     if (card.dfc === FACE_SPLIT_FULL) {
@@ -121,7 +120,7 @@ export default function CardTile(props) {
 
   React.useEffect(() => {
     if (!card) {
-      console.log("get card: " + grpId);
+      //console.log("get card: " + grpId);
       const cardObj = db.card(grpId);
       if (cardObj) {
         setCard(cardObj);

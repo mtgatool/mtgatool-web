@@ -1,19 +1,17 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import css from './footer.css';
+import React from "react";
+import css from "./footer.css";
 
-import logoDiscord from '../../images/discord_logo.png';
-import logoTwitter from '../../images/twitter_logo.png';
-import logoGithub from '../../images/github_logo.png';
-import logoPatreon from '../../images/patreon_logo.png';
-import logoArena from '../../images/arena_logo.png';
+import logoDiscord from "../../images/discord_logo.png";
+import logoTwitter from "../../images/twitter_logo.png";
+import logoGithub from "../../images/github_logo.png";
+import logoPatreon from "../../images/patreon_logo.png";
+import logoArena from "../../images/arena_logo.png";
 
 function Footer() {
   return (
-    <div className={css['footer-main']}>
-      <div className={css['footer-wrapper']}>
+    <div className={css["footer-main"]}>
+      <div className={css["footer-wrapper"]}>
         <FooterLink url="https://discord.gg/K9bPkJy" image={logoDiscord} />
         <FooterLink
           url="https://twitter.com/MEtchegaray7"
@@ -32,8 +30,8 @@ function Footer() {
           image={logoArena}
         />
       </div>
-      <div className={css['footer-wrapper']}>
-        <div className={css['footer-text']}>
+      <div className={css["footer-wrapper"]}>
+        <div className={css["footer-text"]}>
           MTG Arena Tool is unofficial Fan Content permitted under the Fan
           Content Policy.
           <br></br>
@@ -53,7 +51,7 @@ function FooterLink(props) {
   return (
     <>
       <a target="_blank" rel="noopener noreferrer" href={url}>
-        <img alt="" className={css['footer-logo']} src={image} />
+        <img alt="" className={css["footer-logo"]} src={image} />
       </a>
     </>
   );

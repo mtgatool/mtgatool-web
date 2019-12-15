@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import _ from "lodash";
 import React from "react";
 import db from "../../shared/database";
@@ -6,11 +7,13 @@ import css from "./decklist.css";
 
 import CardTile from "../card-tile";
 
+/*
 function compareQuantity(a, b) {
   if (b.quantity - a.quantity < 0) return -1;
   if (b.quantity - a.quantity > 0) return 1;
   return 0;
 }
+*/
 
 function Separator(props) {
   const { children } = props;
@@ -29,7 +32,7 @@ function getDeckComponents(deck) {
         components.push(
           <CardTile
             grpId={id}
-            key={"commandercardtile" + index + "_" + card.id}
+            key={"commandercardtile" + index + "_" + id}
             quantity={1}
           />
         );
@@ -77,7 +80,9 @@ function getDeckComponents(deck) {
       // draw a separator for the group
       const cards = cardsByGroup[group];
       const count = _.sumBy(cards, "quantity");
-      components.push(<Separator key={'sepm_'+group}>{`${group} (${count})`}</Separator>);
+      components.push(
+        <Separator key={"sepm_" + group}>{`${group} (${count})`}</Separator>
+      );
 
       // draw the cards
       _(cards)
@@ -97,7 +102,9 @@ function getDeckComponents(deck) {
   const sideboardSize = _.sumBy(deck.sideboard, "quantity");
   if (sideboardSize) {
     // draw a separator for the sideboard
-    components.push(<Separator key="sep_side">{`Sideboard (${sideboardSize})`}</Separator>);
+    components.push(
+      <Separator key="sep_side">{`Sideboard (${sideboardSize})`}</Separator>
+    );
 
     // draw the cards
     _(deck.sideboard)

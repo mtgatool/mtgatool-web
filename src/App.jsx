@@ -17,7 +17,7 @@ import ReleaseNotes from "./components/release-notes";
 import Metagame from "./components/metagame";
 import Register from "./components/register";
 import CardHover from "./components/card-hover";
-import {WebProvider} from "./web-provider";
+import { WebProvider } from "./web-provider";
 
 // Import once so all CSS can use it thanks to webpack magic
 // eslint-disable-next-line no-unused-vars

@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import css from './cardhover.css';
-import db from '../../shared/database';
-import NotFound from '../../cssimages/notfound.png';
-import { useWebContext } from '../../web-provider';
+import React from "react";
+import css from "./cardhover.css";
+import db from "../../shared/database";
+import NotFound from "../../cssimages/notfound.png";
+import { useWebContext } from "../../web-provider";
 
 function CardHover() {
   const webContext = useWebContext();
 
-  const getStyle = (ctx) => {
+  const getStyle = ctx => {
     const cardObj = db.card(ctx.HoverGrpId);
 
     let newImg;
@@ -20,11 +20,11 @@ function CardHover() {
     return {
       opacity: ctx.HoverOpacity,
       backgroundImage: newImg
-    }
-  }
+    };
+  };
 
   return (
-    <div style={getStyle(webContext)} className={css['card-hover-main']} />
+    <div style={getStyle(webContext)} className={css["card-hover-main"]} />
   );
 }
 

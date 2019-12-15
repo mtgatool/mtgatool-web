@@ -24,16 +24,18 @@ class Database {
       console.log("Error parsing metadata", e);
     }
   }
-
+  /*
   updateCache(data) {
     try {
     } catch (e) {
       console.log("Error updating cache", e);
     }
   }
-
+  */
   card(grpId) {
-    return this.metadata && this.metadata.cards ? this.metadata.cards[grpId] : undefined;
+    return this.metadata && this.metadata.cards
+      ? this.metadata.cards[grpId]
+      : undefined;
   }
 
   get sets() {
