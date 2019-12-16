@@ -720,6 +720,8 @@ export const CARD_TYPES = [
 
 export const CARD_RARITIES = ["common", "uncommon", "rare", "mythic", "land"];
 
+export const WILDCARD_RARITIES = ["common", "uncommon", "rare", "mythic"];
+
 export const MANA_COLORS = [
   "#E7CA8E",
   "#AABEDF",

@@ -6,6 +6,8 @@ import { WrapperOuter } from "../wrapper";
 import css from "./deckview.css";
 import metacss from "../metagame/metagame.css";
 import Deck from "../../shared/deck";
+import DeckTypesStats from "../deck-types-stats";
+import DeckWildcards from "../deck-wildcards";
 //import NotFound from "../notfound";
 //import db from "../../shared/database";
 //import CardTile from "../card-tile";
@@ -59,12 +61,18 @@ function DeckView() {
         title={deckToDraw ? deckToDraw.name : ""}
         subtitle={deckToDraw ? "by " + deckToDraw.user : ""}
       />
-      <div className={css["decklist-div"]}>
-        <div onClick={copyDeck} className={metacss["button-simple"]}>
-          Copy to clipboard
+      {deckToDraw ? (
+        <div className={css["deckview-div"]}>
+          <div onClick={copyDeck} className={metacss["button-simple"]}>
+            Copy to clipboard
+          </div>
+          <DeckWildcards deck={new Deck(deckToDraw)} />
+          <DeckTypesStats deck={new Deck(deckToDraw)} />
+          <DeckList deck={deckToDraw} />
         </div>
-        <DeckList deck={deckToDraw} />
-      </div>
+      ) : (
+        <></>
+      )}
     </WrapperOuter>
   );
 }
