@@ -308,7 +308,9 @@ function ArchetypeDecks(props) {
   if (deckToDraw) {
     try {
       const cardObj = db.card(deckToDraw.deckTileId);
-      setImage("https://img.scryfall.com/cards" + cardObj.images.art_crop);
+      if (cardObj.images.art_crop) {
+        setImage(cardObj);
+      }
     } catch (e) {
       console.log("Card image not found ", e);
     }

@@ -1,0 +1,85 @@
+.deckview-div {
+	width: calc(100% - 48px);
+    margin: 24px;
+    text-align: center;
+}
+
+.actionlog-div {
+  font-family: var(--main-font-name);
+  width: calc(100% - 48px);
+  margin: 0 24px 24px 24px;
+}
+
+.actionlog-div .actionlog {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 680px) {
+  .match-div {
+      display: flex;
+  }
+  .playerDeck {
+      width: calc(50% - 48px);
+  }
+  .actionlog-div {
+      width: calc(50% - 24px);
+      margin: 0 24px 24px 0;
+  }
+}
+
+.actionlog {
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  white-space: nowrap;
+  overflow: hidden;
+  height: 24px;
+  line-height: 24px;
+  width: 100%;
+  display: flex;
+  font-size: 14px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+}
+
+.log_p0 {
+  color: rgba(200, 255, 200, 1);
+}
+
+.log_p1 {
+  color: rgba(255, 200, 200, 1);
+}
+
+.log_p2 {
+  color: rgba(200, 200, 255, 1);
+}
+
+.log_p-1 {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: bold;
+}
+
+.log_p-2 {
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: bold;
+}
+
+.actionlog_time {
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.actionlog_text {
+  margin-left: 8px;
+}
+
+log-card {
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+log-ability {
+  text-decoration: underline !important;
+  cursor: pointer;
+}
+

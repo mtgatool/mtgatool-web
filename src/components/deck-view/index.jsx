@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
 import DeckList from "../decklist";
@@ -9,11 +10,12 @@ import Deck from "../../shared/deck";
 import DeckManaCurve from "../deck-mana-curve";
 import DeckTypesStats from "../deck-types-stats";
 import DeckWildcards from "../deck-wildcards";
+import db from "../../shared/database";
 //import NotFound from "../notfound";
-//import db from "../../shared/database";
 //import CardTile from "../card-tile";
 
-function DeckView() {
+function DeckView(props) {
+  const { setImage } = props;
   const deckMatch = useRouteMatch("/deck/:deckid");
   const [deckToDraw, setDeckToDraw] = React.useState(null);
 
@@ -36,7 +38,14 @@ function DeckView() {
           try {
             let deckData = JSON.parse(xhr.responseText);
             setDeckToDraw(deckData);
-            console.log(deckData);
+            try {
+              const cardObj = db.card(deckToDraw.deckTileId);
+              if (cardObj.images.art_crop) {
+                setImage(cardObj);
+              }
+            } catch (e) {
+              console.log("Card image not found ", e);
+            }
             //setQueryState(STATE_IDLE);
           } catch (e) {
             console.log(e);

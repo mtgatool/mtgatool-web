@@ -49,8 +49,8 @@ export default function DeckManaCurve(props) {
   // console.log("deckManaCurve", manaCounts, curveMax);
 
   return (
-    <div className="mana-curve-container">
-      <div className="mana-curve">
+    <div className={css["mana-curve-container"]}>
+      <div className={css["mana-curve"]}>
         {!!manaCounts &&
           manaCounts.map((cost, i) => {
             const total = cost[0];
@@ -58,18 +58,18 @@ export default function DeckManaCurve(props) {
 
             return (
               <div
-                className="mana-curve-column"
+                className={css["mana-curve-column"]}
                 key={"mana-curve-column-" + i}
                 style={{ height: (total * 100) / curveMax + "%" }}
               >
-                <div className="mana-curve-number">
+                <div className={css["mana-curve-number"]}>
                   {total > 0 ? total : ""}
                 </div>
                 {MANA_COLORS.map((mc, ind) => {
                   if (ind < 5 && cost[ind + 1] > 0) {
                     return (
                       <div
-                        className="mana-curve-column-color"
+                        className={css["mana-curve-column-color"]}
                         key={"mana-curve-column-color-" + ind}
                         style={{
                           height:
@@ -84,16 +84,16 @@ export default function DeckManaCurve(props) {
             );
           })}
       </div>
-      <div className="mana-curve-numbers">
+      <div className={css["mana-curve-numbers"]}>
         {!!manaCounts &&
           manaCounts.map((cost, i) => {
             return (
               <div
-                className="mana-curve-column-number"
+                className={css["mana-curve-column-number"]}
                 key={"mana-curve-column-number-" + i}
               >
                 <div
-                  className={"mana_s16 mana_" + i}
+                  className={css["mana_s16"] + " mana_" + i}
                   style={{ margin: "auto" }}
                 />
               </div>

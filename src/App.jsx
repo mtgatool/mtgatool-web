@@ -12,6 +12,7 @@ import Home from "./components/home";
 import Metagame from "./components/metagame";
 import Register from "./components/register";
 import DeckView from "./components/deck-view";
+import ActionLog from "./components/action-log";
 import CardHover from "./components/card-hover";
 import { WebProvider } from "./web-provider";
 
@@ -24,9 +25,19 @@ import keyArt from "./images/key-art.jpg";
 const DATABASE_URL = "https://mtgatool.com/database/";
 
 function App() {
-  const artist = "Bedevil by Seb Mckinnon";
-  const [image, setImage] = React.useState(keyArt);
+  const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
+  const [imageUrl, setImageUrl] = React.useState(keyArt);
   const [queryState, setQueryState] = React.useState(0);
+
+  const setImage = cardObj => {
+    if (cardObj == keyArt) {
+      setImageUrl(keyArt);
+      setArtData("Bedevil by Seb Mckinnon");
+    } else {
+      setImageUrl("https://img.scryfall.com/cards" + cardObj.images.art_crop);
+      setArtData(cardObj.name + " by " + cardObj.artist);
+    }
+  };
 
   const getDatabase = () => {
     if (localStorage.databaseTime) {
@@ -72,14 +83,14 @@ function App() {
   }, []);
 
   const wrapperStyle = {
-    backgroundImage: `url("${image}")`
+    backgroundImage: `url("${imageUrl}")`
   };
 
   return (
     <WebProvider>
       <Router>
         <div style={wrapperStyle} className={css["wrapper-image"]} />
-        <TopNav artist={artist} />
+        <TopNav artist={artData} />
         <CardHover />
         <Switch>
           <Route exact path="/">
@@ -96,6 +107,9 @@ function App() {
           </Route>
           <Route path="/deck">
             <DeckView setImage={setImage} />
+          </Route>
+          <Route path="/action-log">
+            <ActionLog setImage={setImage} />
           </Route>
           <Route>
             <NotFound setImage={setImage} />
