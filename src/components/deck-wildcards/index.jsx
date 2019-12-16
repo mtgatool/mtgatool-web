@@ -7,19 +7,20 @@ import css from "./deckwildcards.css";
 
 function getDeckWildcards(deck) {
   const rarities = { common: 0, uncommon: 0, rare: 0, mythic: 0 };
+  const deckCards = [
+    ...deck.getMainboard().get(),
+    ...deck.getSideboard().get()
+  ];
 
-  deck
-    .getMainboard()
-    .get()
-    .forEach(function(card) {
-      const c = db.card(card.id);
-      if (c) {
-        if (c.rarity == "common") rarities.common += card.quantity;
-        if (c.rarity == "uncommon") rarities.uncommon += card.quantity;
-        if (c.rarity == "rare") rarities.rare += card.quantity;
-        if (c.rarity == "mythic") rarities.mythic += card.quantity;
-      }
-    });
+  deckCards.forEach(function(card) {
+    const c = db.card(card.id);
+    if (c) {
+      if (c.rarity == "common") rarities.common += card.quantity;
+      if (c.rarity == "uncommon") rarities.uncommon += card.quantity;
+      if (c.rarity == "rare") rarities.rare += card.quantity;
+      if (c.rarity == "mythic") rarities.mythic += card.quantity;
+    }
+  });
   return rarities;
 }
 

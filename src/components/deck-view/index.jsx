@@ -6,6 +6,7 @@ import { WrapperOuter } from "../wrapper";
 import css from "./deckview.css";
 import metacss from "../metagame/metagame.css";
 import Deck from "../../shared/deck";
+import DeckManaCurve from "../deck-mana-curve";
 import DeckTypesStats from "../deck-types-stats";
 import DeckWildcards from "../deck-wildcards";
 //import NotFound from "../notfound";
@@ -68,6 +69,7 @@ function DeckView() {
           </div>
           <DeckWildcards deck={new Deck(deckToDraw)} />
           <DeckTypesStats deck={new Deck(deckToDraw)} />
+          <DeckManaCurve deck={deckToDraw} />
           <DeckList deck={deckToDraw} />
         </div>
       ) : (
