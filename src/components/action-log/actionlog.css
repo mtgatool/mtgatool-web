@@ -4,6 +4,12 @@
     text-align: center;
 }
 
+.deckview-title {
+  font-family: var(--main-font-name);
+  text-align: center;
+  margin-bottom: 1em;
+}
+
 .actionlog-div {
   font-family: var(--main-font-name);
   width: calc(100% - 48px);
@@ -28,6 +34,7 @@
 }
 
 .actionlog {
+  color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
   white-space: nowrap;
   overflow: hidden;
@@ -68,18 +75,25 @@
 }
 
 .actionlog_text {
+  display: flex;
   margin-left: 8px;
 }
 
-log-card {
+.log-text {
+  margin-right: 3px;
+}
+
+.log-card {
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
+  margin-right: 3px;
 }
 
-log-ability {
+.log-ability {
   text-decoration: underline !important;
   cursor: pointer;
+  margin-right: 3px;
 }
 

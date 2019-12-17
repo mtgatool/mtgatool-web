@@ -5,6 +5,7 @@ class Database {
   constructor() {
     this.setDatabase = this.setDatabase.bind(this);
     this.card = this.card.bind(this);
+    this.ability = this.ability.bind(this);
     //const defaultDb = fs.readFileSync(dbUri, "utf8");
     //this.setDatabase(defaultDb);
   }
@@ -35,6 +36,12 @@ class Database {
   card(grpId) {
     return this.metadata && this.metadata.cards
       ? this.metadata.cards[grpId]
+      : undefined;
+  }
+
+  ability(abId) {
+    return this.metadata && this.metadata.abilities
+      ? this.metadata.abilities[abId]
       : undefined;
   }
 
