@@ -97,17 +97,25 @@ export default function CardTile(props) {
   const [isMouseHovering, setMouseHovering] = React.useState(false);
   const [card, setCard] = React.useState(undefined);
   const [dfcCard, setdfcCard] = React.useState(undefined);
-  const hoverDispatch = useWebDispatch(card);
+  const webDispatch = useWebDispatch(card);
+
+  const setHoverCard = grpId => {
+    webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
+  };
+
+  const setHoverOpacity = opacity => {
+    webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
+  };
 
   const handleMouseEnter = React.useCallback(() => {
     setMouseHovering(true);
-    hoverDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-    hoverDispatch({ type: "setHoverOpacity", HoverOpacity: 1 });
+    setHoverCard(grpId);
+    setHoverOpacity(1);
   }, []);
 
   const handleMouseLeave = React.useCallback(() => {
     setMouseHovering(false);
-    hoverDispatch({ type: "setHoverOpacity", HoverOpacity: 0 });
+    setHoverOpacity(0);
   }, []);
 
   const handleMouseClick = React.useCallback(() => {

@@ -13,6 +13,7 @@ import DeckList from "../decklist";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 import NotFound from "../notfound";
 import Deck from "../../shared/deck";
+import { useWebDispatch } from "../../web-provider";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -46,9 +47,14 @@ function Metagame(props) {
   const archMatch = useRouteMatch("/metagame/:format/:day/:arch");
   const deckMatch = useRouteMatch("/metagame/:format/:day/:arch/:deck");
   const { setImage } = props;
-  const [queryState, setQueryState] = React.useState(STATE_IDLE);
   const [metagameData, setMetagameData] = React.useState(null);
   const [deckToDraw, setDeckToDraw] = React.useState(null);
+  const webDispatch = useWebDispatch();
+
+  const setQueryState = state => {
+    webDispatch({ type: "setQueryState", queryState: state });
+  };
+
   // Little debug here
   /*
   const database = useSelector(state => {
@@ -103,7 +109,7 @@ function Metagame(props) {
       }
     };
     xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && queryState !== STATE_ERROR) {
+      if (xhr.readyState === 4) {
         setQueryState(STATE_IDLE);
       }
     };

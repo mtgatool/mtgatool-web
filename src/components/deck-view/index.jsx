@@ -11,13 +11,25 @@ import DeckManaCurve from "../deck-mana-curve";
 import DeckTypesStats from "../deck-types-stats";
 import DeckWildcards from "../deck-wildcards";
 import db from "../../shared/database";
-//import NotFound from "../notfound";
-//import CardTile from "../card-tile";
+import NotFound from "../notfound";
+
+import { useWebDispatch } from "../../web-provider";
+import {
+  STATE_IDLE,
+  STATE_DOWNLOAD,
+  STATE_ERROR
+} from "../../shared/constants";
 
 function DeckView(props) {
   const { setImage } = props;
   const deckMatch = useRouteMatch("/deck/:deckid");
   const [deckToDraw, setDeckToDraw] = React.useState(null);
+
+  const webDispatch = useWebDispatch();
+
+  const setQueryState = state => {
+    webDispatch({ type: "setQueryState", queryState: state });
+  };
 
   const copyDeck = React.useCallback(() => {
     console.log("Copy");
@@ -29,11 +41,11 @@ function DeckView(props) {
   React.useEffect(() => {
     if (deckMatch) {
       const URL = `https://mtgatool.com/api/get_deck.php?id=${deckMatch.params.deckid}`;
-      //setQueryState(STATE_DOWNLOAD);
+      setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
       xhr.onload = () => {
         if (xhr.status !== 200) {
-          //setQueryState(xhr.status);
+          setQueryState(xhr.status);
         } else {
           try {
             let deckData = JSON.parse(xhr.responseText);
@@ -46,45 +58,51 @@ function DeckView(props) {
             } catch (e) {
               console.log("Card image not found ", e);
             }
-            //setQueryState(STATE_IDLE);
+            setQueryState(STATE_IDLE);
           } catch (e) {
             console.log(e);
-            //setQueryState(STATE_ERROR);
+            setQueryState(STATE_ERROR);
           }
         }
       };
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-          //setQueryState(STATE_IDLE);
+          setQueryState(STATE_IDLE);
         }
       };
       xhr.open("GET", URL);
       xhr.send();
     } else {
-      //
+      setQueryState(STATE_ERROR);
     }
   }, []);
 
   return (
-    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
-      <TopTitle
-        title={deckToDraw ? deckToDraw.name : ""}
-        subtitle={deckToDraw ? "by " + deckToDraw.user : ""}
-      />
-      {deckToDraw ? (
-        <div className={css["deckview-div"]}>
-          <div onClick={copyDeck} className={metacss["button-simple"]}>
-            Copy to clipboard
-          </div>
-          <DeckWildcards deck={new Deck(deckToDraw)} />
-          <DeckTypesStats deck={new Deck(deckToDraw)} />
-          <DeckManaCurve deck={deckToDraw} />
-          <DeckList deck={deckToDraw} />
-        </div>
+    <>
+      {deckToDraw && deckToDraw.error ? (
+        <NotFound setImage={setImage} />
       ) : (
-        <></>
+        <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
+          <TopTitle
+            title={deckToDraw ? deckToDraw.name : ""}
+            subtitle={deckToDraw ? "by " + deckToDraw.user : ""}
+          />
+          {deckToDraw ? (
+            <div className={css["deckview-div"]}>
+              <div onClick={copyDeck} className={metacss["button-simple"]}>
+                Copy to clipboard
+              </div>
+              <DeckWildcards deck={new Deck(deckToDraw)} />
+              <DeckTypesStats deck={new Deck(deckToDraw)} />
+              <DeckManaCurve deck={deckToDraw} />
+              <DeckList deck={deckToDraw} />
+            </div>
+          ) : (
+            <></>
+          )}
+        </WrapperOuter>
       )}
-    </WrapperOuter>
+    </>
   );
 }
 

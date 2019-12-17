@@ -9,11 +9,21 @@ import metacss from "../metagame/metagame.css";
 import Deck from "../../shared/deck";
 import db from "../../shared/database";
 import { useWebDispatch } from "../../web-provider";
+import {
+  STATE_IDLE,
+  STATE_DOWNLOAD,
+  STATE_ERROR
+} from "../../shared/constants";
 
 function ActionLogView(props) {
   const { setImage } = props;
   const logMatch = useRouteMatch("/action-log/:logId");
   const [matchToDraw, setMatchToDraw] = React.useState(null);
+  const webDispatch = useWebDispatch();
+
+  const setQueryState = state => {
+    webDispatch({ type: "setQueryState", queryState: state });
+  };
 
   const copyDeck = React.useCallback(() => {
     console.log("Copy");
@@ -25,11 +35,11 @@ function ActionLogView(props) {
   React.useEffect(() => {
     if (logMatch) {
       const URL = `https://mtgatool.com/api/get_action_log.php?id=${logMatch.params.logId}`;
-      //setQueryState(STATE_DOWNLOAD);
+      setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
       xhr.onload = () => {
         if (xhr.status !== 200) {
-          //setQueryState(xhr.status);
+          setQueryState(xhr.status);
         } else {
           try {
             let matchData = JSON.parse(xhr.responseText);
@@ -43,22 +53,22 @@ function ActionLogView(props) {
             } catch (e) {
               console.log("Card image not found ", e);
             }
-            //setQueryState(STATE_IDLE);
+            setQueryState(STATE_IDLE);
           } catch (e) {
             console.log(e);
-            //setQueryState(STATE_ERROR);
+            setQueryState(STATE_ERROR);
           }
         }
       };
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-          //setQueryState(STATE_IDLE);
+          setQueryState(STATE_IDLE);
         }
       };
       xhr.open("GET", URL);
       xhr.send();
     } else {
-      //
+      setQueryState(STATE_IDLE);
     }
   }, []);
 
@@ -170,15 +180,23 @@ function LogCard(props) {
   const cardObj = db.card(grpId);
   const cardName = cardObj.name;
 
-  const hoverDispatch = useWebDispatch(cardObj);
+  const webDispatch = useWebDispatch(cardObj);
+
+  const setHoverCard = grpId => {
+    webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
+  };
+
+  const setHoverOpacity = opacity => {
+    webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
+  };
 
   const handleMouseEnter = React.useCallback(() => {
-    hoverDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-    hoverDispatch({ type: "setHoverOpacity", HoverOpacity: 1 });
+    setHoverCard(grpId);
+    setHoverOpacity(1);
   }, []);
 
   const handleMouseLeave = React.useCallback(() => {
-    hoverDispatch({ type: "setHoverOpacity", HoverOpacity: 0 });
+    setHoverOpacity(0);
   }, []);
 
   return (

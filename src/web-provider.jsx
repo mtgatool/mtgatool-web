@@ -9,6 +9,9 @@ function webReducer(state, action) {
     case "setHoverCard": {
       return { ...state, HoverGrpId: action.HoverGrpId };
     }
+    case "setQueryState": {
+      return { ...state, queryState: action.queryState };
+    }
     case "setHoverOpacity": {
       return { ...state, HoverOpacity: action.HoverOpacity };
     }
@@ -19,6 +22,7 @@ function webReducer(state, action) {
 }
 
 const defaultWebState = {
+  queryState: 0,
   HoverGrpId: 1,
   HoverOpacity: 0
 };
