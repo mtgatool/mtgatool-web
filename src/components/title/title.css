@@ -10,6 +10,7 @@
   text-align: center;
   font-size: 1.33em;
   margin: 7em auto auto auto;
+  height: auto;
   color: #fae5d2;
   padding-bottom: 16px;
   font-family: var(--sub-font-name-it);
@@ -21,6 +22,7 @@
   text-align: center;
   font-size: 1em;
   margin: auto;
+  height: auto;
   color: #fae5d2;
   padding-bottom: 8px;
   font-family: var(--sub-font-name-it);

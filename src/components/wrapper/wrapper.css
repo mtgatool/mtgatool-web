@@ -24,6 +24,8 @@
 
 .wrapper-inner-centered {
   margin: auto;
+  max-width: 1200px;
+  width: -webkit-fill-available;
   flex-grow: 2;
 }
 
