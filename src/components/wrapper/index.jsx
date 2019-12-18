@@ -11,6 +11,15 @@ export function WrapperInner(props) {
   );
 }
 
+export function WrapperInnerCentered(props) {
+  const { children, style } = props;
+  return (
+    <div style={style} className={css["wrapper-inner-centered"]}>
+      {children}
+    </div>
+  );
+}
+
 export function WrapperOuter(props) {
   const { children, style } = props;
   return (

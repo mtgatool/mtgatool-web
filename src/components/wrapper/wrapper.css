@@ -22,6 +22,11 @@
   display: contents;
 }
 
+.wrapper-inner-centered {
+  margin: auto;
+  flex-grow: 2;
+}
+
 .wrapper-outer a {
   color: rgba(231, 202, 142, 1);
   margin-top: 10px;

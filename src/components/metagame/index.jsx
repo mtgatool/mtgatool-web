@@ -2,18 +2,19 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { useRouteMatch, useLocation, Link } from "react-router-dom";
-import { WrapperInner, WrapperOuter } from "../wrapper";
-import keyArt from "../../images/key-art.jpg";
-import db from "../../shared/database";
 import css from "./metagame.css";
 import topNavCss from "../topnav/topnav.css";
-import TopTitle from "../title";
 import { ManaCost } from "../card-tile";
 import DeckList from "../decklist";
-import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 import NotFound from "../notfound";
+import TopTitle from "../title";
+import { WrapperInner, WrapperOuter } from "../wrapper";
+import db from "../../shared/database";
 import Deck from "../../shared/deck";
+import urlDecode from "../../shared/urlDecode";
+import keyArt from "../../images/key-art.jpg";
 import { useWebDispatch } from "../../web-provider";
+import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -71,7 +72,7 @@ function Metagame(props) {
         setQueryState(xhr.status);
       } else {
         try {
-          let deckData = JSON.parse(xhr.responseText);
+          let deckData = JSON.parse(urlDecode(xhr.responseText));
           setDeckToDraw(deckData);
           setQueryState(STATE_IDLE);
         } catch (e) {

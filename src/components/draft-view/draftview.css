@@ -9,11 +9,31 @@
   font-family: var(--sub-font-name-it);
 }
 
+.draft-container {
+  flex-direction: column;
+  display: flex;
+  margin: 8px 48px;
+  flex-grow: 2;
+}
+
+@media screen and (min-width: 900px) {
+  .draft-container{
+      flex-direction: row;
+  }
+  .draft-deck-view {
+    max-width: 350px;
+  }
+}
+
 .draft-view {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   flex-grow: 2;
+}
+
+.draft-deck-view {
+  width: -webkit-fill-available;
 }
 
 .draft-card {

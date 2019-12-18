@@ -1,14 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
-import TopTitle from "../title";
-import { WrapperOuter } from "../wrapper";
 import css from "./draftview.css";
-import db from "../../shared/database";
-import { useWebDispatch } from "../../web-provider";
-import urlDecode from "../../shared/urlDecode";
+import TopTitle from "../title";
+import { WrapperOuter, WrapperInnerCentered } from "../wrapper";
+import DeckList from "../decklist";
 import NotFound from "../notfound";
 import Slider from "../slider";
+import { useWebDispatch } from "../../web-provider";
+import db from "../../shared/database";
+import urlDecode from "../../shared/urlDecode";
 
 import {
   STATE_IDLE,
@@ -16,6 +17,7 @@ import {
   STATE_ERROR,
   PACK_SIZES
 } from "../../shared/constants";
+import Deck from "../../shared/deck";
 
 function DraftView(props) {
   const { setImage } = props;
@@ -81,39 +83,63 @@ function DraftView(props) {
     return draftToDraw[key] ? draftToDraw[key] : { pick: 0, pack: [] };
   };
 
+  const getCurrentDeck = () => {
+    const pos = positionFromPickPack(pickpack, draftToDraw.set);
+    let decklist = new Deck();
+    for (let i = 0; i < pos; i++) {
+      let pp = pickPackFromPosition(i, draftToDraw.set);
+      const key = `pack_${pp.pack}pick_${pp.pick}`;
+      decklist.getMainboard().add(draftToDraw[key].pick);
+    }
+    decklist.getMainboard().removeDuplicates();
+    return decklist.getSave();
+  };
+
   return (
     <>
       {draftToDraw && draftToDraw.error ? (
         <NotFound setImage={setImage} />
       ) : draftToDraw ? (
         <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
-          <TopTitle
-            title={draftToDraw.set + " Draft"}
-            subtitle={"by " + draftToDraw.owner.split("#")[0]}
-          />
-          <div className={css["draft-title"]}>{`Pack ${pickpack.pack +
-            1}, Pick ${pickpack.pick + 1}`}</div>
-          <Slider
-            onChange={onSliderChange}
-            max={(PACK_SIZES[draftToDraw.set] || 14) * 3 - 1}
-          />
-          <div className={css["draft-view"]}>
-            {getCurrentPick().pack.map((grpId, index) => {
-              return (
-                <DraftCard
-                  pick={getCurrentPick().pick == grpId}
-                  key={pickpack.pack + "-" + pickpack.pick + "-" + index}
-                  grpId={grpId}
-                />
-              );
-            })}
-          </div>
+          <WrapperInnerCentered>
+            <TopTitle
+              title={draftToDraw.set + " Draft"}
+              subtitle={"by " + draftToDraw.owner.split("#")[0]}
+            />
+            <div className={css["draft-title"]}>{`Pack ${pickpack.pack +
+              1}, Pick ${pickpack.pick + 1}`}</div>
+            <Slider
+              onChange={onSliderChange}
+              max={(PACK_SIZES[draftToDraw.set] || 14) * 3 - 1}
+            />
+            <div className={css["draft-container"]}>
+              <div className={css["draft-view"]}>
+                {getCurrentPick().pack.map((grpId, index) => {
+                  return (
+                    <DraftCard
+                      pick={getCurrentPick().pick == grpId}
+                      key={pickpack.pack + "-" + pickpack.pick + "-" + index}
+                      grpId={grpId}
+                    />
+                  );
+                })}
+              </div>
+              <div className={css["draft-deck-view"]}>
+                <DeckList deck={getCurrentDeck()} />
+              </div>
+            </div>
+          </WrapperInnerCentered>
         </WrapperOuter>
       ) : (
         <></>
       )}
     </>
   );
+}
+
+function positionFromPickPack(pp, set) {
+  const packSize = PACK_SIZES[set] || 14;
+  return pp.pick + pp.pack * packSize;
 }
 
 function pickPackFromPosition(position, set) {
