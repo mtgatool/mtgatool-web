@@ -83,6 +83,7 @@
   margin-bottom: 1px;
   background-color: rgba(0,0,0,0.75);
   -webkit-transition: all .15s ease-in;
+  transition: all 0.15s ease-in-out;
   cursor: pointer;
   width: 100%;
   font-family: var(--main-font-name);

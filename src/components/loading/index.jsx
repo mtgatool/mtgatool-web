@@ -13,18 +13,18 @@ function Loading() {
   const loadingStyle = ctx => {
     if (ctx.queryState == STATE_DOWNLOAD) {
       return {
-        opacity: 1
+        display: "block"
       };
     }
     if (ctx.queryState == STATE_IDLE) {
       return {
-        opacity: 0,
+        display: "none",
         animation: "none"
       };
     }
     if (ctx.queryState == STATE_ERROR) {
       return {
-        opacity: 0
+        display: "none"
       };
     }
   };

@@ -3,11 +3,11 @@
   background-image: url(../../cssimages/icon-256.png);
   background-size: contain;
   z-index: 50;
-  width: 10em;
-  height: 10em;
+  width: 4em;
+  height: 4em;
   position: fixed;
-  left: calc(50% - 5em);
-  top: calc(50% - 5em);
+  left: calc(50% - 2em);
+  top: calc(50% - 2em);
   animation-name: spin;
   animation-duration: 1500ms;
   animation-iteration-count: infinite;

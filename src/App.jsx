@@ -6,16 +6,20 @@ import db from "./shared/database";
 
 import TopNav from "./components/topnav";
 import Footer from "./components/footer";
+
+// Pages
+import Home from "./components/home";
 import NotFound from "./components/notfound";
 import ReleaseNotes from "./components/release-notes";
-import Home from "./components/home";
 import Metagame from "./components/metagame";
 import Register from "./components/register";
 import DeckView from "./components/deck-view";
 import ActionLog from "./components/action-log";
+import DraftView from "./components/draft-view";
+
 import CardHover from "./components/card-hover";
 import Loading from "./components/loading";
-import { WebProvider } from "./web-provider";
+import { useWebDispatch } from "./web-provider";
 
 // Import once so all CSS can use it thanks to webpack magic
 // eslint-disable-next-line no-unused-vars
@@ -29,12 +33,11 @@ const DATABASE_URL = "https://mtgatool.com/database/";
 function App() {
   const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
   const [imageUrl, setImageUrl] = React.useState(keyArt);
-  /*
   const webDispatch = useWebDispatch();
+
   const setQueryState = state => {
     webDispatch({ type: "setQueryState", queryState: state });
   };
-  */
 
   const setImage = cardObj => {
     if (cardObj == keyArt) {
@@ -59,27 +62,27 @@ function App() {
       !localStorage.database ||
       new Date(Date.now() - 864e5) < new Date(localStorage.databaseTime)
     ) {
-      //setQueryState(STATE_DOWNLOAD);
+      setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
       xhr.onload = () => {
         if (xhr.status !== 200) {
-          //setQueryState(xhr.status);
+          setQueryState(xhr.status);
         } else {
           try {
             console.log("Database download ok!");
             localStorage.database = xhr.responseText;
             localStorage.databaseTime = new Date();
             db.setDatabase(xhr.responseText);
-            //setQueryState(STATE_IDLE);
+            setQueryState(STATE_IDLE);
           } catch (e) {
             console.log(e);
-            //setQueryState(STATE_ERROR);
+            setQueryState(STATE_ERROR);
           }
         }
       };
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
-          //setQueryState(STATE_IDLE);
+          setQueryState(STATE_IDLE);
         }
       };
       xhr.open("GET", DATABASE_URL);
@@ -96,7 +99,7 @@ function App() {
   };
 
   return (
-    <WebProvider>
+    <>
       <Loading />
       <Router>
         <div style={wrapperStyle} className={css["wrapper-image"]} />
@@ -121,13 +124,16 @@ function App() {
           <Route path="/action-log">
             <ActionLog setImage={setImage} />
           </Route>
+          <Route path="/draft">
+            <DraftView setImage={setImage} />
+          </Route>
           <Route>
             <NotFound setImage={setImage} />
           </Route>
         </Switch>
         <Footer />
       </Router>
-    </WebProvider>
+    </>
   );
 }
 
