@@ -103,9 +103,10 @@ body {
     src: url('./fonts/mplantinbold.woff') format('woff');
 }
  
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 680px) {
     .home-desc {
         height: calc(50vh - 80px);
+        padding: 80px 0 16px 0 !important;
     }
     .text-description {
         margin: 0 48px;

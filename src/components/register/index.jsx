@@ -5,6 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./register.css";
 import keyArt from "../../images/key-art.jpg";
+import TopTitle from "../title";
 
 function Register(props) {
   const { setImage } = props;

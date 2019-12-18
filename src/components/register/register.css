@@ -11,8 +11,9 @@
 }
 
 .form-authenticate {
-  max-width: 30em;
-  margin: 2em auto;
+  max-width: 20em;
+  width: -webkit-fill-available;
+  margin: 9em auto 2em auto;
   background-color: var(--color-light);
   padding: 3.5em 2em 2em 2em;
   border-radius: 3px;

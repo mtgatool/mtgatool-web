@@ -64,7 +64,7 @@ function Metagame(props) {
   */
 
   const getArchetypeDeck = match => {
-    const URL = `https://mtgatool.com/metagame/get_deck.php?id=${match}`;
+    const URL = `https://mtgatool.com/api/get_match_deck.php?id=${match}`;
     setQueryState(STATE_DOWNLOAD);
     const xhr = new XMLHttpRequest();
     xhr.onload = () => {
