@@ -39,7 +39,7 @@ function Register(props) {
         setErrorMessage("Error reading response.");
       }
     });
-    xhr.open("POST", "https://mtgatool.com/register.php");
+    xhr.open("POST", "https://mtgatool.com/api/register.php");
     xhr.send(
       JSON.stringify({
         pasword: passHash,
