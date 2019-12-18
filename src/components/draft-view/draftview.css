@@ -27,6 +27,7 @@
 
 .draft-view {
   display: flex;
+  height: fit-content;
   justify-content: center;
   flex-wrap: wrap;
   flex-grow: 2;
