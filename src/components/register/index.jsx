@@ -40,12 +40,9 @@ function Register(props) {
       }
     });
     xhr.open("POST", "https://mtgatool.com/api/register.php");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(
-      JSON.stringify({
-        pasword: passHash,
-        email: formData.email,
-        "g-recaptcha-response": formData.recaptcha
-      })
+      `password=${passHash}&email=${formData.email}&g-recaptcha-response=${formData.recaptcha}`
     );
   };
 
