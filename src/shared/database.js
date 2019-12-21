@@ -6,6 +6,7 @@ class Database {
     this.setDatabase = this.setDatabase.bind(this);
     this.card = this.card.bind(this);
     this.ability = this.ability.bind(this);
+    this.eventName = this.eventName.bind(this);
     //const defaultDb = fs.readFileSync(dbUri, "utf8");
     //this.setDatabase(defaultDb);
   }
@@ -58,6 +59,10 @@ class Database {
 
   get version() {
     return this.metadata ? this.metadata.version : 0;
+  }
+
+  eventName(evid) {
+    return this.metadata.events[evid] ? this.metadata.events[evid] : evid;
   }
 }
 

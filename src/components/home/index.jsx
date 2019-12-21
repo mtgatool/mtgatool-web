@@ -7,7 +7,7 @@ import downloadButton from "../../images/badge_download.png";
 import keyArt from "../../images/key-art.jpg";
 import css from "../../app.css";
 
-import Video from "../video";
+import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
@@ -62,7 +62,7 @@ function Home(props) {
         </WrapperInner>
       </WrapperOuter>
       <WrapperOuter style={{ paddingBottom: "64px" }}>
-        <Video />
+        <MatchFeed />
       </WrapperOuter>
       <WrapperOuterLight>
         <WrapperInner>

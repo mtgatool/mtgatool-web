@@ -49,6 +49,7 @@ function App() {
 
   return (
     <>
+      <Database />
       <Loading />
       <Router>
         <div style={wrapperStyle} className={css["wrapper-image"]} />
@@ -59,7 +60,6 @@ function App() {
             <Home setImage={setImage} />
           </Route>
           <Route path="/metagame">
-            <Database />
             <Metagame setImage={setImage} />
           </Route>
           <Route exact path="/register">
@@ -69,15 +69,12 @@ function App() {
             <ReleaseNotes setImage={setImage} />
           </Route>
           <Route path="/deck">
-            <Database />
             <DeckView setImage={setImage} />
           </Route>
           <Route path="/action-log">
-            <Database />
             <ActionLog setImage={setImage} />
           </Route>
           <Route path="/draft">
-            <Database />
             <DraftView setImage={setImage} />
           </Route>
           <Route>

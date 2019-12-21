@@ -17,6 +17,12 @@ function Database() {
   };
 
   React.useState(() => {
+    setTimeout(() => {
+      load();
+    }, 500);
+  }, []);
+
+  const load = () => {
     if (localStorage.databaseTime) {
       const dbJson = JSON.parse(localStorage.database);
       console.log("database from cache: v" + dbJson.version);
@@ -55,7 +61,7 @@ function Database() {
       xhr.open("GET", DATABASE_URL);
       xhr.send();
     }
-  }, []);
+  };
 
   return <></>;
 }

@@ -1,6 +1,6 @@
 import CardsList from "./cardsList";
 import Colors from "./colors";
-import { compareCards, getSetCode, objectClone } from "./util";
+import { compareCards, objectClone } from "./util";
 
 import db from "./database";
 const DEFAULT_TILE = 67003;
@@ -164,6 +164,7 @@ class Deck {
    */
   getExportArena() {
     let str = "";
+    const NEWLINE = `\n`;
     let listMain = this.mainboard.removeDuplicates(false);
     listMain.forEach(function(card) {
       let grpid = card.id;
@@ -175,18 +176,13 @@ class Deck {
       }
 
       let card_name = cardObj.name;
-      let card_set = cardObj.set;
-      let card_cn = cardObj.cid;
       let card_q = card.measurable ? card.quantity : 1;
 
-      let sets = db.sets;
-      let set_code = sets
-        ? sets[card_set].arenacode
-        : false || getSetCode(card_set);
-      str += `${card_q} ${card_name} (${set_code}) ${card_cn} \r\n`;
+      if (str !== "") str += NEWLINE;
+      str += `${card_q} ${card_name}`;
     });
 
-    str += "\r\n";
+    str += NEWLINE;
 
     let listSide = this.sideboard.removeDuplicates(false);
     listSide.forEach(function(card) {
@@ -199,15 +195,9 @@ class Deck {
       }
 
       let card_name = cardObj.name;
-      let card_set = cardObj.set;
-      let card_cn = cardObj.cid;
       let card_q = card.measurable ? card.quantity : 1;
 
-      let sets = db.sets;
-      let set_code = sets
-        ? sets[card_set].arenacode
-        : false || getSetCode(card_set);
-      str += `${card_q} ${card_name} (${set_code}) ${card_cn} \r\n`;
+      str += `${NEWLINE}${card_q} ${card_name}`;
     });
 
     return str;
