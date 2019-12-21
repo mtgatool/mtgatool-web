@@ -67,11 +67,12 @@ function MatchFeed() {
         matches
           .slice(0)
           .reverse()
-          .map(match => {
+          .map((match, index) => {
             return (
               <MatchBrief
                 key={match.date + match.opponent.name}
                 match={match}
+                index={index}
               />
             );
           })
@@ -83,8 +84,8 @@ function MatchFeed() {
 }
 
 function MatchBrief(props) {
-  const { match } = props;
-  const [animate, setAnimate] = React.useState(false);
+  const { match, index } = props;
+  const [animate, setAnimate] = React.useState(index > 0);
 
   const cardObj = db.card(match.playerDeck.deckTileId);
   const cardImage = cardObj
