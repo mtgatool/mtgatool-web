@@ -1,34 +1,37 @@
 @media screen and (min-width: 1120px) {
   .match-feed {
-      width: 1024px;
-      height: 526px;
-      margin: auto;
+    width: 1024px;
+    height: 526px;
+    margin: auto;
   }
 }
 
 @media screen and (min-width: 680px) {
   .match-feed {
-      margin: 0 48px;
-      max-width: 900px;
+    margin: 0 48px;
+    max-width: 900px;
   }
 }
 
 .match-feed {
-  display: flex;
-  flex-direction: column-reverse;
   margin: auto;
   box-shadow: 0px 5px 20px 1px #00000059;
   overflow: hidden;
 }
 
 .match-brief {
-  min-height: 64px;
+  height: 0px;
+  margin-bottom: 0px;
   overflow: hidden;
   display: flex;
-  margin-bottom: 2px;
-  background-color: rgba(0,0,0,0.4);
-  -webkit-transition: all .5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+
+.match-brief-open {
+  height: 64px !important;
+  margin-bottom: 2px !important;
 }
 
 .match-brief-flex {

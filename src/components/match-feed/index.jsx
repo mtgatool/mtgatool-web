@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+
 import css from "./matchfeed.css";
 import { ManaCost } from "../card-tile";
 import db from "../../shared/database";
@@ -63,9 +64,17 @@ function MatchFeed() {
   return (
     <div className={css["match-feed"]}>
       {matches ? (
-        matches.map((match, index) => {
-          return <MatchBrief key={index} match={match} />;
-        })
+        matches
+          .slice(0)
+          .reverse()
+          .map(match => {
+            return (
+              <MatchBrief
+                key={match.date + match.opponent.name}
+                match={match}
+              />
+            );
+          })
       ) : (
         <></>
       )}
@@ -74,8 +83,8 @@ function MatchFeed() {
 }
 
 function MatchBrief(props) {
-  const { containerRef } = React.useRef(null);
   const { match } = props;
+  const [animate, setAnimate] = React.useState(false);
 
   const cardObj = db.card(match.playerDeck.deckTileId);
   const cardImage = cardObj
@@ -85,8 +94,18 @@ function MatchBrief(props) {
     backgroundImage: `url(${cardImage})`
   };
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      setAnimate(true);
+    }, 500);
+  }, []);
+
   return (
-    <div className={css["match-brief"]}>
+    <div
+      className={
+        css["match-brief"] + (animate ? " " + css["match-brief-open"] : "")
+      }
+    >
       <div className={css["match-brief-tile"]} style={tileStyle} />
       <div className={css["match-brief-column"]}>
         <div className={css["match-brief-title"]}>
