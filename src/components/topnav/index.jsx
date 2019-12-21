@@ -21,6 +21,9 @@ export function TopNav(props) {
           <Link to="/register" className={css["nav-link-a"]}>
             Register
           </Link>
+          <Link to="/release-notes" className={css["nav-link-a"]}>
+            Release Notes
+          </Link>
         </div>
       </div>
     </div>

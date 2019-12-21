@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Link } from "react-router-dom";
 import sharedcss from "../../shared.css";
 
 import downloadButton from "../../images/badge_download.png";
@@ -18,8 +17,6 @@ const FEATURE_B_TITLE = `Explore and learn`;
 const FEATURE_B_TEXT = `Browse what others are playing and how they perform, be it on constructed events, drafts and ranked. You would be able to filter decks by colors, events or results. Take your game to the next level and brag your winning deck with everyone else!`;
 const FEATURE_C_TITLE = `Not only a Deck Tracker`;
 const FEATURE_C_TEXT = `Even if you dislike deck trackers, you can find MTGA Tool useful to keep record of your matches, browse through your collection or even check other people's decks. Just disable the deck tracker overlay to keep it running only in background, you won’t miss a thing anyway.`;
-
-const RELEASE_DESC = "v2.14.2, Released November 29th, 2019";
 
 function Home(props) {
   const { setImage } = props;
@@ -47,14 +44,6 @@ function Home(props) {
                 src={downloadButton}
               />
             </a>
-            <div className={css["home-desc-small"]}>{RELEASE_DESC}</div>
-            <Link
-              to="/release-notes"
-              style={{ marginBottom: "10px" }}
-              className={css["nav-logo"]}
-            >
-              Release Notes
-            </Link>
             <div className={css["home-desc-small"]}>
               <i>* No account required</i>
             </div>
