@@ -12,6 +12,7 @@ import NotFound from "./components/notfound";
 import ReleaseNotes from "./components/release-notes";
 import Metagame from "./components/metagame";
 import Register from "./components/register";
+import ResetPassword from "./components/resetpassword";
 import DeckView from "./components/deck-view";
 import ActionLog from "./components/action-log";
 import DraftView from "./components/draft-view";
@@ -64,6 +65,9 @@ function App() {
           </Route>
           <Route exact path="/register">
             <Register setImage={setImage} />
+          </Route>
+          <Route path="/resetpassword">
+            <ResetPassword setImage={setImage} />
           </Route>
           <Route exact path="/release-notes">
             <ReleaseNotes setImage={setImage} />
