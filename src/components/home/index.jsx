@@ -2,7 +2,6 @@
 import React from "react";
 import sharedcss from "../../shared.css";
 
-import downloadButton from "../../images/badge_download.png";
 import keyArt from "../../images/key-art.jpg";
 import css from "../../app.css";
 
@@ -17,6 +16,24 @@ const FEATURE_B_TITLE = `Explore and learn`;
 const FEATURE_B_TEXT = `Browse what others are playing and how they perform, be it on constructed events, drafts and ranked. You would be able to filter decks by colors, events or results. Take your game to the next level and brag your winning deck with everyone else!`;
 const FEATURE_C_TITLE = `Not only a Deck Tracker`;
 const FEATURE_C_TEXT = `Even if you dislike deck trackers, you can find MTGA Tool useful to keep record of your matches, browse through your collection or even check other people's decks. Just disable the deck tracker overlay to keep it running only in background, you won’t miss a thing anyway.`;
+
+// https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest
+function getCurrentOSName() {
+  const platform = window.navigator.platform;
+  if (platform.indexOf("Mac") > 0) return "Mac";
+  if (platform.indexOf("Linux") > 0) return "Linux";
+  return "Windows";
+}
+
+function makeDownloadURL() {
+  const platform = window.navigator.platform;
+  const versionTag = "2.14.2";
+  let extension = "exe";
+  if (platform.indexOf("Mac") > 0) extension = "pkg";
+  if (platform.indexOf("Linux") > 0) extension = "AppImage";
+
+  return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/v${versionTag}/MTG-Arena-Tool-${versionTag}.${extension}`;
+}
 
 function Home(props) {
   const { setImage } = props;
@@ -34,15 +51,8 @@ function Home(props) {
             >
               {DESCRIPTION_TEXT}
             </div>
-            <a
-              className={css["download-button"]}
-              href="https://github.com/Manuel-777/MTG-Arena-Tool/releases/latest"
-            >
-              <img
-                className={css["download-img"]}
-                alt=""
-                src={downloadButton}
-              />
+            <a className={css["download-button"]} href={makeDownloadURL()}>
+              Download for {getCurrentOSName()}
             </a>
             <div className={css["home-desc-small"]}>
               <i>* No account required</i>
