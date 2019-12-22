@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Link } from "react-router-dom";
 import sharedcss from "../../shared.css";
 
-import downloadButton from "../../images/badge_download.png";
 import keyArt from "../../images/key-art.jpg";
 import css from "../../app.css";
 
@@ -19,7 +17,23 @@ const FEATURE_B_TEXT = `Browse what others are playing and how they perform, be 
 const FEATURE_C_TITLE = `Not only a Deck Tracker`;
 const FEATURE_C_TEXT = `Even if you dislike deck trackers, you can find MTGA Tool useful to keep record of your matches, browse through your collection or even check other people's decks. Just disable the deck tracker overlay to keep it running only in background, you won’t miss a thing anyway.`;
 
-const RELEASE_DESC = "v2.14.2, Released November 29th, 2019";
+// https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest
+function getCurrentOSName() {
+  const platform = window.navigator.platform;
+  if (platform.indexOf("Mac") > 0) return "Mac";
+  if (platform.indexOf("Linux") > 0) return "Linux";
+  return "Windows";
+}
+
+function makeDownloadURL() {
+  const platform = window.navigator.platform;
+  const versionTag = "2.14.2";
+  let extension = "exe";
+  if (platform.indexOf("Mac") > 0) extension = "pkg";
+  if (platform.indexOf("Linux") > 0) extension = "AppImage";
+
+  return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/v${versionTag}/MTG-Arena-Tool-${versionTag}.${extension}`;
+}
 
 function Home(props) {
   const { setImage } = props;
@@ -37,24 +51,9 @@ function Home(props) {
             >
               {DESCRIPTION_TEXT}
             </div>
-            <a
-              className={css["download-button"]}
-              href="https://github.com/Manuel-777/MTG-Arena-Tool/releases/latest"
-            >
-              <img
-                className={css["download-img"]}
-                alt=""
-                src={downloadButton}
-              />
+            <a className={css["download-button"]} href={makeDownloadURL()}>
+              Download for {getCurrentOSName()}
             </a>
-            <div className={css["home-desc-small"]}>{RELEASE_DESC}</div>
-            <Link
-              to="/release-notes"
-              style={{ marginBottom: "10px" }}
-              className={css["nav-logo"]}
-            >
-              Release Notes
-            </Link>
             <div className={css["home-desc-small"]}>
               <i>* No account required</i>
             </div>
