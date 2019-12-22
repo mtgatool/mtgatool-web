@@ -38,7 +38,11 @@ function ResetPassword(props) {
         if (!response.ok && response.error) {
           setErrorMessage(response.error);
         } else {
-          setErrorMessage("We sent you an email!");
+          if (checkMode) {
+            setErrorMessage("We sent you an email!");
+          } else {
+            setErrorMessage("Sucessfully changed your password!");
+          }
         }
       } catch (e) {
         console.log(e, xhr.responseText);
