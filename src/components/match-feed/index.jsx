@@ -4,6 +4,7 @@ import React from "react";
 import css from "./matchfeed.css";
 import { ManaCost } from "../card-tile";
 import db from "../../shared/database";
+import { getRankIndex } from "../../shared/util";
 
 const FEED_URL = "https://mtgatool.com/api/get_match_feed.php";
 
@@ -21,7 +22,7 @@ function MatchFeed() {
             matches &&
             addMatch[0].date !== matches[matches.length - 1].date
           ) {
-            const newMatches = [...matches, ...addMatch].slice(-10);
+            const newMatches = [...matches, ...addMatch].slice(-9);
             setMatches(newMatches);
           } else {
             setTimeout(nextLoad, 1500);
@@ -41,7 +42,7 @@ function MatchFeed() {
       if (xhr.status == 200) {
         try {
           const response = JSON.parse(xhr.responseText);
-          setMatches(response);
+          setMatches(response.slice(-9));
         } catch (e) {
           console.log(e);
         }
@@ -107,7 +108,11 @@ function MatchBrief(props) {
         css["match-brief"] + (animate ? " " + css["match-brief-open"] : "")
       }
     >
-      <div className={css["match-brief-tile"]} style={tileStyle} />
+      <div className={css["match-brief-tile"]} style={tileStyle}>
+        <div className={css["rank-left"]}>
+          <RankIcon rank={match.player.rank} tier={match.player.tier} />
+        </div>
+      </div>
       <div className={css["match-brief-column"]}>
         <div className={css["match-brief-title"]}>
           {match.playerDeck.name}
@@ -143,6 +148,28 @@ function MatchBrief(props) {
         </div>
       </div>
     </div>
+  );
+}
+
+function RankIcon(props) {
+  const { rank, tier, format } = props;
+  const rankIndex = getRankIndex(rank, tier);
+
+  const rankStyle = {
+    backgroundPosition: rankIndex * -48 + "px 0px"
+  };
+
+  const rankClass =
+    !format || format == "constructed"
+      ? css["constructed-rank"]
+      : css["limited-rank"];
+
+  return (
+    <div
+      title={rank + " " + tier}
+      className={rankClass}
+      style={rankStyle}
+    ></div>
   );
 }
 

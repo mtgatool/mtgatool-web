@@ -1,7 +1,7 @@
 @media screen and (min-width: 1120px) {
   .match-feed {
     width: 1024px;
-    height: 526px;
+    height: 536px;
     margin: auto;
   }
 }
@@ -24,12 +24,14 @@
   margin-bottom: 0px;
   overflow: hidden;
   display: flex;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--color-back-alpha);
+  border-bottom: 0px solid var(--color-mid-50);
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
 }
 
 .match-brief-open {
+  border-bottom: 1px solid var(--color-mid-50) !important;
   height: 64px !important;
   margin-bottom: 2px !important;
 }
@@ -38,8 +40,17 @@
   display: flex;
 }
 
+.match-brief-middleflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: -webkit-fill-available;
+  height: 48px;
+}
+
 .match-brief-column {
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   justify-content: space-evenly;
   margin: 0 8px;
@@ -62,11 +73,35 @@
 .match-brief-title {
   white-space: nowrap;
   display: flex;
-  font-family: var(--main-font-name-bold);
+  font-family: var(--main-font-name);
 }
 
 .match-brief-subtitle {
   white-space: nowrap;
   font-family: var(--main-font-name-it);
   color: var(--color-light-66);
+}
+
+.rank-left {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 64px;
+}
+
+.rank-small {
+  display: flex;
+}
+
+.constructed-rank {
+  background: url(../../cssimages/ranks_constructed_48.png);
+}
+
+.limited-rank {
+  background: url(../../cssimages/ranks_limited_48.png);
+}
+
+.constructed-rank, .limited-rank {
+  width: 48px;
+  height: 48px;
 }
