@@ -7,7 +7,8 @@ import keyArt from "../../images/key-art.jpg";
 import textFile from "./releasenotes.txt";
 import Title from "../title";
 
-// const CHANGELOG = 'https://mtgatool.com/release-notes/releasenotes.txt';
+const CHANGELOG =
+  "https://raw.githubusercontent.com/mtgatool/mtgatool-web/master/src/components/release-notes/releasenotes.txt";
 
 const TYPE_RELEASE = 0;
 const TYPE_EVENT = 1;
@@ -18,18 +19,16 @@ function ReleaseNotes(props) {
   const [parsedNotes, setParsedNotes] = React.useState([]);
 
   const getReleaseNotes = () => {
-    const lines = textFile.split("\n");
+    // const lines = textFile.split("\n");
     // console.log(lines, textFile);
-    setNotes(lines);
-    /*
+    // setNotes(lines);
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', () => {
-      const lines = xhr.responseText.split('\n');
+    xhr.addEventListener("load", () => {
+      const lines = xhr.responseText.split("\n");
       setNotes(lines);
     });
-    xhr.open('GET', CHANGELOG);
+    xhr.open("GET", CHANGELOG);
     xhr.send();
-    */
   };
 
   React.useEffect(() => {
@@ -39,6 +38,7 @@ function ReleaseNotes(props) {
 
   React.useEffect(() => {
     const newNotes = [];
+    const lines = /(fixed|improved|removed|added)/g;
     notes.forEach((line, index) => {
       if (line.startsWith("version")) {
         newNotes.push({
@@ -47,12 +47,7 @@ function ReleaseNotes(props) {
           date: notes[index + 2]
         });
       }
-      if (
-        line === "fixed" ||
-        line === "improved" ||
-        line === "removed" ||
-        line === "added"
-      ) {
+      if (lines.test(line)) {
         newNotes.push({
           type: TYPE_EVENT,
           event: line,
@@ -60,6 +55,7 @@ function ReleaseNotes(props) {
           commit: notes[index + 2]
         });
       }
+      console.log(newNotes);
       setParsedNotes(newNotes);
     });
   }, [notes]);
