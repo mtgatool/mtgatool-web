@@ -11,7 +11,7 @@ import TopTitle from "../title";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import db from "../../shared/database";
 import Deck from "../../shared/deck";
-import urlDecode from "../../shared/urlDecode";
+import { utf8Decode } from "../../shared/util";
 import keyArt from "../../images/key-art.jpg";
 import { useWebDispatch } from "../../web-provider";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
@@ -72,7 +72,9 @@ function Metagame(props) {
         setQueryState(xhr.status);
       } else {
         try {
-          let deckData = JSON.parse(urlDecode(xhr.responseText));
+          let deckData = JSON.parse(
+            decodeURIComponent(escape(xhr.responseText))
+          );
           setDeckToDraw(deckData);
           setQueryState(STATE_IDLE);
         } catch (e) {
@@ -98,8 +100,9 @@ function Metagame(props) {
         setQueryState(xhr.status);
       } else {
         try {
-          localStorage.metagame = xhr.responseText;
-          let jsonData = JSON.parse(xhr.responseText);
+          const response = decodeURIComponent(escape(xhr.responseText));
+          localStorage.metagame = response;
+          let jsonData = JSON.parse(response);
           console.log("setMetagameData");
           setMetagameData(jsonData);
           setQueryState(STATE_IDLE);
@@ -365,7 +368,7 @@ function ArchetypeDecks(props) {
             >
               <ManaCost colors={deck.colors} />
               <div className={css["deck-link-desc"]}>
-                {deck.name + " by " + deck.owner}
+                {utf8Decode(deck.name + " by " + deck.owner)}
               </div>
               <div className={css["deck-link-wr"]}>
                 {Math.round(deck.wr * deck.wrt)} -{" "}

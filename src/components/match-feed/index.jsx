@@ -4,7 +4,7 @@ import React from "react";
 import css from "./matchfeed.css";
 import { ManaCost } from "../card-tile";
 import db from "../../shared/database";
-import { getRankIndex } from "../../shared/util";
+import { getRankIndex, utf8Decode } from "../../shared/util";
 
 const FEED_URL = "https://mtgatool.com/api/get_match_feed.php";
 
@@ -16,7 +16,8 @@ function MatchFeed() {
     xhr.onload = () => {
       if (xhr.status == 200) {
         try {
-          const addMatch = JSON.parse(xhr.responseText);
+          const response = xhr.responseText;
+          const addMatch = JSON.parse(response);
           // Only update if theres new data
           if (
             matches &&
@@ -41,8 +42,9 @@ function MatchFeed() {
     xhr.onload = () => {
       if (xhr.status == 200) {
         try {
-          const response = JSON.parse(xhr.responseText);
-          setMatches(response.slice(-9));
+          const response = xhr.responseText;
+          const addMatch = JSON.parse(response);
+          setMatches(addMatch.slice(-9));
         } catch (e) {
           console.log(e);
         }
@@ -115,12 +117,12 @@ function MatchBrief(props) {
       </div>
       <div className={css["match-brief-column"]}>
         <div className={css["match-brief-title"]}>
-          {match.playerDeck.name}
+          {utf8Decode(match.playerDeck.name)}
           <div
             className={css["match-brief-subtitle"]}
             style={{ marginLeft: "4px" }}
           >
-            {" by " + match.player.name}
+            {" by " + utf8Decode(match.player.name)}
           </div>
         </div>
         <div className={css["match-brief-flex"]}>

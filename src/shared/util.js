@@ -73,3 +73,7 @@ export function getRankIndex(_rank, _tier) {
   if (_rank == "Mythic") ii = 21 + (_tier - 1); //1 2 3 4
   return ii;
 }
+
+export function utf8Decode(str) {
+  return decodeURIComponent(escape(str));
+}

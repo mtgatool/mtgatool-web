@@ -4,7 +4,7 @@ import React from "react";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./releasenotes.css";
 import keyArt from "../../images/key-art.jpg";
-import textFile from "./releasenotes.txt";
+//import textFile from "./releasenotes.txt";
 import Title from "../title";
 
 const CHANGELOG =
