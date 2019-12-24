@@ -18,8 +18,12 @@ import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
+function sortUnknown(a, b) {
+  return b.name === "Unknown" ? -1 : 1;
+}
+
 function sortArchetypes(a, b) {
-  return b.name === "Unknown" ? -1 : parseFloat(b.share) - parseFloat(a.share);
+  return parseFloat(b.share) - parseFloat(a.share);
 }
 
 const formats = [
@@ -222,6 +226,7 @@ function Metagame(props) {
               []
                 .concat(metagameData.meta)
                 .sort(sortArchetypes)
+                .sort(sortUnknown)
                 .map((arch, index) => {
                   return (
                     <ArchetypeTile
