@@ -5,6 +5,7 @@
   color: var(--color-light);
   display: flex;
   flex-grow: 2;
+  overflow: hidden;
 }
 
 .wrapper-outer-light {
@@ -14,6 +15,7 @@
   color: var(--color-back);
   display: flex;
   flex-grow: 2;
+  overflow: hidden;
 }
 
 .wrapper-inner {
