@@ -48,7 +48,7 @@
 
 .download-button {
   cursor: pointer;
-  margin: 8px auto !important;
+  margin: 8px auto;
   width: 16em;
   height: 2.5em;
   line-height: 2.5em;
