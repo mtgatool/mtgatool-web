@@ -82,6 +82,7 @@
 }
 
 .nav-link-a {
+  white-space: nowrap;
   color: var(--color-light);
   font-family: var(--main-font-name);
   line-height: 32px;

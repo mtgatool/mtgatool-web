@@ -31,7 +31,7 @@ const FEATURE_A_TEXT_A = `Enable up to five completely customizable overlay wind
 const FEATURE_A_TEXT_B = `The combinations are endless.`;
 
 const FEATURE_B_TITLE = `Collection viewer`;
-const FEATURE_B_TEXT = `Excellen for rare-drafting, or to review your collection at a glance. Browse every detail of your collection easily.`;
+const FEATURE_B_TEXT = `Excellent for rare-drafting, or to review your collection at a glance. Browse every detail of your collection easily.`;
 
 const FEATURE_C_TITLE = `Matches History`;
 const FEATURE_C_TEXT = `Get every detail from your play sessions. review old drafts, see the cards your opponent played and much more!`;
@@ -165,9 +165,6 @@ function ShowcaseImage(props) {
   const webContext = useWebContext();
 
   const getStyle = ctx => {
-    if (imageRef.current) {
-      console.log(ctx.scroll, imageRef.current.offsetTop);
-    }
     let offset = imageRef.current
       ? imageRef.current.offsetTop - ctx.scroll
       : -999;
