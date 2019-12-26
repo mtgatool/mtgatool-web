@@ -26,10 +26,29 @@ import Loading from "./components/loading";
 import css from "./app.css";
 import keyArt from "./images/key-art.jpg";
 import notFoundArt from "./images/404.jpg";
+import { useWebDispatch } from "./web-provider";
 
 function App() {
   const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
   const [imageUrl, setImageUrl] = React.useState(keyArt);
+  const position = React.useRef(window);
+
+  const webDispatch = useWebDispatch();
+
+  const setScroll = state => {
+    webDispatch({ type: "setScroll", scroll: state });
+  };
+
+  const handleScroll = () => {
+    //console.log("handleScroll", window.scrollY);
+    setScroll(window.scrollY);
+  };
+
+  React.useLayoutEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, position);
 
   const setImage = cardObj => {
     if (cardObj == keyArt) {
