@@ -6,6 +6,9 @@ const WebDispatchContext = React.createContext();
 
 function webReducer(state, action) {
   switch (action.type) {
+    case "setScroll": {
+      return { ...state, scroll: action.scroll };
+    }
     case "setHoverCard": {
       return { ...state, HoverGrpId: action.HoverGrpId };
     }
@@ -22,6 +25,7 @@ function webReducer(state, action) {
 }
 
 const defaultWebState = {
+  scroll: window.scrollY,
   queryState: 0,
   HoverGrpId: 1,
   HoverOpacity: 0

@@ -3,19 +3,38 @@ import React from "react";
 import sharedcss from "../../shared.css";
 
 import keyArt from "../../images/key-art.jpg";
+
+import show00 from "../../images/showcase/00.png";
+import show01 from "../../images/showcase/01.png";
+import show02 from "../../images/showcase/02.png";
+import show03 from "../../images/showcase/03.png";
+import show04 from "../../images/showcase/04.png";
+import show05 from "../../images/showcase/05.png";
+import show06 from "../../images/showcase/06.png";
+
+const showCase = [show00, show01, show02, show03, show04, show05, show06];
+
+import showHistory from "../../images/showcase/history.png";
+import showCollection from "../../images/showcase/collection.png";
+
 import css from "../../app.css";
+import homeCss from "./home.css";
 
 import Video from "../video";
 import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
+import { useWebContext } from "../../web-provider";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
-const FEATURE_A_TITLE = `Powerful stats`;
-const FEATURE_A_TEXT = `With MTGA Tool you will be able to browse your match history and see which cards and colors your opponents played. This is extremely helpful to understand why your deck is struggling or winning against other opponents. See how much progress you have made with your collection, browse your new cards acquired and explore how many packs and wildcards you need to finish each of your deck builds.`;
-const FEATURE_B_TITLE = `Explore and learn`;
-const FEATURE_B_TEXT = `Browse what others are playing and how they perform, be it on constructed events, drafts and ranked. You would be able to filter decks by colors, events or results. Take your game to the next level and brag your winning deck with everyone else!`;
-const FEATURE_C_TITLE = `Not only a Deck Tracker`;
-const FEATURE_C_TEXT = `Even if you dislike deck trackers, you can find MTGA Tool useful to keep record of your matches, browse through your collection or even check other people's decks. Just disable the deck tracker overlay to keep it running only in background, you won’t miss a thing anyway.`;
+const FEATURE_A_TITLE = `Track your deck, beautifully.`;
+const FEATURE_A_TEXT_A = `Enable up to five completely customizable overlay windows, with options like background color, position, size, and what elements to display.`;
+const FEATURE_A_TEXT_B = `The combinations are endless.`;
+
+const FEATURE_B_TITLE = `Collection viewer`;
+const FEATURE_B_TEXT = `Excellen for rare-drafting, or to review your collection at a glance. Browse every detail of your collection easily.`;
+
+const FEATURE_C_TITLE = `Matches History`;
+const FEATURE_C_TEXT = `Get every detail from your play sessions. review old drafts, see the cards your opponent played and much more!`;
 
 // https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest
 function getCurrentOSName() {
@@ -63,24 +82,129 @@ function Home(props) {
       <WrapperOuter style={{ paddingBottom: "64px" }}>
         <Video />
       </WrapperOuter>
+
       <WrapperOuterLight>
         <WrapperInner>
-          <div className={sharedcss["text-title"]}>{FEATURE_A_TITLE}</div>
-          <div className={sharedcss["text-description"]}>{FEATURE_A_TEXT}</div>
+          <div className={homeCss["cont-margin"]}>
+            <div className={homeCss["showcase-container"]}>
+              <div className={homeCss["showcase-desc"]}>
+                <div className={homeCss["showcase-title-right"]}>
+                  {FEATURE_A_TITLE}
+                </div>
+                <div className={homeCss["showcase-description-right"]}>
+                  {FEATURE_A_TEXT_A}
+                </div>
+                <div className={homeCss["showcase-description-right"]}>
+                  {FEATURE_A_TEXT_B}
+                </div>
+              </div>
+              <div className={homeCss["showcase-desc"]}>
+                <ShowcaseOverlay />
+              </div>
+            </div>
+          </div>
         </WrapperInner>
       </WrapperOuterLight>
+
+      <WrapperOuter>
+        <div className={homeCss["cont-margin"]}>
+          <div className={homeCss["showcase-container"]}>
+            <div className={homeCss["showcase-desc"]}>
+              <ShowcaseImage align="right" image={showCollection} />
+            </div>
+            <div className={homeCss["showcase-desc"]}>
+              <div className={homeCss["showcase-title-left"]}>
+                {FEATURE_B_TITLE}
+              </div>
+              <div className={homeCss["showcase-description-left"]}>
+                {FEATURE_B_TEXT}
+              </div>
+            </div>
+          </div>
+        </div>
+      </WrapperOuter>
+
       <WrapperOuterLight>
-        <WrapperInner>
-          <div className={sharedcss["text-title"]}>{FEATURE_B_TITLE}</div>
-          <div className={sharedcss["text-description"]}>{FEATURE_B_TEXT}</div>
-        </WrapperInner>
+        <div className={homeCss["cont-margin"]}>
+          <div className={homeCss["showcase-container"]}>
+            <div className={homeCss["showcase-desc"]}>
+              <div className={homeCss["showcase-title-right"]}>
+                {FEATURE_C_TITLE}
+              </div>
+              <div className={homeCss["showcase-description-right"]}>
+                {FEATURE_C_TEXT}
+              </div>
+            </div>
+            <div className={homeCss["showcase-desc"]}>
+              <ShowcaseImage align="left" image={showHistory} />
+            </div>
+          </div>
+        </div>
       </WrapperOuterLight>
-      <WrapperOuterLight>
-        <WrapperInner>
-          <div className={sharedcss["text-title"]}>{FEATURE_C_TITLE}</div>
-          <div className={sharedcss["text-description"]}>{FEATURE_C_TEXT}</div>
-        </WrapperInner>
-      </WrapperOuterLight>
+
+      <WrapperOuter>
+        <div className={homeCss["cont-margin"]}>
+          <div className={homeCss["showcase-download-container"]}>
+            <a
+              style={{ margin: "auto 0px" }}
+              className={css["download-button"]}
+              href={makeDownloadURL()}
+            >
+              Download for {getCurrentOSName()}
+            </a>
+          </div>
+        </div>
+      </WrapperOuter>
+    </>
+  );
+}
+
+function ShowcaseImage(props) {
+  const { image, align } = props;
+  const imageRef = React.useRef(null);
+  const webContext = useWebContext();
+
+  const getStyle = ctx => {
+    if (imageRef.current) {
+      console.log(ctx.scroll, imageRef.current.offsetTop);
+    }
+    let offset = imageRef.current
+      ? imageRef.current.offsetTop - ctx.scroll
+      : -999;
+    return {
+      backgroundImage: `url(${image})`,
+      alignSelf: align == "left" ? "flex-start" : "flex-end",
+      transform: `translateY(${offset / 2}px)`
+    };
+  };
+
+  return (
+    <>
+      <div
+        ref={imageRef}
+        style={getStyle(webContext)}
+        className={homeCss["showcase-image"]}
+      />
+    </>
+  );
+}
+
+function ShowcaseOverlay() {
+  const webContext = useWebContext();
+
+  const getStyle = ctx => {
+    const back = Math.round(ctx.scroll / 30) % showCase.length;
+    return {
+      backgroundImage: `url(${showCase[back]})`
+    };
+  };
+
+  return (
+    <>
+      <div
+        style={getStyle(webContext)}
+        className={homeCss["showcase-overlay-cont"]}
+      />
     </>
   );
 }
