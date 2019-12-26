@@ -141,6 +141,20 @@ function Home(props) {
           </div>
         </div>
       </WrapperOuterLight>
+
+      <WrapperOuter>
+        <div className={homeCss["cont-margin"]}>
+          <div className={homeCss["showcase-download-container"]}>
+            <a
+              style={{ margin: "auto 0px" }}
+              className={css["download-button"]}
+              href={makeDownloadURL()}
+            >
+              Download for {getCurrentOSName()}
+            </a>
+          </div>
+        </div>
+      </WrapperOuter>
     </>
   );
 }
