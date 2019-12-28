@@ -32,6 +32,7 @@
   justify-content: space-between;
   max-width: 1200px;
   width: -webkit-fill-available;
+  width: -moz-available;
   padding: 0 3em;
 }
 

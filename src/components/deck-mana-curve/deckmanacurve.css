@@ -21,6 +21,7 @@
   color: #fae5d2;
   justify-content: space-around;
   width: -webkit-fill-available;
+  width: -moz-available;
   flex-direction: column;
   margin: 0px 4px;
   display: flex;
