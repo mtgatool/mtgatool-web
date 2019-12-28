@@ -24,7 +24,6 @@ function getDeckComponents(deck) {
   //console.log(deck);
   const components = [];
   if (deck.commandZoneGRPIds && deck.commandZoneGRPIds.length > 0) {
-    //
     components.push(<Separator key="sep_commander">Commander</Separator>);
 
     deck.commandZoneGRPIds.forEach((id, index) => {
@@ -43,7 +42,7 @@ function getDeckComponents(deck) {
   // draw maindeck grouped by cardType
   const cardsByGroup = _(deck.mainDeck)
     .map(card => ({ data: db.card(card.id), ...card }))
-    .filter(card => card.data.type)
+    .filter(card => card.data !== undefined)
     .groupBy(card => {
       const type = cardType(card.data);
       switch (type) {
@@ -126,7 +125,7 @@ function getDeckComponents(deck) {
 
 export default function DeckList(props) {
   const { deck } = props;
-  if (!deck) return <></>;
+  if (!deck || db.version == 0) return <></>;
 
   const renderComponents = getDeckComponents(deck);
   return <div className="decklist">{renderComponents}</div>;

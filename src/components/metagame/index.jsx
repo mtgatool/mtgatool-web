@@ -320,7 +320,7 @@ function ArchetypeDecks(props) {
   if (deckToDraw) {
     try {
       const cardObj = db.card(deckToDraw.deckTileId);
-      if (cardObj.images.art_crop) {
+      if (cardObj && cardObj.images.art_crop) {
         setImage(cardObj);
       }
     } catch (e) {
