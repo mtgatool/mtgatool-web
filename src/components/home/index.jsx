@@ -9,10 +9,8 @@ import show01 from "../../images/showcase/01.png";
 import show02 from "../../images/showcase/02.png";
 import show03 from "../../images/showcase/03.png";
 import show04 from "../../images/showcase/04.png";
-import show05 from "../../images/showcase/05.png";
-import show06 from "../../images/showcase/06.png";
 
-const showCase = [show00, show01, show02, show03, show04, show05, show06];
+const showCase = [show00, show01, show02, show03, show04];
 
 import showHistory from "../../images/showcase/history.png";
 import showCollection from "../../images/showcase/collection.png";
@@ -31,7 +29,7 @@ const FEATURE_A_TEXT_A = `Enable up to five completely customizable overlay wind
 const FEATURE_A_TEXT_B = `The combinations are endless.`;
 
 const FEATURE_B_TITLE = `Collection viewer`;
-const FEATURE_B_TEXT = `Excellen for rare-drafting, or to review your collection at a glance. Browse every detail of your collection easily.`;
+const FEATURE_B_TEXT = `Excellent for rare-drafting, or to review your collection at a glance. Browse every detail of your collection easily.`;
 
 const FEATURE_C_TITLE = `Matches History`;
 const FEATURE_C_TEXT = `Get every detail from your play sessions. review old drafts, see the cards your opponent played and much more!`;
@@ -165,9 +163,6 @@ function ShowcaseImage(props) {
   const webContext = useWebContext();
 
   const getStyle = ctx => {
-    if (imageRef.current) {
-      console.log(ctx.scroll, imageRef.current.offsetTop);
-    }
     let offset = imageRef.current
       ? imageRef.current.offsetTop - ctx.scroll
       : -999;

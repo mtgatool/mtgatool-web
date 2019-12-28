@@ -25,7 +25,9 @@
 
 .archetype-selector {
   width: -webkit-fill-available;
+  width: -moz-available;
   height: -webkit-fill-available;
+  height: -moz-available;
 }
 
 .archetype-colors {
@@ -55,7 +57,8 @@
   /* max-width: 200px; */
   width: -webkit-fill-available;
   align-items: center;
-  /* height: -webkit-fill-available; */
+  /* height: -webkit-fill-available;
+  height: -moz-available; */
   flex-direction: column;
   display: flex;
   -webkit-transition: all 0.15s cubic-bezier(0.2, 0.5, 0.35, 1);

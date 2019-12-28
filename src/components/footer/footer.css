@@ -33,6 +33,7 @@
 .footer-column {
   max-width: 14em;
   width: -webkit-fill-available;
+  width: -moz-available;
   text-align: center;
   display: flex;
   flex-direction: column;

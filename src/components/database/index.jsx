@@ -44,6 +44,7 @@ function Database() {
             localStorage.databaseTime = new Date();
             db.setDatabase(xhr.responseText);
             setQueryState(STATE_IDLE);
+            window.location.reload();
           } catch (e) {
             console.log(e);
             setQueryState(STATE_ERROR);

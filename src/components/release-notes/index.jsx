@@ -54,7 +54,7 @@ function ReleaseNotes(props) {
           commit: notes[index + 2]
         });
       }
-      console.log(newNotes);
+      //console.log(newNotes);
       setParsedNotes(newNotes);
     });
   }, [notes]);

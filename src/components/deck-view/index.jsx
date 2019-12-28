@@ -33,7 +33,7 @@ function DeckView(props) {
 
   const copyDeck = React.useCallback(() => {
     console.log("Copy");
-    console.log(deckToDraw, str);
+    //console.log(deckToDraw, str);
     const str = new Deck(deckToDraw).getExportArena();
     navigator.clipboard.writeText(str);
   }, [deckToDraw]);

@@ -20,6 +20,7 @@ import Database from "./components/database";
 
 import CardHover from "./components/card-hover";
 import Loading from "./components/loading";
+import CookiesSign from "./components/cookies";
 
 // Import once so all CSS can use it thanks to webpack magic
 // eslint-disable-next-line no-unused-vars
@@ -71,6 +72,7 @@ function App() {
     <>
       <Database />
       <Loading />
+      <CookiesSign />
       <Router>
         <div style={wrapperStyle} className={css["wrapper-image"]} />
         <TopNav artist={artData} />

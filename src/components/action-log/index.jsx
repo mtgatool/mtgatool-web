@@ -26,8 +26,8 @@ function ActionLogView(props) {
   };
 
   const copyDeck = React.useCallback(() => {
-    console.log("Copy");
-    console.log(matchToDraw, str);
+    //console.log("Copy");
+    //console.log(matchToDraw, str);
     const str = new Deck(matchToDraw.playerDeck).getExportArena();
     navigator.clipboard.writeText(str);
   }, [matchToDraw]);
@@ -43,7 +43,7 @@ function ActionLogView(props) {
         } else {
           try {
             let matchData = JSON.parse(xhr.responseText);
-            console.log(matchData);
+            //console.log(matchData);
             setMatchToDraw(matchData);
             try {
               const cardObj = db.card(matchData.playerDeck.deckTileId);

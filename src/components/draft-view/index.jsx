@@ -41,7 +41,7 @@ function DraftView(props) {
         } else {
           try {
             let draftData = JSON.parse(urlDecode(xhr.responseText));
-            console.log(xhr.responseText);
+            //console.log(xhr.responseText);
             setDraftToDraw(draftData);
             /*
             try {
@@ -79,7 +79,7 @@ function DraftView(props) {
 
   const getCurrentPick = () => {
     const key = `pack_${pickpack.pack}pick_${pickpack.pick}`;
-    console.log(key, draftToDraw[key]);
+    //console.log(key, draftToDraw[key]);
     return draftToDraw[key] ? draftToDraw[key] : { pick: 0, pack: [] };
   };
 

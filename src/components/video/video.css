@@ -5,6 +5,7 @@
 
 .video-div {
     width: -webkit-fill-available;
+    width: -moz-available;
     margin: auto;
     display: block;
 }

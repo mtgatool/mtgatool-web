@@ -18,12 +18,10 @@ import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
-function sortUnknown(a, b) {
-  return b.name === "Unknown" ? -1 : 1;
-}
-
 function sortArchetypes(a, b) {
-  return parseFloat(b.share) - parseFloat(a.share);
+  const an = a.name === "Unknown" ? 0 : a.total;
+  const bn = b.name === "Unknown" ? 0 : b.total;
+  return bn - an;
 }
 
 const formats = [
@@ -46,7 +44,7 @@ const formats = [
 ];
 
 function Metagame(props) {
-  const match = useRouteMatch();
+  //const match = useRouteMatch();
   const formatMatch = useRouteMatch("/metagame/:format");
   const dayMatch = useRouteMatch("/metagame/:format/:day");
   const archMatch = useRouteMatch("/metagame/:format/:day/:arch");
@@ -105,9 +103,9 @@ function Metagame(props) {
       } else {
         try {
           const response = decodeURIComponent(escape(xhr.responseText));
-          localStorage.metagame = response;
           let jsonData = JSON.parse(response);
-          console.log("setMetagameData");
+          //console.log("setMetagameData");
+          //console.log(jsonData);
           setMetagameData(jsonData);
           setQueryState(STATE_IDLE);
         } catch (e) {
@@ -130,7 +128,7 @@ function Metagame(props) {
     } else if (formatMatch) {
       URL = `${METAGAME_URL}?event=${formatMatch.params.format.toUpperCase()}`;
     }
-    console.log(URL);
+    //console.log(URL);
     xhr.open("GET", URL);
     xhr.send();
   };
@@ -138,7 +136,7 @@ function Metagame(props) {
   const location = useLocation();
 
   React.useEffect(() => {
-    console.log("match", match);
+    //console.log("match", match);
     //console.log("formatMatch", formatMatch);
     //console.log("dayMatch", dayMatch);
     //console.log("archMatch", archMatch);
@@ -162,7 +160,7 @@ function Metagame(props) {
         )[0];
         if (openedDeck < archetypeData.decks.length) {
           const matchId = archetypeData.decks[openedDeck].match;
-          console.log("get deck", matchId);
+          //console.log("get deck", matchId);
           getArchetypeDeck(matchId);
         }
       } else if (archMatch) {
@@ -171,7 +169,7 @@ function Metagame(props) {
           arch => arch.name == archName
         )[0];
         if (archetypeData) {
-          console.log("set best deck", archetypeData.best_deck);
+          //console.log("set best deck", archetypeData.best_deck);
           setDeckToDraw(archetypeData.best_deck);
         }
       }
@@ -226,7 +224,6 @@ function Metagame(props) {
               []
                 .concat(metagameData.meta)
                 .sort(sortArchetypes)
-                .sort(sortUnknown)
                 .map((arch, index) => {
                   return (
                     <ArchetypeTile
@@ -323,7 +320,7 @@ function ArchetypeDecks(props) {
   if (deckToDraw) {
     try {
       const cardObj = db.card(deckToDraw.deckTileId);
-      if (cardObj.images.art_crop) {
+      if (cardObj && cardObj.images.art_crop) {
         setImage(cardObj);
       }
     } catch (e) {
@@ -332,8 +329,8 @@ function ArchetypeDecks(props) {
   }
 
   const copyDeck = React.useCallback(() => {
-    console.log("Copy");
-    console.log(deckToDraw, str);
+    //console.log("Copy");
+    //console.log(deckToDraw, str);
     const str = new Deck(deckToDraw).getExportArena();
     navigator.clipboard.writeText(str);
   }, [deckToDraw]);
