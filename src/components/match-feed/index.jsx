@@ -112,7 +112,12 @@ function MatchBrief(props) {
     >
       <div className={css["match-brief-tile"]} style={tileStyle}>
         <div className={css["rank-left"]}>
-          <RankIcon rank={match.player.rank} tier={match.player.tier} />
+          <RankIcon
+            rank={match.player.rank}
+            tier={match.player.tier}
+            percentile={match.player.percentile}
+            leaderboardPlace={match.player.leaderboardPlace}
+          />
         </div>
       </div>
       <div className={css["match-brief-column"]}>
@@ -154,7 +159,7 @@ function MatchBrief(props) {
 }
 
 function RankIcon(props) {
-  const { rank, tier, format } = props;
+  const { rank, tier, percentile, leaderboardPlace, format } = props;
   const rankIndex = getRankIndex(rank, tier);
 
   const rankStyle = {
@@ -166,13 +171,12 @@ function RankIcon(props) {
       ? css["constructed-rank"]
       : css["limited-rank"];
 
-  return (
-    <div
-      title={rank + " " + tier}
-      className={rankClass}
-      style={rankStyle}
-    ></div>
-  );
+  const mythicRankTitle =
+    rank +
+    (leaderboardPlace == 0 ? ` ${percentile}%` : ` #${leaderboardPlace}`);
+  const rankTitle = rank == "Mythic" ? mythicRankTitle : rank + " " + tier;
+
+  return <div title={rankTitle} className={rankClass} style={rankStyle}></div>;
 }
 
 export default MatchFeed;
