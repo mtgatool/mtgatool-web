@@ -44,7 +44,7 @@ const formats = [
 ];
 
 function Metagame(props) {
-  const match = useRouteMatch();
+  //const match = useRouteMatch();
   const formatMatch = useRouteMatch("/metagame/:format");
   const dayMatch = useRouteMatch("/metagame/:format/:day");
   const archMatch = useRouteMatch("/metagame/:format/:day/:arch");

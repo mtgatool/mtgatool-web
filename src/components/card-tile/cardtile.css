@@ -8,34 +8,37 @@
 .mana_multi     { background-image: url("../../cssimages/filter_multi.png");}
 
 .mana_s20 {
-    z-index: 15;
-    pointer-events: none;
-    background-size: contain;
-    width: 20px;
-    height: 20px;
-    margin: 0 2px auto 2px;
-    background-repeat: no-repeat;
-    filter: drop-shadow(-1px 1px black);
+  z-index: 15;
+  pointer-events: none;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  margin: 0 2px auto 2px;
+  filter: drop-shadow(-1px 1px black);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .mana_s16, .mana-s16 {
-    z-index: 15;
-    pointer-events: none;
-    background-size: contain;
-    box-shadow: -1px 1px black;
-    border-radius: 100%;
-    width: 16px;
-    height: 16px;
-    margin: auto 2px auto 2px;
+  z-index: 15;
+  pointer-events: none;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  margin: auto 2px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .mana_16 {
-    z-index: 15;
-    pointer-events: none;
-    background-size: contain;
-    width: 16px;
-    height: 16px;
-    margin: auto 2px auto 2px;
+  z-index: 15;
+  pointer-events: none;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  margin: auto 2px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .mana_w { background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxMGNtIiBoZWlnaHQ9IjkuOTk5OWNtIiB2ZXJzaW9uPSIxLjEiIHN0eWxlPSJzaGFwZS1yZW5kZXJpbmc6Z2VvbWV0cmljUHJlY2lzaW9uOyB0ZXh0LXJlbmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247IGltYWdlLXJlbmRlcmluZzpvcHRpbWl6ZVF1YWxpdHk7IGZpbGwtcnVsZTpldmVub2RkOyBjbGlwLXJ1bGU6ZXZlbm9kZCINCnZpZXdCb3g9IjAgMCAxNjk5IDE2OTkiDQp4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+DQo8ZGVmcz4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQo8IVtDREFUQVsNCi5maWwxIHtmaWxsOmJsYWNrfQ0KLmZpbDAge2ZpbGw6I0Y4RjZEOH0NCl1dPg0KPC9zdHlsZT4NCjwvZGVmcz4NCjxnIGlkPSJMYXllcl94MDAyMF8xIj4NCjxtZXRhZGF0YSBpZD0iQ29yZWxDb3JwSURfMENvcmVsLUxheWVyIi8+DQo8Y2lyY2xlIGNsYXNzPSJmaWwwIiBjeD0iODUwIiBjeT0iODUwIiByPSI4NTAiLz4NCjwvZz4NCjxnIGlkPSJMYXllcl94MDAyMF8xXzAiPg0KPG1ldGFkYXRhIGlkPSJDb3JlbENvcnBJRF8xQ29yZWwtTGF5ZXIiLz4NCjxwYXRoIGNsYXNzPSJmaWwxIiBkPSJNMTEwNiAzOTNjLTMwLC03OSAyNTQsLTI1IDM0NSwxMyAtOTYsMTkgLTIwNiwyOCAtMTg3LDE0NCAxNywxMDUgLTExMiwxMTYgLTY5LDE5MCAzOCw0OSAxMjAsNTYgMTU5LC0zMyAzNCwtNzcgMTk4LDE2MiAyMzUsMjUzIC04MSwtNTQgLTE2NiwtMTI1IC0yMzQsLTMxIC02Miw4NiAtMTYxLDMgLTE4NCw4NiAtOCw2MiA0NSwxMjUgMTM2LDkwIDc5LC0zMCAyNSwyNTQgLTEzLDM0NSAtMTksLTk2IC0yOCwtMjA2IC0xNDQsLTE4NyAtMTA1LDE3IC0xMTYsLTExMiAtMTkwLC02OSAtNDksMzggLTU2LDEyMCAzMywxNTkgNzcsMzQgLTE2MiwxOTggLTI1MywyMzUgNTQsLTgxIDEyNSwtMTY2IDMxLC0yMzQgLTg2LC02MiAtMywtMTYxIC04NiwtMTg0IC02MiwtOCAtMTI1LDQ1IC05MCwxMzYgMzAsNzkgLTI1NCwyNSAtMzQ1LC0xMyA5NiwtMTkgMjA2LC0yOCAxODcsLTE0NCAtMTcsLTEwNSAxMTIsLTExNiA2OSwtMTkwIC0zOCwtNDkgLTEyMCwtNTYgLTE1OSwzMyAtMzQsNzcgLTE5OCwtMTYyIC0yMzUsLTI1MyA4MSw1NCAxNjYsMTI1IDIzNCwzMSA2MiwtODYgMTYxLC0zIDE4NCwtODYgOCwtNjIgLTQ1LC0xMjUgLTEzNiwtOTAgLTc5LDMwIC0yNSwtMjU0IDEzLC0zNDUgMTksOTYgMjgsMjA2IDE0NCwxODcgMTA1LC0xNyAxMTYsMTEyIDE5MCw2OSA0OSwtMzggNTYsLTEyMCAtMzMsLTE1OSAtNzcsLTM0IDE2MiwtMTk4IDI1MywtMjM1IC01NCw4MSAtMTI1LDE2NiAtMzEsMjM0IDg2LDYyIDMsMTYxIDg2LDE4NCA2Miw4IDEyNSwtNDUgOTAsLTEzNnptLTI1NiAxNTVjMTU3LDAgMjg0LDEyNyAyODQsMjg0IDAsMTU3IC0xMjcsMjg0IC0yODQsMjg0IC0xNTcsMCAtMjg0LC0xMjcgLTI4NCwtMjg0IDAsLTE1NyAxMjcsLTI4NCAyODQsLTI4NHptMCAtMjhjMTcyLDAgMzEyLDEzOSAzMTIsMzEyIDAsMTcyIC0xMzksMzEyIC0zMTIsMzEyIC0xNzIsMCAtMzEyLC0xMzkgLTMxMiwtMzEyIDAsLTE3MiAxMzksLTMxMiAzMTIsLTMxMnoiLz4NCjwvZz4NCjwvc3ZnPg0K");}
