@@ -23,7 +23,7 @@ function sortUnknown(a, b) {
 }
 
 function sortArchetypes(a, b) {
-  return parseFloat(b.share) - parseFloat(a.share);
+  return parseFloat(a.share) - parseFloat(b.share);
 }
 
 const formats = [

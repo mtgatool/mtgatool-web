@@ -12,7 +12,7 @@ function CookiesSign() {
   }
 
   React.useState(() => {
-    if (localStorage._ck == true) {
+    if (localStorage._ck) {
       hide();
     }
   }, []);
