@@ -102,8 +102,8 @@ function Metagame(props) {
         try {
           localStorage.metagame = xhr.responseText;
           let jsonData = JSON.parse(xhr.responseText);
-          console.log("setMetagameData");
-          console.log(jsonData);
+          //console.log("setMetagameData");
+          //console.log(jsonData);
           setMetagameData(jsonData);
           setQueryState(STATE_IDLE);
         } catch (e) {
@@ -126,7 +126,7 @@ function Metagame(props) {
     } else if (formatMatch) {
       URL = `${METAGAME_URL}?event=${formatMatch.params.format.toUpperCase()}`;
     }
-    console.log(URL);
+    //console.log(URL);
     xhr.open("GET", URL);
     xhr.send();
   };
@@ -134,7 +134,7 @@ function Metagame(props) {
   const location = useLocation();
 
   React.useEffect(() => {
-    console.log("match", match);
+    //console.log("match", match);
     //console.log("formatMatch", formatMatch);
     //console.log("dayMatch", dayMatch);
     //console.log("archMatch", archMatch);
@@ -158,7 +158,7 @@ function Metagame(props) {
         )[0];
         if (openedDeck < archetypeData.decks.length) {
           const matchId = archetypeData.decks[openedDeck].match;
-          console.log("get deck", matchId);
+          //console.log("get deck", matchId);
           getArchetypeDeck(matchId);
         }
       } else if (archMatch) {
@@ -167,7 +167,7 @@ function Metagame(props) {
           arch => arch.name == archName
         )[0];
         if (archetypeData) {
-          console.log("set best deck", archetypeData.best_deck);
+          //console.log("set best deck", archetypeData.best_deck);
           setDeckToDraw(archetypeData.best_deck);
         }
       }
@@ -327,8 +327,8 @@ function ArchetypeDecks(props) {
   }
 
   const copyDeck = React.useCallback(() => {
-    console.log("Copy");
-    console.log(deckToDraw, str);
+    //console.log("Copy");
+    //console.log(deckToDraw, str);
     const str = new Deck(deckToDraw).getExportArena();
     navigator.clipboard.writeText(str);
   }, [deckToDraw]);
