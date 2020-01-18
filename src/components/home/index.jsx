@@ -44,7 +44,7 @@ function getCurrentOSName() {
 
 function makeDownloadURL() {
   const platform = window.navigator.platform;
-  const versionTag = "2.14.2";
+  const versionTag = "3.0.2";
   let extension = "exe";
   if (platform.indexOf("Mac") > 0) extension = "pkg";
   if (platform.indexOf("Linux") > 0) extension = "AppImage";
