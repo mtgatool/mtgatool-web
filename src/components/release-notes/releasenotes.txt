@@ -1,4 +1,48 @@
 version
+3.0.2
+January 17th, 2020
+fixed
+Attempt to fix multi account merges
+32e709597d309fb5722abc158def478f5785a5e8
+fixed
+Old Deck data may be Arena Deck v3
+d82231a2ca7096c55e33a3f6616c2f2401fe2588
+fixed
+Persist player data fixes
+e8eb4e142b4813017edc823f1466e4a6ddae6323
+fixed
+Fix archetype detection math
+08b1826b2c94ed805c66989be3ebf183b43852a4
+
+version
+3.0.1
+January 11th, 2020
+breaking
+Local database upgrade
+d69042a696c2b98df54252c36fdf12e0b677ef8f
+added
+Decks tables
+155f9ec2e17a5c6a82d9600875db07046d9efefe
+improved
+SVG set icons
+6705c545817325498921970bd47dd3546f8f036a
+improved
+.proto update
+f503a4d9b5d6800c8ce195b3d794c256797f0975
+improved
+Prepopulate draft overlays
+8a16c7bbd246b5dc8c0efab104208eaeb8d465e3
+fixed
+Seb Seb title
+2b4edba29a26dc440294acb1faf008004ad352b2
+fixed
+Sideboards fix
+5ac6efef4bdbfea71b91de636b2ed404ccc51a49
+fixed
+Collection stats performance
+ee3c34bf35eb5073f4b89dfc4fa670a9700b661b
+
+version
 2.14.2
 November 29th, 2019
 fixed
