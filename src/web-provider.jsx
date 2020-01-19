@@ -18,6 +18,9 @@ function webReducer(state, action) {
     case "setHoverOpacity": {
       return { ...state, HoverOpacity: action.HoverOpacity };
     }
+    case "setDatabaseVersion": {
+      return { ...state, databaseVersion: action.databaseVersion };
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -28,7 +31,8 @@ const defaultWebState = {
   scroll: window.scrollY,
   queryState: 0,
   HoverGrpId: 1,
-  HoverOpacity: 0
+  HoverOpacity: 0,
+  databaseVersion: 0
 };
 
 function WebProvider({ children }) {

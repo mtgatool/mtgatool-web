@@ -73,3 +73,10 @@
   width: 12em;
   display: block;
 }
+
+.loading {
+  font-size: 2em;
+  font-family: var(--main-font-name-it);
+  color: var(--color-r);
+  margin: auto;
+}

@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
+import db from "./shared/database";
 
 import TopNav from "./components/topnav";
 import Footer from "./components/footer";
@@ -22,17 +23,20 @@ import CardHover from "./components/card-hover";
 import Loading from "./components/loading";
 import CookiesSign from "./components/cookies";
 
+import { WrapperOuter } from "./components/wrapper";
+
 // Import once so all CSS can use it thanks to webpack magic
 // eslint-disable-next-line no-unused-vars
 import css from "./app.css";
 import keyArt from "./images/key-art.jpg";
 import notFoundArt from "./images/404.jpg";
-import { useWebDispatch } from "./web-provider";
+import { useWebDispatch, useWebContext } from "./web-provider";
 
 function App() {
   const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
   const [imageUrl, setImageUrl] = React.useState(keyArt);
   const position = React.useRef(window);
+  const webContext = useWebContext();
 
   const webDispatch = useWebDispatch();
 
@@ -77,35 +81,41 @@ function App() {
         <div style={wrapperStyle} className={css["wrapper-image"]} />
         <TopNav artist={artData} />
         <CardHover />
-        <Switch>
-          <Route exact path="/">
-            <Home setImage={setImage} />
-          </Route>
-          <Route path="/metagame">
-            <Metagame setImage={setImage} />
-          </Route>
-          <Route exact path="/register">
-            <Register setImage={setImage} />
-          </Route>
-          <Route path="/resetpassword">
-            <ResetPassword setImage={setImage} />
-          </Route>
-          <Route exact path="/release-notes">
-            <ReleaseNotes setImage={setImage} />
-          </Route>
-          <Route path="/deck">
-            <DeckView setImage={setImage} />
-          </Route>
-          <Route path="/action-log">
-            <ActionLog setImage={setImage} />
-          </Route>
-          <Route path="/draft">
-            <DraftView setImage={setImage} />
-          </Route>
-          <Route>
-            <NotFound setImage={setImage} />
-          </Route>
-        </Switch>
+        {webContext.databaseVersion !== 0 ? (
+          <Switch>
+            <Route exact path="/">
+              <Home setImage={setImage} />
+            </Route>
+            <Route path="/metagame">
+              <Metagame setImage={setImage} />
+            </Route>
+            <Route exact path="/register">
+              <Register setImage={setImage} />
+            </Route>
+            <Route path="/resetpassword">
+              <ResetPassword setImage={setImage} />
+            </Route>
+            <Route exact path="/release-notes">
+              <ReleaseNotes setImage={setImage} />
+            </Route>
+            <Route path="/deck">
+              <DeckView setImage={setImage} />
+            </Route>
+            <Route path="/action-log">
+              <ActionLog setImage={setImage} />
+            </Route>
+            <Route path="/draft">
+              <DraftView setImage={setImage} />
+            </Route>
+            <Route>
+              <NotFound setImage={setImage} />
+            </Route>
+          </Switch>
+        ) : (
+          <WrapperOuter>
+            <div className={css["loading"]}>Loading..</div>
+          </WrapperOuter>
+        )}
         <Footer />
       </Router>
     </>
