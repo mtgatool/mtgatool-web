@@ -24,6 +24,10 @@ function sortArchetypes(a, b) {
   return bn - an;
 }
 
+function sortDeckLinks(a, b) {
+  return b.wr - a.wr;
+}
+
 const formats = [
   {
     id: "BO1",
@@ -104,8 +108,8 @@ function Metagame(props) {
         try {
           const response = decodeURIComponent(escape(xhr.responseText));
           let jsonData = JSON.parse(response);
-          //console.log("setMetagameData");
-          //console.log(jsonData);
+          console.log("setMetagameData");
+          console.log(jsonData);
           setMetagameData(jsonData);
           setQueryState(STATE_IDLE);
         } catch (e) {
@@ -359,7 +363,7 @@ function ArchetypeDecks(props) {
         )}
       </div>
       <div className={css["archetype-decks-list-div"]}>
-        {archetype.decks.map((deck, index) => {
+        {archetype.decks.sort(sortDeckLinks).map((deck, index) => {
           return (
             <Link
               to={() =>
