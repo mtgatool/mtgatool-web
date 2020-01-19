@@ -27,6 +27,7 @@ function Database() {
       const dbJson = JSON.parse(localStorage.database);
       console.log("database from cache: v" + dbJson.version);
       db.setDatabase(localStorage.database);
+      setDatabaseVersion(dbJson.version);
     }
     setTimeout(() => {
       fetchVersion();
