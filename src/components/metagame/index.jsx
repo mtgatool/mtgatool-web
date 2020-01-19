@@ -108,8 +108,8 @@ function Metagame(props) {
         try {
           const response = decodeURIComponent(escape(xhr.responseText));
           let jsonData = JSON.parse(response);
-          console.log("setMetagameData");
-          console.log(jsonData);
+          //console.log("setMetagameData");
+          //console.log(jsonData);
           setMetagameData(jsonData);
           setQueryState(STATE_IDLE);
         } catch (e) {
