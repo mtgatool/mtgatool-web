@@ -1,4 +1,17 @@
 version
+3.0.4
+January 28th, 2020
+added
+Multi React Table
+d27b99c2aef825e5238227e15e3b4ab0ef2d01c9
+fixed
+bugfix missing explore color filter
+c93da4a9a7f78391e63deda13d78a08c0983eca8
+fixed
+deescalate offline or non-sharing modes to a warning
+7199fd22803c3d29fddadb6a3add54340129c094
+
+version
 3.0.2
 January 17th, 2020
 fixed

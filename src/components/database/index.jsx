@@ -9,6 +9,8 @@ import { useWebDispatch } from "../../web-provider";
 
 const DATABASE_URL = "https://mtgatool.com/database/";
 const LATEST_URL = "https://mtgatool.com/database/latest/";
+const GH_LATEST =
+  "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest";
 
 function Database() {
   const webDispatch = useWebDispatch();
@@ -30,6 +32,7 @@ function Database() {
       setDatabaseVersion(dbJson.version);
     }
     setTimeout(() => {
+      fetchGHTag();
       fetchVersion();
     }, 500);
   }, []);
@@ -66,6 +69,24 @@ function Database() {
       }
     };
     xhr.open("GET", LATEST_URL);
+    xhr.send();
+  };
+
+  const fetchGHTag = () => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+      if (xhr.status == 200) {
+        try {
+          const response = JSON.parse(xhr.responseText);
+          console.log("Latest GitHub: " + response.tag_name);
+          webDispatch({ type: "setVersionTag", versionTag: response.tag_name });
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    };
+
+    xhr.open("GET", GH_LATEST);
     xhr.send();
   };
 

@@ -34,7 +34,6 @@ const FEATURE_B_TEXT = `Excellent for rare-drafting, or to review your collectio
 const FEATURE_C_TITLE = `Matches History`;
 const FEATURE_C_TEXT = `Get every detail from your play sessions. review old drafts, see the cards your opponent played and much more!`;
 
-// https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest
 function getCurrentOSName() {
   const platform = window.navigator.platform;
   if (platform.indexOf("Mac") > 0) return "Mac";
@@ -42,14 +41,15 @@ function getCurrentOSName() {
   return "Windows";
 }
 
-function makeDownloadURL() {
+function makeDownloadURL(versionTag) {
   const platform = window.navigator.platform;
-  const versionTag = "3.0.2";
   let extension = "exe";
   if (platform.indexOf("Mac") > 0) extension = "pkg";
   if (platform.indexOf("Linux") > 0) extension = "AppImage";
 
-  return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/v${versionTag}/MTG-Arena-Tool-${versionTag}.${extension}`;
+  return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/${versionTag}/MTG-Arena-Tool-${versionTag.slice(
+    1
+  )}.${extension}`;
 }
 
 function Home(props) {
@@ -57,6 +57,7 @@ function Home(props) {
   React.useEffect(() => {
     setImage(keyArt);
   }, []);
+  const webContext = useWebContext();
 
   return (
     <>
@@ -68,7 +69,10 @@ function Home(props) {
             >
               {DESCRIPTION_TEXT}
             </div>
-            <a className={css["download-button"]} href={makeDownloadURL()}>
+            <a
+              className={css["download-button"]}
+              href={makeDownloadURL(webContext.versionTag)}
+            >
               Download for {getCurrentOSName()}
             </a>
             <div className={css["home-desc-small"]}>
@@ -97,7 +101,7 @@ function Home(props) {
                 </div>
               </div>
               <div className={homeCss["showcase-desc"]}>
-                <ShowcaseOverlay />
+                <ShowcaseOverlay webContext={webContext} />
               </div>
             </div>
           </div>
@@ -146,7 +150,7 @@ function Home(props) {
             <a
               style={{ margin: "auto 0px" }}
               className={css["download-button"]}
-              href={makeDownloadURL()}
+              href={makeDownloadURL(webContext.versionTag)}
             >
               Download for {getCurrentOSName()}
             </a>
@@ -184,9 +188,7 @@ function ShowcaseImage(props) {
   );
 }
 
-function ShowcaseOverlay() {
-  const webContext = useWebContext();
-
+function ShowcaseOverlay(webContext) {
   const getStyle = ctx => {
     const back = Math.round(ctx.scroll / 30) % showCase.length;
     return {

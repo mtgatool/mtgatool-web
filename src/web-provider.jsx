@@ -21,6 +21,9 @@ function webReducer(state, action) {
     case "setDatabaseVersion": {
       return { ...state, databaseVersion: action.databaseVersion };
     }
+    case "setVersionTag": {
+      return { ...state, versionTag: action.versionTag };
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -32,7 +35,8 @@ const defaultWebState = {
   queryState: 0,
   HoverGrpId: 1,
   HoverOpacity: 0,
-  databaseVersion: 0
+  databaseVersion: 0,
+  versionTag: "v3.0.4"
 };
 
 function WebProvider({ children }) {
