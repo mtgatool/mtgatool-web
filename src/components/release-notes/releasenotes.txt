@@ -1,4 +1,56 @@
 version
+3.1.0
+March 23rd, 2020
+added
+event entry tokens to economy page transactions (#902)
+2c7fd2739af728d7de873f809980d011ec830c2c
+improved
+React settings (#879)
+496fadd12a78a293aa4fdcf80793f0d32a2045af
+improved
+React offline splash (#878)
+ded6b54e77399eb7c12a18630c8c82bd68758dd9
+improved
+React Collection completion stats (#898)
+6c8ebd061aaeeef853d83eec11318d3aa6b4e915
+improved
+React home tab (#906)
+b03de4221b1f88aab76858a020daf5a81ff19e2c
+improved
+convert player-data to typescript (#907)
+98fb150522c4abf47bef2941a02f6fb6b31be743
+improved
+Convert shared util to TypeScript (#910)
+ace2c3183167eb62becea38f90dcd705ed279d07
+improved
+Full React (#916)
+273cfebbf07fa1593e11026384cab003d76540b1
+improved
+Non Electron package upgrades (#924)
+6794e0bbacbd9124f62006a80064c768bc781a7d
+improved
+Electron upgrade (#927)
+f076b2389bedcae59335d223bf36a1ccac2899ed
+improved
+Files Reorganization (#926)
+9f09ce7027b1f2862cfebfd3748f189ca1caf86e
+improved
+Draft view polish (#934)
+2fe1ee23e10effffb187c4b7d1d2e03deb8ab91c
+fixed
+bugfix gracefully handle missing card metadata (#900)
+2edd0f5b78eecbb0ae5dbe6749cb9755420f99ca
+fixed
+Tables fixes (#920)
+ed8aa5759153c7cca32863710322cdbfbf6adcff
+fixed
+add vanity codes to economy page transactions (#901)
+76537db613035a9ed36f047409fd4c49d271a9a8
+fixed
+NeDB ensure compaction run at launch (#944)
+b8d7ef3cd65d52bf580877e5aca1bcfaef307dfb
+
+version
 3.0.4
 January 28th, 2020
 added
