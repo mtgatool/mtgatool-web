@@ -89,7 +89,10 @@ function DraftView(props) {
     for (let i = 0; i < pos; i++) {
       let pp = pickPackFromPosition(i, draftToDraw.set);
       const key = `pack_${pp.pack}pick_${pp.pick}`;
-      decklist.getMainboard().add(draftToDraw[key].pick);
+      if (draftToDraw[key]) {
+        const pickToDraw = draftToDraw[key].pick;
+        decklist.getMainboard().add(pickToDraw);
+      }
     }
     decklist.getMainboard().removeDuplicates();
     return decklist.getSave();
