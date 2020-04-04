@@ -1,5 +1,6 @@
 version
 4.0.1
+April 4th, 2020
 fixed
 Remember last tab open
 f2de9052d3b92fd29c95843d5f039dd874b95151
