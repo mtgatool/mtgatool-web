@@ -1,5 +1,5 @@
 version
-4.0.1
+4.0.3
 April 4th, 2020
 fixed
 Remember last tab open
@@ -22,6 +22,21 @@ Deck export fix (again)
 fixed
 Restore lands odds hover
 599fce008f692a846e854d18e90e4c76d123419d
+fixed
+"Games until rank" is zero
+ee4b41105da22fe43c7f0cbc67dce8f36e0404d6
+fixed
+Overlay crashes
+e677d4b837fac633eaf69bc2d55beb63a70840ac
+fixed
+BO3 incorrect save
+80def1c61066241949eaacbbfa0e506aece6ef65
+fixed
+Decks archive button
+eec4ae7aee2c50a055fba134522af723d80293a1
+fixed
+Matches aggregator crash
+cdf137f1753502f29fb64690cb713532c572f9c7
 improved
 Economy crafted quantities
 61c9c748bff982a96ac1dca4641f7b7be284a733
