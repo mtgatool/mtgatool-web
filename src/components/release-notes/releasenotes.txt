@@ -1,4 +1,41 @@
 version
+4.0.1
+fixed
+Remember last tab open
+f2de9052d3b92fd29c95843d5f039dd874b95151
+fixed
+Decks tab BSoD
+3ca70ae6900de742e14644df1ed7361d89bc5e80
+fixed
+Show aetherized cards in economy
+d2321912de43f88c14fbd3bf342fa174b2d5f896
+fixed
+Show craftable in Explore
+25a63067aa59be7edd4616dabcf1a3f9dd7b9cf9
+fixed
+Collection set filters
+12fd7fdfa8044897606c4e8f94a47493cb86635e
+fixed
+Deck export fix (again)
+224dbe257d824664c30498f4da09ef41ebda55fb
+fixed
+Restore lands odds hover
+599fce008f692a846e854d18e90e4c76d123419d
+improved
+Economy crafted quantities
+61c9c748bff982a96ac1dca4641f7b7be284a733
+
+version
+4.0.0
+April 3rd, 2020
+added
+Timeline tab
+caf1447ea9e8ea3f11d66577f1167ada21c5bebc
+improved
+(breaking) internal data reorganization
+36b81f579e3ad894512dde1c1c453973ea86e0b5
+
+version
 3.1.0
 March 23rd, 2020
 added
