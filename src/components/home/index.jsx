@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import sharedcss from "../../shared.css";
 
 import keyArt from "../../images/key-art.jpg";
@@ -101,7 +101,7 @@ function Home(props) {
                 </div>
               </div>
               <div className={homeCss["showcase-desc"]}>
-                <ShowcaseOverlay webContext={webContext} />
+                <ShowcaseOverlay />
               </div>
             </div>
           </div>
@@ -188,20 +188,19 @@ function ShowcaseImage(props) {
   );
 }
 
-function ShowcaseOverlay(webContext) {
-  const getStyle = ctx => {
-    const back = Math.round(ctx.scroll / 30) % showCase.length;
+function ShowcaseOverlay() {
+  //const back = Math.round(ctx.webContext.scroll / 30) % showCase.length;
+  const back = useMemo(() => Math.floor(Math.random() * showCase.length));
+
+  const getStyle = useCallback(() => {
     return {
       backgroundImage: `url(${showCase[back]})`
     };
-  };
+  }, [back]);
 
   return (
     <>
-      <div
-        style={getStyle(webContext)}
-        className={homeCss["showcase-overlay-cont"]}
-      />
+      <div style={getStyle()} className={homeCss["showcase-overlay-cont"]} />
     </>
   );
 }
