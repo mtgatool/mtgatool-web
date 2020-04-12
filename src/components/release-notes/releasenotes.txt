@@ -1,3 +1,39 @@
+version 4.0.6
+April 11th, 2020
+fixed
+Deck changes
+0ae4e50cb35988185c235df07770e8ab6af494c2
+
+version 4.0.5
+April 6th, 2020
+added
+Sync button
+60c23e7e93d15aabb41f0cfd9b5385e2e4798ed2
+fixed
+Decks tab colors
+ea4b55089c44d2d691f1193b2206bf53bae030fe
+fixed
+Archive button static size
+bfb76a7de6c41c6992e691d93c103123497684d5
+fixed
+Cards missing icon spacing
+3c897ea2ebe5f00826d825e59c7716189f13d2be
+improved
+Overlays full transparency
+a761c78116e339cb197c6a667c321e0ea8dccad0
+
+version 4.0.4
+April 5th, 2020
+fixed
+Economy card pool scroll
+363340899fd3e878e5197b01c619250425afbec7
+fixed
+Mana filter
+9084771f771b132b4dd2772f33c2cecb17af6e65
+fixed
+Filter invalid seasonal data
+6cd5cb18ddb07647740d0bf60d9345c04667a206
+
 version
 4.0.3
 April 4th, 2020
