@@ -1,4 +1,92 @@
 version
+4.0.18
+April 24th, 2020
+fixed
+Some backscreen fix attempts
+01b6441f772eae2fcf53cb2917ad8db7c040cd2d
+fixed
+Mythic seasonal fixes
+c4644be1bbb40e47bfb1afb1b83f6b298eb023dd
+fixed
+isEpochTimestamp fix (events dates)
+11b1a3ab6a95b8a6a04b1c2a5b1eebb2e8d33a39
+fixed
+Matches slices integration (matches processing fixes)
+c10df1da357dfb938ce6aab561a7f52af0a35d9a
+fixed
+Seasonal update
+b9f38a35b3d6275bd7a9c8cd791df0aa6ac313c6
+
+version
+4.0.17
+April 19th, 2020
+fixed
+ColorsCell BSoD
+7030baf3e134e381b1684d8d5e8d2f39d0dfdc49
+fixed
+Human draft set courses/event
+b2fce50a7d1909c6f2f271e3016050a7f3b891e3
+fixed
+Matches loading missing data
+9772e0d74d5ef437f22bbda11a5c5285e84160f6
+fixed
+Bad matches loading
+cfdb42c8cd6502f784771d47d28e68d81de239eb
+fixed
+Black decks tab
+a196750daef7407b1941035612523bfb2c005ba7
+
+version
+4.0.14
+April 18th, 2020
+improved
+Get types from .proto
+df4e8b633e85e9a57b4a24b5ed18c289243a5d3c
+fixed
+More matches loading fixes
+8aef3f89484ed06f48913928e6e9326627eea909
+
+version
+4.0.13
+April 17th, 2020
+improved
+Proto patch 1.07.00.00
+d2a8a4f33d46d0b9e1e4c4d1e9359c0a2a2fa727
+fixed
+load matches / sanitize data
+7adf0758f1c0a448e4adf6d8f071e8608b21a364
+
+version
+4.0.9
+April 16th, 2020
+fixed
+Ikoria release changes
+be37ec53150163eb9a46887617164fba808865c9
+fixed
+collection card stars
+dea4454511b45de66a6f4349bcaa886b5a8da3dc
+fixed
+auto update collection tab
+7ac3147eaa1b507b6ecdabc3dd16fd44ec20d08f
+
+version
+4.0.8
+April 15th, 2020
+fixed
+Timeline fixes
+4b2c25c0ad35d66ed093d7f3c5f08d493a91eb2a
+fixed
+Numbers on positive game win loss ratio
+8bd2e929a5f76511c6a6eecbf76ff0d4c390dede
+
+version
+4.0.7
+April 13th, 2020
+improved
+Error boundary
+0d44cbb581576738781e10e04da7ce85809ff41b
+
+version
 4.0.6
 April 11th, 2020
 fixed
