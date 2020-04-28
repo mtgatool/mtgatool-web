@@ -1,4 +1,39 @@
 version
+4.1.0
+April 28th, 2020
+added
+Cards see by game in match history
+1b80d6089f8db9248acd89fb77534c0b4fbc3444
+added
+Remove cards on bottom from odds calculation
+b470ac9d25e6fac2c1666c35b4e6497600c35ede
+added
+Button to hide background shade
+e157187eb380374c48a7a179743e7260aab3ceab
+added
+Detect cards taken from sideboard
+059e37651cf124115ea5004d0d9ca66275e8d746
+fixed
+Matches clear
+ee33bdd9c641f39c651bf070487b59215f883e45
+fixed
+Explore warn on empty query
+feea112467352895286b656f29c5ba43fc6a34b0
+fixed
+Overlay hide zeroed cards
+f3992a736f261bdb129e20de75a9cf8bf7d7e0aa
+
+version
+4.0.20
+April 24th, 2020
+fixed
+Timers adding up
+04362c50b15d22204a8ca44062c85d0f200582e3
+fixed
+Events loading
+3a01ba45a006b9feb633ad31c78e66c5b3e9978d
+
+version
 4.0.18
 April 24th, 2020
 fixed
