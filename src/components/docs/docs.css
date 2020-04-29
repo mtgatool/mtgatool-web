@@ -1,6 +1,6 @@
 .docs-wrapper {
   width: 100%;
-  padding: 80px 0 32px 0;
+  padding: 80px 0 0 0;
   display: flex;
   flex-grow: 2;
 }
@@ -14,14 +14,16 @@
   width: inherit;
   font-family: var(--main-font-name);
   font-size: 16px;
-  margin: 0 32px;
+  padding: 0 32px;
+  background-color: var(--color-light);
+  color: var(--color-back);
 }
 
 .docs-main a {
   cursor: pointer;
   text-decoration: none;
   margin: 0 4px;
-  color: var(--color-highlight);
+  color: var(--color-mid-75);
   font-size: inherit;
   display: inline-block;
   font-family: inherit;

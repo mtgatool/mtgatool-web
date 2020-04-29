@@ -5,12 +5,15 @@ import keyArt from "../../images/key-art.jpg";
 import { WrapperOuter } from "../wrapper";
 import css from "./docs.css";
 import docs from "./index.yml";
-import introduction from "./resources/introduction.yml";
-import installation from "./resources/installation.yml";
+import introduction from "!!raw-loader!./resources/introduction.md";
+import installation from "!!raw-loader!./resources/installation.md";
+import outputLogs from "!!raw-loader!./resources/output-logs.md";
+import ReactMarkdown from "react-markdown";
 
 const resources = {
   introduction: introduction,
-  installation: installation
+  installation: installation,
+  "output-logs": outputLogs
 };
 
 export default function Docs(props) {
@@ -27,6 +30,7 @@ export default function Docs(props) {
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
+      <div className={css["docs-wrapper-top"]}></div>
       <div className={css["docs-wrapper"]}>
         <div className={css["docs-sidebar"]}>
           {docs.docs.map(title => {
@@ -46,52 +50,9 @@ export default function Docs(props) {
           })}
         </div>
         <div className={css["docs-main"]}>
-          {resource ? (
-            Object.keys(resource.content).map((key, i) => {
-              return (
-                <React.Fragment key={"text-" + i}>
-                  <h2>{key}</h2>
-                  {parseContent(resource.content[key], 0)}
-                </React.Fragment>
-              );
-            })
-          ) : (
-            <></>
-          )}
+          {resource ? <ReactMarkdown source={resource}></ReactMarkdown> : <></>}
         </div>
       </div>
     </WrapperOuter>
   );
-}
-
-function parseContent(content, d) {
-  let depth = d + 1;
-  return Object.keys(content).map((key, i) => {
-    if (key.startsWith("a")) {
-      return (
-        <a key={key + "-" + d} href={content[key].src}>
-          {content[key].text}
-        </a>
-      );
-    } else if (key.startsWith("b")) {
-      return <b key={key + "-" + d}>{parseContent(content[key], depth)}</b>;
-    } else if (key.startsWith("i")) {
-      return <i key={key + "-" + d}>{parseContent(content[key], depth)}</i>;
-    } else if (key.startsWith("text")) {
-      return (
-        <div key={key + "-" + d} className={css["docs-text"]}>
-          {parseContent(content[key], depth)}
-        </div>
-      );
-    } else if (key.startsWith("code")) {
-      return (
-        <div key={key + "-" + d} className={css["docs-code"]}>
-          {" "}
-          {parseContent(content[key], depth)}{" "}
-        </div>
-      );
-    } else {
-      return <React.Fragment key={i + "-" + d}>{content[key]}</React.Fragment>;
-    }
-  });
 }
