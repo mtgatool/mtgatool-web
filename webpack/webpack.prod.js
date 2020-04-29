@@ -1,16 +1,17 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+/* eslint-disable no-undef */
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
-const commonPaths = require('./paths');
+const commonPaths = require("./paths");
 
 module.exports = {
-  mode: 'production',
+  mode: "production",
   output: {
     filename: `${commonPaths.jsFolder}/[name].[hash].js`,
     path: commonPaths.outputPath,
-    chunkFilename: `${commonPaths.jsFolder}/[name].[chunkhash].js`,
+    chunkFilename: `${commonPaths.jsFolder}/[name].[chunkhash].js`
   },
   optimization: {
     minimizer: [
@@ -20,9 +21,9 @@ module.exports = {
         parallel: true,
         // Enable file caching
         cache: true,
-        sourceMap: true,
+        sourceMap: true
       }),
-      new OptimizeCSSAssetsPlugin(),
+      new OptimizeCSSAssetsPlugin()
     ],
     // Automatically split vendor and commons
     // https://twitter.com/wSokra/status/969633336732905474
@@ -31,20 +32,20 @@ module.exports = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'initial',
+          name: "vendors",
+          chunks: "initial"
         },
         async: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'async',
-          chunks: 'async',
-          minChunks: 4,
-        },
-      },
+          name: "async",
+          chunks: "async",
+          minChunks: 4
+        }
+      }
     },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+    runtimeChunk: true
   },
 
   module: {
@@ -54,26 +55,26 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: false,
-              localsConvention: 'camelCase',
+              localsConvention: "camelCase",
               modules: {
-                localIdentName: '[local]',
-              },
-            },
+                localIdentName: "[local]"
+              }
+            }
           },
-          'sass-loader',
-        ],
-      },
-    ],
+          "sass-loader"
+        ]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: `${commonPaths.cssFolder}[name].css`,
-      chunkFilename: `${commonPaths.cssFolder}[name].css`,
-    }),
+      chunkFilename: `${commonPaths.cssFolder}[name].css`
+    })
   ],
-  devtool: 'source-map',
+  devtool: "source-map"
 };

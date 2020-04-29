@@ -1,0 +1,17 @@
+docs: [
+  "Introduction",
+  "Installation",
+  "Output logs"
+]
+
+Introduction:
+  type: section
+  path: introduction
+
+Installation:
+  type: section
+  path: installation
+
+Output logs:
+  type: section
+  path: output-logs
