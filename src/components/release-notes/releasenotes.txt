@@ -2,7 +2,7 @@ version
 4.1.0
 April 28th, 2020
 added
-Cards see by game in match history
+Cards seen by game in match history
 1b80d6089f8db9248acd89fb77534c0b4fbc3444
 added
 Remove cards on bottom from odds calculation
