@@ -1,8 +1,14 @@
 docs: [
+  "Resources",
   "Introduction",
   "Installation",
-  "Output logs"
+  "Output logs",
+  "Sections",
+  "Decks"
 ]
+
+Resources:
+  type: title
 
 Introduction:
   type: section
@@ -15,3 +21,11 @@ Installation:
 Output logs:
   type: section
   path: output-logs
+
+Sections:
+  type: title
+
+Decks:
+  type: section
+  path: decks
+  
