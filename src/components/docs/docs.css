@@ -36,6 +36,12 @@
   text-decoration: underline;
 }
 
+.docs-main code {
+  background-color: var(--color-mid-20);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
 .docs-main blockquote {
   padding: 0 1em;
   color: var(--color-b);

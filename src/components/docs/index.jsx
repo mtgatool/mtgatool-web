@@ -85,7 +85,9 @@ export default function Docs(props) {
   const { setImage } = props;
 
   const sectionMatch = useRouteMatch("/docs/:section");
-  const resource = resources[sectionMatch.params.section];
+  const resource = sectionMatch
+    ? resources[sectionMatch.params.section]
+    : resources.introduction;
 
   React.useEffect(() => {
     setImage(keyArt);
@@ -106,7 +108,8 @@ export default function Docs(props) {
           </div>
           {docs.docs.map(title => {
             const path = docs[title].path;
-            const isActive = sectionMatch.params.section == path;
+            const isActive =
+              sectionMatch && sectionMatch.params.section == path;
 
             if (docs[title].type == "section") {
               return (
