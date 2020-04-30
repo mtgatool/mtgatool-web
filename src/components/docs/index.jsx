@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import { useRouteMatch, Link } from "react-router-dom";
-import keyArt from "../../images/key-art.jpg";
+import React, { useState, useRef, useEffect } from "react";
+import { useRouteMatch, useLocation, Link } from "react-router-dom";
 import { WrapperOuter } from "../wrapper";
-
+import css from "./docs.css";
+import keyArt from "../../images/key-art.jpg";
 import logoTool from "../../cssimages/icon-256.png";
 
-import css from "./docs.css";
 // Docs
 import docs from "./index.yml";
 import introduction from "!!raw-loader!./resources/introduction.md";
 import installation from "!!raw-loader!./resources/installation.md";
 import outputLogs from "!!raw-loader!./resources/output-logs.md";
+import privacy from "!!raw-loader!./resources/privacy.md";
 import decks from "!!raw-loader!./resources/decks.md";
 
 // Images
@@ -22,25 +22,43 @@ const resources = {
   introduction: introduction,
   installation: installation,
   "output-logs": outputLogs,
+  privacy: privacy,
   decks: decks
 };
+
+const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
 
 const imageTransform = img => {
   switch (img) {
     case "detailed-logs.png":
       return detailedLogsImg;
+    default:
+      return img;
   }
 };
 
 const HeadRenderer = props => {
   const { nodeKey, children } = props;
+  const linkRef = useRef(null);
   const id = children[0].props.value.replace(/\s+/g, "-").toLowerCase();
   const [op, setOp] = useState(0);
+  const location = useLocation();
+
+  const executeScroll = () => scrollToRef(linkRef);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (location.hash == "#" + id) {
+        executeScroll();
+      }
+    }, 500);
+  }, [linkRef, location]);
 
   return (
     <React.Fragment key={nodeKey}>
       <h1
         {...props}
+        ref={linkRef}
         onMouseEnter={() => setOp(0.8)}
         onMouseLeave={() => setOp(0)}
       >
@@ -57,7 +75,6 @@ export default function Docs(props) {
   const { setImage } = props;
 
   const sectionMatch = useRouteMatch("/docs/:section");
-  // const linkMatch = useRouteMatch("/docs/:section/:link");
   const resource = resources[sectionMatch.params.section];
 
   React.useEffect(() => {
