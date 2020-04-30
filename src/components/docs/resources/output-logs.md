@@ -9,5 +9,15 @@ MTG Arena Tool does not currently track `.html` logs (stored under Program Files
 # Parse multiple logs
 
 Thanks to [AnnanFay](https://github.com/AnnanFay) we can parse multiple logs at once using CLI commands.
+This is especially useful when you make backups of the logs and dont want to keep the tool running constantly, or there was an update that made it impossible to parse the logs for a time period.
 
-[link](https://github.com/Manuel-777/MTG-Arena-Tool/blob/master/scripts/load-logs.js)
+> You need to [run mtgatool from source](https://github.com/Manuel-777/MTG-Arena-Tool/blob/master/CONTRIBUTING.md#running-from-source) to be able to do this!
+
+In the folder where MTG Arena Tool is running, browse to `/scripts` and edit `batch_load_files.json`. Here you should enter the path of the logs you wish to parse using absolute paths.
+
+To start the job just use
+`npm run load-logs`
+
+> Very old logs might have compatibility problems, use at your own risk!
+
+You can check [AnnaFay's code](https://github.com/Manuel-777/MTG-Arena-Tool/blob/master/scripts/load-logs.js) for a more in-depth explanation.

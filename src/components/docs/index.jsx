@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { useRouteMatch, Link } from "react-router-dom";
 import keyArt from "../../images/key-art.jpg";
 import { WrapperOuter } from "../wrapper";
@@ -7,11 +7,15 @@ import { WrapperOuter } from "../wrapper";
 import logoTool from "../../cssimages/icon-256.png";
 
 import css from "./docs.css";
+// Docs
 import docs from "./index.yml";
 import introduction from "!!raw-loader!./resources/introduction.md";
 import installation from "!!raw-loader!./resources/installation.md";
 import outputLogs from "!!raw-loader!./resources/output-logs.md";
 import decks from "!!raw-loader!./resources/decks.md";
+
+// Images
+import detailedLogsImg from "../../images/docs/detailed-logs.png";
 import ReactMarkdown from "react-markdown";
 
 const resources = {
@@ -21,12 +25,39 @@ const resources = {
   decks: decks
 };
 
+const imageTransform = img => {
+  switch (img) {
+    case "detailed-logs.png":
+      return detailedLogsImg;
+  }
+};
+
+const HeadRenderer = props => {
+  const { nodeKey, children } = props;
+  const id = children[0].props.value.replace(/\s+/g, "-").toLowerCase();
+  const [op, setOp] = useState(0);
+
+  return (
+    <React.Fragment key={nodeKey}>
+      <h1
+        {...props}
+        onMouseEnter={() => setOp(0.8)}
+        onMouseLeave={() => setOp(0)}
+      >
+        {children}
+        <a id={id} href={`#${id}`}>
+          <div className={css["anchor-link"]} style={{ opacity: op }}></div>
+        </a>
+      </h1>
+    </React.Fragment>
+  );
+};
+
 export default function Docs(props) {
   const { setImage } = props;
 
   const sectionMatch = useRouteMatch("/docs/:section");
   // const linkMatch = useRouteMatch("/docs/:section/:link");
-
   const resource = resources[sectionMatch.params.section];
 
   React.useEffect(() => {
@@ -76,7 +107,15 @@ export default function Docs(props) {
           })}
         </div>
         <div className={css["docs-main"]}>
-          {resource ? <ReactMarkdown source={resource}></ReactMarkdown> : <></>}
+          {resource ? (
+            <ReactMarkdown
+              transformImageUri={imageTransform}
+              renderers={{ heading: HeadRenderer }}
+              source={resource}
+            ></ReactMarkdown>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </WrapperOuter>

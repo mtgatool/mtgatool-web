@@ -25,7 +25,7 @@
   cursor: pointer;
   text-decoration: none;
   margin: 0 4px;
-  color: var(--color-mid-75);
+  color: #efae4e;
   font-size: inherit;
   display: inline-block;
   font-family: inherit;
@@ -34,6 +34,28 @@
 
 .docs-main a:hover {
   text-decoration: underline;
+}
+
+.docs-main blockquote {
+  padding: 0 1em;
+  color: var(--color-b);
+  margin: 1em 0;
+  border-left: .25em solid var(--color-mid-40);
+}
+
+.docs-main .anchor-link {
+  background-image: url(../../cssimages/link.svg);
+  background-repeat: no-repeat;
+  background-position: center 4px;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  opacity: 0;
+  transition: all 250ms;
+}
+
+.docs-main .anchor-link:hover {
+  opacity: 0.8;
 }
 
 .docs-section-title {
