@@ -4,7 +4,8 @@ docs: [
   "Installation",
   "Output logs",
   "Sections",
-  "Decks"
+  "Decks",
+  "Overlays"
 ]
 
 Resources:
@@ -28,4 +29,8 @@ Sections:
 Decks:
   type: section
   path: decks
+
+Overlays:
+  type: section
+  path: overlays
   

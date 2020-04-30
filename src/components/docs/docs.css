@@ -43,19 +43,32 @@
   border-left: .25em solid var(--color-mid-40);
 }
 
-.docs-main .anchor-link {
+.anchor-link {
   background-image: url(../../cssimages/link.svg);
   background-repeat: no-repeat;
   background-position: center 4px;
   background-size: contain;
-  width: 24px;
-  height: 24px;
   opacity: 0;
   transition: all 250ms;
 }
 
-.docs-main .anchor-link:hover {
+.anchor-link:hover {
   opacity: 0.8;
+}
+
+.anchor-h1 {
+  width: 24px;
+  height: 24px;
+}
+
+.anchor-h2 {
+  width: 20px;
+  height: 20px;
+}
+
+.anchor-h3 {
+  width: 16px;
+  height: 16px;
 }
 
 .docs-section-title {

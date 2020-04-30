@@ -13,6 +13,7 @@ import installation from "!!raw-loader!./resources/installation.md";
 import outputLogs from "!!raw-loader!./resources/output-logs.md";
 import privacy from "!!raw-loader!./resources/privacy.md";
 import decks from "!!raw-loader!./resources/decks.md";
+import overlays from "!!raw-loader!./resources/overlays.md";
 
 // Images
 import detailedLogsImg from "../../images/docs/detailed-logs.png";
@@ -23,7 +24,8 @@ const resources = {
   installation: installation,
   "output-logs": outputLogs,
   privacy: privacy,
-  decks: decks
+  decks: decks,
+  overlays: overlays
 };
 
 const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
@@ -37,8 +39,13 @@ const imageTransform = img => {
   }
 };
 
+function Heading({ children, ...props }) {
+  const { level } = props;
+  return React.createElement("h" + level, props, children);
+}
+
 const HeadRenderer = props => {
-  const { nodeKey, children } = props;
+  const { nodeKey, children, level } = props;
   const linkRef = useRef(null);
   const id = children[0].props.value.replace(/\s+/g, "-").toLowerCase();
   const [op, setOp] = useState(0);
@@ -56,7 +63,7 @@ const HeadRenderer = props => {
 
   return (
     <React.Fragment key={nodeKey}>
-      <h1
+      <Heading
         {...props}
         ref={linkRef}
         onMouseEnter={() => setOp(0.8)}
@@ -64,9 +71,12 @@ const HeadRenderer = props => {
       >
         {children}
         <a id={id} href={`#${id}`}>
-          <div className={css["anchor-link"]} style={{ opacity: op }}></div>
+          <div
+            className={css["anchor-link"] + " " + css["anchor-h" + level]}
+            style={{ opacity: op }}
+          ></div>
         </a>
-      </h1>
+      </Heading>
     </React.Fragment>
   );
 };
