@@ -1,4 +1,38 @@
 version
+4.1.3
+May 2nd, 2020
+fixed
+Draft ratings (add JustLolaMan's)
+cf47fb9bc9c737aa312c112ae8bf06b585082f18
+fixed
+Side panels, Unify hook
+b15c0297dd49dd1d47618b26576d40f816d5efd6
+fixed
+ResultDetails error (attempt to fix)
+262ae620655ec2f6dc225e9fc6502b5ebf1e290b
+
+version
+4.1.1
+May 1st, 2020
+fixed
+Rework resizable panels
+e0fe8f19c2b396053d0af3012809b96c8a4d49a0
+fixed
+MatchView error
+54145eb6241822f2e7329c6a1092a30d1b4c7b71
+fixed
+Error boundary not doing its thing
+e4c49790130cdf245187a8d8df89ca1123312066
+fixed
+Total seen in BO3
+568d768ff6a9932ffb589b3d651513249e553d45
+fixed
+Negative wildcards input
+removed
+Auto launch of explore queries
+124b81825371f026f20eaaf060ad57607f20a530
+
+version
 4.1.0
 April 28th, 2020
 added
