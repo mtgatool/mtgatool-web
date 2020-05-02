@@ -5,7 +5,8 @@ docs: [
   "Output logs",
   "Sections",
   "Decks",
-  "Overlays"
+  "Overlays",
+  "Collection"
 ]
 
 Resources:
@@ -33,4 +34,9 @@ Decks:
 Overlays:
   type: section
   path: overlays
+
+Collection:
+  type: section
+  path: collection
+      
   

@@ -13,6 +13,7 @@ import installation from "!!raw-loader!./resources/installation.md";
 import outputLogs from "!!raw-loader!./resources/output-logs.md";
 import privacy from "!!raw-loader!./resources/privacy.md";
 import decks from "!!raw-loader!./resources/decks.md";
+import collection from "!!raw-loader!./resources/collection.md";
 import overlays from "!!raw-loader!./resources/overlays.md";
 
 // Images
@@ -25,6 +26,7 @@ const resources = {
   "output-logs": outputLogs,
   privacy: privacy,
   decks: decks,
+  collection: collection,
   overlays: overlays
 };
 
@@ -98,43 +100,37 @@ export default function Docs(props) {
       <div className={css["docs-wrapper-top"]}></div>
       <div className={css["docs-wrapper"]}>
         <div className={css["docs-sidebar"]}>
-          <div>
-            <img
-              style={{ margin: "auto " }}
-              alt="MTG Arena Tool"
-              className={css["top-logo"]}
-              src={logoTool}
-            />
-          </div>
-          {docs.docs.map(title => {
-            const path = docs[title].path;
-            const isActive =
-              sectionMatch && sectionMatch.params.section == path;
+          <div className={css["docs-sidebar-content"]}>
+            {docs.docs.map(title => {
+              const path = docs[title].path;
+              const isActive =
+                sectionMatch && sectionMatch.params.section == path;
 
-            if (docs[title].type == "section") {
-              return (
-                <div
-                  className={
-                    css["docs-section-link"] +
-                    (isActive ? " " + css["docs-section-link-active"] : "")
-                  }
-                  key={title + "-side"}
-                >
-                  <Link to={"/docs/" + path}>{title}</Link>
-                </div>
-              );
-            }
-            if (docs[title].type == "title") {
-              return (
-                <div
-                  className={css["docs-section-title"]}
-                  key={title + "-side-title"}
-                >
-                  {title}
-                </div>
-              );
-            }
-          })}
+              if (docs[title].type == "section") {
+                return (
+                  <div
+                    className={
+                      css["docs-section-link"] +
+                      (isActive ? " " + css["docs-section-link-active"] : "")
+                    }
+                    key={title + "-side"}
+                  >
+                    <Link to={"/docs/" + path}>{title}</Link>
+                  </div>
+                );
+              }
+              if (docs[title].type == "title") {
+                return (
+                  <div
+                    className={css["docs-section-title"]}
+                    key={title + "-side-title"}
+                  >
+                    {title}
+                  </div>
+                );
+              }
+            })}
+          </div>
         </div>
         <div className={css["docs-main"]}>
           {resource ? (
