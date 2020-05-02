@@ -1,13 +1,21 @@
 .docs-wrapper {
   width: 100%;
-  padding: 80px 0 0 0;
+  padding: 150px 0 0 0;
   display: flex;
   flex-grow: 1;
+}
+
+@media screen and (min-width: 750px) {
+  .docs-wrapper {
+    padding: 64px 0 0 0;
+  }
 }
 
 .docs-sidebar {
   display: flex;
   min-width: 240px;
+  max-width: 240px;
+  overflow-x: hidden;
   padding-top: 24px;
   padding-left: 24px;
   flex-direction: column;

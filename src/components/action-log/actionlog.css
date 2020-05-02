@@ -20,7 +20,7 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-@media screen and (min-width: 680px) {
+@media screen and (min-width: 750px) {
   .match-div {
       display: flex;
   }
