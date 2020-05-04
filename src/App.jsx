@@ -13,6 +13,7 @@ import ReleaseNotes from "./components/release-notes";
 import Metagame from "./components/metagame";
 import Register from "./components/register";
 import ResetPassword from "./components/resetpassword";
+import Docs from "./components/docs";
 import DeckView from "./components/deck-view";
 import ActionLog from "./components/action-log";
 import DraftView from "./components/draft-view";
@@ -105,6 +106,9 @@ function App() {
             </Route>
             <Route path="/draft">
               <DraftView setImage={setImage} />
+            </Route>
+            <Route path="/docs">
+              <Docs setImage={setImage} />
             </Route>
             <Route>
               <NotFound setImage={setImage} />

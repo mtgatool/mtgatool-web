@@ -1,41 +1,42 @@
-const webpack = require('webpack');
+/* eslint-disable no-undef */
+const webpack = require("webpack");
 
-const commonPaths = require('./paths');
+const commonPaths = require("./paths");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   output: {
-    publicPath: '/',
-    filename: '[name].js',
+    publicPath: "/",
+    filename: "[name].js",
     path: commonPaths.outputPath,
-    chunkFilename: '[name].js',
+    chunkFilename: "[name].js"
   },
   module: {
     rules: [
       {
         test: /\.(css|scss)$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
-              localsConvention: 'camelCase',
+              localsConvention: "camelCase",
               modules: {
-                localIdentName: '[local]',
-              },
-            },
+                localIdentName: "[local]"
+              }
+            }
           },
-          'sass-loader',
-        ],
-      },
-    ],
+          "sass-loader"
+        ]
+      }
+    ]
   },
   devServer: {
     contentBase: commonPaths.outputPath,
     compress: true,
     historyApiFallback: true,
-    hot: true,
+    hot: true
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };

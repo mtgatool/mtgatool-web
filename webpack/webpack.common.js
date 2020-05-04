@@ -1,66 +1,72 @@
-const eslint = require('eslint');
-const webpack = require('webpack');
-const convert = require('koa-connect');
-const history = require('connect-history-api-fallback');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const commonPaths = require('./paths');
+/* eslint-disable no-undef */
+const eslint = require("eslint");
+const webpack = require("webpack");
+const convert = require("koa-connect");
+const history = require("connect-history-api-fallback");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const commonPaths = require("./paths");
 
 module.exports = {
   entry: commonPaths.entryPath,
   module: {
     rules: [
       {
-        enforce: 'pre',
+        test: /\.ya?ml$/,
+        type: "json", // Required by Webpack v4
+        use: "yaml-loader"
+      },
+      {
+        enforce: "pre",
         test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'eslint-loader',
+        loader: "eslint-loader",
         exclude: /(node_modules)/,
         options: {
-          formatter: eslint.CLIEngine.getFormatter('stylish'),
-          emitWarning: process.env.NODE_ENV !== 'production',
-        },
+          formatter: eslint.CLIEngine.getFormatter("stylish"),
+          emitWarning: process.env.NODE_ENV !== "production"
+        }
       },
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules)/,
+        loader: "babel-loader",
+        exclude: /(node_modules)/
       },
       {
         test: /\.(ts|tsx)$/,
-        loader: 'ts-loader',
-        exclude: /(node_modules)/,
+        loader: "ts-loader",
+        exclude: /(node_modules)/
       },
       {
         test: /\.(png|jpg|gif|svg|webm)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              outputPath: commonPaths.imagesFolder,
-            },
-          },
-        ],
+              outputPath: commonPaths.imagesFolder
+            }
+          }
+        ]
       },
       {
         test: /\.(woff2|ttf|woff|eot)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              outputPath: commonPaths.fontsFolder,
-            },
-          },
-        ],
+              outputPath: commonPaths.fontsFolder
+            }
+          }
+        ]
       },
       {
         test: /\.txt$/,
         use: [
           {
-            loader: 'raw-loader',
-          },
-        ],
-      },
-    ],
+            loader: "raw-loader"
+          }
+        ]
+      }
+    ]
   },
   serve: {
     add: app => {
@@ -68,21 +74,21 @@ module.exports = {
     },
     content: commonPaths.entryPath,
     dev: {
-      publicPath: commonPaths.outputPath,
+      publicPath: commonPaths.outputPath
     },
-    open: true,
+    open: true
   },
   resolve: {
-    modules: ['src', 'node_modules'],
-    extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.css', '.scss'],
+    modules: ["src", "node_modules"],
+    extensions: ["*", ".js", ".jsx", ".ts", ".tsx", ".css", ".scss"]
   },
   plugins: [
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
-      template: commonPaths.templatePath,
+      template: commonPaths.templatePath
     }),
     new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'async',
-    }),
-  ],
+      defaultAttribute: "async"
+    })
+  ]
 };

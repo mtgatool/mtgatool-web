@@ -24,19 +24,20 @@ function Footer() {
         </div>
         <div className={css["footer-column"]}>
           <div className={css["footer-column-title"]}>MTG Arena Tool</div>
+          <FooterLink url="mailto:mtgatool@gmail.com">Contact</FooterLink>
+          <FooterLink url="https://mtgatool.com/database/">Database</FooterLink>
+          <FooterLink url="./docs/">Documentation</FooterLink>
           <FooterLink url="https://github.com/Manuel-777/MTG-Arena-Tool/releases">
             Releases
           </FooterLink>
-          <FooterLink url="https://mtgatool.com/database/">Database</FooterLink>
-          <FooterLink url="mailto:mtgatool@gmail.com">Contact</FooterLink>
         </div>
         <div className={css["footer-column"]}>
           <div className={css["footer-column-title"]}>Support us</div>
-          <FooterLink url="https://www.patreon.com/mtgatool">
-            Patreon
-          </FooterLink>
           <FooterLink url="https://www.paypal.me/ManuelEtchegaray/10">
             Donate
+          </FooterLink>
+          <FooterLink url="https://www.patreon.com/mtgatool">
+            Patreon
           </FooterLink>
         </div>
         <div className={css["footer-column"]}>
