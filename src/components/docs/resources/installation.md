@@ -10,7 +10,7 @@ For Mac users we provide `.dmg` installers, but we currently cannot actively sup
 
 On all platforms, before you can run any software for MTG Arena you need to enable "plugins support" on it. To do so, open the game and navigate to your settings, and on "Account" enable "Detailed Logs (Plugin Support)", as shown below.
 
-![Detailed logs](detailed-logs.png)
+![Detailed logs](detailed-logs)
 
 Once you do this close MTG Arena and start again so the game generates a new valid log the tracker can read. (else the tracker will still ask you to do this)
 

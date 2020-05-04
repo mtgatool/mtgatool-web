@@ -4,7 +4,6 @@ import { useRouteMatch, useLocation, Link } from "react-router-dom";
 import { WrapperOuter } from "../wrapper";
 import css from "./docs.css";
 import keyArt from "../../images/key-art.jpg";
-import logoTool from "../../cssimages/icon-256.png";
 
 // Docs
 import docs from "./index.yml";
@@ -17,7 +16,12 @@ import collection from "!!raw-loader!./resources/collection.md";
 import overlays from "!!raw-loader!./resources/overlays.md";
 
 // Images
+import deckArchive from "../../images/docs/deck-archive.png";
+import deckView from "../../images/docs/deck-view.png";
 import detailedLogsImg from "../../images/docs/detailed-logs.png";
+import filterBoosters from "../../images/docs/collection-filter-boosters.png";
+import viewSets from "../../images/docs/collection-view-sets.png";
+
 import ReactMarkdown from "react-markdown";
 
 const resources = {
@@ -34,8 +38,16 @@ const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
 
 const imageTransform = img => {
   switch (img) {
-    case "detailed-logs.png":
+    case "deck-archive":
+      return deckArchive;
+    case "deck-view":
+      return deckView;
+    case "detailed-logs":
       return detailedLogsImg;
+    case "collection-filter-boosters":
+      return filterBoosters;
+    case "collection-view-sets":
+      return viewSets;
     default:
       return img;
   }

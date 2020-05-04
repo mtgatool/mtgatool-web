@@ -1,13 +1,14 @@
 .docs-wrapper {
   width: 100%;
-  padding: 150px 0 0 0;
+  margin: 150px 0 0 0;
   display: flex;
   flex-grow: 1;
+  background-color: var(--color-light);
 }
 
 @media screen and (min-width: 750px) {
   .docs-wrapper {
-    padding: 64px 0 0 0;
+    margin: 64px 0 0 0;
   }
 }
 
@@ -16,11 +17,10 @@
   min-width: 240px;
   max-width: 240px;
   overflow-x: hidden;
-  padding-top: 24px;
-  padding-left: 24px;
+  margin-top: 24px;
+  margin-left: 24px;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--color-light);
   border-right: solid 1px var(--color-mid-66);
 }
 
@@ -35,12 +35,18 @@
 }
 
 .docs-main {
-  flex-grow: 1;
+  width: calc(100% - 241px);
   font-family: var(--main-font-name);
   font-size: 16px;
-  padding: 0 32px 24px 32px;
-  background-color: var(--color-light);
+  margin: 0 32px 24px 32px;
   color: var(--color-back);
+}
+
+.docs-main img {
+  max-width: 100%;
+  max-width: -moz-available;
+  max-width: -webkit-fill-available; 
+  max-width: fill-available;
 }
 
 .docs-main a {

@@ -11,6 +11,8 @@ In MTG Arena Tool you can enable up to 5 different overlays at the same time, an
 - **Draft Brew:** Shows your current draft pool/picks.
 - **Action Log:** Shows the action log for this match as events happen, in a human-readable manner.
 
-# Black Overlays
+## Edit Mode
 
-To fix this issue, if you are on Windows you should enable Transparency (on Windows 10) or Aero Effects on Windows 7 and Vista. If your PC does not support transparency overlays will not function correctly.
+To edit an overlay's position and size you must first enter Edit Mode, to do this the default shortcut is `Alt + Shift + E`, alternatively you can do this directly in the Overlay settings page, or by right clicking on the tray icon. To Exit edit mode the process is the same.
+
+> We made it this way because we have had issues detecting the mouse positions for cliking and hovering on the overlays while playing. This was mostly because we were "listening" to click and hover events of a transparent window on top of everything else, which is not really how things are made to work (most overlays only draw things on top and you do not interact with them). This is *still* an issue in Linux for example, that has a very different window management system and players have to run using Wine/Lutris, which makes clicking on the overlay impossible because of how Wine and Linux interact.
