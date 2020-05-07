@@ -6,6 +6,7 @@ import { cardType } from "../../shared/cardTypes";
 import css from "./decklist.css";
 
 import CardTile from "../card-tile";
+import { InternalDeck } from "../../types/Deck";
 
 /*
 function compareQuantity(a, b) {
@@ -15,12 +16,16 @@ function compareQuantity(a, b) {
 }
 */
 
-function Separator(props) {
-  const { children } = props;
-  return <div className={css["card-tile-separator"]}>{children}</div>;
+interface SeparatorProps {
+  children: any;
 }
 
-function getDeckComponents(deck) {
+function Separator(props: SeparatorProps): JSX.Element {
+  const { children } = props;
+  return <div className={css.cardTileSeparator}>{children}</div>;
+}
+
+function getDeckComponents(deck: InternalDeck): JSX.Element[] {
   //console.log(deck);
   const components = [];
   if (deck.commandZoneGRPIds && deck.commandZoneGRPIds.length > 0) {
@@ -123,7 +128,11 @@ function getDeckComponents(deck) {
   return components;
 }
 
-export default function DeckList(props) {
+interface DeckListProps {
+  deck: InternalDeck;
+}
+
+export default function DeckList(props: DeckListProps): JSX.Element {
   const { deck } = props;
   if (!deck || db.version == 0) return <></>;
 

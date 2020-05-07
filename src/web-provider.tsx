@@ -1,10 +1,28 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-const WebStateContext = React.createContext();
-const WebDispatchContext = React.createContext();
+export interface AppState {
+  scroll: number,
+  queryState: number,
+  HoverGrpId: number,
+  HoverOpacity: number,
+  databaseVersion: number,
+  versionTag: string
+};
 
-function webReducer(state, action) {
+const defaultWebState: AppState = {
+  scroll: window.scrollY,
+  queryState: 0,
+  HoverGrpId: 1,
+  HoverOpacity: 0,
+  databaseVersion: 0,
+  versionTag: "v3.0.4"
+};
+
+const WebStateContext = React.createContext({});
+const WebDispatchContext = React.createContext({});
+
+function webReducer(state: AppState, action: any): AppState {
   switch (action.type) {
     case "setScroll": {
       return { ...state, scroll: action.scroll };
@@ -30,16 +48,7 @@ function webReducer(state, action) {
   }
 }
 
-const defaultWebState = {
-  scroll: window.scrollY,
-  queryState: 0,
-  HoverGrpId: 1,
-  HoverOpacity: 0,
-  databaseVersion: 0,
-  versionTag: "v3.0.4"
-};
-
-function WebProvider({ children }) {
+function WebProvider({ children }: {children: any;}): JSX.Element {
   const [state, dispatch] = React.useReducer(webReducer, defaultWebState);
   return (
     <WebStateContext.Provider value={state}>
@@ -50,7 +59,7 @@ function WebProvider({ children }) {
   );
 }
 
-const useWebContext = () => {
+const useWebContext = (): any => {
   const context = React.useContext(WebStateContext);
   if (!context) {
     throw new Error(
@@ -60,7 +69,7 @@ const useWebContext = () => {
   return context;
 };
 
-function useWebDispatch() {
+function useWebDispatch(): any {
   const context = React.useContext(WebDispatchContext);
   if (context === undefined) {
     throw new Error("useWebDispatch must be used within a WebProvider");

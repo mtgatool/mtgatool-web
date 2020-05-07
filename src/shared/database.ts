@@ -1,7 +1,11 @@
 import _ from "lodash";
+import { Metadata, DbCardData, CardSet } from "../types/Metadata";
 
 // Some other things should go here later, like updating from MTGA Servers themselves.
 class Database {
+  private static instance: Database;
+  public metadata: Metadata | undefined;
+
   constructor() {
     this.setDatabase = this.setDatabase.bind(this);
     this.card = this.card.bind(this);
@@ -11,7 +15,7 @@ class Database {
     //this.setDatabase(defaultDb);
   }
 
-  static getInstance() {
+  static getInstance(): Database {
     if (!Database.instance) {
       Database.instance = new Database();
     }
@@ -19,7 +23,7 @@ class Database {
     return Database.instance;
   }
 
-  setDatabase(arg) {
+  setDatabase(arg: string): void {
     try {
       this.metadata = JSON.parse(arg);
     } catch (e) {
@@ -34,19 +38,19 @@ class Database {
     }
   }
   */
-  card(grpId) {
+  card(grpId: number): DbCardData | undefined {
     return this.metadata && this.metadata.cards
       ? this.metadata.cards[grpId]
       : undefined;
   }
 
-  ability(abId) {
+  ability(abId: number): string | undefined {
     return this.metadata && this.metadata.abilities
       ? this.metadata.abilities[abId]
       : undefined;
   }
 
-  get sets() {
+  get sets(): { [id: string]: CardSet } {
     if (!this.metadata) {
       return {};
     }
@@ -57,12 +61,12 @@ class Database {
     );
   }
 
-  get version() {
+  get version(): number {
     return this.metadata ? this.metadata.version : 0;
   }
 
-  eventName(evid) {
-    return this.metadata.events[evid] ? this.metadata.events[evid] : evid;
+  eventName(evid: string): string {
+    return this.metadata?.events[evid] ? this.metadata.events[evid] : evid;
   }
 }
 

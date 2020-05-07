@@ -2,6 +2,14 @@ declare namespace SliderCssModule {
   export interface ISliderCss {
     slidecontainer: string;
     slider: string;
+    sliderMarkHor: string;
+    sliderMarkOuter: string;
+    sliderMarkText: string;
+    sliderMarksContainerHor: string;
+    slider_mark_hor: string;
+    slider_mark_outer: string;
+    slider_mark_text: string;
+    slider_marks_container_hor: string;
   }
 }
 

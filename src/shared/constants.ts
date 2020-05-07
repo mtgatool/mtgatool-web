@@ -682,22 +682,6 @@ export const ARENA_MODE_IDLE = 0;
 export const ARENA_MODE_MATCH = 1;
 export const ARENA_MODE_DRAFT = 2;
 
-export const DRAFT_RANKS = [
-  "F",
-  "D-",
-  "D",
-  "D+",
-  "C-",
-  "C",
-  "C+",
-  "B-",
-  "B",
-  "B+",
-  "A-",
-  "A",
-  "A+"
-];
-
 export const CARD_TYPE_CODES = [
   "cre",
   "lan",
@@ -753,11 +737,12 @@ export const RANKS_SORT = {
   Mythic: 6
 };
 
-export const PACK_SIZES = {
+export const PACK_SIZES: Record<string, number> = {
   "Ravnica Allegiance": 14,
   "Guilds of Ravnica": 14,
+  "Ikoria: Lair of Behemoths": 15,
   "Core Set 2020": 15
-};
+} as const;
 
 export const DEFAULT_TILE = 67003;
 export const CARD_TILE_ARENA = 0;
@@ -778,17 +763,6 @@ export const MAIN_UPDATE = 9;
 export const MAIN_CONSTRUCTED = 10;
 export const MAIN_LIMITED = 11;
 
-export const SHORTCUT_NAMES = {
-  shortcut_overlay_1: "Toggle Overlay 1",
-  shortcut_overlay_2: "Toggle Overlay 2",
-  shortcut_overlay_3: "Toggle Overlay 3",
-  shortcut_overlay_4: "Toggle Overlay 4",
-  shortcut_overlay_5: "Toggle Overlay 5",
-  shortcut_editmode: "Toggle Edit Overlay Positions",
-  shortcut_devtools_main: "Toggle Developer Tools (main)",
-  shortcut_devtools_overlay: "Toggle Developer Tools (overlays)"
-};
-
 export const SETTINGS_BEHAVIOUR = 1;
 export const SETTINGS_ARENA_DATA = 2;
 export const SETTINGS_OVERLAY = 3;
@@ -804,3 +778,36 @@ export const DATE_LAST_DAY = "Last 24 Hours";
 export const DATE_LAST_30 = "Last 30 Days";
 export const DATE_SEASON = "Current Season";
 export const DATE_ALL_TIME = "All Time";
+
+export const DRAFT_RANKS = [
+  "F",
+  "D-",
+  "D",
+  "D+",
+  "C-",
+  "C",
+  "C+",
+  "B-",
+  "B",
+  "B+",
+  "A-",
+  "A",
+  "A+"
+] as const;
+
+export const DRAFT_RANKS_LOLA = [
+  "",
+  "A+",
+  "A",
+  "A-",
+  "B+",
+  "B",
+  "B-",
+  "C+",
+  "C",
+  "C-",
+  "D+",
+  "D",
+  "D-",
+  "F"
+];
