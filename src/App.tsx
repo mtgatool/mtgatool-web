@@ -26,7 +26,6 @@ import CookiesSign from "./components/cookies";
 import { WrapperOuter } from "./components/wrapper";
 
 // Import once so all CSS can use it thanks to webpack magic
-// eslint-disable-next-line no-unused-vars
 import css from "./app.css";
 import keyArt from "./images/key-art.jpg";
 import notFoundArt from "./images/404.jpg";
@@ -40,7 +39,7 @@ function App() {
 
   const webDispatch = useWebDispatch();
 
-  const setScroll = state => {
+  const setScroll = (state: number) => {
     webDispatch({ type: "setScroll", scroll: state });
   };
 
@@ -51,11 +50,10 @@ function App() {
 
   React.useLayoutEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
-  }, position);
+  }, [position]);
 
-  const setImage = cardObj => {
+  const setImage = (cardObj: any) => {
     if (cardObj == keyArt) {
       setImageUrl(keyArt);
       setArtData("Bedevil by Seb Mckinnon");
@@ -78,7 +76,7 @@ function App() {
       <Loading />
       <CookiesSign />
       <Router>
-        <div style={wrapperStyle} className={css["wrapper-image"]} />
+        <div style={wrapperStyle} className={css.wrapperImage} />
         <TopNav artist={artData} />
         <CardHover />
         {webContext.databaseVersion !== 0 ? (
@@ -116,7 +114,7 @@ function App() {
           </Switch>
         ) : (
           <WrapperOuter>
-            <div className={css["loading"]}>Loading..</div>
+            <div className={css.loading}>Loading..</div>
           </WrapperOuter>
         )}
         <Footer />

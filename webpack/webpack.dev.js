@@ -18,6 +18,12 @@ module.exports = {
         use: [
           "style-loader",
           {
+            loader: "@teamsupercell/typings-for-css-modules-loader",
+            options: {
+              formatter: "prettier"
+            }
+          },
+          {
             loader: "css-loader",
             options: {
               sourceMap: true,
