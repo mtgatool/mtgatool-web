@@ -56,6 +56,17 @@
 
 }
 
+.mana_curve_column {
+  color: #fae5d2;
+  justify-content: space-around;
+  width: -webkit-fill-available;
+  flex-direction: column;
+  margin: 0px 4px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(250, 229, 210, 0.8);
+}
+
 .mana-curve-column-number {
   font-size: 12px;
   line-height: 20px;

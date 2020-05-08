@@ -1,10 +1,12 @@
 {
+  "parser": "@typescript-eslint/parser",
   "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier/@typescript-eslint"
   ],
   "parserOptions": {
+    "project": "./tsconfig.json",
     "sourceType": "module",
     "ecmaVersion": 9
   },
@@ -20,7 +22,6 @@
   "rules": {
     "no-cond-assign": 0,
     "no-console": "off",
-    "no-unused-vars": "warn",
     "no-redeclare": "warn",
     "no-undef": "error",
     "no-global-assign": "warn",
@@ -32,7 +33,6 @@
     "max-statements": [
       "warn",
       100
-    ],
-    "prettier/prettier": "warn"
+    ]
   }
 }
