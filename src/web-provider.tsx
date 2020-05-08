@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { STATE_IDLE } from "./shared/constants";
+import {STATE_IDLE} from "./shared/constants";
 
 export interface WebState {
   scroll: number;
@@ -21,13 +21,13 @@ const defaultWebState: WebState = {
 };
 
 interface ContextType {
-  dispatch: React.Dispatch<Action>,
+  dispatch: React.Dispatch<Action>;
   state: WebState;
 }
 
 const WebStateContext = React.createContext<ContextType>({
   state: defaultWebState,
-  dispatch: () => null
+  dispatch: () => null,
 });
 
 interface Action {
@@ -60,7 +60,10 @@ function webReducer(state: WebState, action: Action): WebState {
     case "setHoverOpacity": {
       return {
         ...state,
-        HoverOpacity: action.HoverOpacity || state.HoverOpacity,
+        HoverOpacity:
+          action.HoverOpacity == undefined
+            ? state.HoverOpacity
+            : action.HoverOpacity,
       };
     }
     case "setDatabaseVersion": {

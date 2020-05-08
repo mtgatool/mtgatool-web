@@ -1,6 +1,6 @@
 .deckview-div {
 	width: calc(100% - 48px);
-    margin: 24px;
+    margin: 24px auto;
     text-align: center;
 }
 
