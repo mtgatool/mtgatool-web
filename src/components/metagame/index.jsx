@@ -1,26 +1,30 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React from "react";
-import { useRouteMatch, useLocation, Link } from "react-router-dom";
-import css from "./metagame.css";
-import topNavCss from "../topnav/topnav.css";
-import { ManaCost } from "../card-tile";
-import DeckList from "../decklist";
-import NotFound from "../notfound";
-import TopTitle from "../title";
-import { WrapperInner, WrapperOuter } from "../wrapper";
-import db from "../../shared/database";
-import Deck from "../../shared/deck";
-import { utf8Decode } from "../../shared/util";
-import keyArt from "../../images/key-art.jpg";
-import { useWebDispatch } from "../../web-provider";
-import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
+import React from 'react';
+import { useRouteMatch, useLocation, Link } from 'react-router-dom';
+import css from './metagame.css';
+import topNavCss from '../topnav/topnav.css';
+import { ManaCost } from '../card-tile';
+import DeckList from '../decklist';
+import NotFound from '../notfound';
+import TopTitle from '../title';
+import { WrapperInner, WrapperOuter } from '../wrapper';
+import db from '../../shared/database';
+import Deck from '../../shared/deck';
+import { utf8Decode } from '../../shared/util';
+import keyArt from '../../images/key-art.jpg';
+import { useWebDispatch } from '../../web-provider';
+import {
+  STATE_IDLE,
+  STATE_DOWNLOAD,
+  STATE_ERROR
+} from '../../shared/constants';
 
-const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
+const METAGAME_URL = 'https://mtgatool.com/api/get_metagame.php';
 
 function sortArchetypes(a, b) {
-  const an = a.name === "Unknown" ? 0 : a.total;
-  const bn = b.name === "Unknown" ? 0 : b.total;
+  const an = a.name === 'Unknown' ? 0 : a.total;
+  const bn = b.name === 'Unknown' ? 0 : b.total;
   return bn - an;
 }
 
@@ -30,36 +34,36 @@ function sortDeckLinks(a, b) {
 
 const formats = [
   {
-    id: "BO1",
-    name: "Standard BO1"
+    id: 'BO1',
+    name: 'Standard BO1'
   },
   {
-    id: "BO3",
-    name: "Standard BO3"
+    id: 'BO3',
+    name: 'Standard BO3'
   },
   {
-    id: "HBO1",
-    name: "Historic BO1"
+    id: 'HBO1',
+    name: 'Historic BO1'
   },
   {
-    id: "HBO3",
-    name: "Historic BO3"
+    id: 'HBO3',
+    name: 'Historic BO3'
   }
 ];
 
 function Metagame(props) {
   //const match = useRouteMatch();
-  const formatMatch = useRouteMatch("/metagame/:format");
-  const dayMatch = useRouteMatch("/metagame/:format/:day");
-  const archMatch = useRouteMatch("/metagame/:format/:day/:arch");
-  const deckMatch = useRouteMatch("/metagame/:format/:day/:arch/:deck");
+  const formatMatch = useRouteMatch('/metagame/:format');
+  const dayMatch = useRouteMatch('/metagame/:format/:day');
+  const archMatch = useRouteMatch('/metagame/:format/:day/:arch');
+  const deckMatch = useRouteMatch('/metagame/:format/:day/:arch/:deck');
   const { setImage } = props;
   const [metagameData, setMetagameData] = React.useState(null);
   const [deckToDraw, setDeckToDraw] = React.useState(null);
   const webDispatch = useWebDispatch();
 
   const setQueryState = state => {
-    webDispatch({ type: "setQueryState", queryState: state });
+    webDispatch({ type: 'setQueryState', queryState: state });
   };
 
   // Little debug here
@@ -78,7 +82,7 @@ function Metagame(props) {
         setQueryState(xhr.status);
       } else {
         try {
-          let deckData = JSON.parse(
+          const deckData = JSON.parse(
             decodeURIComponent(escape(xhr.responseText))
           );
           setDeckToDraw(deckData);
@@ -94,7 +98,7 @@ function Metagame(props) {
         setQueryState(STATE_IDLE);
       }
     };
-    xhr.open("GET", URL);
+    xhr.open('GET', URL);
     xhr.send();
   };
 
@@ -107,7 +111,7 @@ function Metagame(props) {
       } else {
         try {
           const response = decodeURIComponent(escape(xhr.responseText));
-          let jsonData = JSON.parse(response);
+          const jsonData = JSON.parse(response);
           //console.log("setMetagameData");
           //console.log(jsonData);
           setMetagameData(jsonData);
@@ -133,7 +137,7 @@ function Metagame(props) {
       URL = `${METAGAME_URL}?event=${formatMatch.params.format.toUpperCase()}`;
     }
     //console.log(URL);
-    xhr.open("GET", URL);
+    xhr.open('GET', URL);
     xhr.send();
   };
 
@@ -196,19 +200,19 @@ function Metagame(props) {
           .decks.length <= parseInt(deckMatch.params.deck))) ? (
     <NotFound setImage={setImage} />
   ) : (
-    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
+    <WrapperOuter style={{ minHeight: 'calc(100vh - 5px)' }}>
       <TopTitle
         title={
           metagameData
             ? `${
                 formats.filter(f => f.id == metagameData.format)[0].name
               } Metagame (${new Date(metagameData.date).toUTCString()})`
-            : "Metagame"
+            : 'Metagame'
         }
         subtitle={
           metagameData
             ? `Contains data from the last ${metagameData.days} days`
-            : ""
+            : ''
         }
       />
       <MetagameNav format={formatMatch} />
@@ -223,7 +227,7 @@ function Metagame(props) {
             metagame={metagameData}
           />
         ) : (
-          <div className={css["metagame-div"]}>
+          <div className={css['metagame-div']}>
             {metagameData && metagameData.meta ? (
               []
                 .concat(metagameData.meta)
@@ -249,13 +253,13 @@ function Metagame(props) {
 
 function MetagameNav(props) {
   const { format } = props;
-  let formatId = format ? format.params.format : "BO1";
+  const formatId = format ? format.params.format : 'BO1';
   return (
-    <div className={css["metagame-nav"]}>
+    <div className={css['metagame-nav']}>
       {formats.map(format => {
         if (formatId !== format.id) {
           return (
-            <Link key={format.id} to={"/metagame/" + format.id}>
+            <Link key={format.id} to={'/metagame/' + format.id}>
               {format.name}
             </Link>
           );
@@ -270,7 +274,7 @@ function ArchetypeTile(props) {
   const cardObj = db.card(arch.tile);
   const cardImage = cardObj
     ? `https://img.scryfall.com/cards${cardObj.images.art_crop}`
-    : "https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/thumb/c/c4/Fblthp.jpg/250px-Fblthp.jpg";
+    : 'https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/thumb/c/c4/Fblthp.jpg/250px-Fblthp.jpg';
   const tileStyle = {
     backgroundImage: `url(${cardImage})`
   };
@@ -279,24 +283,24 @@ function ArchetypeTile(props) {
   return (
     <Link
       to={
-        "/metagame/" +
-        id.split(".")[1] +
-        "/" +
-        id.split(".")[0] +
-        "/" +
+        '/metagame/' +
+        id.split('.')[1] +
+        '/' +
+        id.split('.')[0] +
+        '/' +
         arch.name
       }
     >
-      <div className={css["archetype-div"]}>
-        <div className={css["archetype-tile"]} style={tileStyle}></div>
-        <div className={css["archetype-name"]}>{arch.name}</div>
-        <div className={css["archetype-colors"]}>
+      <div className={css['archetype-div']}>
+        <div className={css['archetype-tile']} style={tileStyle}></div>
+        <div className={css['archetype-name']}>{arch.name}</div>
+        <div className={css['archetype-colors']}>
           <ManaCost colors={arch.colors} />
         </div>
-        <div className={css["archetype-desc"]}>
-          {arch.share + "% - " + winrate.toFixed(2) + "% winrate"}
+        <div className={css['archetype-desc']}>
+          {arch.share + '% - ' + winrate.toFixed(2) + '% winrate'}
         </div>
-        <div className={css["archetype-desc"]}>{arch.total + " matches"}</div>
+        <div className={css['archetype-desc']}>{arch.total + ' matches'}</div>
       </div>
     </Link>
   );
@@ -328,7 +332,7 @@ function ArchetypeDecks(props) {
         setImage(cardObj);
       }
     } catch (e) {
-      console.log("Card image not found ", e);
+      console.log('Card image not found ', e);
     }
   }
 
@@ -340,20 +344,20 @@ function ArchetypeDecks(props) {
   }, [deckToDraw]);
 
   return (
-    <div className={css["archetype-decks-div"]}>
-      <div className={css["decklist-div"]}>
-        <Link className={topNavCss["nav-link-a"]} to="..">
-          {"< Go Back"}
+    <div className={css['archetype-decks-div']}>
+      <div className={css['decklist-div']}>
+        <Link className={topNavCss['nav-link-a']} to="..">
+          {'< Go Back'}
         </Link>
         {deckToDraw && deckWinrate ? (
           <>
-            <div className={css["deck-desc"]}>
+            <div className={css['deck-desc']}>
               {deckName} by {deckOwner}
             </div>
-            <div className={css["deck-desc-b"]}>
+            <div className={css['deck-desc-b']}>
               {deckWinrate.toFixed(2)}% winrate across {deckMatches} matches.
             </div>
-            <div onClick={copyDeck} className={css["button-simple"]}>
+            <div onClick={copyDeck} className={css['button-simple']}>
               Copy to clipboard
             </div>
             <DeckList deck={deckToDraw} />
@@ -362,22 +366,22 @@ function ArchetypeDecks(props) {
           <></>
         )}
       </div>
-      <div className={css["archetype-decks-list-div"]}>
+      <div className={css['archetype-decks-list-div']}>
         {archetype.decks.sort(sortDeckLinks).map((deck, index) => {
           return (
             <Link
               to={() =>
                 `/metagame/${archMatch.params.format}/${archMatch.params.day}/${archMatch.params.arch}/${index}`
               }
-              key={deck.name + "-" + index}
-              className={css["deck-link"]}
+              key={deck.name + '-' + index}
+              className={css['deck-link']}
             >
               <ManaCost colors={deck.colors} />
-              <div className={css["deck-link-desc"]}>
-                {utf8Decode(deck.name + " by " + deck.owner)}
+              <div className={css['deck-link-desc']}>
+                {utf8Decode(deck.name + ' by ' + deck.owner)}
               </div>
-              <div className={css["deck-link-wr"]}>
-                {Math.round(deck.wr * deck.wrt)} -{" "}
+              <div className={css['deck-link-wr']}>
+                {Math.round(deck.wr * deck.wrt)} -{' '}
                 {Math.round(deck.wrt - deck.wr * deck.wrt)} (
                 {(deck.wr * 100).toFixed(2)}%)
               </div>

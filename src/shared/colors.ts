@@ -1,4 +1,4 @@
-import { WHITE, BLUE, BLACK, RED, GREEN, MULTI, COLORLESS } from "./constants";
+import { WHITE, BLUE, BLACK, RED, GREEN, MULTI, COLORLESS } from "../shared/constants";
 const colorFlags = {
   NONE: 0,
   W: 1,

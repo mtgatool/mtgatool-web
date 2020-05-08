@@ -8,7 +8,7 @@ import {
 import { DbCardData } from "../types/Metadata";
 import CardsList from "./cardsList";
 import Colors from "./colors";
-import { DEFAULT_TILE } from "./constants";
+import { DEFAULT_TILE } from "../shared/constants";
 import db from "./database";
 import { compareCards, getSetCode, objectClone } from "./util";
 

@@ -24,11 +24,13 @@ export interface InternalDeck extends BasicDeck {
   type: "InternalDeck";
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isInternalDeck(deck: any): deck is InternalDeck {
   return (
     deck &&
     typeof deck === "object" &&
     "type" in deck &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (deck as any).type === "InternalDeck"
   );
 }
