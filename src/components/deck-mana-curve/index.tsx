@@ -3,9 +3,10 @@ import React from "react";
 import db from "../../shared/database";
 import css from "./deckmanacurve.css";
 import { MANA_COLORS } from "../../shared/constants";
+import { InternalDeck } from "../../types/Deck";
 
-function getDeckCurve(deck) {
-  const curve = [];
+function getDeckCurve(deck: InternalDeck): number[][] {
+  const curve: number[][] = [];
   if (!deck.mainDeck) return curve;
 
   deck.mainDeck.forEach(card => {
@@ -31,11 +32,11 @@ function getDeckCurve(deck) {
   return curve;
 }
 
-function add(a, b) {
+function add(a: number, b: number): number {
   return a + b;
 }
 
-export default function DeckManaCurve(props) {
+export default function DeckManaCurve(props: { deck: InternalDeck }): JSX.Element {
   const { deck } = props;
   const manaCounts = getDeckCurve(deck);
   const curveMax = Math.max(
@@ -49,8 +50,8 @@ export default function DeckManaCurve(props) {
   // console.log("deckManaCurve", manaCounts, curveMax);
 
   return (
-    <div className={css["mana-curve-container"]}>
-      <div className={css["mana-curve"]}>
+    <div className={css.manaCurveContainer}>
+      <div className={css.manaCurve}>
         {!!manaCounts &&
           manaCounts.map((cost, i) => {
             const total = cost[0];
@@ -58,11 +59,11 @@ export default function DeckManaCurve(props) {
 
             return (
               <div
-                className={css["mana-curve-column"]}
+                className={css.manaCurveColumn}
                 key={"mana-curve-column-" + i}
                 style={{ height: (total * 100) / curveMax + "%" }}
               >
-                <div className={css["mana-curve-number"]}>
+                <div className={css.manaCurveNumber}>
                   {total > 0 ? total : ""}
                 </div>
                 {MANA_COLORS.map((mc, ind) => {
@@ -84,12 +85,12 @@ export default function DeckManaCurve(props) {
             );
           })}
       </div>
-      <div className={css["mana-curve-numbers"]}>
+      <div className={css.manaCurveNumbers}>
         {!!manaCounts &&
           manaCounts.map((cost, i) => {
             return (
               <div
-                className={css["mana-curve-column-number"]}
+                className={css.manaCurveColumnNumber}
                 key={"mana-curve-column-number-" + i}
               >
                 <div

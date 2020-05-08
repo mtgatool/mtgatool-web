@@ -1,40 +1,44 @@
 /* eslint-disable no-else-return */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import css from './cardtile.css';
-import db from '../../shared/database';
-import { useWebDispatch } from '../../web-provider';
+import React from "react";
+import css from "./cardtile.css";
+import db from "../../shared/database";
+import {useWebDispatch} from "../../web-provider";
 import {
   COLORS_ALL,
   FACE_SPLIT_FULL,
-  FACE_ADVENTURE_MAIN
-} from '../../shared/constants';
+  FACE_ADVENTURE_MAIN,
+} from "../../shared/constants";
+import {DbCardData} from "../../types/Metadata";
 
-function openScryfallCard() {
-  //
+function openScryfallCard(card: DbCardData): void {
+  console.log("open " + card.name);
 }
 
-export function getCardArtCrop(cardObj) {
+export function getCardArtCrop(cardObj: DbCardData): string {
   try {
-    return 'https://img.scryfall.com/cards' + cardObj.images.art_crop;
+    return "https://img.scryfall.com/cards" + cardObj.images.art_crop;
   } catch (e) {
-    console.log('Cant find card art crop: ', cardObj);
-    return '../images/notfound.png';
+    console.log("Cant find card art crop: ", cardObj);
+    return "../images/notfound.png";
   }
 }
 
-export function ManaCost(props) {
-  const { colors } = props;
-  let { newclass } = props;
-  if (!newclass) newclass = css['mana-s16'];
+export function ManaCost(props: {
+  newclass?: string;
+  colors: number[];
+}): JSX.Element {
+  const {colors} = props;
+  let {newclass} = props;
+  if (!newclass) newclass = css["mana-s16"];
 
   return (
     <>
       {colors.map((mana, index) => {
         return (
           <div
-            key={mana + '_' + index}
+            key={mana + "_" + index}
             className={`${newclass} flex_end mana_${COLORS_ALL[mana - 1]}`}
           />
         );
@@ -43,10 +47,13 @@ export function ManaCost(props) {
   );
 }
 
-function CostSymbols(props) {
-  const { card, dfcCard } = props;
+function CostSymbols(props: {
+  card: DbCardData;
+  dfcCard?: DbCardData;
+}): JSX.Element {
+  const {card, dfcCard} = props;
   if (!card) return <></>;
-  const costSymbols = [];
+  const costSymbols: JSX.Element[] = [];
   let prevc = true;
   const hasSplitCost = card.dfc === FACE_SPLIT_FULL;
   if (card.cost) {
@@ -54,26 +61,26 @@ function CostSymbols(props) {
       if (hasSplitCost) {
         if (/^(x|\d)+$/.test(cost) && prevc === false) {
           costSymbols.push(
-            <span key={card.id + '_cost_separator'}>{'//'}</span>
+            <span key={card.id + "_cost_separator"}>{"//"}</span>
           );
         }
         prevc = /^\d+$/.test(cost);
       }
       costSymbols.push(
         <div
-          key={card.id + '_' + index}
-          className={'mana_s16 flex_end mana_' + cost}
+          key={card.id + "_" + index}
+          className={"mana_s16 flex_end mana_" + cost}
         />
       );
     });
   }
   if (card.dfc === FACE_ADVENTURE_MAIN && dfcCard && dfcCard.cost) {
-    costSymbols.push(<span key={dfcCard.id + '_cost_separator'}>{'//'}</span>);
+    costSymbols.push(<span key={dfcCard.id + "_cost_separator"}>{"//"}</span>);
     dfcCard.cost.forEach((cost, index) => {
       costSymbols.push(
         <div
-          key={dfcCard.id + '_' + index}
-          className={'mana_s16 flex_end mana_' + cost}
+          key={dfcCard.id + "_" + index}
+          className={"mana_s16 flex_end mana_" + cost}
         />
       );
     });
@@ -81,34 +88,31 @@ function CostSymbols(props) {
   return <>{costSymbols}</>;
 }
 
-function CardQuantityDisplay(props) {
-  const { quantity } = props;
-  if (typeof quantity === 'object') {
-    // Mixed quantity (odds and quantity)
-    return (
-      <div className="card_tile_odds_flat">
-        <div className="card_tile_odds_flat_half">{quantity.quantity}</div>
-        <div className="card_tile_odds_flat_half_dark">{quantity.odds}</div>
-      </div>
-    );
-  } else {
-    return <div className="card_tile_quantity_flat">{quantity}</div>;
-  }
+function CardQuantityDisplay(props: {quantity: number}): JSX.Element {
+  const {quantity} = props;
+  return <div className="card_tile_quantity_flat">{quantity}</div>;
 }
 
-export default function CardTile(props) {
-  const { grpId, quantity } = props;
-  const [isMouseHovering, setMouseHovering] = React.useState(false);
-  const [card, setCard] = React.useState(undefined);
-  const [dfcCard, setdfcCard] = React.useState(undefined);
-  const webDispatch = useWebDispatch(card);
+interface CardTileProps {
+  grpId: number;
+  quantity: number;
+}
 
-  const setHoverCard = grpId => {
-    webDispatch({ type: 'setHoverCard', HoverGrpId: grpId });
+export default function CardTile(props: CardTileProps): JSX.Element {
+  const {grpId, quantity} = props;
+  const [isMouseHovering, setMouseHovering] = React.useState(false);
+  const [card, setCard] = React.useState<DbCardData | undefined>(undefined);
+  const [dfcCard, setdfcCard] = React.useState<DbCardData | undefined>(
+    undefined
+  );
+  const webDispatch = useWebDispatch();
+
+  const setHoverCard = (grpId): void => {
+    webDispatch({type: "setHoverCard", HoverGrpId: grpId});
   };
 
-  const setHoverOpacity = opacity => {
-    webDispatch({ type: 'setHoverOpacity', HoverOpacity: opacity });
+  const setHoverOpacity = (opacity): void => {
+    webDispatch({type: "setHoverOpacity", HoverOpacity: opacity});
   };
 
   const handleMouseEnter = React.useCallback(() => {
@@ -124,10 +128,12 @@ export default function CardTile(props) {
 
   const handleMouseClick = React.useCallback(() => {
     let cardOpen = card;
-    if (card.dfc === FACE_SPLIT_FULL) {
+    if (card?.dfc === FACE_SPLIT_FULL) {
       cardOpen = dfcCard || card;
     }
-    openScryfallCard(cardOpen);
+    if (cardOpen) {
+      openScryfallCard(cardOpen);
+    }
   }, [card]);
 
   React.useEffect(() => {
@@ -136,20 +142,22 @@ export default function CardTile(props) {
       const cardObj = db.card(grpId);
       if (cardObj) {
         setCard(cardObj);
-        const dfcObj = db.card(cardObj.dfcId);
-        if (dfcObj) {
-          setdfcCard(dfcObj);
+        if (cardObj.dfcId) {
+          const dfcObj = db.card(cardObj.dfcId);
+          if (dfcObj) {
+            setdfcCard(dfcObj);
+          }
         }
       }
     }
   }, []);
 
-  const getCardTileStyle = () => {
-    const cardTileStyle = { backgroundImage: '', borderImage: '' };
+  const getCardTileStyle = (): React.CSSProperties => {
+    const cardTileStyle = {backgroundImage: "", borderImage: ""};
     if (card) {
       try {
-        if (card.type === 'Special') {
-          cardTileStyle.backgroundImage = `url(${card.images['art-crop']})`;
+        if (card.type === "Special") {
+          cardTileStyle.backgroundImage = `url(${card.images["art-crop"]})`;
         } else {
           cardTileStyle.backgroundImage = `url(${getCardArtCrop(card)})`;
         }
@@ -157,8 +165,8 @@ export default function CardTile(props) {
         console.log(e);
       }
 
-      let colorA = 'c';
-      let colorB = 'c';
+      let colorA = "c";
+      let colorB = "c";
       if (card.frame) {
         if (card.frame.length === 1) {
           colorA = COLORS_ALL[card.frame[0] - 1];
@@ -167,8 +175,8 @@ export default function CardTile(props) {
           colorA = COLORS_ALL[card.frame[0] - 1];
           colorB = COLORS_ALL[card.frame[1] - 1];
         } else if (card.frame.length > 2) {
-          colorA = 'm';
-          colorB = 'm';
+          colorA = "m";
+          colorB = "m";
         }
       }
       try {
@@ -181,11 +189,11 @@ export default function CardTile(props) {
     return cardTileStyle;
   };
 
-  const getTileStyle = () => {
-    const tileStyle = { backgroundColor: 'rgba(0, 0, 0, 0.75)' };
+  const getTileStyle = (): React.CSSProperties => {
+    const tileStyle = {backgroundColor: "rgba(0, 0, 0, 0.75)"};
     if (isMouseHovering) {
       try {
-        tileStyle.backgroundColor = 'rgba(65, 50, 40, 0.75)';
+        tileStyle.backgroundColor = "rgba(65, 50, 40, 0.75)";
       } catch (e) {
         console.log(e);
       }
@@ -206,9 +214,9 @@ export default function CardTile(props) {
     >
       <CardQuantityDisplay quantity={quantity} />
       <div className="card_tile_crop_flat" style={getCardTileStyle()} />
-      <div className="card_tile_name_flat">{card ? card.name : 'Unknown'}</div>
+      <div className="card_tile_name_flat">{card ? card.name : "Unknown"}</div>
       <div className="cart_tile_mana_flat">
-        <CostSymbols card={card} dfcCard={dfcCard} />
+        {card ? <CostSymbols card={card} dfcCard={dfcCard} /> : <></>}
       </div>
     </div>
   );

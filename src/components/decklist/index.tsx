@@ -2,12 +2,12 @@
 import _ from "lodash";
 import React from "react";
 import db from "../../shared/database";
-import { cardType } from "../../shared/cardTypes";
+import {cardType} from "../../shared/cardTypes";
 import css from "./decklist.css";
 
 import CardTile from "../card-tile";
-import { InternalDeck } from "../../types/Deck";
-import { DbCardData } from "../../types/Metadata";
+import {InternalDeck} from "../../types/Deck";
+import {DbCardData} from "../../types/Metadata";
 
 /*
 function compareQuantity(a, b) {
@@ -18,11 +18,11 @@ function compareQuantity(a, b) {
 */
 
 interface SeparatorProps {
-  children: any;
+  children: JSX.Element | string;
 }
 
 function Separator(props: SeparatorProps): JSX.Element {
-  const { children } = props;
+  const {children} = props;
   return <div className={css.cardTileSeparator}>{children}</div>;
 }
 
@@ -47,9 +47,9 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
 
   // draw maindeck grouped by cardType
   const cardsByGroup = _(deck.mainDeck)
-    .map(card => ({ data: db.card(card.id), ...card }))
-    .filter(card => card.data !== undefined)
-    .groupBy(card => {
+    .map((card) => ({data: db.card(card.id), ...card}))
+    .filter((card) => card.data !== undefined)
+    .groupBy((card) => {
       const type = cardType(card.data as DbCardData);
       switch (type) {
         case "Creature":
@@ -78,10 +78,10 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
     "Spells",
     "Enchantments",
     "Artifacts",
-    "Lands"
+    "Lands",
   ])
-    .filter(group => !_.isEmpty(cardsByGroup[group]))
-    .forEach(group => {
+    .filter((group) => !_.isEmpty(cardsByGroup[group]))
+    .forEach((group) => {
       // draw a separator for the group
       const cards = cardsByGroup[group];
       const count = _.sumBy(cards, "quantity");
@@ -91,7 +91,7 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
 
       // draw the cards
       _(cards)
-        .filter(card => card.quantity > 0)
+        .filter((card) => card.quantity > 0)
         .orderBy(["data.cmc", "data.name"])
         .forEach((card, index) => {
           components.push(
@@ -113,7 +113,7 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
 
     // draw the cards
     _(deck.sideboard)
-      .filter(card => card.quantity > 0)
+      .filter((card) => card.quantity > 0)
       .orderBy(["data.cmc", "data.name"])
       .forEach((card, index) => {
         components.push(
@@ -134,7 +134,7 @@ interface DeckListProps {
 }
 
 export default function DeckList(props: DeckListProps): JSX.Element {
-  const { deck } = props;
+  const {deck} = props;
   if (!deck || db.version == 0) return <></>;
 
   const renderComponents = getDeckComponents(deck);

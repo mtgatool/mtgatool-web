@@ -6,4 +6,7 @@ export interface ExportViewProps {
 
 export interface ServerDeck extends InternalDeck {
   owner: string;
+  ok: boolean;
+  user?: string;
+  error?: string;
 }

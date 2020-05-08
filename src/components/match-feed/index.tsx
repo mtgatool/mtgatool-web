@@ -137,7 +137,7 @@ function MatchBrief(props: MatchBriefProps): JSX.Element {
           </div>
         </div>
         <div className={css.matchBriefFlex}>
-          <ManaCost colors={match.playerDeck.colors} />
+          <ManaCost colors={match.playerDeck.colors || []} />
         </div>
       </div>
       <div className={css.matchBriefColumn} style={{alignItems: "center"}}>
@@ -154,7 +154,7 @@ function MatchBrief(props: MatchBriefProps): JSX.Element {
       >
         <div className={css.matchBriefTitle}>{match.opponent.name}</div>
         <div className={css.matchBriefFlex}>
-          <ManaCost colors={match.oppDeck.colors} />
+          <ManaCost colors={match.oppDeck.colors || []} />
         </div>
       </div>
     </div>

@@ -1,15 +1,23 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 
-import { WILDCARD_RARITIES } from "../../shared/constants";
+import {WILDCARD_RARITIES} from "../../shared/constants";
 import db from "../../shared/database";
 import css from "./deckwildcards.css";
+import Deck from "../../shared/deck";
 
-function getDeckWildcards(deck) {
-  const rarities = { common: 0, uncommon: 0, rare: 0, mythic: 0 };
+function getDeckWildcards(
+  deck: Deck
+): {
+  common: number;
+  uncommon: number;
+  rare: number;
+  mythic: number;
+} {
+  const rarities = {common: 0, uncommon: 0, rare: 0, mythic: 0};
   const deckCards = [
     ...deck.getMainboard().get(),
-    ...deck.getSideboard().get()
+    ...deck.getSideboard().get(),
   ];
 
   deckCards.forEach(function(card) {
@@ -24,17 +32,21 @@ function getDeckWildcards(deck) {
   return rarities;
 }
 
-export default function DeckWildcards(props) {
-  const { deck } = props;
+interface DeckWildcardsProps {
+  deck: Deck;
+}
+
+export default function DeckWildcards(props: DeckWildcardsProps): JSX.Element {
+  const {deck} = props;
 
   const wildcards = getDeckWildcards(deck);
 
   return (
-    <div className={css["wildcards-cost"]}>
-      {WILDCARD_RARITIES.map(rarity => {
+    <div className={css.wildcardsCost}>
+      {WILDCARD_RARITIES.map((rarity) => {
         return (
           <div
-            className={css["wildcard-icon-cont"]}
+            className={css.wildcardIconCont}
             key={"wildcard-icon-cont-" + rarity}
           >
             <div className={"wildcards-icon wc-" + rarity} title={rarity} />

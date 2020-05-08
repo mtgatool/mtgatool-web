@@ -5,15 +5,16 @@ import db from "../../shared/database";
 import NotFound from "../../cssimages/notfound.png";
 import { useWebContext } from "../../web-provider";
 import { FACE_DFC_BACK, FACE_DFC_FRONT } from "../../shared/constants";
-function CardHover() {
+
+function CardHover(): JSX.Element {
   const webContext = useWebContext();
 
-  const getStyle = ctx => {
+  const getStyle = (ctx): React.CSSProperties => {
     const cardObj = db.card(ctx.HoverGrpId);
 
     let newImg;
     try {
-      newImg = `url(https://img.scryfall.com/cards${cardObj.images.normal}`;
+      newImg = `url(https://img.scryfall.com/cards${cardObj?.images.normal}`;
     } catch (e) {
       newImg = `url(${NotFound})`;
     }
@@ -23,7 +24,7 @@ function CardHover() {
     };
   };
 
-  const getStyleDfc = ctx => {
+  const getStyleDfc = (ctx): React.CSSProperties => {
     let cardObj = db.card(ctx.HoverGrpId);
     let newImg = `url(${NotFound})`;
     let opacity = ctx.HoverOpacity;
@@ -34,7 +35,7 @@ function CardHover() {
     ) {
       cardObj = db.card(cardObj.dfcId);
       try {
-        newImg = `url(https://img.scryfall.com/cards${cardObj.images.normal}`;
+        newImg = `url(https://img.scryfall.com/cards${cardObj?.images.normal}`;
       } catch (e) {
         newImg = `url(${NotFound})`;
       }

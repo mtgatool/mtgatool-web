@@ -10,20 +10,20 @@ import logoArena from "../../images/arena_logo.png";
 */
 import logoTool from "../../cssimages/icon-256.png";
 
-function Footer() {
+function Footer(): JSX.Element {
   return (
-    <div className={css["footer-main"]}>
-      <div className={css["footer-wrapper"]}>
-        <div className={css["footer-column"]}>
+    <div className={css.footerMain}>
+      <div className={css.footerWrapper}>
+        <div className={css.footerColumn}>
           <img
             style={{ margin: "auto " }}
             alt="MTG Arena Tool"
-            className={css["footer-logo"]}
+            className={css.footerLogo}
             src={logoTool}
           />
         </div>
-        <div className={css["footer-column"]}>
-          <div className={css["footer-column-title"]}>MTG Arena Tool</div>
+        <div className={css.footerColumn}>
+          <div className={css.footerColumnTitle}>MTG Arena Tool</div>
           <FooterLink url="mailto:mtgatool@gmail.com">Contact</FooterLink>
           <FooterLink url="https://mtgatool.com/database/">Database</FooterLink>
           <FooterLink url="./docs/">Documentation</FooterLink>
@@ -31,8 +31,8 @@ function Footer() {
             Releases
           </FooterLink>
         </div>
-        <div className={css["footer-column"]}>
-          <div className={css["footer-column-title"]}>Support us</div>
+        <div className={css.footerColumn}>
+          <div className={css.footerColumnTitle}>Support us</div>
           <FooterLink url="https://www.paypal.me/ManuelEtchegaray/10">
             Donate
           </FooterLink>
@@ -40,8 +40,8 @@ function Footer() {
             Patreon
           </FooterLink>
         </div>
-        <div className={css["footer-column"]}>
-          <div className={css["footer-column-title"]}>Developers</div>
+        <div className={css.footerColumn}>
+          <div className={css.footerColumnTitle}>Developers</div>
           <FooterLink url="https://github.com/Manuel-777/MTG-Arena-Tool">
             App Github
           </FooterLink>
@@ -49,8 +49,8 @@ function Footer() {
             Website Github
           </FooterLink>
         </div>
-        <div className={css["footer-column"]}>
-          <div className={css["footer-column-title"]}>Places</div>
+        <div className={css.footerColumn}>
+          <div className={css.footerColumnTitle}>Places</div>
           <FooterLink url="https://discord.gg/K9bPkJy">Discord</FooterLink>
           <FooterLink url="https://twitter.com/MEtchegaray7">
             Twitter
@@ -60,8 +60,8 @@ function Footer() {
           </FooterLink>
         </div>
       </div>
-      <div className={css["footer-wrapper"]}>
-        <div className={css["footer-text"]}>
+      <div className={css.footerWrapper}>
+        <div className={css.footerText}>
           Portions of MTG Arena Tool are unofficial Fan Content permitted under
           the Fan Content Policy.
           <br></br>
@@ -80,7 +80,9 @@ function Footer() {
   );
 }
 
-function FooterLink(props) {
+interface FooterLinkProps { url: string; children: Element | string;}
+
+function FooterLink(props: FooterLinkProps): JSX.Element {
   const { url, children } = props;
 
   return (

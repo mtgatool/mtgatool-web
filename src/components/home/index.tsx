@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useMemo, useCallback } from "react";
+import React, {useMemo, useCallback} from "react";
 import sharedcss from "../../shared.css";
 
 import keyArt from "../../images/key-art.jpg";
@@ -19,9 +19,9 @@ import css from "../../app.css";
 import homeCss from "./home.css";
 
 import MatchFeed from "../match-feed";
-import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
-import { useWebContext } from "../../web-provider";
-import { ExportViewProps } from "../../web-types/shared";
+import {WrapperInner, WrapperOuter, WrapperOuterLight} from "../wrapper";
+import {useWebContext} from "../../web-provider";
+import {ExportViewProps} from "../../web-types/shared";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -54,7 +54,7 @@ function makeDownloadURL(versionTag: string): string {
 }
 
 function Home(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
+  const {setImage} = props;
   React.useEffect(() => {
     setImage(keyArt);
   }, []);
@@ -82,7 +82,7 @@ function Home(props: ExportViewProps): JSX.Element {
           </div>
         </WrapperInner>
       </WrapperOuter>
-      <WrapperOuter style={{ paddingBottom: "64px" }}>
+      <WrapperOuter style={{paddingBottom: "64px"}}>
         <MatchFeed />
       </WrapperOuter>
 
@@ -116,9 +116,7 @@ function Home(props: ExportViewProps): JSX.Element {
               <ShowcaseImage align="right" image={showCollection} />
             </div>
             <div className={homeCss.showcaseDesc}>
-              <div className={homeCss.showcaseTitleLeft}>
-                {FEATURE_B_TITLE}
-              </div>
+              <div className={homeCss.showcaseTitleLeft}>{FEATURE_B_TITLE}</div>
               <div className={homeCss.showcaseDescriptionLeft}>
                 {FEATURE_B_TEXT}
               </div>
@@ -131,9 +129,7 @@ function Home(props: ExportViewProps): JSX.Element {
         <div className={homeCss.contMargin}>
           <div className={homeCss.showcaseContainer}>
             <div className={homeCss.showcaseDesc}>
-              <div className={homeCss.showcaseTitleLeft}>
-                {FEATURE_C_TITLE}
-              </div>
+              <div className={homeCss.showcaseTitleLeft}>{FEATURE_C_TITLE}</div>
               <div className={homeCss.showcaseDescriptionRight}>
                 {FEATURE_C_TEXT}
               </div>
@@ -149,7 +145,7 @@ function Home(props: ExportViewProps): JSX.Element {
         <div className={homeCss.contMargin}>
           <div className={homeCss.showcaseDownloadContainer}>
             <a
-              style={{ margin: "auto 0px" }}
+              style={{margin: "auto 0px"}}
               className={css.downloadButton}
               href={makeDownloadURL(webContext.versionTag)}
             >
@@ -163,7 +159,7 @@ function Home(props: ExportViewProps): JSX.Element {
 }
 
 function ShowcaseImage(props): JSX.Element {
-  const { image, align } = props;
+  const {image, align} = props;
   const imageRef = React.useRef<HTMLImageElement>(null);
   const webContext = useWebContext();
 
@@ -174,7 +170,7 @@ function ShowcaseImage(props): JSX.Element {
     return {
       backgroundImage: `url(${image})`,
       alignSelf: align == "left" ? "flex-start" : "flex-end",
-      transform: `translateY(${offset / 2}px)`
+      transform: `translateY(${offset / 2}px)`,
     };
   };
 
@@ -195,7 +191,7 @@ function ShowcaseOverlay(): JSX.Element {
 
   const getStyle = useCallback(() => {
     return {
-      backgroundImage: `url(${showCase[back]})`
+      backgroundImage: `url(${showCase[back]})`,
     };
   }, [back]);
 

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { useRouteMatch } from "react-router-dom";
+import {useRouteMatch} from "react-router-dom";
 import DeckList from "../decklist";
 import TopTitle from "../title";
-import { WrapperOuter } from "../wrapper";
+import {WrapperOuter} from "../wrapper";
 import css from "./deckview.css";
 import metacss from "../metagame/metagame.css";
 import Deck from "../../shared/deck";
@@ -13,28 +13,25 @@ import DeckWildcards from "../deck-wildcards";
 import db from "../../shared/database";
 import NotFound from "../notfound";
 
-import { useWebDispatch } from "../../web-provider";
-import {
-  STATE_IDLE,
-  STATE_DOWNLOAD,
-  STATE_ERROR
-} from "../../shared/constants";
+import {useWebDispatch} from "../../web-provider";
+import {STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR} from "../../shared/constants";
+import {ExportViewProps, ServerDeck} from "../../web-types/shared";
 
-function DeckView(props) {
-  const { setImage } = props;
-  const deckMatch = useRouteMatch("/deck/:deckid");
-  const [deckToDraw, setDeckToDraw] = React.useState(null);
+function DeckView(props: ExportViewProps): JSX.Element {
+  const {setImage} = props;
+  const deckMatch = useRouteMatch<{deckid: string}>("/deck/:deckid");
+  const [deckToDraw, setDeckToDraw] = React.useState<ServerDeck | null>(null);
 
   const webDispatch = useWebDispatch();
 
-  const setQueryState = state => {
-    webDispatch({ type: "setQueryState", queryState: state });
+  const setQueryState = (state): void => {
+    webDispatch({type: "setQueryState", queryState: state});
   };
 
   const copyDeck = React.useCallback(() => {
     console.log("Copy");
     //console.log(deckToDraw, str);
-    const str = new Deck(deckToDraw).getExportArena();
+    const str = deckToDraw ? new Deck(deckToDraw).getExportArena() : "";
     navigator.clipboard.writeText(str);
   }, [deckToDraw]);
 
@@ -43,16 +40,18 @@ function DeckView(props) {
       const URL = `https://mtgatool.com/api/get_deck.php?id=${deckMatch.params.deckid}`;
       setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
+      xhr.onload = (): void => {
         if (xhr.status !== 200) {
           setQueryState(xhr.status);
         } else {
           try {
-            let deckData = JSON.parse(xhr.responseText);
+            const deckData = JSON.parse(xhr.responseText);
             setDeckToDraw(deckData);
             try {
-              const cardObj = db.card(deckToDraw.deckTileId);
-              if (cardObj.images.art_crop) {
+              const cardObj = deckToDraw
+                ? db.card(deckToDraw.deckTileId)
+                : undefined;
+              if (cardObj?.images.art_crop) {
                 setImage(cardObj);
               }
             } catch (e) {
@@ -65,7 +64,7 @@ function DeckView(props) {
           }
         }
       };
-      xhr.onreadystatechange = function() {
+      xhr.onreadystatechange = function(): void {
         if (xhr.readyState === 4) {
           setQueryState(STATE_IDLE);
         }
@@ -82,7 +81,7 @@ function DeckView(props) {
       {deckToDraw && deckToDraw.error ? (
         <NotFound setImage={setImage} />
       ) : (
-        <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
+        <WrapperOuter style={{minHeight: "calc(100vh - 5px)"}}>
           <TopTitle
             title={deckToDraw ? deckToDraw.name : ""}
             subtitle={deckToDraw ? "by " + deckToDraw.user : ""}

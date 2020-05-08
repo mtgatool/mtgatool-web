@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useRef, useEffect } from "react";
-import { useRouteMatch, useLocation, Link } from "react-router-dom";
-import { WrapperOuter } from "../wrapper";
+import React, {useState, useRef, useEffect} from "react";
+import {useRouteMatch, useLocation, Link} from "react-router-dom";
+import {WrapperOuter} from "../wrapper";
 import css from "./docs.css";
 import keyArt from "../../images/key-art.jpg";
 
@@ -23,6 +23,7 @@ import filterBoosters from "../../images/docs/collection-filter-boosters.png";
 import viewSets from "../../images/docs/collection-view-sets.png";
 
 import ReactMarkdown from "react-markdown";
+import {ExportViewProps} from "../../web-types/shared";
 
 const resources = {
   introduction: introduction,
@@ -31,12 +32,12 @@ const resources = {
   privacy: privacy,
   decks: decks,
   collection: collection,
-  overlays: overlays
+  overlays: overlays,
 };
 
-const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop);
+const scrollToRef = (ref): void => window.scrollTo(0, ref.current.offsetTop);
 
-const imageTransform = img => {
+const imageTransform = (img): string => {
   switch (img) {
     case "deck-archive":
       return deckArchive;
@@ -53,19 +54,19 @@ const imageTransform = img => {
   }
 };
 
-function Heading({ children, ...props }) {
-  const { level } = props;
+function Heading({children, ...props}): JSX.Element {
+  const {level} = props;
   return React.createElement("h" + level, props, children);
 }
 
-const HeadRenderer = props => {
-  const { nodeKey, children, level } = props;
+const HeadRenderer = (props): JSX.Element => {
+  const {nodeKey, children, level} = props;
   const linkRef = useRef(null);
   const id = children[0].props.value.replace(/\s+/g, "-").toLowerCase();
   const [op, setOp] = useState(0);
   const location = useLocation();
 
-  const executeScroll = () => scrollToRef(linkRef);
+  const executeScroll = (): void => scrollToRef(linkRef);
 
   useEffect(() => {
     setTimeout(() => {
@@ -80,14 +81,14 @@ const HeadRenderer = props => {
       <Heading
         {...props}
         ref={linkRef}
-        onMouseEnter={() => setOp(0.8)}
-        onMouseLeave={() => setOp(0)}
+        onMouseEnter={(): void => setOp(0.8)}
+        onMouseLeave={(): void => setOp(0)}
       >
         {children}
         <a id={id} href={`#${id}`}>
           <div
             className={css["anchor-link"] + " " + css["anchor-h" + level]}
-            style={{ opacity: op }}
+            style={{opacity: op}}
           ></div>
         </a>
       </Heading>
@@ -95,10 +96,10 @@ const HeadRenderer = props => {
   );
 };
 
-export default function Docs(props) {
-  const { setImage } = props;
+export default function Docs(props: ExportViewProps): JSX.Element {
+  const {setImage} = props;
 
-  const sectionMatch = useRouteMatch("/docs/:section");
+  const sectionMatch = useRouteMatch<{section: string}>("/docs/:section");
   const resource = sectionMatch
     ? resources[sectionMatch.params.section]
     : resources.introduction;
@@ -108,12 +109,12 @@ export default function Docs(props) {
   }, []);
 
   return (
-    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
+    <WrapperOuter style={{minHeight: "calc(100vh - 5px)"}}>
       <div className={css["docs-wrapper-top"]}></div>
-      <div className={css["docs-wrapper"]}>
-        <div className={css["docs-sidebar"]}>
-          <div className={css["docs-sidebar-content"]}>
-            {docs.docs.map(title => {
+      <div className={css.docsWrapper}>
+        <div className={css.docsSidebar}>
+          <div className={css.docsSidebarContent}>
+            {docs.docs.map((title) => {
               const path = docs[title].path;
               const isActive =
                 sectionMatch && sectionMatch.params.section == path;
@@ -122,8 +123,8 @@ export default function Docs(props) {
                 return (
                   <div
                     className={
-                      css["docs-section-link"] +
-                      (isActive ? " " + css["docs-section-link-active"] : "")
+                      css.docsSectionLink +
+                      (isActive ? " " + css.docsSectionLinkActive : "")
                     }
                     key={title + "-side"}
                   >
@@ -134,7 +135,7 @@ export default function Docs(props) {
               if (docs[title].type == "title") {
                 return (
                   <div
-                    className={css["docs-section-title"]}
+                    className={css.docsSectionTitle}
                     key={title + "-side-title"}
                   >
                     {title}
@@ -144,11 +145,11 @@ export default function Docs(props) {
             })}
           </div>
         </div>
-        <div className={css["docs-main"]}>
+        <div className={css.docsMain}>
           {resource ? (
             <ReactMarkdown
               transformImageUri={imageTransform}
-              renderers={{ heading: HeadRenderer }}
+              renderers={{heading: HeadRenderer}}
               source={resource}
             ></ReactMarkdown>
           ) : (
