@@ -1,4 +1,39 @@
 version
+4.2.0
+May 8th, 2020
+added
+Cards Winrates data
+d8ebc0c41854d0dadc343c0035424331241f79ad
+improved
+Show companion on Decks
+8066469dad9d5f5e7e19d75a3388450c0703c104
+fixed
+Reset overlays position
+c646deb7337b286237915d11b1c7628a55ce7d96
+fixed
+Action log players life
+5be773269869687b021561d2591f664ce561d169
+fixed
+Reset sub nav on back button
+aaefe6a91163cd913dbd5c178f9faffe51bfe98f
+
+version
+4.1.4
+May 4th, 2020
+improved
+Restore window on double tray click
+b5921b5187014979c811f899b6d7223102d67518
+improved
+Wanted cards visiblity
+108e16c5c84cd8042354394233cb4ee22c71b85b
+improved
+Use the saved game wins data
+dcc3580179ff6e99145b8380e8da249fc35b067c
+fixed
+Side panel fixes
+734387dc56849ee6f4c63a2b13803fb8459ee804
+
+version
 4.1.3
 May 2nd, 2020
 fixed
