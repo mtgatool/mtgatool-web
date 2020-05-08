@@ -34,7 +34,7 @@ class Colors {
    * inside an array.
    */
   get(): number[] {
-    const _arr = [];
+    const _arr: number[] = [];
     if (this.w !== 0) _arr.push(WHITE);
     if (this.u !== 0) _arr.push(BLUE);
     if (this.b !== 0) _arr.push(BLACK);

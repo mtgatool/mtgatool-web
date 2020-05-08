@@ -1,10 +1,10 @@
 {
   "name": "mtgatool-web",
   "version": "2.0.0",
-  "description": "Boilerplate for react and webpack",
+  "description": "Website for MTG Arena Tool",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --open",
+    "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "format": "prettier --write 'packages/**/*.js'",
     "test": "jest --watchAll --coverage"

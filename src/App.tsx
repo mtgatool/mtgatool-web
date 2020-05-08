@@ -30,8 +30,9 @@ import css from "./app.css";
 import keyArt from "./images/key-art.jpg";
 import notFoundArt from "./images/404.jpg";
 import { useWebDispatch, useWebContext } from "./web-provider";
+import { DbCardData } from "./types/Metadata";
 
-function App() {
+function App(): JSX.Element {
   const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
   const [imageUrl, setImageUrl] = React.useState(keyArt);
   const position = React.useRef(window);
@@ -39,28 +40,28 @@ function App() {
 
   const webDispatch = useWebDispatch();
 
-  const setScroll = (state: number) => {
+  const setScroll = (state: number): void => {
     webDispatch({ type: "setScroll", scroll: state });
   };
 
-  const handleScroll = () => {
+  const handleScroll = (): void => {
     //console.log("handleScroll", window.scrollY);
     setScroll(window.scrollY);
   };
 
   React.useLayoutEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return (): void => window.removeEventListener("scroll", handleScroll);
   }, [position]);
 
-  const setImage = (cardObj: any) => {
+  const setImage = (cardObj: DbCardData | string): void => {
     if (cardObj == keyArt) {
       setImageUrl(keyArt);
       setArtData("Bedevil by Seb Mckinnon");
     } else if (cardObj == notFoundArt) {
       setImageUrl(notFoundArt);
       setArtData("Totally Lost by David Palumbo");
-    } else {
+    } else if (cardObj && typeof cardObj !== "string") {
       setImageUrl("https://img.scryfall.com/cards" + cardObj.images.art_crop);
       setArtData(cardObj.name + " by " + cardObj.artist);
     }

@@ -118,5 +118,6 @@ export interface InternalMatch {
   opponent: InternalPlayer;
   archived?: boolean;
   set: string;
+  actionLog: string;
   type: "match";
 }

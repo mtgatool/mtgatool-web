@@ -73,7 +73,7 @@ class Deck {
         )
       );
     } else {
-      const loggedList = [];
+      const loggedList: CardObject[] = [];
       let lastObj: CardObject | undefined = undefined;
       for (const id of list) {
         if (lastObj === undefined || lastObj.id !== id) {

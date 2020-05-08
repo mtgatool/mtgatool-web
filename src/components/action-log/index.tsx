@@ -14,21 +14,23 @@ import {
   STATE_DOWNLOAD,
   STATE_ERROR
 } from "../../shared/constants";
+import { ExportViewProps } from "../../web-types/shared";
+import { InternalMatch } from "../../types/match";
 
-function ActionLogView(props) {
+function ActionLogView(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
-  const logMatch = useRouteMatch("/action-log/:logId");
-  const [matchToDraw, setMatchToDraw] = React.useState(null);
+  const logMatch = useRouteMatch<{logId: string}>("/action-log/:logId");
+  const [matchToDraw, setMatchToDraw] = React.useState<InternalMatch | null>(null);
   const webDispatch = useWebDispatch();
 
-  const setQueryState = state => {
+  const setQueryState = (state: number): void => {
     webDispatch({ type: "setQueryState", queryState: state });
   };
 
   const copyDeck = React.useCallback(() => {
     //console.log("Copy");
     //console.log(matchToDraw, str);
-    const str = new Deck(matchToDraw.playerDeck).getExportArena();
+    const str = new Deck(matchToDraw?.playerDeck).getExportArena();
     navigator.clipboard.writeText(str);
   }, [matchToDraw]);
 
@@ -37,17 +39,17 @@ function ActionLogView(props) {
       const URL = `https://mtgatool.com/api/get_action_log.php?id=${logMatch.params.logId}`;
       setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
+      xhr.onload = (): void => {
         if (xhr.status !== 200) {
           setQueryState(xhr.status);
         } else {
           try {
-            let matchData = JSON.parse(xhr.responseText);
+            const matchData = JSON.parse(xhr.responseText);
             //console.log(matchData);
             setMatchToDraw(matchData);
             try {
               const cardObj = db.card(matchData.playerDeck.deckTileId);
-              if (cardObj.images.art_crop) {
+              if (cardObj?.images.art_crop) {
                 setImage(cardObj);
               }
             } catch (e) {
@@ -60,7 +62,7 @@ function ActionLogView(props) {
           }
         }
       };
-      xhr.onreadystatechange = function() {
+      xhr.onreadystatechange = function(): void {
         if (xhr.readyState === 4) {
           setQueryState(STATE_IDLE);
         }
@@ -89,7 +91,7 @@ function ActionLogView(props) {
             <DeckList deck={matchToDraw.playerDeck} />
           </div>
           <div className={css["actionlog-div"]}>
-            <ActionLog logStr={matchToDraw.actionLog} />
+            <ActionLog logStr={matchToDraw?.actionLog} />
           </div>
         </div>
       ) : (
@@ -99,17 +101,28 @@ function ActionLogView(props) {
   );
 }
 
-function ActionLog(props) {
+interface ActionLogProps {
+  logStr: string;
+}
+
+interface LogLine {
+  seat: number;
+  time: string;
+  groups: RegExpMatchArray[];
+  strings: string[];
+}
+
+function ActionLog(props: ActionLogProps): JSX.Element {
   const { logStr } = props;
   const actionLog = logStr.split("\n");
 
-  const log_p = [css["log_p0"], css["log_p1"], css["log_p2"]];
+  const logP = [css.logP0, css.logP1, css.logP2];
 
-  const elements = [];
+  const elements: LogLine[] = [];
   for (let line = 1; line < actionLog.length - 1; line += 3) {
     const seat = ("" + actionLog[line]).trim();
     const time = actionLog[line + 1];
-    let str = actionLog[line + 2];
+    const str = actionLog[line + 2];
 
     const regex = new RegExp(
       /<log-(card|ability) id="(?<id>.*?)">.*?<\/log-(card|ability)>/,
@@ -118,8 +131,8 @@ function ActionLog(props) {
     const groups = [...str.matchAll(regex)];
     const list = str.replace(regex, "\n").split("\n");
 
-    const newObj = {
-      seat: seat,
+    const newObj: LogLine = {
+      seat: parseInt(seat),
       time: time,
       groups: groups,
       strings: list
@@ -132,7 +145,7 @@ function ActionLog(props) {
     <>
       {elements.map((line, i) => {
         return (
-          <div key={i} className={css["actionlog"] + " " + log_p[line.seat]}>
+          <div key={i} className={css["actionlog"] + " " + logP[line.seat]}>
             <div key={i + 1} className={css["actionlog_time"]}>
               {line.time}
             </div>
@@ -170,23 +183,32 @@ function ActionLog(props) {
   );
 }
 
-function LogText(props) {
-  const { children } = props;
-  return <div className={css["log-text"]}>{children}</div>;
+interface LogTextProps {
+  children: string;
 }
 
-function LogCard(props) {
+function LogText(props: LogTextProps): JSX.Element {
+  const { children } = props;
+  return <div className={"log-text"}>{children}</div>;
+}
+
+interface LogCardProps {
+  children: string;
+  grpId: number;
+}
+
+function LogCard(props: LogCardProps): JSX.Element {
   const { children, grpId } = props;
   const cardObj = db.card(grpId);
-  const cardName = cardObj.name;
+  const cardName = cardObj?.name;
 
-  const webDispatch = useWebDispatch(cardObj);
+  const webDispatch = useWebDispatch();
 
-  const setHoverCard = grpId => {
+  const setHoverCard = (grpId: number): void => {
     webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
   };
 
-  const setHoverOpacity = opacity => {
+  const setHoverOpacity = (opacity: number): void => {
     webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
   };
 
@@ -213,7 +235,12 @@ function LogCard(props) {
   );
 }
 
-function LogAbility(props) {
+interface LogAbilityProps {
+  children: string;
+  abId: number;
+}
+
+function LogAbility(props: LogAbilityProps): JSX.Element {
   const { children, abId } = props;
   const desc = db.ability(abId);
 

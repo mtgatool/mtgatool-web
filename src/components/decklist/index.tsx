@@ -7,6 +7,7 @@ import css from "./decklist.css";
 
 import CardTile from "../card-tile";
 import { InternalDeck } from "../../types/Deck";
+import { DbCardData } from "../../types/Metadata";
 
 /*
 function compareQuantity(a, b) {
@@ -27,7 +28,7 @@ function Separator(props: SeparatorProps): JSX.Element {
 
 function getDeckComponents(deck: InternalDeck): JSX.Element[] {
   //console.log(deck);
-  const components = [];
+  const components: JSX.Element[] = [];
   if (deck.commandZoneGRPIds && deck.commandZoneGRPIds.length > 0) {
     components.push(<Separator key="sep_commander">Commander</Separator>);
 
@@ -49,7 +50,7 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
     .map(card => ({ data: db.card(card.id), ...card }))
     .filter(card => card.data !== undefined)
     .groupBy(card => {
-      const type = cardType(card.data);
+      const type = cardType(card.data as DbCardData);
       switch (type) {
         case "Creature":
           return "Creatures";
