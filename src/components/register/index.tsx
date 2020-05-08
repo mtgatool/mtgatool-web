@@ -5,8 +5,9 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./register.css";
 import keyArt from "../../images/key-art.jpg";
+import { ExportViewProps } from "../../web-types/shared";
 
-function Register(props) {
+function Register(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
   const [errorMessage, setErrorMessage] = React.useState("");
   const [formData, setFormData] = React.useState({
@@ -16,9 +17,10 @@ function Register(props) {
     recaptcha: ""
   });
 
-  const recaptchaRef = React.createRef();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recaptchaRef = React.createRef<any>();
 
-  const doSubmit = () => {
+  const doSubmit = (): void => {
     const shasum = crypto.createHash("sha1");
     shasum.update(formData.pass);
     const passHash = shasum.digest("hex");
@@ -45,26 +47,26 @@ function Register(props) {
     );
   };
 
-  const handleEmailChange = event => {
+  const handleEmailChange = (event): void => {
     setFormData({ ...formData, email: event.target.value });
   };
 
-  const handlePassChange = event => {
+  const handlePassChange = (event): void => {
     setFormData({ ...formData, pass: event.target.value });
   };
 
-  const handlePasscChange = event => {
+  const handlePasscChange = (event): void => {
     setFormData({ ...formData, passc: event.target.value });
   };
 
-  const handleCaptchaChange = () => {
+  const handleCaptchaChange = (): void => {
     setFormData({
       ...formData,
-      recaptcha: recaptchaRef.current.getValue()
+      recaptcha: recaptchaRef?.current?.getValue()
     });
   };
 
-  const onSubmit = event => {
+  const onSubmit = (event): void => {
     // Submit the form
     if (formData.pass !== formData.passc) {
       setErrorMessage("Passwords dont match");
@@ -84,11 +86,11 @@ function Register(props) {
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <WrapperInner>
-        <div className={css["form-authenticate"]}>
-          <div className={css["form-icon"]} />
+        <div className={css.formAuthenticate}>
+          <div className={css.formIcon} />
           <form onSubmit={onSubmit} id="registerform" method="POST">
-            <label className={css["form-label"]}>Email</label>
-            <div className={css["form-input-container"]}>
+            <label className={css.formLabel}>Email</label>
+            <div className={css.formInputContainer}>
               <input
                 onChange={handleEmailChange}
                 type="email"
@@ -96,8 +98,8 @@ function Register(props) {
                 autoComplete="off"
               />
             </div>
-            <label className={css["form-label"]}>Password</label>
-            <div className={css["form-input-container"]}>
+            <label className={css.formLabel}>Password</label>
+            <div className={css.formInputContainer}>
               <input
                 onChange={handlePassChange}
                 type="password"
@@ -105,10 +107,10 @@ function Register(props) {
                 autoComplete="off"
               />
             </div>
-            <label className={css["form-label"]}>Confirm Password</label>
+            <label className={css.formLabel}>Confirm Password</label>
             <div
               style={{ paddingBottom: "20px" }}
-              className={css["form-input-container"]}
+              className={css.formInputContainer}
             >
               <input
                 onChange={handlePasscChange}
@@ -123,10 +125,10 @@ function Register(props) {
               sitekey="6LesQnQUAAAAABMfGoGiJRgWJLYlBJI6_6sSKaDL"
             />
             ,
-            <button className={css["form-button"]} type="submit" id="submit">
+            <button className={css.formButton} type="submit" id="submit">
               Register
             </button>
-            <div className={css["form-error"]}>{errorMessage}</div>
+            <div className={css.formError}>{errorMessage}</div>
           </form>
         </div>
       </WrapperInner>

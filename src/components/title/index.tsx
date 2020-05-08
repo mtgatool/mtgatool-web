@@ -3,13 +3,18 @@ import React from "react";
 // import { Link } from 'react-router-dom';
 import css from "./title.css";
 
-function TopTitle(props) {
+interface TopTitleProps {
+  subtitle?: string;
+  title: string;
+}
+
+function TopTitle(props: TopTitleProps): JSX.Element {
   const { subtitle, title } = props;
   return (
     <>
-      <div className={css["top-title-container"]}>{title}</div>
+      <div className={css.topTitleContainer}>{title}</div>
       {subtitle ? (
-        <div className={css["top-subtitle-container"]}>{subtitle}</div>
+        <div className={css.topSubtitleContainer}>{subtitle}</div>
       ) : (
         <></>
       )}

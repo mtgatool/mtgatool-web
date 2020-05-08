@@ -6,8 +6,9 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import regcss from "../register/register.css";
 import keyArt from "../../images/key-art.jpg";
+import { ExportViewProps } from "../../web-types/shared";
 
-function ResetPassword(props) {
+function ResetPassword(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
   const [errorMessage, setErrorMessage] = React.useState("");
   const [formData, setFormData] = React.useState({
@@ -16,16 +17,17 @@ function ResetPassword(props) {
     passc: "",
     recaptcha: ""
   });
-  const tokenMatch = useRouteMatch("/resetpassword/:token");
-  const recaptchaRef = React.createRef();
+  const tokenMatch = useRouteMatch<{token: string}>("/resetpassword/:token");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recaptchaRef = React.createRef<any>();
 
-  const checkMode = () => {
+  const checkMode = (): boolean => {
     return (
       !tokenMatch || tokenMatch.params == null || tokenMatch.params.token == ""
     );
   };
 
-  const doSubmit = () => {
+  const doSubmit = (): void => {
     const shasum = crypto.createHash("sha1");
     shasum.update(formData.pass);
     const passHash = shasum.digest("hex");
@@ -38,7 +40,7 @@ function ResetPassword(props) {
         if (!response.ok && response.error) {
           setErrorMessage(response.error);
         } else {
-          if (checkMode) {
+          if (checkMode()) {
             setErrorMessage("We sent you an email!");
           } else {
             setErrorMessage("Sucessfully changed your password!");
@@ -56,30 +58,30 @@ function ResetPassword(props) {
         `m=0&email=${formData.email}&g-recaptcha-response=${formData.recaptcha}`
       );
     } else {
-      xhr.send(`m=1&tk=${tokenMatch.params.token}&newpass=${passHash}`);
+      xhr.send(`m=1&tk=${tokenMatch?.params.token}&newpass=${passHash}`);
     }
   };
 
-  const handleEmailChange = event => {
+  const handleEmailChange = (event): void => {
     setFormData({ ...formData, email: event.target.value });
   };
 
-  const handlePassChange = event => {
+  const handlePassChange = (event): void => {
     setFormData({ ...formData, pass: event.target.value });
   };
 
-  const handlePasscChange = event => {
+  const handlePasscChange = (event): void => {
     setFormData({ ...formData, passc: event.target.value });
   };
 
-  const handleCaptchaChange = () => {
+  const handleCaptchaChange = (): void => {
     setFormData({
       ...formData,
-      recaptcha: recaptchaRef.current.getValue()
+      recaptcha: recaptchaRef?.current?.getValue()
     });
   };
 
-  const onSubmit = event => {
+  const onSubmit = (event): void => {
     // Submit the form
     const mode = checkMode();
     if (formData.pass !== formData.passc && !mode) {

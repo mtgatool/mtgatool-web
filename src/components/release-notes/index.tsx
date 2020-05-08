@@ -5,6 +5,7 @@ import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./releasenotes.css";
 import keyArt from "../../images/key-art.jpg";
 import Title from "../title";
+import { ExportViewProps } from "../../web-types/shared";
 
 const CHANGELOG =
   "https://raw.githubusercontent.com/mtgatool/mtgatool-web/master/src/components/release-notes/releasenotes.txt";
@@ -12,12 +13,21 @@ const CHANGELOG =
 const TYPE_RELEASE = 0;
 const TYPE_EVENT = 1;
 
-function ReleaseNotes(props) {
-  const { setImage } = props;
-  const [notes, setNotes] = React.useState([]);
-  const [parsedNotes, setParsedNotes] = React.useState([]);
+interface Note {
+  type: number;
+  event?: string;
+  desc?: string;
+  commit?: string;
+  version?: string;
+  date?: string;
+}
 
-  const getReleaseNotes = () => {
+function ReleaseNotes(props: ExportViewProps): JSX.Element {
+  const { setImage } = props;
+  const [notes, setNotes] = React.useState<string[]>([]);
+  const [parsedNotes, setParsedNotes] = React.useState<Note[]>([]);
+
+  const getReleaseNotes = (): void => {
     // const lines = textFile.split("\n");
     // console.log(lines, textFile);
     // setNotes(lines);
@@ -36,7 +46,7 @@ function ReleaseNotes(props) {
   }, []);
 
   React.useEffect(() => {
-    const newNotes = [];
+    const newNotes: Note[] = [];
     const lines = /(fixed|improved|removed|added)/g;
     notes.forEach((line, index) => {
       if (line.startsWith("version")) {
@@ -69,7 +79,7 @@ function ReleaseNotes(props) {
             let ret;
             if (line.type === TYPE_RELEASE) {
               ret = (
-                <Version key={index} version={line.version} date={line.date} />
+                <Version key={index} version={line.version || ""} date={line.date || ""} />
               );
             } else {
               ret = (
@@ -89,28 +99,33 @@ function ReleaseNotes(props) {
   );
 }
 
-function Version(props) {
+interface VersionProps {
+  version: string;
+  date: string;
+}
+
+function Version(props: VersionProps): JSX.Element {
   const { version, date } = props;
 
   return (
-    <div className={css["version-div"]}>
-      <div className={css["version-number"]}>{version}</div>
-      <div className={css["version-release"]}>{date}</div>
+    <div className={css.versionDiv}>
+      <div className={css.versionNumber}>{version}</div>
+      <div className={css.versionRelease}>{date}</div>
     </div>
   );
 }
 
-function Commit(props) {
+function Commit(props): JSX.Element {
   const { event, desc, commit } = props;
 
   return (
-    <div className={css["commit-div"]}>
-      <div className={css["commit-type"] + " type-" + event}>
+    <div className={css.commitDiv}>
+      <div className={css.commitType + " type-" + event}>
         {event.toUpperCase()}
       </div>
-      <div className={css["commit-desc"]}>{desc}</div>
+      <div className={css.commitDesc
+      }>{desc}</div>
       <a
-        className={css["commit-link"]}
         href={"https://github.com/Manuel-777/MTG-Arena-Tool/commit/" + commit}
       >
         {commit.substr(0, 6)}

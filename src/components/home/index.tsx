@@ -21,6 +21,7 @@ import homeCss from "./home.css";
 import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
 import { useWebContext } from "../../web-provider";
+import { ExportViewProps } from "../../web-types/shared";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -34,14 +35,14 @@ const FEATURE_B_TEXT = `Excellent for rare-drafting, or to review your collectio
 const FEATURE_C_TITLE = `Matches History`;
 const FEATURE_C_TEXT = `Get every detail from your play sessions. review old drafts, see the cards your opponent played and much more!`;
 
-function getCurrentOSName() {
+function getCurrentOSName(): string {
   const platform = window.navigator.platform;
   if (platform.indexOf("Mac") > 0) return "Mac";
   if (platform.indexOf("Linux") > 0) return "Linux";
   return "Windows";
 }
 
-function makeDownloadURL(versionTag) {
+function makeDownloadURL(versionTag: string): string {
   const platform = window.navigator.platform;
   let extension = "exe";
   if (platform.indexOf("Mac") > 0) extension = "pkg";
@@ -52,7 +53,7 @@ function makeDownloadURL(versionTag) {
   )}.${extension}`;
 }
 
-function Home(props) {
+function Home(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
   React.useEffect(() => {
     setImage(keyArt);
@@ -63,19 +64,19 @@ function Home(props) {
     <>
       <WrapperOuter>
         <WrapperInner>
-          <div className={css["home-desc"]}>
+          <div className={css.homeDesc}>
             <div
-              className={`${sharedcss["text-description"]} ${sharedcss["text-light"]}`}
+              className={`${sharedcss.textDescription} ${sharedcss.textLight}`}
             >
               {DESCRIPTION_TEXT}
             </div>
             <a
-              className={css["download-button"]}
+              className={css.downloadButton}
               href={makeDownloadURL(webContext.versionTag)}
             >
               Download for {getCurrentOSName()}
             </a>
-            <div className={css["home-desc-small"]}>
+            <div className={css.homeDescSmall}>
               <i>* No account required</i>
             </div>
           </div>
@@ -87,20 +88,20 @@ function Home(props) {
 
       <WrapperOuterLight>
         <WrapperInner>
-          <div className={homeCss["cont-margin"]}>
-            <div className={homeCss["showcase-container"]}>
-              <div className={homeCss["showcase-desc"]}>
-                <div className={homeCss["showcase-title-right"]}>
+          <div className={homeCss.contMargin}>
+            <div className={homeCss.showcaseContainer}>
+              <div className={homeCss.showcaseDesc}>
+                <div className={homeCss.showcaseTitleRight}>
                   {FEATURE_A_TITLE}
                 </div>
-                <div className={homeCss["showcase-description-right"]}>
+                <div className={homeCss.showcaseDescriptionRight}>
                   {FEATURE_A_TEXT_A}
                 </div>
-                <div className={homeCss["showcase-description-right"]}>
+                <div className={homeCss.showcaseDescriptionRight}>
                   {FEATURE_A_TEXT_B}
                 </div>
               </div>
-              <div className={homeCss["showcase-desc"]}>
+              <div className={homeCss.showcaseDesc}>
                 <ShowcaseOverlay />
               </div>
             </div>
@@ -109,16 +110,16 @@ function Home(props) {
       </WrapperOuterLight>
 
       <WrapperOuter>
-        <div className={homeCss["cont-margin"]}>
-          <div className={homeCss["showcase-container"]}>
-            <div className={homeCss["showcase-desc"]}>
+        <div className={homeCss.contMargin}>
+          <div className={homeCss.showcaseContainer}>
+            <div className={homeCss.showcaseDesc}>
               <ShowcaseImage align="right" image={showCollection} />
             </div>
-            <div className={homeCss["showcase-desc"]}>
-              <div className={homeCss["showcase-title-left"]}>
+            <div className={homeCss.showcaseDesc}>
+              <div className={homeCss.showcaseTitleLeft}>
                 {FEATURE_B_TITLE}
               </div>
-              <div className={homeCss["showcase-description-left"]}>
+              <div className={homeCss.showcaseDescriptionLeft}>
                 {FEATURE_B_TEXT}
               </div>
             </div>
@@ -127,17 +128,17 @@ function Home(props) {
       </WrapperOuter>
 
       <WrapperOuterLight>
-        <div className={homeCss["cont-margin"]}>
-          <div className={homeCss["showcase-container"]}>
-            <div className={homeCss["showcase-desc"]}>
-              <div className={homeCss["showcase-title-right"]}>
+        <div className={homeCss.contMargin}>
+          <div className={homeCss.showcaseContainer}>
+            <div className={homeCss.showcaseDesc}>
+              <div className={homeCss.showcaseTitleLeft}>
                 {FEATURE_C_TITLE}
               </div>
-              <div className={homeCss["showcase-description-right"]}>
+              <div className={homeCss.showcaseDescriptionRight}>
                 {FEATURE_C_TEXT}
               </div>
             </div>
-            <div className={homeCss["showcase-desc"]}>
+            <div className={homeCss.showcaseDesc}>
               <ShowcaseImage align="left" image={showHistory} />
             </div>
           </div>
@@ -145,11 +146,11 @@ function Home(props) {
       </WrapperOuterLight>
 
       <WrapperOuter>
-        <div className={homeCss["cont-margin"]}>
-          <div className={homeCss["showcase-download-container"]}>
+        <div className={homeCss.contMargin}>
+          <div className={homeCss.showcaseDownloadContainer}>
             <a
               style={{ margin: "auto 0px" }}
-              className={css["download-button"]}
+              className={css.downloadButton}
               href={makeDownloadURL(webContext.versionTag)}
             >
               Download for {getCurrentOSName()}
@@ -161,13 +162,13 @@ function Home(props) {
   );
 }
 
-function ShowcaseImage(props) {
+function ShowcaseImage(props): JSX.Element {
   const { image, align } = props;
-  const imageRef = React.useRef(null);
+  const imageRef = React.useRef<HTMLImageElement>(null);
   const webContext = useWebContext();
 
-  const getStyle = ctx => {
-    let offset = imageRef.current
+  const getStyle = (ctx): React.CSSProperties => {
+    const offset = imageRef.current
       ? imageRef.current.offsetTop - ctx.scroll
       : -999;
     return {
@@ -182,15 +183,15 @@ function ShowcaseImage(props) {
       <div
         ref={imageRef}
         style={getStyle(webContext)}
-        className={homeCss["showcase-image"]}
+        className={homeCss.showcaseImage}
       />
     </>
   );
 }
 
-function ShowcaseOverlay() {
+function ShowcaseOverlay(): JSX.Element {
   //const back = Math.round(ctx.webContext.scroll / 30) % showCase.length;
-  const back = useMemo(() => Math.floor(Math.random() * showCase.length));
+  const back = useMemo(() => Math.floor(Math.random() * showCase.length), []);
 
   const getStyle = useCallback(() => {
     return {
@@ -200,7 +201,7 @@ function ShowcaseOverlay() {
 
   return (
     <>
-      <div style={getStyle()} className={homeCss["showcase-overlay-cont"]} />
+      <div style={getStyle()} className={homeCss.showcaseOverlayCont} />
     </>
   );
 }

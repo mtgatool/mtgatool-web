@@ -7,10 +7,10 @@ import {
   STATE_ERROR
 } from "../../shared/constants";
 
-function Loading() {
+function Loading(): JSX.Element {
   const webContext = useWebContext();
 
-  const loadingStyle = ctx => {
+  const loadingStyle = (ctx): React.CSSProperties => {
     if (ctx.queryState == STATE_DOWNLOAD) {
       return {
         display: "block"
@@ -27,10 +27,11 @@ function Loading() {
         display: "none"
       };
     }
+    return {};
   };
 
   return (
-    <div style={loadingStyle(webContext)} className={css["loading-div"]}></div>
+    <div style={loadingStyle(webContext)} className={css.loadingDiv}></div>
   );
 }
 
