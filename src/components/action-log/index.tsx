@@ -116,7 +116,7 @@ function ActionLog(props: ActionLogProps): JSX.Element {
   const { logStr } = props;
   const actionLog = logStr.split("\n");
 
-  const logP = [css.logP0, css.logP1, css.logP2];
+  const logP = [css.logPlayer0, css.logPlayer1, css.logPlayer2];
 
   const elements: LogLine[] = [];
   for (let line = 1; line < actionLog.length - 1; line += 3) {
@@ -125,7 +125,7 @@ function ActionLog(props: ActionLogProps): JSX.Element {
     const str = actionLog[line + 2];
 
     const regex = new RegExp(
-      /<log-(card|ability) id="(?<id>.*?)">.*?<\/log-(card|ability)>/,
+      /<log-(card|ability) id="(.*?)">.*?<\/log-(card|ability)>/,
       "g"
     );
     const groups = [...str.matchAll(regex)];

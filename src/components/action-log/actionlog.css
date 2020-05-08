@@ -46,15 +46,15 @@
   background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
 }
 
-.log_p0 {
+.log_player0 {
   color: rgba(200, 255, 200, 1);
 }
 
-.log_p1 {
+.log_player1 {
   color: rgba(255, 200, 200, 1);
 }
 
-.log_p2 {
+.log_player2 {
   color: rgba(200, 200, 255, 1);
 }
 
