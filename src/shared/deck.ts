@@ -101,6 +101,7 @@ class Deck {
    * Sort the mainboard of this deck.
    * @param func sort function.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sortMainboard(func: any): void {
     this.mainboard.get().sort(func);
   }
@@ -109,6 +110,7 @@ class Deck {
    * Sort the sideboard of this deck.
    * @param func sort function.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sortSideboard(func: any): void {
     this.sideboard.get().sort(func);
   }

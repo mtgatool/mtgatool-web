@@ -1,6 +1,6 @@
 import db from "./database";
 
-export function getCardTypeSort(a) {
+export function getCardTypeSort(a: string): number {
   if (a == undefined) return 0;
   if (a.includes("Creature", 0)) return 1;
   if (a.includes("Planeswalker", 0)) return 2;
@@ -13,16 +13,16 @@ export function getCardTypeSort(a) {
   return 0;
 }
 
-export function compareCards(a, b) {
+export function compareCards(aId: number, bId: number): number {
   // Yeah this is lazy.. I know
-  a = db.card(a.id);
-  b = db.card(b.id);
+  const a = db.card(aId);
+  const b = db.card(bId);
 
   if (!a) return 1;
   if (!b) return -1;
 
-  var _as = getCardTypeSort(a.type);
-  var _bs = getCardTypeSort(b.type);
+  const _as = getCardTypeSort(a.type);
+  const _bs = getCardTypeSort(b.type);
 
   // Order by type?
   if (_as < _bs) {
@@ -51,19 +51,20 @@ export function compareCards(a, b) {
   return 0;
 }
 
-export function getSetCode(set) {
+export function getSetCode(set: string): string {
   if (set == undefined) return "";
   let s = db.sets[set].code;
   if (s == undefined) s = set;
   return s;
 }
 
-export function objectClone(originalObject) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function objectClone(originalObject: any): any {
   return JSON.parse(JSON.stringify(originalObject));
 }
 
-export function getRankIndex(_rank, _tier) {
-  var ii = 0;
+export function getRankIndex(_rank: string, _tier: number): number {
+  let ii = 0;
   if (_rank == "Unranked") ii = 0;
   if (_rank == "Bronze") ii = 1 + (_tier - 1); //1 2 3 4
   if (_rank == "Silver") ii = 5 + (_tier - 1); //5 6 7 8
@@ -74,6 +75,6 @@ export function getRankIndex(_rank, _tier) {
   return ii;
 }
 
-export function utf8Decode(str) {
+export function utf8Decode(str: string): string {
   return decodeURIComponent(escape(str));
 }

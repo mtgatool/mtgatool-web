@@ -121,6 +121,7 @@ class CardsList {
   /**
    * Same as count(), but here we can apply a filter function to the list.
    **/
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   countFilter(prop = "quantity", func: any): number {
     return _(this.list)
       .filter(func)
