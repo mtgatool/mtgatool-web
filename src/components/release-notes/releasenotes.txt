@@ -1,4 +1,14 @@
 version
+4.2.1
+May 9th, 2020
+improved
+Decks art view
+d028296de1720157801ded350a498964c36bc133
+improved
+Explore "Click to search"
+210165b6e997f66671969d6099f658451ae416dc
+
+version
 4.2.0
 May 8th, 2020
 added
