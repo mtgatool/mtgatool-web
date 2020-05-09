@@ -36,42 +36,30 @@
   width: fit-content;
 }
 
-.archetype-tile {
-  background-size: cover;
-  background-position: center 0;
-  margin-bottom: 10px;
-  width: calc(100% - 10px);
-  height: 80px;
-  margin: 5px;
-}
-
-.archetype-name {
-  
+.archetype-info {
+  height: 50%;
+  background-color: rgba(25, 20, 15, 0.95);
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .archetype-div {
   border-radius: 4px;
-  /* box-shadow: rgba(0, 0, 0, 0.25) 0 6px 8px 0px; */
   cursor: pointer;
   color: white;
   background-color: rgba(0, 0, 0, 0.7);
   margin: 8px;
   font-size: 14px;
   line-height: 16px;
-  /* max-width: 200px; */
-  width: -webkit-fill-available;
   align-items: center;
-  /* height: -webkit-fill-available;
-  height: -moz-available; */
-  flex-direction: column;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  -webkit-transition: all 0.15s cubic-bezier(0.2, 0.5, 0.35, 1);
-  transition: all 0.15s cubic-bezier(0.2, 0.5, 0.35, 1);
-  padding-bottom: 16px;
-}
-
-.archetype-div:hover {
-  background-color: rgba(40, 40, 40, 0.8);
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
 }
 
 .archetype-selector {

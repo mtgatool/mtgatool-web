@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import {useRouteMatch, useLocation, Link, match} from "react-router-dom";
 import css from "./metagame.css";
 import topNavCss from "../topnav/topnav.css";
@@ -17,6 +17,7 @@ import {useWebDispatch} from "../../web-provider";
 import {STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR} from "../../shared/constants";
 import {ExportViewProps, ServerDeck} from "../../web-types/shared";
 import {InternalDeck} from "../../types/Deck";
+import {animated, useSpring} from "react-spring";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -119,6 +120,12 @@ interface ArchetypeTileProps {
 function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
   const {arch, id} = props;
   const cardObj = db.card(arch.tile);
+  const [hover, setHover] = useState(0);
+  const spring = useSpring({
+    backgroundSize: "auto " + Math.round(hover ? 220 : 185) + "px",
+    config: { mass: 5, tension: 2000, friction: 150 }
+  });
+
   const cardImage = cardObj
     ? `https://img.scryfall.com/cards${cardObj.images.art_crop}`
     : "https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/thumb/c/c4/Fblthp.jpg/250px-Fblthp.jpg";
@@ -126,9 +133,19 @@ function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
     backgroundImage: `url(${cardImage})`,
   };
 
+  const mouseEnter = React.useCallback(() => {
+    setHover(1);
+  }, []);
+
+  const mouseLeave = React.useCallback(() => {
+    setHover(0);
+  }, []);
+
   const winrate = (arch.win / arch.total) * 100;
   return (
     <Link
+      onMouseEnter={mouseEnter}
+      onMouseLeave={mouseLeave}
       to={
         "/metagame/" +
         id.split(".")[1] +
@@ -138,17 +155,18 @@ function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
         arch.name
       }
     >
-      <div className={css["archetype-div"]}>
-        <div className={css["archetype-tile"]} style={tileStyle}></div>
-        <div className={css["archetype-name"]}>{arch.name}</div>
-        <div className={css["archetype-colors"]}>
-          <ManaCost colors={arch.colors} />
+      <animated.div className={css["archetype-div"]} style={{...spring, ...tileStyle}}>
+        <div className={css["archetype-info"]}>
+          <div className={css["archetype-name"]}>{arch.name}</div>
+          <div className={css["archetype-colors"]}>
+            <ManaCost colors={arch.colors} />
+          </div>
+          <div className={css["archetype-desc"]}>
+            {arch.share + "% - " + winrate.toFixed(2) + "% winrate"}
+          </div>
+          <div className={css["archetype-desc"]}>{arch.total + " matches"}</div>
         </div>
-        <div className={css["archetype-desc"]}>
-          {arch.share + "% - " + winrate.toFixed(2) + "% winrate"}
-        </div>
-        <div className={css["archetype-desc"]}>{arch.total + " matches"}</div>
-      </div>
+      </animated.div>
     </Link>
   );
 }

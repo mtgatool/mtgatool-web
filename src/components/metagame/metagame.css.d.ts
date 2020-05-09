@@ -5,15 +5,15 @@ declare namespace MetagameCssModule {
     "archetype-decks-list-div": string;
     "archetype-desc": string;
     "archetype-div": string;
+    "archetype-info": string;
     "archetype-selector": string;
-    "archetype-tile": string;
     archetypeColors: string;
     archetypeDecksDiv: string;
     archetypeDecksListDiv: string;
     archetypeDesc: string;
     archetypeDiv: string;
+    archetypeInfo: string;
     archetypeSelector: string;
-    archetypeTile: string;
     "button-simple": string;
     buttonSimple: string;
     "deck-container": string;
