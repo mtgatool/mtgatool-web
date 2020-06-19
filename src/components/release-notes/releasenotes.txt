@@ -1,4 +1,127 @@
 version
+5.0.6
+June 18th, 2020
+added
+Human drafts support
+610c0355be83631fd040ea986e2365089510bd17
+added
+Auto resize overlays
+f8cd63a55f5e99389be34a80f3529d4c85a33f48
+added
+Post-match briefing overlay
+f8cd63a55f5e99389be34a80f3529d4c85a33f48
+fixed
+Restore match log overlay scroll
+b0e05075fb0483f608c4f2c1c0fdfe84a286c6fc
+fixed
+Fix unknown internal event name (#1118)
+acbecebe7ae37b4fc7b08801c633c8c23cd52fda
+fixed
+Mutate cards tracking
+bbb531ecf619a18743fb6895d332f2277b98ef46
+fixed
+Filter timelines without matches data
+b79f253f56388f14edb586de5684b1764c5f11fb
+fixed
+Log decoder labels
+7483e0f14f61750328db7e65985341b95efad72a
+fixed
+Overlay scaling
+3eca573e2f9947010893ceac0d3fb179412d530b
+fixed
+Re-push match data that was lost on the server (#1106)
+73390d154d32c0c3162daf9946f0d1754a2ad459
+fixed
+Date type and format
+2f6f9f566317cb15b62af7eb1d83a6dc63b85d18
+improved
+Webpack
+f8cd63a55f5e99389be34a80f3529d4c85a33f48
+improved
+Tests for bounds
+eac8866999c97e53f11f80d80f2d6d72ee7a209a
+
+version
+4.2.11
+May 28th, 2020
+fixed
+Decks aggregator error
+b52a11feb37a036622fbb89ae0e58d64f683ff70
+fixed
+WAR Rankings
+dc01eb7a9d8df4c34674d13af76d3f700c50552f
+
+version
+4.2.10
+May 24th, 2020
+fixed
+Inverted toggle skip firstpass
+b5ac5ac75283f81f4bd9b87795d7e2a0c8c26711
+fixed
+Fix missing pip on first card (#1089)
+95af90a7784add53b6599157dd269c47a0f0f344
+fixed
+collection cards quantity spacing
+735b46eb57e1e123e5faaec4f1460ffa60420589
+
+version
+4.2.7
+May 21st, 2020
+fixed
+fix Match Created arrow
+234646b5a4a431a267759f7da23701f74c581c4d
+fixed
+New log path (#1079)
+9317366c04560e9fd2cb8afd4e9fa763f476f305
+fixed
+Fix On the Play text: it was always Draw for g1 (#1080)
+252c33c3cce9bd33d7fd94106f1c79d56bcea552
+fixed
+Fix language in Action log start of turn message (#1074)
+4460ed21748e0741b7a8dfc864252d87c561e718
+
+version
+4.2.6
+May 16th, 2020
+fixed
+Cards ineconomy not updating
+36d290c855b9c40159ae3852b6ddc552411f85a1
+fixed
+transitions
+03c207500d7e15ddb716cce91974d6718670d715
+improved
+Remove deprecated toggles
+e38adfe4b55286ac2be6a4754656eebd627a25e3
+improved
+globals tests
+559e5bfb137927b2bbd35cb9097be04c267ab8ae
+
+version
+4.2.2
+May 12th, 2020
+added
+Cards Winrates
+3371e7f684906e2848688ce06cf4b9c17bf63981
+added
+Mulligan stats
+cd08bb60451d3fbcf6b6e166d75fc8da2aaf41d5
+fixed
+Aggregator and winrates fixes
+c8348662f22844423eed5be63c459827bd20e22c
+fixed
+Decks art view archive button
+77c51d9cc16a349779c0c305469e7c0f64f2caef
+fixed
+Remove ZoneType_ in action logs
+0a5988f728949b8d10bbcc6aadc4a9adda72b438
+improved
+Unify action log on overlay
+d443804eceee22f3323698125486c1bac4521da7
+improved
+Show decks versions
+ffc1167a377f64cdf639366539d2b49354fcfd19
+
+version
 4.2.1
 May 9th, 2020
 improved
