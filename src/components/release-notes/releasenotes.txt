@@ -1,4 +1,20 @@
 version
+5.0.9
+June 23rd, 2020
+fixed
+Linux builds
+b67a8cb4929ae5e11a57abcf7ccf6a7b6ce590d6
+fixed
+Cube draft rares and mythics
+8a3d873ee4468e8fe05c7a74888e834b7972bef5
+fixed
+Handle saved data with invalid date format (#1123)
+51688284fe9bf8cc169f2b75d6c1903678a46e4d
+improved
+Use electron log (#1124)
+141f60c80ae9a8ab82311028e3e58be2b3ca9a9b
+
+version
 5.0.6
 June 18th, 2020
 added
