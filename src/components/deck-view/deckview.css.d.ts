@@ -1,13 +1,13 @@
-declare namespace DeckviewCssModule {
+declare namespace DeckviewCssNamespace {
   export interface IDeckviewCss {
-    "deckview-div": string;
+    'deckview-div': string;
     deckviewDiv: string;
   }
 }
 
-declare const DeckviewCssModule: DeckviewCssModule.IDeckviewCss & {
+declare const DeckviewCssModule: DeckviewCssNamespace.IDeckviewCss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: DeckviewCssModule.IDeckviewCss;
+  locals: DeckviewCssNamespace.IDeckviewCss;
 };
 
 export = DeckviewCssModule;

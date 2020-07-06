@@ -1,4 +1,4 @@
-declare namespace CardtileCssModule {
+declare namespace CardtileCssNamespace {
   export interface ICardtileCss {
     cardTileContainerFlat: string;
     cardTileCropFlat: string;
@@ -16,7 +16,7 @@ declare namespace CardtileCssModule {
     card_tile_quantity_flat: string;
     cartTileManaFlat: string;
     cart_tile_mana_flat: string;
-    "mana-s16": string;
+    'mana-s16': string;
     mana0: string;
     mana1: string;
     mana10: string;
@@ -114,9 +114,9 @@ declare namespace CardtileCssModule {
   }
 }
 
-declare const CardtileCssModule: CardtileCssModule.ICardtileCss & {
+declare const CardtileCssModule: CardtileCssNamespace.ICardtileCss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: CardtileCssModule.ICardtileCss;
+  locals: CardtileCssNamespace.ICardtileCss;
 };
 
 export = CardtileCssModule;

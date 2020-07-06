@@ -1,11 +1,11 @@
-declare namespace RegisterCssModule {
+declare namespace RegisterCssNamespace {
   export interface IRegisterCss {
-    "form-authenticate": string;
-    "form-button": string;
-    "form-error": string;
-    "form-icon": string;
-    "form-input-container": string;
-    "form-label": string;
+    'form-authenticate': string;
+    'form-button': string;
+    'form-error': string;
+    'form-icon': string;
+    'form-input-container': string;
+    'form-label': string;
     formAuthenticate: string;
     formButton: string;
     formError: string;
@@ -15,9 +15,9 @@ declare namespace RegisterCssModule {
   }
 }
 
-declare const RegisterCssModule: RegisterCssModule.IRegisterCss & {
+declare const RegisterCssModule: RegisterCssNamespace.IRegisterCss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: RegisterCssModule.IRegisterCss;
+  locals: RegisterCssNamespace.IRegisterCss;
 };
 
 export = RegisterCssModule;

@@ -1,4 +1,4 @@
-declare namespace SliderCssModule {
+declare namespace SliderCssNamespace {
   export interface ISliderCss {
     slidecontainer: string;
     slider: string;
@@ -13,9 +13,9 @@ declare namespace SliderCssModule {
   }
 }
 
-declare const SliderCssModule: SliderCssModule.ISliderCss & {
+declare const SliderCssModule: SliderCssNamespace.ISliderCss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: SliderCssModule.ISliderCss;
+  locals: SliderCssNamespace.ISliderCss;
 };
 
 export = SliderCssModule;

@@ -21,6 +21,7 @@
 .wrapper-inner {
   margin: auto;
   flex-grow: 2;
+  width: 100%;
   display: contents;
 }
 

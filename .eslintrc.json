@@ -26,6 +26,7 @@
     "no-undef": "error",
     "no-global-assign": "warn",
     "no-empty": "warn",
+    "@typescript-eslint/interface-name-prefix": 0,
     "complexity": [
       "warn",
       40

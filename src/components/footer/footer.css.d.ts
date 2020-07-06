@@ -1,11 +1,11 @@
-declare namespace FooterCssModule {
+declare namespace FooterCssNamespace {
   export interface IFooterCss {
-    "footer-column": string;
-    "footer-column-title": string;
-    "footer-logo": string;
-    "footer-main": string;
-    "footer-text": string;
-    "footer-wrapper": string;
+    'footer-column': string;
+    'footer-column-title': string;
+    'footer-logo': string;
+    'footer-main': string;
+    'footer-text': string;
+    'footer-wrapper': string;
     footerColumn: string;
     footerColumnTitle: string;
     footerLogo: string;
@@ -15,9 +15,9 @@ declare namespace FooterCssModule {
   }
 }
 
-declare const FooterCssModule: FooterCssModule.IFooterCss & {
+declare const FooterCssModule: FooterCssNamespace.IFooterCss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: FooterCssModule.IFooterCss;
+  locals: FooterCssNamespace.IFooterCss;
 };
 
 export = FooterCssModule;
