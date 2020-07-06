@@ -36,7 +36,9 @@ function add(a: number, b: number): number {
   return a + b;
 }
 
-export default function DeckManaCurve(props: { deck: InternalDeck }): JSX.Element {
+export default function DeckManaCurve(props: {
+  deck: InternalDeck;
+}): JSX.Element {
   const { deck } = props;
   const manaCounts = getDeckCurve(deck);
   const curveMax = Math.max(

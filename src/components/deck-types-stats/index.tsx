@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 
-import {CARD_TYPES, CARD_TYPE_CODES} from "../../shared/constants";
+import { CARD_TYPES, CARD_TYPE_CODES } from "../../shared/constants";
 import db from "../../shared/database";
 import css from "./decktypesstats.css";
 import Deck from "../../shared/deck";
@@ -24,7 +24,7 @@ function getDeckTypesAmount(deck: Deck): DeckTypes {
     ins: 0,
     lan: 0,
     pla: 0,
-    sor: 0,
+    sor: 0
   };
   if (!deck.getMainboard().get()) return types;
 
@@ -47,8 +47,8 @@ function getDeckTypesAmount(deck: Deck): DeckTypes {
   return types;
 }
 
-export default function DeckTypesStats(props: {deck: Deck}): JSX.Element {
-  const {deck} = props;
+export default function DeckTypesStats(props: { deck: Deck }): JSX.Element {
+  const { deck } = props;
   const cardTypes = getDeckTypesAmount(deck);
   return (
     <div className={css["types-container"]}>

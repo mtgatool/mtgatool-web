@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 
-import {WILDCARD_RARITIES} from "../../shared/constants";
+import { WILDCARD_RARITIES } from "../../shared/constants";
 import db from "../../shared/database";
 import css from "./deckwildcards.css";
 import Deck from "../../shared/deck";
@@ -14,10 +14,10 @@ function getDeckWildcards(
   rare: number;
   mythic: number;
 } {
-  const rarities = {common: 0, uncommon: 0, rare: 0, mythic: 0};
+  const rarities = { common: 0, uncommon: 0, rare: 0, mythic: 0 };
   const deckCards = [
     ...deck.getMainboard().get(),
-    ...deck.getSideboard().get(),
+    ...deck.getSideboard().get()
   ];
 
   deckCards.forEach(function(card) {
@@ -37,13 +37,13 @@ interface DeckWildcardsProps {
 }
 
 export default function DeckWildcards(props: DeckWildcardsProps): JSX.Element {
-  const {deck} = props;
+  const { deck } = props;
 
   const wildcards = getDeckWildcards(deck);
 
   return (
     <div className={css.wildcardsCost}>
-      {WILDCARD_RARITIES.map((rarity) => {
+      {WILDCARD_RARITIES.map(rarity => {
         return (
           <div
             className={css.wildcardIconCont}

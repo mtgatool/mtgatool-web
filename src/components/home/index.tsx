@@ -1,27 +1,27 @@
 /* eslint-disable react/prop-types */
-import React, { useMemo, useCallback } from 'react';
-import sharedcss from '../../shared.css';
+import React, { useMemo, useCallback } from "react";
+import sharedcss from "../../shared.css";
 
-import keyArt from '../../images/key-art.jpg';
+import keyArt from "../../images/key-art.jpg";
 
-import show00 from '../../images/showcase/00.png';
-import show01 from '../../images/showcase/01.png';
-import show02 from '../../images/showcase/02.png';
-import show03 from '../../images/showcase/03.png';
-import show04 from '../../images/showcase/04.png';
+import show00 from "../../images/showcase/00.png";
+import show01 from "../../images/showcase/01.png";
+import show02 from "../../images/showcase/02.png";
+import show03 from "../../images/showcase/03.png";
+import show04 from "../../images/showcase/04.png";
 
 const showCase = [show00, show01, show02, show03, show04];
 
-import showHistory from '../../images/showcase/history.png';
-import showCollection from '../../images/showcase/collection.png';
+import showHistory from "../../images/showcase/history.png";
+import showCollection from "../../images/showcase/collection.png";
 
-import css from '../../app.css';
-import homeCss from './home.css';
+import css from "../../app.css";
+import homeCss from "./home.css";
 
-import MatchFeed from '../match-feed';
-import { WrapperInner, WrapperOuter, WrapperOuterLight } from '../wrapper';
-import { useWebContext } from '../../web-provider';
-import { ExportViewProps } from '../../web-types/shared';
+import MatchFeed from "../match-feed";
+import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
+import { useWebContext } from "../../web-provider";
+import { ExportViewProps } from "../../web-types/shared";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -37,16 +37,16 @@ const FEATURE_C_TEXT = `Get every detail from your play sessions. review old dra
 
 function getCurrentOSName(): string {
   const platform = window.navigator.platform;
-  if (platform.indexOf('Mac') > -1) return 'Mac';
-  if (platform.indexOf('Linux') > -1) return 'Linux';
-  return 'Windows';
+  if (platform.indexOf("Mac") > -1) return "Mac";
+  if (platform.indexOf("Linux") > -1) return "Linux";
+  return "Windows";
 }
 
 function makeDownloadURL(versionTag: string): string {
   const platform = window.navigator.platform;
-  let extension = 'exe';
-  if (platform.indexOf('Mac') > -1) extension = 'pkg';
-  if (platform.indexOf('Linux') > -1) extension = 'AppImage';
+  let extension = "exe";
+  if (platform.indexOf("Mac") > -1) extension = "pkg";
+  if (platform.indexOf("Linux") > -1) extension = "AppImage";
 
   return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/${versionTag}/MTG-Arena-Tool-${versionTag.slice(
     1
@@ -82,7 +82,7 @@ function Home(props: ExportViewProps): JSX.Element {
           </div>
         </WrapperInner>
       </WrapperOuter>
-      <WrapperOuter style={{ paddingBottom: '64px' }}>
+      <WrapperOuter style={{ paddingBottom: "64px" }}>
         <MatchFeed />
       </WrapperOuter>
 
@@ -145,7 +145,7 @@ function Home(props: ExportViewProps): JSX.Element {
         <div className={homeCss.contMargin}>
           <div className={homeCss.showcaseDownloadContainer}>
             <a
-              style={{ margin: 'auto 0px' }}
+              style={{ margin: "auto 0px" }}
               className={css.downloadButton}
               href={makeDownloadURL(webContext.versionTag)}
             >
@@ -169,7 +169,7 @@ function ShowcaseImage(props): JSX.Element {
       : -999;
     return {
       backgroundImage: `url(${image})`,
-      alignSelf: align == 'left' ? 'flex-start' : 'flex-end',
+      alignSelf: align == "left" ? "flex-start" : "flex-end",
       transform: `translateY(${offset / 2}px)`
     };
   };

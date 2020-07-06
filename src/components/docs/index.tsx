@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, {useState, useRef, useEffect} from "react";
-import {useRouteMatch, useLocation, Link} from "react-router-dom";
-import {WrapperOuter} from "../wrapper";
+import React, { useState, useRef, useEffect } from "react";
+import { useRouteMatch, useLocation, Link } from "react-router-dom";
+import { WrapperOuter } from "../wrapper";
 import css from "./docs.css";
 import keyArt from "../../images/key-art.jpg";
 
@@ -23,7 +23,7 @@ import filterBoosters from "../../images/docs/collection-filter-boosters.png";
 import viewSets from "../../images/docs/collection-view-sets.png";
 
 import ReactMarkdown from "react-markdown";
-import {ExportViewProps} from "../../web-types/shared";
+import { ExportViewProps } from "../../web-types/shared";
 
 const resources = {
   introduction: introduction,
@@ -32,7 +32,7 @@ const resources = {
   privacy: privacy,
   decks: decks,
   collection: collection,
-  overlays: overlays,
+  overlays: overlays
 };
 
 const scrollToRef = (ref): void => window.scrollTo(0, ref.current.offsetTop);
@@ -54,13 +54,13 @@ const imageTransform = (img): string => {
   }
 };
 
-function Heading({children, ...props}): JSX.Element {
-  const {level} = props;
+function Heading({ children, ...props }): JSX.Element {
+  const { level } = props;
   return React.createElement("h" + level, props, children);
 }
 
 const HeadRenderer = (props): JSX.Element => {
-  const {nodeKey, children, level} = props;
+  const { nodeKey, children, level } = props;
   const linkRef = useRef(null);
   const id = children[0].props.value.replace(/\s+/g, "-").toLowerCase();
   const [op, setOp] = useState(0);
@@ -88,7 +88,7 @@ const HeadRenderer = (props): JSX.Element => {
         <a id={id} href={`#${id}`}>
           <div
             className={css["anchor-link"] + " " + css["anchor-h" + level]}
-            style={{opacity: op}}
+            style={{ opacity: op }}
           ></div>
         </a>
       </Heading>
@@ -97,9 +97,9 @@ const HeadRenderer = (props): JSX.Element => {
 };
 
 export default function Docs(props: ExportViewProps): JSX.Element {
-  const {setImage} = props;
+  const { setImage } = props;
 
-  const sectionMatch = useRouteMatch<{section: string}>("/docs/:section");
+  const sectionMatch = useRouteMatch<{ section: string }>("/docs/:section");
   const resource = sectionMatch
     ? resources[sectionMatch.params.section]
     : resources.introduction;
@@ -109,12 +109,12 @@ export default function Docs(props: ExportViewProps): JSX.Element {
   }, []);
 
   return (
-    <WrapperOuter style={{minHeight: "calc(100vh - 5px)"}}>
+    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <div className={css["docs-wrapper-top"]}></div>
       <div className={css.docsWrapper}>
         <div className={css.docsSidebar}>
           <div className={css.docsSidebarContent}>
-            {docs.docs.map((title) => {
+            {docs.docs.map(title => {
               const path = docs[title].path;
               const isActive =
                 sectionMatch && sectionMatch.params.section == path;
@@ -149,7 +149,7 @@ export default function Docs(props: ExportViewProps): JSX.Element {
           {resource ? (
             <ReactMarkdown
               transformImageUri={imageTransform}
-              renderers={{heading: HeadRenderer}}
+              renderers={{ heading: HeadRenderer }}
               source={resource}
             ></ReactMarkdown>
           ) : (

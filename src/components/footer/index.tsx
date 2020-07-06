@@ -26,7 +26,9 @@ function Footer(): JSX.Element {
           <div className={css.footerColumnTitle}>MTG Arena Tool</div>
           <FooterLink url="mailto:mtgatool@gmail.com">Contact</FooterLink>
           <FooterLink url="https://mtgatool.com/database/">Database</FooterLink>
-          <FooterLink url="https://mtgatool.com/docs/">Documentation</FooterLink>
+          <FooterLink url="https://mtgatool.com/docs/">
+            Documentation
+          </FooterLink>
           <FooterLink url="https://github.com/Manuel-777/MTG-Arena-Tool/releases">
             Releases
           </FooterLink>
@@ -80,7 +82,10 @@ function Footer(): JSX.Element {
   );
 }
 
-interface FooterLinkProps { url: string; children: Element | string;}
+interface FooterLinkProps {
+  url: string;
+  children: Element | string;
+}
 
 function FooterLink(props: FooterLinkProps): JSX.Element {
   const { url, children } = props;

@@ -19,8 +19,10 @@ import { InternalMatch } from "../../types/match";
 
 function ActionLogView(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
-  const logMatch = useRouteMatch<{logId: string}>("/action-log/:logId");
-  const [matchToDraw, setMatchToDraw] = React.useState<InternalMatch | null>(null);
+  const logMatch = useRouteMatch<{ logId: string }>("/action-log/:logId");
+  const [matchToDraw, setMatchToDraw] = React.useState<InternalMatch | null>(
+    null
+  );
   const webDispatch = useWebDispatch();
 
   const setQueryState = (state: number): void => {

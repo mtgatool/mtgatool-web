@@ -17,7 +17,7 @@ function ResetPassword(props: ExportViewProps): JSX.Element {
     passc: "",
     recaptcha: ""
   });
-  const tokenMatch = useRouteMatch<{token: string}>("/resetpassword/:token");
+  const tokenMatch = useRouteMatch<{ token: string }>("/resetpassword/:token");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recaptchaRef = React.createRef<any>();
 

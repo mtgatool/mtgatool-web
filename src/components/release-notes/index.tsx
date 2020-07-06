@@ -79,7 +79,11 @@ function ReleaseNotes(props: ExportViewProps): JSX.Element {
             let ret;
             if (line.type === TYPE_RELEASE) {
               ret = (
-                <Version key={index} version={line.version || ""} date={line.date || ""} />
+                <Version
+                  key={index}
+                  version={line.version || ""}
+                  date={line.date || ""}
+                />
               );
             } else {
               ret = (
@@ -123,11 +127,8 @@ function Commit(props): JSX.Element {
       <div className={css.commitType + " type-" + event}>
         {event.toUpperCase()}
       </div>
-      <div className={css.commitDesc
-      }>{desc}</div>
-      <a
-        href={"https://github.com/Manuel-777/MTG-Arena-Tool/commit/" + commit}
-      >
+      <div className={css.commitDesc}>{desc}</div>
+      <a href={"https://github.com/Manuel-777/MTG-Arena-Tool/commit/" + commit}>
         {commit.substr(0, 6)}
       </a>
     </div>

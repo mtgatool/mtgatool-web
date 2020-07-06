@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import {useRouteMatch} from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import DeckList from "../decklist";
 import TopTitle from "../title";
-import {WrapperOuter} from "../wrapper";
+import { WrapperOuter } from "../wrapper";
 import css from "./deckview.css";
 import metacss from "../metagame/metagame.css";
 import Deck from "../../shared/deck";
@@ -13,19 +13,23 @@ import DeckWildcards from "../deck-wildcards";
 import db from "../../shared/database";
 import NotFound from "../notfound";
 
-import {useWebDispatch} from "../../web-provider";
-import {STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR} from "../../shared/constants";
-import {ExportViewProps, ServerDeck} from "../../web-types/shared";
+import { useWebDispatch } from "../../web-provider";
+import {
+  STATE_IDLE,
+  STATE_DOWNLOAD,
+  STATE_ERROR
+} from "../../shared/constants";
+import { ExportViewProps, ServerDeck } from "../../web-types/shared";
 
 function DeckView(props: ExportViewProps): JSX.Element {
-  const {setImage} = props;
-  const deckMatch = useRouteMatch<{deckid: string}>("/deck/:deckid");
+  const { setImage } = props;
+  const deckMatch = useRouteMatch<{ deckid: string }>("/deck/:deckid");
   const [deckToDraw, setDeckToDraw] = React.useState<ServerDeck | null>(null);
 
   const webDispatch = useWebDispatch();
 
   const setQueryState = (state): void => {
-    webDispatch({type: "setQueryState", queryState: state});
+    webDispatch({ type: "setQueryState", queryState: state });
   };
 
   const copyDeck = React.useCallback(() => {
@@ -81,7 +85,7 @@ function DeckView(props: ExportViewProps): JSX.Element {
       {deckToDraw && deckToDraw.error ? (
         <NotFound setImage={setImage} />
       ) : (
-        <WrapperOuter style={{minHeight: "calc(100vh - 5px)"}}>
+        <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
           <TopTitle
             title={deckToDraw ? deckToDraw.name : ""}
             subtitle={deckToDraw ? "by " + deckToDraw.user : ""}

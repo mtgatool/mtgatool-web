@@ -40,7 +40,6 @@ function pickPackFromPosition(position: number, set: string): PickPack {
   return { pack: pack, pick: pick };
 }
 
-
 interface DraftCardProps {
   grpId: number;
   pick: boolean;
@@ -89,17 +88,17 @@ function DraftCard(props: DraftCardProps): JSX.Element {
       style={makeStyle()}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={
-        css["draft-card"] + (pick ? " " + css.draftCardPicked : "")
-      }
+      className={css["draft-card"] + (pick ? " " + css.draftCardPicked : "")}
     />
   );
 }
 
 function DraftView(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
-  const draftMatch = useRouteMatch<{draftId: string}>("/draft/:draftId");
-  const [draftToDraw, setDraftToDraw] = React.useState<InternalDraft | null>(null);
+  const draftMatch = useRouteMatch<{ draftId: string }>("/draft/:draftId");
+  const [draftToDraw, setDraftToDraw] = React.useState<InternalDraft | null>(
+    null
+  );
   const [pickpack, setPickPack] = React.useState({ pick: 0, pack: 0 });
   const webDispatch = useWebDispatch();
   const set = draftToDraw?.set || "";
@@ -160,7 +159,9 @@ function DraftView(props: ExportViewProps): JSX.Element {
 
   const getCurrentPick = useCallback(() => {
     const key = `pack_${pickpack.pack}pick_${pickpack.pick}`;
-    return draftToDraw && draftToDraw[key] ? draftToDraw[key] : { pick: 0, pack: [] };
+    return draftToDraw && draftToDraw[key]
+      ? draftToDraw[key]
+      : { pick: 0, pack: [] };
   }, [draftToDraw, pickpack.pack, pickpack.pick]);
 
   const getCurrentDeck = useCallback((): Deck => {
@@ -212,16 +213,16 @@ function DraftView(props: ExportViewProps): JSX.Element {
             />
             <div className={css.draftContainer}>
               <div className={css.draftView}>
-              {getCurrentPick().pack.map((grpId: number, index: number) => {
-              return (
-                <DraftCard
-                  pick={getCurrentPick().pick == grpId}
-                  key={pickpack.pack + "-" + pickpack.pick + "-" + index}
-                  size={5}
-                  grpId={grpId}
-                />
-              );
-            })}
+                {getCurrentPick().pack.map((grpId: number, index: number) => {
+                  return (
+                    <DraftCard
+                      pick={getCurrentPick().pick == grpId}
+                      key={pickpack.pack + "-" + pickpack.pick + "-" + index}
+                      size={5}
+                      grpId={grpId}
+                    />
+                  );
+                })}
               </div>
               <div className={css.draftDeckView}>
                 <DeckList deck={getCurrentDeck().getSave()} />

@@ -4,13 +4,13 @@
 import React from "react";
 import css from "./cardtile.css";
 import db from "../../shared/database";
-import {useWebDispatch} from "../../web-provider";
+import { useWebDispatch } from "../../web-provider";
 import {
   COLORS_ALL,
   FACE_SPLIT_FULL,
-  FACE_ADVENTURE_MAIN,
+  FACE_ADVENTURE_MAIN
 } from "../../shared/constants";
-import {DbCardData} from "../../types/Metadata";
+import { DbCardData } from "../../types/Metadata";
 
 function openScryfallCard(card: DbCardData): void {
   console.log("open " + card.name);
@@ -29,8 +29,8 @@ export function ManaCost(props: {
   newclass?: string;
   colors: number[];
 }): JSX.Element {
-  const {colors} = props;
-  let {newclass} = props;
+  const { colors } = props;
+  let { newclass } = props;
   if (!newclass) newclass = css["mana-s16"];
 
   return (
@@ -51,7 +51,7 @@ function CostSymbols(props: {
   card: DbCardData;
   dfcCard?: DbCardData;
 }): JSX.Element {
-  const {card, dfcCard} = props;
+  const { card, dfcCard } = props;
   if (!card) return <></>;
   const costSymbols: JSX.Element[] = [];
   let prevc = true;
@@ -88,8 +88,8 @@ function CostSymbols(props: {
   return <>{costSymbols}</>;
 }
 
-function CardQuantityDisplay(props: {quantity: number}): JSX.Element {
-  const {quantity} = props;
+function CardQuantityDisplay(props: { quantity: number }): JSX.Element {
+  const { quantity } = props;
   return <div className="card_tile_quantity_flat">{quantity}</div>;
 }
 
@@ -99,7 +99,7 @@ interface CardTileProps {
 }
 
 export default function CardTile(props: CardTileProps): JSX.Element {
-  const {grpId, quantity} = props;
+  const { grpId, quantity } = props;
   const [isMouseHovering, setMouseHovering] = React.useState(false);
   const [card, setCard] = React.useState<DbCardData | undefined>(undefined);
   const [dfcCard, setdfcCard] = React.useState<DbCardData | undefined>(
@@ -108,11 +108,11 @@ export default function CardTile(props: CardTileProps): JSX.Element {
   const webDispatch = useWebDispatch();
 
   const setHoverCard = (grpId): void => {
-    webDispatch({type: "setHoverCard", HoverGrpId: grpId});
+    webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
   };
 
   const setHoverOpacity = (opacity): void => {
-    webDispatch({type: "setHoverOpacity", HoverOpacity: opacity});
+    webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
   };
 
   const handleMouseEnter = React.useCallback(() => {
@@ -153,7 +153,7 @@ export default function CardTile(props: CardTileProps): JSX.Element {
   }, []);
 
   const getCardTileStyle = (): React.CSSProperties => {
-    const cardTileStyle = {backgroundImage: "", borderImage: ""};
+    const cardTileStyle = { backgroundImage: "", borderImage: "" };
     if (card) {
       try {
         if (card.type === "Special") {
@@ -190,7 +190,7 @@ export default function CardTile(props: CardTileProps): JSX.Element {
   };
 
   const getTileStyle = (): React.CSSProperties => {
-    const tileStyle = {backgroundColor: "rgba(0, 0, 0, 0.75)"};
+    const tileStyle = { backgroundColor: "rgba(0, 0, 0, 0.75)" };
     if (isMouseHovering) {
       try {
         tileStyle.backgroundColor = "rgba(65, 50, 40, 0.75)";
