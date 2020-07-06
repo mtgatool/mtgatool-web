@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import {STATE_IDLE} from "./shared/constants";
+import { STATE_IDLE } from "./shared/constants";
 
 export interface WebState {
   scroll: number;
@@ -17,7 +17,7 @@ const defaultWebState: WebState = {
   HoverGrpId: 1,
   HoverOpacity: 0,
   databaseVersion: 0,
-  versionTag: "v4.1.0",
+  versionTag: "v4.1.0"
 };
 
 interface ContextType {
@@ -27,7 +27,7 @@ interface ContextType {
 
 const WebStateContext = React.createContext<ContextType>({
   state: defaultWebState,
-  dispatch: () => null,
+  dispatch: () => null
 });
 
 interface Action {
@@ -49,13 +49,13 @@ interface Action {
 function webReducer(state: WebState, action: Action): WebState {
   switch (action.type) {
     case "setScroll": {
-      return {...state, scroll: action.scroll || state.scroll};
+      return { ...state, scroll: action.scroll || state.scroll };
     }
     case "setHoverCard": {
-      return {...state, HoverGrpId: action.HoverGrpId || state.HoverGrpId};
+      return { ...state, HoverGrpId: action.HoverGrpId || state.HoverGrpId };
     }
     case "setQueryState": {
-      return {...state, queryState: action.queryState || state.queryState};
+      return { ...state, queryState: action.queryState || state.queryState };
     }
     case "setHoverOpacity": {
       return {
@@ -63,17 +63,17 @@ function webReducer(state: WebState, action: Action): WebState {
         HoverOpacity:
           action.HoverOpacity == undefined
             ? state.HoverOpacity
-            : action.HoverOpacity,
+            : action.HoverOpacity
       };
     }
     case "setDatabaseVersion": {
       return {
         ...state,
-        databaseVersion: action.databaseVersion || state.databaseVersion,
+        databaseVersion: action.databaseVersion || state.databaseVersion
       };
     }
     case "setVersionTag": {
-      return {...state, versionTag: action.versionTag || state.versionTag};
+      return { ...state, versionTag: action.versionTag || state.versionTag };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -81,11 +81,11 @@ function webReducer(state: WebState, action: Action): WebState {
   }
 }
 
-function WebProvider({children}: {children: React.ReactNode}): JSX.Element {
+function WebProvider({ children }: { children: React.ReactNode }): JSX.Element {
   //const state = React.useContext<WebState>(WebStateContext);
   const [state, dispatch] = React.useReducer(webReducer, defaultWebState);
   return (
-    <WebStateContext.Provider value={{state, dispatch} as ContextType}>
+    <WebStateContext.Provider value={{ state, dispatch } as ContextType}>
       {children}
     </WebStateContext.Provider>
   );
@@ -112,4 +112,4 @@ function useWebDispatch(): React.Dispatch<Action> {
   return initialState.dispatch;
 }
 
-export {WebProvider, useWebContext, useWebDispatch};
+export { WebProvider, useWebContext, useWebDispatch };
