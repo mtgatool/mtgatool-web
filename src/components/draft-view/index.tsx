@@ -52,22 +52,28 @@ function DraftCard(props: DraftCardProps): JSX.Element {
 
   const webDispatch = useWebDispatch();
 
-  const setHoverCard = (grpId: number): void => {
-    webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-  };
+  const setHoverCard = useCallback(
+    (grpId: number): void => {
+      webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
+    },
+    [webDispatch]
+  );
 
-  const setHoverOpacity = (opacity: number): void => {
-    webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
-  };
+  const setHoverOpacity = useCallback(
+    (opacity: number): void => {
+      webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
+    },
+    [webDispatch]
+  );
 
   const handleMouseEnter = React.useCallback(() => {
     setHoverCard(grpId);
     setHoverOpacity(1);
-  }, []);
+  }, [grpId, setHoverCard, setHoverOpacity]);
 
   const handleMouseLeave = React.useCallback(() => {
     setHoverOpacity(0);
-  }, []);
+  }, [setHoverOpacity]);
 
   const makeStyle = (): React.CSSProperties => {
     const cardObj = db.card(grpId);
@@ -104,9 +110,12 @@ function DraftView(props: ExportViewProps): JSX.Element {
   const set = draftToDraw?.set || "";
   const maxPosition = (PACK_SIZES[set] ?? DEFAULT_PACK_SIZE) * 3 - 1;
 
-  const setQueryState = (state: number): void => {
-    webDispatch({ type: "setQueryState", queryState: state });
-  };
+  const setQueryState = useCallback(
+    (state: number): void => {
+      webDispatch({ type: "setQueryState", queryState: state });
+    },
+    [webDispatch]
+  );
 
   React.useEffect(() => {
     if (draftMatch) {
@@ -148,13 +157,13 @@ function DraftView(props: ExportViewProps): JSX.Element {
     } else {
       setQueryState(STATE_IDLE);
     }
-  }, []);
+  }, [draftMatch, setQueryState]);
 
   const onSliderChange = useCallback(
     (value: number) => {
       setPickPack(pickPackFromPosition(value, set));
     },
-    [draftToDraw]
+    [set]
   );
 
   const getCurrentPick = useCallback(() => {
@@ -178,7 +187,7 @@ function DraftView(props: ExportViewProps): JSX.Element {
     }
     decklist.getMainboard().removeDuplicates();
     return decklist;
-  }, [draftToDraw, pickpack]);
+  }, [set, draftToDraw, pickpack]);
 
   const sliderPositions = Array(maxPosition + 1).fill(new SliderPosition());
   sliderPositions[

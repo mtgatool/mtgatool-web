@@ -10,7 +10,7 @@ function NotFound(props: ExportViewProps): JSX.Element {
 
   React.useEffect(() => {
     setImage(notFoundImage);
-  }, []);
+  }, [setImage]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>

@@ -23,20 +23,34 @@
     }
   },
   "rules": {
+    "allowEmptyCatch": 0,
     "no-cond-assign": 0,
     "no-console": "off",
     "no-redeclare": "warn",
     "no-undef": "error",
     "no-global-assign": "warn",
     "no-empty": "warn",
-    "@typescript-eslint/interface-name-prefix": 0,
-    "complexity": [
+    "complexity": ["warn", 40],
+    "max-statements": ["warn", 100],
+    "prettier/prettier": [
       "warn",
-      40
+      {
+        "endOfLine": "auto"
+      }
     ],
-    "max-statements": [
-      "warn",
-      100
-    ]
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {"varsIgnorePattern": "^_", "argsIgnorePattern": "^_"}
+    ],
+    "@typescript-eslint/interface-name-prefix": 0,
+    "@typescript-eslint/camelcase": "off", // Should be enabled some day
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      {"allow": ["arrowFunctions"]}
+    ],
+    "require-atomic-updates": "warn",
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   }
 }

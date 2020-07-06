@@ -7,7 +7,9 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "format": "prettier --write 'packages/**/*.js'",
-    "test": "jest --watchAll --coverage"
+    "eslint": "eslint src/ --ext ts --ext tsx",
+    "eslint:fix": "eslint src/ --ext ts --ext tsx --fix",
+    "test": "npm run eslint && jest --watchAll --coverage"
   },
   "lint-staged": {
     "*.{ts,tsx,jsx}": [

@@ -74,7 +74,7 @@ const HeadRenderer = (props): JSX.Element => {
         executeScroll();
       }
     }, 500);
-  }, [linkRef, location]);
+  }, [id, linkRef, location]);
 
   return (
     <React.Fragment key={nodeKey}>
@@ -106,7 +106,7 @@ export default function Docs(props: ExportViewProps): JSX.Element {
 
   React.useEffect(() => {
     setImage(keyArt);
-  }, []);
+  }, [setImage]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>

@@ -57,7 +57,7 @@ function Home(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
   React.useEffect(() => {
     setImage(keyArt);
-  }, []);
+  }, [setImage]);
   const webContext = useWebContext();
 
   return (

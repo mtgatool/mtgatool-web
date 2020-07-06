@@ -15,7 +15,7 @@ function CookiesSign(): JSX.Element {
     if (localStorage._ck) {
       hide();
     }
-  }, []);
+  }, [hide]);
 
   return (
     <>

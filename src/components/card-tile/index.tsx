@@ -1,7 +1,7 @@
 /* eslint-disable no-else-return */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useCallback } from "react";
 import css from "./cardtile.css";
 import db from "../../shared/database";
 import { useWebDispatch } from "../../web-provider";
@@ -107,24 +107,30 @@ export default function CardTile(props: CardTileProps): JSX.Element {
   );
   const webDispatch = useWebDispatch();
 
-  const setHoverCard = (grpId): void => {
-    webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-  };
+  const setHoverCard = useCallback(
+    (grpId): void => {
+      webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
+    },
+    [webDispatch]
+  );
 
-  const setHoverOpacity = (opacity): void => {
-    webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
-  };
+  const setHoverOpacity = useCallback(
+    (opacity): void => {
+      webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
+    },
+    [webDispatch]
+  );
 
   const handleMouseEnter = React.useCallback(() => {
     setMouseHovering(true);
     setHoverCard(grpId);
     setHoverOpacity(1);
-  }, []);
+  }, [grpId, setMouseHovering, setHoverCard, setHoverOpacity]);
 
   const handleMouseLeave = React.useCallback(() => {
     setMouseHovering(false);
     setHoverOpacity(0);
-  }, []);
+  }, [setMouseHovering, setHoverOpacity]);
 
   const handleMouseClick = React.useCallback(() => {
     let cardOpen = card;
@@ -134,7 +140,7 @@ export default function CardTile(props: CardTileProps): JSX.Element {
     if (cardOpen) {
       openScryfallCard(cardOpen);
     }
-  }, [card]);
+  }, [card, dfcCard]);
 
   React.useEffect(() => {
     if (!card) {
@@ -150,7 +156,7 @@ export default function CardTile(props: CardTileProps): JSX.Element {
         }
       }
     }
-  }, []);
+  }, [card, grpId, setCard, setdfcCard]);
 
   const getCardTileStyle = (): React.CSSProperties => {
     const cardTileStyle = { backgroundImage: "", borderImage: "" };

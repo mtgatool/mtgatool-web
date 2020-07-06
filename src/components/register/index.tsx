@@ -81,7 +81,7 @@ function Register(props: ExportViewProps): JSX.Element {
 
   React.useEffect(() => {
     setImage(keyArt);
-  }, []);
+  }, [setImage]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>

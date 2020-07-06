@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   STATE_IDLE,
   STATE_DOWNLOAD,
@@ -15,15 +15,21 @@ const GH_LATEST =
 function Database(): JSX.Element {
   const webDispatch = useWebDispatch();
 
-  const setQueryState = (state): void => {
-    webDispatch({ type: "setQueryState", queryState: state });
-  };
+  const setQueryState = useCallback(
+    (state): void => {
+      webDispatch({ type: "setQueryState", queryState: state });
+    },
+    [webDispatch]
+  );
 
-  const setDatabaseVersion = (version): void => {
-    webDispatch({ type: "setDatabaseVersion", databaseVersion: version });
-  };
+  const setDatabaseVersion = useCallback(
+    (version): void => {
+      webDispatch({ type: "setDatabaseVersion", databaseVersion: version });
+    },
+    [webDispatch]
+  );
 
-  const fetchGHTag = (): void => {
+  const fetchGHTag = useCallback((): void => {
     const xhr = new XMLHttpRequest();
     xhr.onload = (): void => {
       if (xhr.status == 200) {
@@ -39,9 +45,9 @@ function Database(): JSX.Element {
 
     xhr.open("GET", GH_LATEST);
     xhr.send();
-  };
+  }, [webDispatch]);
 
-  const load = (): void => {
+  const load = useCallback((): void => {
     console.log("Downloading latest..");
     setQueryState(STATE_DOWNLOAD);
     const xhr = new XMLHttpRequest();
@@ -72,9 +78,9 @@ function Database(): JSX.Element {
     };
     xhr.open("GET", DATABASE_URL);
     xhr.send();
-  };
+  }, [setDatabaseVersion, setQueryState]);
 
-  const fetchVersion = (): void => {
+  const fetchVersion = useCallback((): void => {
     setQueryState(STATE_DOWNLOAD);
     const xhr = new XMLHttpRequest();
     xhr.onload = (): void => {
@@ -107,7 +113,7 @@ function Database(): JSX.Element {
     };
     xhr.open("GET", LATEST_URL);
     xhr.send();
-  };
+  }, [load, setQueryState]);
 
   React.useEffect(() => {
     // Load from cache
@@ -121,7 +127,7 @@ function Database(): JSX.Element {
       fetchGHTag();
       fetchVersion();
     }, 500);
-  }, []);
+  }, [fetchGHTag, fetchVersion, setDatabaseVersion]);
 
   return <></>;
 }

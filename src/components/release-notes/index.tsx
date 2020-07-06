@@ -43,7 +43,7 @@ function ReleaseNotes(props: ExportViewProps): JSX.Element {
   React.useEffect(() => {
     getReleaseNotes();
     setImage(keyArt);
-  }, []);
+  }, [setImage]);
 
   React.useEffect(() => {
     const newNotes: Note[] = [];

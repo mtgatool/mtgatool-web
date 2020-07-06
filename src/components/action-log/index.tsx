@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useCallback } from "react";
 import { useRouteMatch } from "react-router-dom";
 import DeckList from "../decklist";
 import TopTitle from "../title";
@@ -25,9 +25,12 @@ function ActionLogView(props: ExportViewProps): JSX.Element {
   );
   const webDispatch = useWebDispatch();
 
-  const setQueryState = (state: number): void => {
-    webDispatch({ type: "setQueryState", queryState: state });
-  };
+  const setQueryState = useCallback(
+    (state: number): void => {
+      webDispatch({ type: "setQueryState", queryState: state });
+    },
+    [webDispatch]
+  );
 
   const copyDeck = React.useCallback(() => {
     //console.log("Copy");
@@ -74,7 +77,7 @@ function ActionLogView(props: ExportViewProps): JSX.Element {
     } else {
       setQueryState(STATE_IDLE);
     }
-  }, []);
+  }, [logMatch, setImage, setQueryState]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
@@ -206,22 +209,28 @@ function LogCard(props: LogCardProps): JSX.Element {
 
   const webDispatch = useWebDispatch();
 
-  const setHoverCard = (grpId: number): void => {
-    webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-  };
+  const setHoverCard = useCallback(
+    (grpId: number): void => {
+      webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
+    },
+    [webDispatch]
+  );
 
-  const setHoverOpacity = (opacity: number): void => {
-    webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
-  };
+  const setHoverOpacity = useCallback(
+    (opacity: number): void => {
+      webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
+    },
+    [webDispatch]
+  );
 
   const handleMouseEnter = React.useCallback(() => {
     setHoverCard(grpId);
     setHoverOpacity(1);
-  }, []);
+  }, [grpId, setHoverCard, setHoverOpacity]);
 
   const handleMouseLeave = React.useCallback(() => {
     setHoverOpacity(0);
-  }, []);
+  }, [setHoverOpacity]);
 
   return (
     <>

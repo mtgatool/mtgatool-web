@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useCallback } from "react";
 
 import css from "./matchfeed.css";
 import { ManaCost } from "../card-tile";
@@ -12,7 +12,7 @@ const FEED_URL = "https://mtgatool.com/api/get_match_feed.php";
 function MatchFeed(): JSX.Element {
   const [matches, setMatches] = React.useState<InternalMatch[] | null>(null);
 
-  const nextLoad = (): void => {
+  const nextLoad = useCallback((): void => {
     const xhr = new XMLHttpRequest();
     xhr.onload = (): void => {
       if (xhr.status == 200) {
@@ -36,7 +36,7 @@ function MatchFeed(): JSX.Element {
     };
     xhr.open("GET", FEED_URL + "?n=1");
     xhr.send();
-  };
+  }, [matches]);
 
   const firstLoad = (): void => {
     const xhr = new XMLHttpRequest();
@@ -63,7 +63,7 @@ function MatchFeed(): JSX.Element {
     if (matches) {
       setTimeout(nextLoad, 1500);
     }
-  }, [matches]);
+  }, [nextLoad, matches]);
 
   return (
     <div className={css.matchFeed}>

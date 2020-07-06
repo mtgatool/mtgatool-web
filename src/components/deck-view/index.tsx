@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useCallback } from "react";
 import { useRouteMatch } from "react-router-dom";
 import DeckList from "../decklist";
 import TopTitle from "../title";
@@ -28,9 +28,12 @@ function DeckView(props: ExportViewProps): JSX.Element {
 
   const webDispatch = useWebDispatch();
 
-  const setQueryState = (state): void => {
-    webDispatch({ type: "setQueryState", queryState: state });
-  };
+  const setQueryState = useCallback(
+    (state): void => {
+      webDispatch({ type: "setQueryState", queryState: state });
+    },
+    [webDispatch]
+  );
 
   const copyDeck = React.useCallback(() => {
     console.log("Copy");
@@ -78,7 +81,7 @@ function DeckView(props: ExportViewProps): JSX.Element {
     } else {
       setQueryState(STATE_ERROR);
     }
-  }, []);
+  }, [deckMatch, setImage, setQueryState, deckToDraw]);
 
   return (
     <>

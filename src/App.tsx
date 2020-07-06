@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useCallback } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 
@@ -40,19 +40,22 @@ function App(): JSX.Element {
 
   const webDispatch = useWebDispatch();
 
-  const setScroll = (state: number): void => {
-    webDispatch({ type: "setScroll", scroll: state });
-  };
+  const setScroll = useCallback(
+    (state: number): void => {
+      webDispatch({ type: "setScroll", scroll: state });
+    },
+    [webDispatch]
+  );
 
-  const handleScroll = (): void => {
+  const handleScroll = useCallback((): void => {
     //console.log("handleScroll", window.scrollY);
     setScroll(window.scrollY);
-  };
+  }, [setScroll]);
 
   React.useLayoutEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return (): void => window.removeEventListener("scroll", handleScroll);
-  }, [position]);
+  }, [position, handleScroll]);
 
   const setImage = (cardObj: DbCardData | string): void => {
     if (cardObj == keyArt) {

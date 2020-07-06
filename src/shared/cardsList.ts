@@ -1,12 +1,12 @@
-import _ from 'lodash';
+import _ from "lodash";
 import {
   anyCardsList,
   CardObject,
   isV2CardsList,
   v2cardsList
-} from '../types/Deck';
-import Colors from './colors';
-import db from './database';
+} from "../types/Deck";
+import Colors from "./colors";
+import db from "./database";
 
 interface CardTypesCount {
   art: number;
@@ -62,8 +62,8 @@ class CardsList {
    * Adds a card to the list
    **/
   add(grpId: number, quantity = 1, merge = false): CardObject {
-    if (typeof quantity !== 'number') {
-      throw new Error('quantity must be a number');
+    if (typeof quantity !== "number") {
+      throw new Error("quantity must be a number");
     }
     if (merge) {
       for (let index = 0; index < this.list.length; index++) {
@@ -113,14 +113,14 @@ class CardsList {
    * Counts all cards in the list, if provided it only counts
    * for the given propierty.
    **/
-  count(prop = 'quantity'): number {
+  count(prop = "quantity"): number {
     return _.sumBy(this.list, prop);
   }
 
   /**
    * Same as count(), but here we can apply a filter function to the list.
    **/
-  countFilter(prop = 'quantity', func: (c: CardObject) => boolean): number {
+  countFilter(prop = "quantity", func: (c: CardObject) => boolean): number {
     return _(this.list)
       .filter(func)
       .sumBy(prop);
@@ -135,19 +135,19 @@ class CardsList {
     this.list.forEach(function(card) {
       const c = db.card(card.id);
       if (c !== undefined) {
-        if (c.type.includes('Land', 0))
+        if (c.type.includes("Land", 0))
           types.lan += card.measurable ? card.quantity : 1;
-        else if (c.type.includes('Creature', 0))
+        else if (c.type.includes("Creature", 0))
           types.cre += card.measurable ? card.quantity : 1;
-        else if (c.type.includes('Artifact', 0))
+        else if (c.type.includes("Artifact", 0))
           types.art += card.measurable ? card.quantity : 1;
-        else if (c.type.includes('Enchantment', 0))
+        else if (c.type.includes("Enchantment", 0))
           types.enc += card.measurable ? card.quantity : 1;
-        else if (c.type.includes('Instant', 0))
+        else if (c.type.includes("Instant", 0))
           types.ins += card.measurable ? card.quantity : 1;
-        else if (c.type.includes('Sorcery', 0))
+        else if (c.type.includes("Sorcery", 0))
           types.sor += card.measurable ? card.quantity : 1;
-        else if (c.type.includes('Planeswalker', 0))
+        else if (c.type.includes("Planeswalker", 0))
           types.pla += card.measurable ? card.quantity : 1;
       }
     });
@@ -160,13 +160,13 @@ class CardsList {
    **/
   countType(type: string): number {
     const types = this.countTypesAll();
-    if (type.includes('Land', 0)) return types.lan;
-    else if (type.includes('Creature', 0)) return types.cre;
-    else if (type.includes('Artifact', 0)) return types.art;
-    else if (type.includes('Enchantment', 0)) return types.enc;
-    else if (type.includes('Instant', 0)) return types.ins;
-    else if (type.includes('Sorcery', 0)) return types.sor;
-    else if (type.includes('Planeswalker', 0)) return types.pla;
+    if (type.includes("Land", 0)) return types.lan;
+    else if (type.includes("Creature", 0)) return types.cre;
+    else if (type.includes("Artifact", 0)) return types.art;
+    else if (type.includes("Enchantment", 0)) return types.enc;
+    else if (type.includes("Instant", 0)) return types.ins;
+    else if (type.includes("Sorcery", 0)) return types.sor;
+    else if (type.includes("Planeswalker", 0)) return types.pla;
 
     return 0;
   }
@@ -182,27 +182,27 @@ class CardsList {
         const dbCard = db.card(card.id);
         if (dbCard !== undefined) {
           dbCard.cost.forEach(function(c) {
-            if (c.indexOf('w') !== -1) {
+            if (c.indexOf("w") !== -1) {
               colors.w += card.quantity;
               colors.total += card.quantity;
             }
-            if (c.indexOf('u') !== -1) {
+            if (c.indexOf("u") !== -1) {
               colors.u += card.quantity;
               colors.total += card.quantity;
             }
-            if (c.indexOf('b') !== -1) {
+            if (c.indexOf("b") !== -1) {
               colors.b += card.quantity;
               colors.total += card.quantity;
             }
-            if (c.indexOf('r') !== -1) {
+            if (c.indexOf("r") !== -1) {
               colors.r += card.quantity;
               colors.total += card.quantity;
             }
-            if (c.indexOf('g') !== -1) {
+            if (c.indexOf("g") !== -1) {
               colors.g += card.quantity;
               colors.total += card.quantity;
             }
-            if (c.indexOf('c') !== -1) {
+            if (c.indexOf("c") !== -1) {
               colors.c += card.quantity;
               colors.total += card.quantity;
             }
@@ -225,8 +225,8 @@ class CardsList {
       const card = db.card(cardEntry.id);
       if (card !== undefined && quantity > 0) {
         if (
-          card.type.indexOf('Land') != -1 ||
-          card.type.indexOf('land') != -1
+          card.type.indexOf("Land") != -1 ||
+          card.type.indexOf("land") != -1
         ) {
           if (card.frame.length < 5) {
             card.frame.forEach(function(c) {
@@ -280,7 +280,7 @@ class CardsList {
     this.list.forEach(card => {
       const cardData = db.card(card.id);
       if (cardData !== undefined) {
-        const isLand = cardData.type.indexOf('Land') !== -1;
+        const isLand = cardData.type.indexOf("Land") !== -1;
         if (isLand && cardData.frame.length < 3) {
           colors.addFromArray(cardData.frame);
         }
