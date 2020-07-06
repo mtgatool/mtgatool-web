@@ -1,10 +1,10 @@
 declare namespace NotfoundCssNamespace {
   export interface INotfoundCss {
-    'subtitle-errorcode': string;
-    'subtitle-notfound': string;
+    "subtitle-errorcode": string;
+    "subtitle-notfound": string;
     subtitleErrorcode: string;
     subtitleNotfound: string;
-    'title-notfound': string;
+    "title-notfound": string;
     titleNotfound: string;
   }
 }

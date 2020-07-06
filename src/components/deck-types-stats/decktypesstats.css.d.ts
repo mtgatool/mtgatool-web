@@ -1,14 +1,14 @@
 declare namespace DecktypesstatsCssNamespace {
   export interface IDecktypesstatsCss {
-    'type-art': string;
-    'type-cre': string;
-    'type-enc': string;
-    'type-icon': string;
-    'type-icon-cont': string;
-    'type-ins': string;
-    'type-lan': string;
-    'type-pla': string;
-    'type-sor': string;
+    "type-art": string;
+    "type-cre": string;
+    "type-enc": string;
+    "type-icon": string;
+    "type-icon-cont": string;
+    "type-ins": string;
+    "type-lan": string;
+    "type-pla": string;
+    "type-sor": string;
     typeArt: string;
     typeCre: string;
     typeEnc: string;
@@ -18,7 +18,7 @@ declare namespace DecktypesstatsCssNamespace {
     typeLan: string;
     typePla: string;
     typeSor: string;
-    'types-container': string;
+    "types-container": string;
     typesContainer: string;
   }
 }

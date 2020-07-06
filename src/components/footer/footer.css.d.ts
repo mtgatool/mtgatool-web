@@ -1,11 +1,11 @@
 declare namespace FooterCssNamespace {
   export interface IFooterCss {
-    'footer-column': string;
-    'footer-column-title': string;
-    'footer-logo': string;
-    'footer-main': string;
-    'footer-text': string;
-    'footer-wrapper': string;
+    "footer-column": string;
+    "footer-column-title": string;
+    "footer-logo": string;
+    "footer-main": string;
+    "footer-text": string;
+    "footer-wrapper": string;
     footerColumn: string;
     footerColumnTitle: string;
     footerLogo: string;

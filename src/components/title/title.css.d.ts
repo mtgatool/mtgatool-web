@@ -1,7 +1,7 @@
 declare namespace TitleCssNamespace {
   export interface ITitleCss {
-    'top-subtitle-container': string;
-    'top-title-container': string;
+    "top-subtitle-container": string;
+    "top-title-container": string;
     topSubtitleContainer: string;
     topTitleContainer: string;
   }

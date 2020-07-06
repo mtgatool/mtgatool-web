@@ -1,6 +1,6 @@
 declare namespace DecklistCssNamespace {
   export interface IDecklistCss {
-    'card-tile-separator': string;
+    "card-tile-separator": string;
     cardTileSeparator: string;
   }
 }

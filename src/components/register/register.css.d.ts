@@ -1,11 +1,11 @@
 declare namespace RegisterCssNamespace {
   export interface IRegisterCss {
-    'form-authenticate': string;
-    'form-button': string;
-    'form-error': string;
-    'form-icon': string;
-    'form-input-container': string;
-    'form-label': string;
+    "form-authenticate": string;
+    "form-button": string;
+    "form-error": string;
+    "form-icon": string;
+    "form-input-container": string;
+    "form-label": string;
     formAuthenticate: string;
     formButton: string;
     formError: string;

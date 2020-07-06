@@ -1,6 +1,6 @@
 declare namespace DeckviewCssNamespace {
   export interface IDeckviewCss {
-    'deckview-div': string;
+    "deckview-div": string;
     deckviewDiv: string;
   }
 }

@@ -1,23 +1,23 @@
 declare namespace DocsCssNamespace {
   export interface IDocsCss {
-    'anchor-h1': string;
-    'anchor-h2': string;
-    'anchor-h3': string;
-    'anchor-link': string;
+    "anchor-h1": string;
+    "anchor-h2": string;
+    "anchor-h3": string;
+    "anchor-link": string;
     anchorH1: string;
     anchorH2: string;
     anchorH3: string;
     anchorLink: string;
-    'docs-code': string;
-    'docs-main': string;
-    'docs-section-link': string;
-    'docs-section-link-active': string;
-    'docs-section-title': string;
-    'docs-sidebar': string;
-    'docs-sidebar-content': string;
-    'docs-sidebar-dragger': string;
-    'docs-text': string;
-    'docs-wrapper': string;
+    "docs-code": string;
+    "docs-main": string;
+    "docs-section-link": string;
+    "docs-section-link-active": string;
+    "docs-section-title": string;
+    "docs-sidebar": string;
+    "docs-sidebar-content": string;
+    "docs-sidebar-dragger": string;
+    "docs-text": string;
+    "docs-wrapper": string;
     docsCode: string;
     docsMain: string;
     docsSectionLink: string;
@@ -28,7 +28,7 @@ declare namespace DocsCssNamespace {
     docsSidebarDragger: string;
     docsText: string;
     docsWrapper: string;
-    'top-logo': string;
+    "top-logo": string;
     topLogo: string;
   }
 }

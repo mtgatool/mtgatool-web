@@ -1,7 +1,7 @@
 declare namespace CardhoverCssNamespace {
   export interface ICardhoverCss {
-    'card-hover-dfc': string;
-    'card-hover-main': string;
+    "card-hover-dfc": string;
+    "card-hover-main": string;
     cardHoverDfc: string;
     cardHoverMain: string;
   }

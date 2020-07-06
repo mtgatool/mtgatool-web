@@ -1,11 +1,11 @@
 declare namespace DraftviewCssNamespace {
   export interface IDraftviewCss {
-    'draft-card': string;
-    'draft-card-picked': string;
-    'draft-container': string;
-    'draft-deck-view': string;
-    'draft-title': string;
-    'draft-view': string;
+    "draft-card": string;
+    "draft-card-picked": string;
+    "draft-container": string;
+    "draft-deck-view": string;
+    "draft-title": string;
+    "draft-view": string;
     draftCard: string;
     draftCardPicked: string;
     draftContainer: string;

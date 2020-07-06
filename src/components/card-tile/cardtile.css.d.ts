@@ -16,7 +16,7 @@ declare namespace CardtileCssNamespace {
     card_tile_quantity_flat: string;
     cartTileManaFlat: string;
     cart_tile_mana_flat: string;
-    'mana-s16': string;
+    "mana-s16": string;
     mana0: string;
     mana1: string;
     mana10: string;

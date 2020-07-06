@@ -1,12 +1,12 @@
 declare namespace TopnavCssNamespace {
   export interface ITopnavCss {
-    'nav-artist': string;
-    'nav-bar': string;
-    'nav-divider': string;
-    'nav-link-a': string;
-    'nav-links': string;
-    'nav-logo': string;
-    'nav-logo-container': string;
+    "nav-artist": string;
+    "nav-bar": string;
+    "nav-divider": string;
+    "nav-link-a": string;
+    "nav-links": string;
+    "nav-logo": string;
+    "nav-logo-container": string;
     navArtist: string;
     navBar: string;
     navDivider: string;
@@ -14,8 +14,8 @@ declare namespace TopnavCssNamespace {
     navLinks: string;
     navLogo: string;
     navLogoContainer: string;
-    'top-nav': string;
-    'top-nav-container': string;
+    "top-nav": string;
+    "top-nav-container": string;
     topNav: string;
     topNavContainer: string;
   }

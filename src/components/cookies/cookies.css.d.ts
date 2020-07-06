@@ -1,7 +1,7 @@
 declare namespace CookiesCssNamespace {
   export interface ICookiesCss {
-    'cookie-banner': string;
-    'cookie-text': string;
+    "cookie-banner": string;
+    "cookie-text": string;
     cookieBanner: string;
     cookieText: string;
   }

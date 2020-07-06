@@ -1,7 +1,7 @@
 declare namespace LoadingCssNamespace {
   export interface ILoadingCss {
     grow: string;
-    'loading-div': string;
+    "loading-div": string;
     loadingDiv: string;
     spin: string;
   }

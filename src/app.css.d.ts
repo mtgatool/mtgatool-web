@@ -1,16 +1,16 @@
 declare namespace AppCssNamespace {
   export interface IAppCss {
     app: string;
-    'download-button': string;
-    'download-img': string;
+    "download-button": string;
+    "download-img": string;
     downloadButton: string;
     downloadImg: string;
-    'home-desc': string;
-    'home-desc-small': string;
+    "home-desc": string;
+    "home-desc-small": string;
     homeDesc: string;
     homeDescSmall: string;
     loading: string;
-    'wrapper-image': string;
+    "wrapper-image": string;
     wrapperImage: string;
   }
 }

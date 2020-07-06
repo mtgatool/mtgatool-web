@@ -1,17 +1,17 @@
 declare namespace DeckwildcardsCssNamespace {
   export interface IDeckwildcardsCss {
-    'wc-common': string;
-    'wc-mythic': string;
-    'wc-rare': string;
-    'wc-uncommon': string;
+    "wc-common": string;
+    "wc-mythic": string;
+    "wc-rare": string;
+    "wc-uncommon": string;
     wcCommon: string;
     wcMythic: string;
     wcRare: string;
     wcUncommon: string;
-    'wildcard-icon-cont': string;
+    "wildcard-icon-cont": string;
     wildcardIconCont: string;
-    'wildcards-cost': string;
-    'wildcards-icon': string;
+    "wildcards-cost": string;
+    "wildcards-icon": string;
     wildcardsCost: string;
     wildcardsIcon: string;
   }

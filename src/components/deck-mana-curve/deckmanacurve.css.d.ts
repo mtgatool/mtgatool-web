@@ -1,12 +1,12 @@
 declare namespace DeckmanacurveCssNamespace {
   export interface IDeckmanacurveCss {
-    'mana-curve': string;
-    'mana-curve-column': string;
-    'mana-curve-column-number': string;
-    'mana-curve-container': string;
-    'mana-curve-costs': string;
-    'mana-curve-number': string;
-    'mana-curve-numbers': string;
+    "mana-curve": string;
+    "mana-curve-column": string;
+    "mana-curve-column-number": string;
+    "mana-curve-container": string;
+    "mana-curve-costs": string;
+    "mana-curve-number": string;
+    "mana-curve-numbers": string;
     manaCurve: string;
     manaCurveColumn: string;
     manaCurveColumnNumber: string;
