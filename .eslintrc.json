@@ -3,8 +3,11 @@
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "prettier/@typescript-eslint"
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "prettier/react"
   ],
+  "plugins": ["react-hooks"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "sourceType": "module",
