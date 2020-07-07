@@ -179,6 +179,8 @@ function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
 
 function Metagame(props: ExportViewProps): JSX.Element {
   //const match = useRouteMatch();
+  const [fetchingDeck, setFetchingDeck] = useState(false);
+  const [currentMatchId, setCurrentMatchId] = useState("");
   const formatMatch = useRouteMatch<{ format: string }>("/metagame/:format");
   const dayMatch = useRouteMatch<{ format: string; day: string }>(
     "/metagame/:format/:day"
@@ -218,7 +220,7 @@ function Metagame(props: ExportViewProps): JSX.Element {
   const getArchetypeDeck = useCallback(
     (match: string): void => {
       const URL = `https://mtgatool.com/api/get_match_deck.php?id=${match}`;
-      setQueryState(STATE_DOWNLOAD);
+      //setQueryState(STATE_DOWNLOAD);
       const xhr = new XMLHttpRequest();
       xhr.onload = (): void => {
         if (xhr.status !== 200) {
@@ -229,6 +231,7 @@ function Metagame(props: ExportViewProps): JSX.Element {
               decodeURIComponent(escape(xhr.responseText))
             );
             setDeckToDraw(deckData);
+            setCurrentMatchId(match);
             setQueryState(STATE_IDLE);
           } catch (e) {
             console.log(e);
@@ -239,6 +242,7 @@ function Metagame(props: ExportViewProps): JSX.Element {
       xhr.onreadystatechange = function(): void {
         if (xhr.readyState === 4) {
           setQueryState(STATE_IDLE);
+          setFetchingDeck(false);
         }
       };
       xhr.open("GET", URL);
@@ -311,10 +315,13 @@ function Metagame(props: ExportViewProps): JSX.Element {
         const archetypeData = metagameData.meta.filter(
           arch => arch.name == archName
         )[0];
-        if (openedDeck < archetypeData.decks.length) {
+        if (openedDeck < archetypeData.decks.length && !fetchingDeck) {
           const matchId = archetypeData.decks[openedDeck].match;
           //console.log("get deck", matchId);
-          getArchetypeDeck(matchId);
+          if (currentMatchId !== matchId) {
+            setFetchingDeck(true);
+            getArchetypeDeck(matchId);
+          }
         }
       } else if (archMatch) {
         const archName = archMatch.params.arch;
@@ -337,7 +344,9 @@ function Metagame(props: ExportViewProps): JSX.Element {
     formatMatch,
     getArchetypeDeck,
     getMetagameData,
-    setImage
+    setImage,
+    fetchingDeck,
+    currentMatchId
   ]);
 
   React.useEffect(() => {

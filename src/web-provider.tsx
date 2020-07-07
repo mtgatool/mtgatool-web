@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useMemo } from "react";
+import React from "react";
 import { STATE_IDLE } from "./shared/constants";
 
 export interface WebState {
@@ -109,11 +109,7 @@ function useWebDispatch(): React.Dispatch<Action> {
     );
   }
 
-  const dispatch = useMemo(() => initialState.dispatch, [
-    initialState.dispatch
-  ]);
-
-  return dispatch;
+  return initialState.dispatch;
 }
 
 export { WebProvider, useWebContext, useWebDispatch };
