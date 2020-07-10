@@ -1,4 +1,101 @@
 version
+5.3.0
+July 10th, 2020
+added
+Collection advanced filters and queries
+c6898bb0c019e56e62dc93e9462ab685da1228b8
+fixed
+Misc Linux support fixes
+326482d5f9853c3e9d6c9e854dfaafc6cb4e6935
+fixed
+Ateempt to fix Mac Os fullscreen overlays
+2f8a23aa1f5da905e50ed383aa585b6c8cf72105
+fixed
+ByteByffer library
+5694e062d6740d3b5b027116f2b00841d734dfa5
+fixed
+Tokens rarity
+11537b1bb7c5988b29c463b005cef362cfc50701
+fixed
+Open tokens in scryfall URL
+76f2763f059cae62e98118dfd3b0b4d283ddc397
+fixed
+overlay settings icon
+ada90ad500b30e607be6a4a23fc69f87373d2ee5
+fixed
+Close button on post match overview
+3ad1d1576936f172d5173ae32c57e827c0acda2f
+fixed
+Revert SSL temp fix
+f85d18893194280ec76aac427164d051b66fcf89
+improved
+Collection views rework
+c6898bb0c019e56e62dc93e9462ab685da1228b8
+improved
+Scrollbars visibility
+2fed09689ebf0074ddee72110714a9dcd5a1839
+improved
+Mac build assets
+3fe128fd0988cfcbaadabad02616ba06f7aac989
+
+version
+5.2.0
+July 6th, 2020
+added
+Complete UI rework
+c502bbf5333698f0a86c232e884c755f20ce7682
+added
+Themes support
+c502bbf5333698f0a86c232e884c755f20ce7682
+improved
+Better Mac os support
+92f2382d372e583cb2649e3dbdc1b5c9c9ae17b2
+
+version
+5.1.1
+June 29th, 2020
+fixed
+decks view wildcards count
+9fd39437719b7bb9616e0cd66b0d8691475e0495
+fixed
+Explore deck view
+c2ef5a6b5ad5bd77da0b072ef9b7a91617116320
+improved
+Deck cards winrates on hover
+d9b6f51fc7c7ca875823685fcb406210f6b4db17
+improved
+Copy opponents tag on history
+780adc8e2477d5ba29318e741caa3ec1d95354d7
+
+version
+5.1.0
+June 27th, 2020
+added
+Deck page changes
+d60e4a16c56c75c0749e1bf5a68a8218c0daf590
+added
+Beta updates on pre auth settings
+b083f3894c0a4dacc7553a545f7efb1c193a211f
+added
+Detailed logs warning dialog
+073fa6f71b1b8e570aa1a017abdb41d4945c7167
+fixed
+Action log overlay scrolling
+e8f389871af9f95c50649a30471f8d18514b83e2
+fixed
+Deck overlay scrolling
+6f1eb136008914f7bd6f85e14d0f0f0532bd409d
+fixed
+Mac default logs path
+7514ab1f71bb12bb0a93d8cac54bb1909b210fe5
+improved
+Show overlay card in edit mode
+87de5f279e288ad082ab2798a676c90fa0a25807
+improved
+Default console messages
+5c9b92931508e7fefe723325572e6786d677cb5c
+
+version
 5.0.9
 June 23rd, 2020
 fixed
