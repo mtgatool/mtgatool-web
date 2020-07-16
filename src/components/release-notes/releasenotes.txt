@@ -1,4 +1,35 @@
 version
+5.4.0
+July 16th, 2020
+added
+Jumpstart support
+334fb8b1956ab04b29adb411a111f1f6b45cb94e
+fixed
+Wildcards count bugs
+d4cec401e78600537d436bc429b24e7c5936ae3b
+fixed
+Not found arts
+2f34774b0a91fe04eedf8bdb17f483bf59418882
+fixed
+Linux top loading bar
+191ad8e3f54770484960576dcdc4957355aadc30
+fixed
+Linux wrapper size
+83d7f5d63e5ff1742be53bffb3f96042c42166f5
+improved
+New list items
+12f31f621d29823d59044ffeefa9d6df016003e1
+improved
+Draft view
+1eaa318cf468b5a705125afbb16397d921151364
+improved
+Collection page
+0ca3361bd2ecfc5481b3127728bca3b9547599a8
+improved
+Internal login flow
+0023087659e268ffb14c9e5b7d0bac9ee882b983
+
+version
 5.3.0
 July 10th, 2020
 added
