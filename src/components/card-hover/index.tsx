@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useCallback } from "react";
 import css from "./cardhover.css";
 import db from "../../shared/database";
 import NotFound from "../../cssimages/notfound.png";
-import { useWebContext } from "../../web-provider";
+
 import { FACE_DFC_BACK, FACE_DFC_FRONT } from "../../shared/constants";
+import { useSelector } from "react-redux";
+import { AppState } from "../../redux/stores/webStore";
 
 function CardHover(): JSX.Element {
-  const webContext = useWebContext();
+  const hoverState = useSelector((state: AppState) => state.hover);
 
-  const getStyle = (ctx): React.CSSProperties => {
-    const cardObj = db.card(ctx.HoverGrpId);
+  const getStyle = useCallback((): React.CSSProperties => {
+    const cardObj = db.card(hoverState.grpId);
 
     let newImg;
     try {
@@ -19,15 +21,15 @@ function CardHover(): JSX.Element {
       newImg = `url(${NotFound})`;
     }
     return {
-      opacity: ctx.HoverOpacity,
+      opacity: hoverState.opacity,
       backgroundImage: newImg
     };
-  };
+  }, [hoverState]);
 
-  const getStyleDfc = (ctx): React.CSSProperties => {
-    let cardObj = db.card(ctx.HoverGrpId);
+  const getStyleDfc = useCallback((): React.CSSProperties => {
+    let cardObj = db.card(hoverState.grpId);
     let newImg = `url(${NotFound})`;
-    let opacity = ctx.HoverOpacity;
+    let opacity = hoverState.opacity;
     if (
       cardObj &&
       (cardObj.dfc == FACE_DFC_BACK || cardObj.dfc == FACE_DFC_FRONT) &&
@@ -47,12 +49,12 @@ function CardHover(): JSX.Element {
       opacity: opacity,
       backgroundImage: newImg
     };
-  };
+  }, [hoverState]);
 
   return (
     <>
-      <div style={getStyleDfc(webContext)} className={css["card-hover-dfc"]} />
-      <div style={getStyle(webContext)} className={css["card-hover-main"]} />
+      <div style={getStyleDfc()} className={css["card-hover-dfc"]} />
+      <div style={getStyle()} className={css["card-hover-main"]} />
     </>
   );
 }

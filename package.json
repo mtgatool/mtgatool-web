@@ -54,6 +54,9 @@
   },
   "dependencies": {
     "@react-spring/parallax": "^9.0.0-rc.3",
+    "@reduxjs/toolkit": "^1.4.0",
+    "@types/react-redux": "^7.1.9",
+    "@types/redux": "^3.6.0",
     "core-js": "3.4.5",
     "crypto": "^1.0.1",
     "lodash": "^4.17.15",
@@ -64,9 +67,11 @@
     "react-google-recaptcha": "^2.1.0",
     "react-hot-loader": "4.12.18",
     "react-markdown": "^4.3.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-spring": "^9.0.0-rc.3",
     "react-use-gesture": "^7.0.15",
+    "redux": "^4.0.5",
     "yaml": "^1.10.0"
   },
   "resolutions": {

@@ -20,8 +20,9 @@ import homeCss from "./home.css";
 
 import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
-import { useWebContext } from "../../web-provider";
 import { ExportViewProps } from "../../web-types/shared";
+import { useSelector } from "react-redux";
+import { AppState } from "../../redux/stores/webStore";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -58,7 +59,7 @@ function Home(props: ExportViewProps): JSX.Element {
   React.useEffect(() => {
     setImage(keyArt);
   }, [setImage]);
-  const webContext = useWebContext();
+  const webContext = useSelector((state: AppState) => state.web);
 
   return (
     <>
@@ -161,28 +162,16 @@ function Home(props: ExportViewProps): JSX.Element {
 function ShowcaseImage(props): JSX.Element {
   const { image, align } = props;
   const imageRef = React.useRef<HTMLImageElement>(null);
-  const webContext = useWebContext();
+  const scroll = useSelector((state: AppState) => state.web.scroll);
 
-  const getStyle = (ctx): React.CSSProperties => {
-    const offset = imageRef.current
-      ? imageRef.current.offsetTop - ctx.scroll
-      : -999;
-    return {
-      backgroundImage: `url(${image})`,
-      alignSelf: align == "left" ? "flex-start" : "flex-end",
-      transform: `translateY(${offset / 2}px)`
-    };
+  const offset = imageRef.current ? imageRef.current.offsetTop - scroll : -999;
+  const style: React.CSSProperties = {
+    backgroundImage: `url(${image})`,
+    alignSelf: align == "left" ? "flex-start" : "flex-end",
+    transform: `translateY(${offset / 2}px)`
   };
 
-  return (
-    <>
-      <div
-        ref={imageRef}
-        style={getStyle(webContext)}
-        className={homeCss.showcaseImage}
-      />
-    </>
-  );
+  return <div ref={imageRef} style={style} className={homeCss.showcaseImage} />;
 }
 
 function ShowcaseOverlay(): JSX.Element {

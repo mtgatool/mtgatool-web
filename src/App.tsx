@@ -29,22 +29,23 @@ import { WrapperOuter } from "./components/wrapper";
 import css from "./app.css";
 import keyArt from "./images/key-art.jpg";
 import notFoundArt from "./images/404.jpg";
-import { useWebDispatch, useWebContext } from "./web-provider";
 import { DbCardData } from "./types/Metadata";
+import { reduxAction } from "./redux/webRedux";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "./redux/stores/webStore";
 
 function App(): JSX.Element {
   const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
   const [imageUrl, setImageUrl] = React.useState(keyArt);
   const position = React.useRef(window);
-  const webContext = useWebContext();
+  const webContext = useSelector((state: AppState) => state.web);
 
-  const webDispatch = useWebDispatch();
-
+  const dispatch = useDispatch();
   const setScroll = useCallback(
-    (state: number): void => {
-      webDispatch({ type: "setScroll", scroll: state });
+    (scroll: number): void => {
+      reduxAction(dispatch, { type: "SET_SCROLL", arg: scroll });
     },
-    [webDispatch]
+    [dispatch]
   );
 
   const handleScroll = useCallback((): void => {

@@ -1,38 +1,36 @@
 import React from "react";
 import css from "./loading.css";
-import { useWebContext } from "../../web-provider";
 import {
   STATE_IDLE,
   STATE_DOWNLOAD,
   STATE_ERROR
 } from "../../shared/constants";
+import { useSelector } from "react-redux";
+import { AppState } from "../../redux/stores/webStore";
 
 function Loading(): JSX.Element {
-  const webContext = useWebContext();
+  const { loadingState } = useSelector((state: AppState) => state.web);
 
-  const loadingStyle = (ctx): React.CSSProperties => {
-    if (ctx.queryState == STATE_DOWNLOAD) {
-      return {
-        display: "block"
-      };
-    }
-    if (ctx.queryState == STATE_IDLE) {
-      return {
-        display: "none",
-        animation: "none"
-      };
-    }
-    if (ctx.queryState == STATE_ERROR) {
-      return {
-        display: "none"
-      };
-    }
-    return {};
-  };
+  let loadingStyle: React.CSSProperties = {};
 
-  return (
-    <div style={loadingStyle(webContext)} className={css.loadingDiv}></div>
-  );
+  if (loadingState == STATE_DOWNLOAD) {
+    loadingStyle = {
+      display: "block"
+    };
+  }
+  if (loadingState == STATE_IDLE) {
+    loadingStyle = {
+      display: "none",
+      animation: "none"
+    };
+  }
+  if (loadingState == STATE_ERROR) {
+    loadingStyle = {
+      display: "none"
+    };
+  }
+
+  return <div style={loadingStyle} className={css.loadingDiv}></div>;
 }
 
 export default Loading;

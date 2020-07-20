@@ -13,7 +13,6 @@ import db from "../../shared/database";
 import Deck from "../../shared/deck";
 import { utf8Decode } from "../../shared/util";
 import keyArt from "../../images/key-art.jpg";
-import { useWebDispatch } from "../../web-provider";
 import {
   STATE_IDLE,
   STATE_DOWNLOAD,
@@ -22,6 +21,8 @@ import {
 import { ExportViewProps, ServerDeck } from "../../web-types/shared";
 import { InternalDeck } from "../../types/Deck";
 import { animated, useSpring } from "react-spring";
+import { useDispatch } from "react-redux";
+import { reduxAction } from "../../redux/webRedux";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -201,15 +202,14 @@ function Metagame(props: ExportViewProps): JSX.Element {
     null
   );
   const [deckToDraw, setDeckToDraw] = React.useState<InternalDeck | null>(null);
-  const webDispatch = useWebDispatch();
+  const dispatch = useDispatch();
 
   const setQueryState = useCallback(
-    (state: number): void => {
-      webDispatch({ type: "setQueryState", queryState: state });
+    (queryState: number) => {
+      reduxAction(dispatch, { type: "SET_LOADING", arg: queryState });
     },
-    [webDispatch]
+    [dispatch]
   );
-
   // Little debug here
   /*
   const database = useSelector(state => {

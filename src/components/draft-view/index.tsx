@@ -6,7 +6,6 @@ import { WrapperOuter, WrapperInnerCentered } from "../wrapper";
 import DeckList from "../decklist";
 import NotFound from "../notfound";
 import Slider, { SliderPosition } from "../slider";
-import { useWebDispatch } from "../../web-provider";
 import db from "../../shared/database";
 import urlDecode from "../../shared/urlDecode";
 import {
@@ -18,6 +17,9 @@ import {
 import Deck from "../../shared/deck";
 import { ExportViewProps } from "../../web-types/shared";
 import { InternalDraft } from "../../types/draft";
+import useHoverCard from "../../hooks/useHoverCard";
+import { useDispatch } from "react-redux";
+import { reduxAction } from "../../redux/webRedux";
 
 interface PickPack {
   pack: number;
@@ -48,32 +50,8 @@ interface DraftCardProps {
 
 function DraftCard(props: DraftCardProps): JSX.Element {
   const { grpId, pick } = props;
-  //const cardObj = db.card(grpId);
 
-  const webDispatch = useWebDispatch();
-
-  const setHoverCard = useCallback(
-    (grpId: number): void => {
-      webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-    },
-    [webDispatch]
-  );
-
-  const setHoverOpacity = useCallback(
-    (opacity: number): void => {
-      webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
-    },
-    [webDispatch]
-  );
-
-  const handleMouseEnter = React.useCallback(() => {
-    setHoverCard(grpId);
-    setHoverOpacity(1);
-  }, [grpId, setHoverCard, setHoverOpacity]);
-
-  const handleMouseLeave = React.useCallback(() => {
-    setHoverOpacity(0);
-  }, [setHoverOpacity]);
+  const [hoverIn, hoverOut] = useHoverCard(grpId);
 
   const makeStyle = (): React.CSSProperties => {
     const cardObj = db.card(grpId);
@@ -92,8 +70,8 @@ function DraftCard(props: DraftCardProps): JSX.Element {
   return (
     <div
       style={makeStyle()}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={hoverIn}
+      onMouseLeave={hoverOut}
       className={css["draft-card"] + (pick ? " " + css.draftCardPicked : "")}
     />
   );
@@ -106,15 +84,16 @@ function DraftView(props: ExportViewProps): JSX.Element {
     null
   );
   const [pickpack, setPickPack] = React.useState({ pick: 0, pack: 0 });
-  const webDispatch = useWebDispatch();
   const set = draftToDraw?.set || "";
   const maxPosition = (PACK_SIZES[set] ?? DEFAULT_PACK_SIZE) * 3 - 1;
 
+  const dispatch = useDispatch();
+
   const setQueryState = useCallback(
-    (state: number): void => {
-      webDispatch({ type: "setQueryState", queryState: state });
+    (queryState: number) => {
+      reduxAction(dispatch, { type: "SET_LOADING", arg: queryState });
     },
-    [webDispatch]
+    [dispatch]
   );
 
   React.useEffect(() => {
@@ -128,18 +107,7 @@ function DraftView(props: ExportViewProps): JSX.Element {
         } else {
           try {
             const draftData = JSON.parse(urlDecode(xhr.responseText));
-            //console.log(xhr.responseText);
             setDraftToDraw(draftData);
-            /*
-            try {
-              const cardObj = db.card(draftData.playerDeck.deckTileId);
-              if (cardObj.images.art_crop) {
-                setImage(cardObj);
-              }
-            } catch (e) {
-              console.log("Card image not found ", e);
-            }
-            */
             setQueryState(STATE_IDLE);
           } catch (e) {
             console.log(e);

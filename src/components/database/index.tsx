@@ -5,7 +5,8 @@ import {
   STATE_ERROR
 } from "../../shared/constants";
 import db from "../../shared/database";
-import { useWebDispatch } from "../../web-provider";
+import { reduxAction } from "../../redux/webRedux";
+import { useDispatch } from "react-redux";
 
 const DATABASE_URL = "https://mtgatool.com/database/";
 const LATEST_URL = "https://mtgatool.com/database/latest/";
@@ -13,20 +14,20 @@ const GH_LATEST =
   "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest";
 
 function Database(): JSX.Element {
-  const webDispatch = useWebDispatch();
+  const dispatch = useDispatch();
 
   const setQueryState = useCallback(
-    (state): void => {
-      webDispatch({ type: "setQueryState", queryState: state });
+    (queryState: number) => {
+      reduxAction(dispatch, { type: "SET_LOADING", arg: queryState });
     },
-    [webDispatch]
+    [dispatch]
   );
 
   const setDatabaseVersion = useCallback(
-    (version): void => {
-      webDispatch({ type: "setDatabaseVersion", databaseVersion: version });
+    (queryState: number) => {
+      reduxAction(dispatch, { type: "SET_DB_VERSION", arg: queryState });
     },
-    [webDispatch]
+    [dispatch]
   );
 
   const fetchGHTag = useCallback((): void => {
@@ -36,7 +37,10 @@ function Database(): JSX.Element {
         try {
           const response = JSON.parse(xhr.responseText);
           console.log("Latest GitHub: " + response.tag_name);
-          webDispatch({ type: "setVersionTag", versionTag: response.tag_name });
+          reduxAction(dispatch, {
+            type: "SET_VERSION_TAG",
+            arg: response.tag_name
+          });
         } catch (e) {
           console.log(e);
         }
@@ -45,7 +49,7 @@ function Database(): JSX.Element {
 
     xhr.open("GET", GH_LATEST);
     xhr.send();
-  }, [webDispatch]);
+  }, [dispatch]);
 
   const load = useCallback((): void => {
     console.log("Downloading latest..");

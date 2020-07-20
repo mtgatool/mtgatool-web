@@ -1,16 +1,16 @@
 /* eslint-disable no-else-return */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React, { useCallback } from "react";
+import React from "react";
 import css from "./cardtile.css";
 import db from "../../shared/database";
-import { useWebDispatch } from "../../web-provider";
 import {
   COLORS_ALL,
   FACE_SPLIT_FULL,
   FACE_ADVENTURE_MAIN
 } from "../../shared/constants";
 import { DbCardData } from "../../types/Metadata";
+import useHoverCard from "../../hooks/useHoverCard";
 
 function openScryfallCard(card: DbCardData): void {
   console.log("open " + card.name);
@@ -105,32 +105,18 @@ export default function CardTile(props: CardTileProps): JSX.Element {
   const [dfcCard, setdfcCard] = React.useState<DbCardData | undefined>(
     undefined
   );
-  const webDispatch = useWebDispatch();
 
-  const setHoverCard = useCallback(
-    (grpId): void => {
-      webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-    },
-    [webDispatch]
-  );
-
-  const setHoverOpacity = useCallback(
-    (opacity): void => {
-      webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
-    },
-    [webDispatch]
-  );
+  const [hoverIn, hoverOut] = useHoverCard(grpId);
 
   const handleMouseEnter = React.useCallback(() => {
     setMouseHovering(true);
-    setHoverCard(grpId);
-    setHoverOpacity(1);
-  }, [grpId, setMouseHovering, setHoverCard, setHoverOpacity]);
+    hoverIn();
+  }, [hoverIn]);
 
   const handleMouseLeave = React.useCallback(() => {
     setMouseHovering(false);
-    setHoverOpacity(0);
-  }, [setMouseHovering, setHoverOpacity]);
+    hoverOut();
+  }, [hoverOut]);
 
   const handleMouseClick = React.useCallback(() => {
     let cardOpen = card;

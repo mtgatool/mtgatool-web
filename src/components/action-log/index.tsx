@@ -8,7 +8,6 @@ import css from "./actionlog.css";
 import metacss from "../metagame/metagame.css";
 import Deck from "../../shared/deck";
 import db from "../../shared/database";
-import { useWebDispatch } from "../../web-provider";
 import {
   STATE_IDLE,
   STATE_DOWNLOAD,
@@ -16,6 +15,9 @@ import {
 } from "../../shared/constants";
 import { ExportViewProps } from "../../web-types/shared";
 import { InternalMatch } from "../../types/match";
+import { useDispatch } from "react-redux";
+import { reduxAction } from "../../redux/webRedux";
+import useHoverCard from "../../hooks/useHoverCard";
 
 function ActionLogView(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
@@ -23,13 +25,13 @@ function ActionLogView(props: ExportViewProps): JSX.Element {
   const [matchToDraw, setMatchToDraw] = React.useState<InternalMatch | null>(
     null
   );
-  const webDispatch = useWebDispatch();
+  const dispatch = useDispatch();
 
   const setQueryState = useCallback(
-    (state: number): void => {
-      webDispatch({ type: "setQueryState", queryState: state });
+    (queryState: number) => {
+      reduxAction(dispatch, { type: "SET_LOADING", arg: queryState });
     },
-    [webDispatch]
+    [dispatch]
   );
 
   const copyDeck = React.useCallback(() => {
@@ -207,37 +209,14 @@ function LogCard(props: LogCardProps): JSX.Element {
   const cardObj = db.card(grpId);
   const cardName = cardObj?.name;
 
-  const webDispatch = useWebDispatch();
-
-  const setHoverCard = useCallback(
-    (grpId: number): void => {
-      webDispatch({ type: "setHoverCard", HoverGrpId: grpId });
-    },
-    [webDispatch]
-  );
-
-  const setHoverOpacity = useCallback(
-    (opacity: number): void => {
-      webDispatch({ type: "setHoverOpacity", HoverOpacity: opacity });
-    },
-    [webDispatch]
-  );
-
-  const handleMouseEnter = React.useCallback(() => {
-    setHoverCard(grpId);
-    setHoverOpacity(1);
-  }, [grpId, setHoverCard, setHoverOpacity]);
-
-  const handleMouseLeave = React.useCallback(() => {
-    setHoverOpacity(0);
-  }, [setHoverOpacity]);
+  const [hoverIn, hoverOut] = useHoverCard(grpId);
 
   return (
     <>
       {children !== "" ? <LogText>{children}</LogText> : <></>}
       <div
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={hoverIn}
+        onMouseLeave={hoverOut}
         className={css["log-card"]}
       >
         {cardName}
