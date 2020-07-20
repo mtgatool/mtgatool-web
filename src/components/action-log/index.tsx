@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback } from "react";
+import React, { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import DeckList from "../decklist";
 import TopTitle from "../title";
@@ -8,16 +8,10 @@ import css from "./actionlog.css";
 import metacss from "../metagame/metagame.css";
 import Deck from "../../shared/deck";
 import db from "../../shared/database";
-import {
-  STATE_IDLE,
-  STATE_DOWNLOAD,
-  STATE_ERROR
-} from "../../shared/constants";
 import { ExportViewProps } from "../../web-types/shared";
 import { InternalMatch } from "../../types/match";
-import { useDispatch } from "react-redux";
-import { reduxAction } from "../../redux/webRedux";
 import useHoverCard from "../../hooks/useHoverCard";
+import useRequest from "../../hooks/useRequest";
 
 function ActionLogView(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
@@ -25,61 +19,32 @@ function ActionLogView(props: ExportViewProps): JSX.Element {
   const [matchToDraw, setMatchToDraw] = React.useState<InternalMatch | null>(
     null
   );
-  const dispatch = useDispatch();
 
-  const setQueryState = useCallback(
-    (queryState: number) => {
-      reduxAction(dispatch, { type: "SET_LOADING", arg: queryState });
-    },
-    [dispatch]
+  const { response, status, start } = useRequest(
+    `https://mtgatool.com/api/get_action_log.php?id=${logMatch?.params.logId}`
   );
 
   const copyDeck = React.useCallback(() => {
-    //console.log("Copy");
-    //console.log(matchToDraw, str);
     const str = new Deck(matchToDraw?.playerDeck).getExportArena();
     navigator.clipboard.writeText(str);
   }, [matchToDraw]);
 
-  React.useEffect(() => {
-    if (logMatch) {
-      const URL = `https://mtgatool.com/api/get_action_log.php?id=${logMatch.params.logId}`;
-      setQueryState(STATE_DOWNLOAD);
-      const xhr = new XMLHttpRequest();
-      xhr.onload = (): void => {
-        if (xhr.status !== 200) {
-          setQueryState(xhr.status);
-        } else {
-          try {
-            const matchData = JSON.parse(xhr.responseText);
-            //console.log(matchData);
-            setMatchToDraw(matchData);
-            try {
-              const cardObj = db.card(matchData.playerDeck.deckTileId);
-              if (cardObj?.images.art_crop) {
-                setImage(cardObj);
-              }
-            } catch (e) {
-              console.log("Card image not found ", e);
-            }
-            setQueryState(STATE_IDLE);
-          } catch (e) {
-            console.log(e);
-            setQueryState(STATE_ERROR);
-          }
+  useEffect(() => {
+    if (logMatch && status == null) {
+      start();
+    } else if (response && matchToDraw == null) {
+      const matchData = JSON.parse(response);
+      setMatchToDraw(matchData);
+      try {
+        const cardObj = db.card(matchData.playerDeck.deckTileId);
+        if (cardObj?.images.art_crop) {
+          setImage(cardObj);
         }
-      };
-      xhr.onreadystatechange = function(): void {
-        if (xhr.readyState === 4) {
-          setQueryState(STATE_IDLE);
-        }
-      };
-      xhr.open("GET", URL);
-      xhr.send();
-    } else {
-      setQueryState(STATE_IDLE);
+      } catch (e) {
+        console.log("Card image not found ", e);
+      }
     }
-  }, [logMatch, setImage, setQueryState]);
+  }, [logMatch, matchToDraw, response, setImage, start, status]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import css from "./draftview.css";
 import TopTitle from "../title";
@@ -7,19 +7,13 @@ import DeckList from "../decklist";
 import NotFound from "../notfound";
 import Slider, { SliderPosition } from "../slider";
 import db from "../../shared/database";
-import urlDecode from "../../shared/urlDecode";
-import {
-  STATE_IDLE,
-  STATE_DOWNLOAD,
-  STATE_ERROR,
-  PACK_SIZES
-} from "../../shared/constants";
+import { PACK_SIZES } from "../../shared/constants";
 import Deck from "../../shared/deck";
 import { ExportViewProps } from "../../web-types/shared";
 import { InternalDraft } from "../../types/draft";
 import useHoverCard from "../../hooks/useHoverCard";
-import { useDispatch } from "react-redux";
-import { reduxAction } from "../../redux/webRedux";
+import useRequest from "../../hooks/useRequest";
+import urlDecode from "../../shared/urlDecode";
 
 interface PickPack {
   pack: number;
@@ -87,45 +81,18 @@ function DraftView(props: ExportViewProps): JSX.Element {
   const set = draftToDraw?.set || "";
   const maxPosition = (PACK_SIZES[set] ?? DEFAULT_PACK_SIZE) * 3 - 1;
 
-  const dispatch = useDispatch();
-
-  const setQueryState = useCallback(
-    (queryState: number) => {
-      reduxAction(dispatch, { type: "SET_LOADING", arg: queryState });
-    },
-    [dispatch]
+  const { response, status, start } = useRequest(
+    `https://mtgatool.com/api/get_draft.php?id=${draftMatch?.params.draftId}`
   );
 
-  React.useEffect(() => {
-    if (draftMatch) {
-      const URL = `https://mtgatool.com/api/get_draft.php?id=${draftMatch.params.draftId}`;
-      setQueryState(STATE_DOWNLOAD);
-      const xhr = new XMLHttpRequest();
-      xhr.onload = (): void => {
-        if (xhr.status !== 200) {
-          setQueryState(xhr.status);
-        } else {
-          try {
-            const draftData = JSON.parse(urlDecode(xhr.responseText));
-            setDraftToDraw(draftData);
-            setQueryState(STATE_IDLE);
-          } catch (e) {
-            console.log(e);
-            setQueryState(STATE_ERROR);
-          }
-        }
-      };
-      xhr.onreadystatechange = function(): void {
-        if (xhr.readyState === 4) {
-          setQueryState(STATE_IDLE);
-        }
-      };
-      xhr.open("GET", URL);
-      xhr.send();
-    } else {
-      setQueryState(STATE_IDLE);
+  useEffect(() => {
+    if (draftMatch && status == null) {
+      start();
+    } else if (response && draftToDraw == null) {
+      const draftData = JSON.parse(urlDecode(response));
+      setDraftToDraw(draftData);
     }
-  }, [draftMatch, setQueryState]);
+  }, [draftMatch, draftToDraw, response, setImage, start, status]);
 
   const onSliderChange = useCallback(
     (value: number) => {
