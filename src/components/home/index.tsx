@@ -21,8 +21,9 @@ import homeCss from "./home.css";
 import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
 import { ExportViewProps } from "../../web-types/shared";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
+import { reduxAction } from "../../redux/webRedux";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -59,7 +60,18 @@ function Home(props: ExportViewProps): JSX.Element {
   React.useEffect(() => {
     setImage(keyArt);
   }, [setImage]);
-  const webContext = useSelector((state: AppState) => state.web);
+  const { versionTag } = useSelector((state: AppState) => state.web);
+  const position = React.useRef(window);
+  const dispatch = useDispatch();
+
+  const handleScroll = useCallback((): void => {
+    reduxAction(dispatch, { type: "SET_SCROLL", arg: window.scrollY });
+  }, [dispatch]);
+
+  React.useLayoutEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return (): void => window.removeEventListener("scroll", handleScroll);
+  }, [position, handleScroll]);
 
   return (
     <>
@@ -73,7 +85,7 @@ function Home(props: ExportViewProps): JSX.Element {
             </div>
             <a
               className={css.downloadButton}
-              href={makeDownloadURL(webContext.versionTag)}
+              href={makeDownloadURL(versionTag)}
             >
               Download for {getCurrentOSName()}
             </a>
@@ -148,7 +160,7 @@ function Home(props: ExportViewProps): JSX.Element {
             <a
               style={{ margin: "auto 0px" }}
               className={css.downloadButton}
-              href={makeDownloadURL(webContext.versionTag)}
+              href={makeDownloadURL(versionTag)}
             >
               Download for {getCurrentOSName()}
             </a>

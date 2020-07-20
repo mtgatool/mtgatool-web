@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 
@@ -30,33 +30,13 @@ import css from "./app.css";
 import keyArt from "./images/key-art.jpg";
 import notFoundArt from "./images/404.jpg";
 import { DbCardData } from "./types/Metadata";
-import { reduxAction } from "./redux/webRedux";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { AppState } from "./redux/stores/webStore";
 
 function App(): JSX.Element {
   const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
   const [imageUrl, setImageUrl] = React.useState(keyArt);
-  const position = React.useRef(window);
-  const webContext = useSelector((state: AppState) => state.web);
-
-  const dispatch = useDispatch();
-  const setScroll = useCallback(
-    (scroll: number): void => {
-      reduxAction(dispatch, { type: "SET_SCROLL", arg: scroll });
-    },
-    [dispatch]
-  );
-
-  const handleScroll = useCallback((): void => {
-    //console.log("handleScroll", window.scrollY);
-    setScroll(window.scrollY);
-  }, [setScroll]);
-
-  React.useLayoutEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return (): void => window.removeEventListener("scroll", handleScroll);
-  }, [position, handleScroll]);
+  const { databaseVersion } = useSelector((state: AppState) => state.web);
 
   const setImage = (cardObj: DbCardData | string): void => {
     if (cardObj == keyArt) {
@@ -84,7 +64,7 @@ function App(): JSX.Element {
         <div style={wrapperStyle} className={css.wrapperImage} />
         <TopNav artist={artData} />
         <CardHover />
-        {webContext.databaseVersion !== 0 ? (
+        {databaseVersion !== 0 ? (
           <Switch>
             <Route exact path="/">
               <Home setImage={setImage} />

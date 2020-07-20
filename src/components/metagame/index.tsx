@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
-import React, { useState, useCallback } from "react";
-import { useRouteMatch, useLocation, Link, match } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useRouteMatch, Link, match } from "react-router-dom";
 import css from "./metagame.css";
 import topNavCss from "../topnav/topnav.css";
 import { ManaCost } from "../card-tile";
@@ -13,16 +13,10 @@ import db from "../../shared/database";
 import Deck from "../../shared/deck";
 import { utf8Decode } from "../../shared/util";
 import keyArt from "../../images/key-art.jpg";
-import {
-  STATE_IDLE,
-  STATE_DOWNLOAD,
-  STATE_ERROR
-} from "../../shared/constants";
 import { ExportViewProps, ServerDeck } from "../../web-types/shared";
 import { InternalDeck } from "../../types/Deck";
 import { animated, useSpring } from "react-spring";
-import { useDispatch } from "react-redux";
-import { reduxAction } from "../../redux/webRedux";
+import useRequest from "../../hooks/useRequest";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -179,8 +173,6 @@ function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
 }
 
 function Metagame(props: ExportViewProps): JSX.Element {
-  //const match = useRouteMatch();
-  const [fetchingDeck, setFetchingDeck] = useState(false);
   const [currentMatchId, setCurrentMatchId] = useState("");
   const formatMatch = useRouteMatch<{ format: string }>("/metagame/:format");
   const dayMatch = useRouteMatch<{ format: string; day: string }>(
@@ -198,156 +190,90 @@ function Metagame(props: ExportViewProps): JSX.Element {
     deck: string;
   }>("/metagame/:format/:day/:arch/:deck");
   const { setImage } = props;
-  const [metagameData, setMetagameData] = React.useState<MetagameData | null>(
-    null
-  );
-  const [deckToDraw, setDeckToDraw] = React.useState<InternalDeck | null>(null);
-  const dispatch = useDispatch();
+  const [metagameData, setMetagameData] = useState<MetagameData | null>(null);
+  const [archetype, setArchetype] = useState<string | null>(null);
+  const [deckToDraw, setDeckToDraw] = useState<InternalDeck | null>(null);
 
-  const setQueryState = useCallback(
-    (queryState: number) => {
-      reduxAction(dispatch, { type: "SET_LOADING", arg: queryState });
-    },
-    [dispatch]
-  );
-  // Little debug here
-  /*
-  const database = useSelector(state => {
-    console.log("new state; ", state);
-  });
-  */
+  let URL = METAGAME_URL;
+  if (dayMatch) {
+    URL = `${METAGAME_URL}?event=${dayMatch.params.format.toUpperCase()}&days=${
+      dayMatch.params.day
+    }`;
+  } else if (formatMatch) {
+    URL = `${METAGAME_URL}?event=${formatMatch.params.format.toUpperCase()}`;
+  }
+  const metagameRequest = useRequest(URL);
 
-  const getArchetypeDeck = useCallback(
-    (match: string): void => {
-      const URL = `https://mtgatool.com/api/get_match_deck.php?id=${match}`;
-      //setQueryState(STATE_DOWNLOAD);
-      const xhr = new XMLHttpRequest();
-      xhr.onload = (): void => {
-        if (xhr.status !== 200) {
-          setQueryState(xhr.status);
-        } else {
-          try {
-            const deckData = JSON.parse(
-              decodeURIComponent(escape(xhr.responseText))
-            );
-            setDeckToDraw(deckData);
-            setCurrentMatchId(match);
-            setQueryState(STATE_IDLE);
-          } catch (e) {
-            console.log(e);
-            setQueryState(STATE_ERROR);
-          }
-        }
-      };
-      xhr.onreadystatechange = function(): void {
-        if (xhr.readyState === 4) {
-          setQueryState(STATE_IDLE);
-          setFetchingDeck(false);
-        }
-      };
-      xhr.open("GET", URL);
-      xhr.send();
-    },
-    [setQueryState]
-  );
-
-  const getMetagameData = useCallback((): void => {
-    setQueryState(STATE_DOWNLOAD);
-    const xhr = new XMLHttpRequest();
-    xhr.onload = (): void => {
-      if (xhr.status !== 200) {
-        setQueryState(xhr.status);
-      } else {
-        try {
-          const response = decodeURIComponent(escape(xhr.responseText));
-          const jsonData = JSON.parse(response);
-          //console.log("setMetagameData");
-          //console.log(jsonData);
-          setMetagameData(jsonData);
-          setQueryState(STATE_IDLE);
-        } catch (e) {
-          console.log(e);
-          setQueryState(STATE_ERROR);
-        }
-      }
-    };
-    xhr.onreadystatechange = (): void => {
-      if (xhr.readyState === 4) {
-        setQueryState(STATE_IDLE);
-      }
-    };
-
-    let URL = METAGAME_URL;
-    if (dayMatch) {
-      URL = `${METAGAME_URL}?event=${dayMatch.params.format.toUpperCase()}&days=${
-        dayMatch.params.day
-      }`;
-    } else if (formatMatch) {
-      URL = `${METAGAME_URL}?event=${formatMatch.params.format.toUpperCase()}`;
+  useEffect(() => {
+    if (metagameRequest.status == null) {
+      metagameRequest.start();
+    } else if (metagameRequest.response && metagameData == null) {
+      const response = decodeURIComponent(escape(metagameRequest.response));
+      const jsonData = JSON.parse(response);
+      setMetagameData(jsonData);
     }
-    //console.log(URL);
-    xhr.open("GET", URL);
-    xhr.send();
-  }, [setQueryState, dayMatch, formatMatch]);
+  }, [metagameRequest, metagameData]);
 
-  const location = useLocation();
+  const ArchURL = `https://mtgatool.com/api/get_match_deck.php?id=${currentMatchId}`;
+  const archRequest = useRequest(ArchURL);
 
-  React.useEffect(() => {
-    //console.log("match", match);
-    //console.log("formatMatch", formatMatch);
-    //console.log("dayMatch", dayMatch);
-    //console.log("archMatch", archMatch);
-    //console.log("deckMatch", deckMatch);
-
-    if (!archMatch) {
-      setImage(keyArt);
+  useEffect(() => {
+    if (archRequest.status == null && currentMatchId !== "") {
+      archRequest.start(ArchURL);
+    } else if (archRequest.response) {
+      const deckData = JSON.parse(
+        decodeURIComponent(escape(archRequest.response))
+      );
+      if (deckData.id !== deckToDraw?.id) {
+        //console.log(deckData);
+        setDeckToDraw(deckData);
+      }
     }
+  }, [ArchURL, archRequest, currentMatchId, deckToDraw]);
+
+  // format ID match
+  useEffect(() => {
     if (
       formatMatch &&
       metagameData &&
       metagameData.format !== formatMatch.params.format
     ) {
-      getMetagameData();
-    } else if (metagameData && metagameData.meta) {
-      if (deckMatch && archMatch) {
-        const openedDeck = parseInt(deckMatch.params.deck);
-        const archName = archMatch.params.arch;
-        const archetypeData = metagameData.meta.filter(
-          arch => arch.name == archName
-        )[0];
-        if (openedDeck < archetypeData.decks.length && !fetchingDeck) {
-          const matchId = archetypeData.decks[openedDeck].match;
-          //console.log("get deck", matchId);
-          if (currentMatchId !== matchId) {
-            setFetchingDeck(true);
-            getArchetypeDeck(matchId);
-          }
-        }
-      } else if (archMatch) {
-        const archName = archMatch.params.arch;
-        const archetypeData = metagameData.meta.filter(
-          arch => arch.name == archName
-        )[0];
-        if (archetypeData) {
-          //console.log("set best deck", archetypeData.best_deck);
-          setDeckToDraw(archetypeData.best_deck);
+      setMetagameData(null);
+      metagameRequest.reset(URL);
+    }
+  }, [URL, formatMatch, metagameData, metagameRequest]);
+
+  // Archetype match
+  useEffect(() => {
+    const archetypeData = metagameData
+      ? metagameData.meta.filter(arch => arch.name == archMatch?.params.arch)[0]
+      : null;
+    if (archetypeData) {
+      setDeckToDraw(archetypeData.best_deck);
+    }
+    if (archMatch && archMatch.params.arch !== archetype) {
+      setArchetype(archMatch.params.arch);
+    }
+  }, [metagameData, archMatch, archetype]);
+
+  // Deck number match
+  useEffect(() => {
+    if (deckMatch && metagameData && metagameData.meta) {
+      const openedDeck = parseInt(deckMatch.params.deck);
+      const archetypeData = metagameData.meta.filter(
+        arch => arch.name == archetype
+      )[0];
+      if (openedDeck < archetypeData.decks.length) {
+        const matchId = archetypeData.decks[openedDeck].match;
+        if (currentMatchId !== matchId) {
+          archRequest.reset();
+          setCurrentMatchId(matchId);
         }
       }
-    } else {
-      getMetagameData();
+    } else if (currentMatchId !== null) {
+      setCurrentMatchId("");
     }
-  }, [
-    metagameData,
-    location,
-    archMatch,
-    deckMatch,
-    formatMatch,
-    getArchetypeDeck,
-    getMetagameData,
-    setImage,
-    fetchingDeck,
-    currentMatchId
-  ]);
+  }, [archetype, deckMatch, metagameData, currentMatchId, archRequest]);
 
   React.useEffect(() => {
     setImage(keyArt);

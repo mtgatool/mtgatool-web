@@ -10,7 +10,7 @@ export default function useRequest(
 ): {
   response: string | undefined;
   status: number | null;
-  start: () => void;
+  start: (url?: string) => void;
   reset: (url?: string) => void;
   setUrl: React.Dispatch<React.SetStateAction<string>>;
 } {
@@ -30,28 +30,36 @@ export default function useRequest(
     if (newUrl) {
       setUrl(newUrl);
     }
+    setResponse(undefined);
     setStatus(null);
   }, []);
 
-  const start = useCallback(() => {
-    setStatus(201);
-    setQueryState(STATE_DOWNLOAD);
-    const xhr = new XMLHttpRequest();
-    xhr.onload = (): void => {
-      if (xhr.status !== status) setStatus(xhr.status);
-      if (xhr.status == 200) {
-        try {
-          setQueryState(STATE_IDLE);
-          setResponse(xhr.responseText);
-        } catch (e) {
-          setQueryState(STATE_ERROR);
-          console.log(e);
+  const start = useCallback(
+    (url?: string) => {
+      setStatus(201);
+      setQueryState(STATE_DOWNLOAD);
+      const xhr = new XMLHttpRequest();
+      xhr.onload = (): void => {
+        if (xhr.status !== status) setStatus(xhr.status);
+        if (xhr.status == 200) {
+          try {
+            //console.log(xhr.responseText);
+            setQueryState(STATE_IDLE);
+            setResponse(xhr.responseText);
+          } catch (e) {
+            setQueryState(STATE_ERROR);
+            console.log(e);
+          }
         }
+      };
+      xhr.open("GET", url || URL);
+      xhr.send();
+      if (url) {
+        setUrl(url);
       }
-    };
-    xhr.open("GET", URL);
-    xhr.send();
-  }, [URL, status, setQueryState]);
+    },
+    [URL, status, setQueryState]
+  );
 
   return { response, status, start, setUrl, reset };
 }
