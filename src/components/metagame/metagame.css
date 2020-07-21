@@ -60,6 +60,7 @@
   flex-direction: column;
   justify-content: flex-end;
   text-align: center;
+  overflow: hidden;
 }
 
 .archetype-selector {

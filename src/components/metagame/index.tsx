@@ -224,8 +224,7 @@ function Metagame(props: ExportViewProps): JSX.Element {
       const deckData = JSON.parse(
         decodeURIComponent(escape(archRequest.response))
       );
-      if (deckData.id !== deckToDraw?.id) {
-        //console.log(deckData);
+      if (deckData.id !== (deckToDraw?.id || "")) {
         setDeckToDraw(deckData);
       }
     }
@@ -245,29 +244,27 @@ function Metagame(props: ExportViewProps): JSX.Element {
 
   // Archetype match
   useEffect(() => {
-    const archetypeData = metagameData
-      ? metagameData.meta.filter(arch => arch.name == archMatch?.params.arch)[0]
-      : null;
-    if (archetypeData) {
-      setDeckToDraw(archetypeData.best_deck);
-    }
     if (archMatch && archMatch.params.arch !== archetype) {
       setArchetype(archMatch.params.arch);
     }
-  }, [metagameData, archMatch, archetype]);
+  }, [archMatch, archetype]);
 
   // Deck number match
   useEffect(() => {
+    const archetypeData = metagameData
+      ? metagameData.meta.filter(arch => arch.name == archMatch?.params.arch)[0]
+      : null;
+    if (archetypeData && !deckMatch) {
+      setDeckToDraw(archetypeData.best_deck);
+    }
     if (deckMatch && metagameData && metagameData.meta) {
       const openedDeck = parseInt(deckMatch.params.deck);
-      const archetypeData = metagameData.meta.filter(
-        arch => arch.name == archetype
-      )[0];
-      if (openedDeck < archetypeData.decks.length) {
+
+      if (archetypeData && openedDeck < archetypeData.decks.length) {
         const matchId = archetypeData.decks[openedDeck].match;
         if (currentMatchId !== matchId) {
-          archRequest.reset();
           setCurrentMatchId(matchId);
+          archRequest.reset();
         }
       }
     } else if (currentMatchId !== null) {
@@ -383,8 +380,6 @@ function ArchetypeDecks(props: ArchetypeDecksProps): JSX.Element {
   }
 
   const copyDeck = React.useCallback(() => {
-    //console.log("Copy");
-    //console.log(deckToDraw, str);
     let str = "";
     if (deckToDraw) {
       str = new Deck(deckToDraw).getExportArena();
