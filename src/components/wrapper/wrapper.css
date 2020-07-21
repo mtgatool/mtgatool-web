@@ -1,9 +1,7 @@
 .wrapper-outer {
   justify-content: center;
   flex-direction: column;
-  background-color: #33281ebf;
-  color: var(--color-light);
-  display: flex;
+  color: var(--color-text);
   flex-grow: 2;
   overflow: hidden;
 }
@@ -13,7 +11,15 @@
   flex-direction: column;
   background-color: #ecddce;
   color: var(--color-back);
-  display: flex;
+  flex-grow: 2;
+  overflow: hidden;
+}
+
+.wrapper-outer-dark {
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-base);
+  color: var(--color-text);
   flex-grow: 2;
   overflow: hidden;
 }
@@ -22,7 +28,7 @@
   margin: auto;
   flex-grow: 2;
   width: 100%;
-  display: contents;
+  max-width: 1200px;
 }
 
 .wrapper-inner-centered {

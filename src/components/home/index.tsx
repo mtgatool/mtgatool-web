@@ -2,28 +2,29 @@
 import React, { useMemo, useCallback } from "react";
 import sharedcss from "../../shared.css";
 
-import keyArt from "../../images/key-art.jpg";
+import keyArt from "../../assets/images/key-art.jpg";
 
-import show00 from "../../images/showcase/00.png";
-import show01 from "../../images/showcase/01.png";
-import show02 from "../../images/showcase/02.png";
-import show03 from "../../images/showcase/03.png";
-import show04 from "../../images/showcase/04.png";
+import show00 from "../../assets/images/showcase/00.png";
+import show01 from "../../assets/images/showcase/01.png";
+import show02 from "../../assets/images/showcase/02.png";
+import show03 from "../../assets/images/showcase/03.png";
+import show04 from "../../assets/images/showcase/04.png";
 
 const showCase = [show00, show01, show02, show03, show04];
 
-import showHistory from "../../images/showcase/history.png";
-import showCollection from "../../images/showcase/collection.png";
+import showHistory from "../../assets/images/showcase/history.png";
+import showCollection from "../../assets/images/showcase/collection.png";
 
 import css from "../../app.css";
 import homeCss from "./home.css";
 
 import MatchFeed from "../match-feed";
-import { WrapperInner, WrapperOuter, WrapperOuterLight } from "../wrapper";
+import { WrapperInner, WrapperOuter, WrapperOuterDark } from "../wrapper";
 import { ExportViewProps } from "../../web-types/shared";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
 import { reduxAction } from "../../redux/webRedux";
+import Section from "../Section";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -75,31 +76,31 @@ function Home(props: ExportViewProps): JSX.Element {
 
   return (
     <>
-      <WrapperOuter>
+      <WrapperOuter style={{ height: "125vh" }}>
         <WrapperInner>
-          <div className={css.homeDesc}>
-            <div
-              className={`${sharedcss.textDescription} ${sharedcss.textLight}`}
-            >
-              {DESCRIPTION_TEXT}
+          <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
+            <div className={css.homeDesc}>
+              <div
+                className={`${sharedcss.textDescription} ${sharedcss.textLight}`}
+              >
+                {DESCRIPTION_TEXT}
+              </div>
+              <a
+                className={css.downloadButton}
+                href={makeDownloadURL(versionTag)}
+              >
+                Download for {getCurrentOSName()}
+              </a>
+              <div className={css.homeDescSmall}>
+                <i>* No account required</i>
+              </div>
             </div>
-            <a
-              className={css.downloadButton}
-              href={makeDownloadURL(versionTag)}
-            >
-              Download for {getCurrentOSName()}
-            </a>
-            <div className={css.homeDescSmall}>
-              <i>* No account required</i>
-            </div>
-          </div>
+          </Section>
+          <MatchFeed />
         </WrapperInner>
       </WrapperOuter>
-      <WrapperOuter style={{ paddingBottom: "64px" }}>
-        <MatchFeed />
-      </WrapperOuter>
 
-      <WrapperOuterLight>
+      <WrapperOuterDark>
         <WrapperInner>
           <div className={homeCss.contMargin}>
             <div className={homeCss.showcaseContainer}>
@@ -120,7 +121,7 @@ function Home(props: ExportViewProps): JSX.Element {
             </div>
           </div>
         </WrapperInner>
-      </WrapperOuterLight>
+      </WrapperOuterDark>
 
       <WrapperOuter>
         <div className={homeCss.contMargin}>
@@ -138,7 +139,7 @@ function Home(props: ExportViewProps): JSX.Element {
         </div>
       </WrapperOuter>
 
-      <WrapperOuterLight>
+      <WrapperOuterDark>
         <div className={homeCss.contMargin}>
           <div className={homeCss.showcaseContainer}>
             <div className={homeCss.showcaseDesc}>
@@ -152,7 +153,7 @@ function Home(props: ExportViewProps): JSX.Element {
             </div>
           </div>
         </div>
-      </WrapperOuterLight>
+      </WrapperOuterDark>
 
       <WrapperOuter>
         <div className={homeCss.contMargin}>

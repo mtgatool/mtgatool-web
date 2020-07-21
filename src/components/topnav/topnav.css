@@ -25,6 +25,8 @@
   justify-content: center;
   display: flex;
   width: 100%;
+  background-color: var(--color-section);
+  box-shadow: 0px 2px 7px 4px rgba(0, 0, 0, 0.3);
 }
 
 .top-nav {
@@ -49,7 +51,7 @@
 
 .nav-logo {
   margin: auto;
-  background-image: url(../../cssimages/logo_big.png);
+  background-image: url(../../assets/cssimages/logo_big.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -58,7 +60,7 @@
 }
 
 .nav-artist {
-  color: var(--color-light);
+  color: var(--color-text);
   font-family: var(--main-font-name-it);
   opacity: 0.7;
   line-height: 32px;
@@ -70,7 +72,7 @@
 
 .nav-divider {
   display: none;
-  border-right: 1px solid var(--color-light);
+  border-right: 1px solid var(--color-text);
   height: 32px;
   margin: auto 8px auto 16px;
   opacity: 0.8;
@@ -84,7 +86,7 @@
 
 .nav-link-a {
   white-space: nowrap;
-  color: var(--color-light);
+  color: var(--color-text-link);
   font-family: var(--main-font-name);
   line-height: 32px;
   margin: auto 8px;
@@ -97,4 +99,3 @@
   cursor: pointer;
   opacity: 1;
 }
-

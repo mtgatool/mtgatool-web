@@ -38,7 +38,7 @@
 
 .archetype-info {
   height: 50%;
-  background-color: rgba(25, 20, 15, 0.95);
+  background-color: var(--color-shade-75);
   width: 100%;
   justify-content: center;
   display: flex;
@@ -96,9 +96,6 @@
 }
 
 .metagame-div {
-  max-width: 1024px;
-  width: calc(100% - 128px);
-  margin: 1em auto;
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

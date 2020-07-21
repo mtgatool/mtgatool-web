@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouteMatch, useLocation, Link } from "react-router-dom";
 import { WrapperOuter } from "../wrapper";
 import css from "./docs.css";
-import keyArt from "../../images/key-art.jpg";
+import keyArt from "../../assets/images/key-art.jpg";
 
 // Docs
 import docs from "./index.yml";
@@ -16,11 +16,11 @@ import collection from "!!raw-loader!./resources/collection.md";
 import overlays from "!!raw-loader!./resources/overlays.md";
 
 // Images
-import deckArchive from "../../images/docs/deck-archive.png";
-import deckView from "../../images/docs/deck-view.png";
-import detailedLogsImg from "../../images/docs/detailed-logs.png";
-import filterBoosters from "../../images/docs/collection-filter-boosters.png";
-import viewSets from "../../images/docs/collection-view-sets.png";
+import deckArchive from "../../assets/images/docs/deck-archive.png";
+import deckView from "../../assets/images/docs/deck-view.png";
+import detailedLogsImg from "../../assets/images/docs/detailed-logs.png";
+import filterBoosters from "../../assets/images/docs/collection-filter-boosters.png";
+import viewSets from "../../assets/images/docs/collection-view-sets.png";
 
 import ReactMarkdown from "react-markdown";
 import { ExportViewProps } from "../../web-types/shared";

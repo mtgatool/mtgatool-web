@@ -4,8 +4,6 @@ declare namespace SharedCssNamespace {
     "button-play": string;
     buttonPause: string;
     buttonPlay: string;
-    "home-desc": string;
-    homeDesc: string;
     "text-centered": string;
     "text-dark": string;
     "text-description": string;

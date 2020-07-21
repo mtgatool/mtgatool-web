@@ -1,6 +1,24 @@
-export const STATE_IDLE = 1;
-export const STATE_DOWNLOAD = 2;
-export const STATE_ERROR = 3;
+// Should allow binary ops
+export const IPC_NONE = 0;
+export const IPC_MAIN = 1;
+export const IPC_BACKGROUND = 2;
+export const IPC_RENDERER = 4;
+export const IPC_OVERLAY = 8;
+export const IPC_ALL = IPC_BACKGROUND | IPC_RENDERER | IPC_MAIN | IPC_OVERLAY;
+
+// Login states
+export const LOGIN_AUTH = 1;
+export const LOGIN_WAITING = 2;
+export const LOGIN_OK = 3;
+export const LOGIN_FAILED = 4;
+
+// Sync states
+export const SYNC_IDLE = 1;
+export const SYNC_OK = 2;
+export const SYNC_CHECK = 3;
+export const SYNC_FETCH = 4;
+export const SYNC_PUSH = 5;
+export const SYNC_ERR = 6;
 
 // Colour indices
 export const WHITE = 1;
@@ -15,7 +33,7 @@ export const MULTI = 7;
 // Magic constant to represent auth token in form
 export const HIDDEN_PW = "********";
 
-const CounterType = {
+const CounterType: Record<string, string> = {
   "1": "+1/+1",
   "2": "-1/-1",
   "3": "Poison",
@@ -151,17 +169,17 @@ const CounterType = {
   "134": "PlaceholderCounterType3",
   "135": "PlaceholderCounterType4",
   "136": "PlaceholderCounterType5"
-};
+} as const;
 
-const SuperType = {
+const SuperType: Record<string, string> = {
   "1": "Basic",
   "2": "Legendary",
   "3": "Ongoing",
   "4": "Snow",
   "5": "World"
-};
+} as const;
 
-const ResultCode = {
+const ResultCode: Record<string, string> = {
   "0": "",
   "1": "Success",
   "2": "Failure",
@@ -177,9 +195,9 @@ const ResultCode = {
   "12": "Too many targets selected",
   "13": "Not enough targets selected",
   "14": "Selected target is not valid"
-};
+} as const;
 
-const SubType = {
+const SubType: Record<string, string> = {
   "1": "Angel",
   "2": "Archer",
   "3": "Archon",
@@ -534,9 +552,9 @@ const SubType = {
   "353": "PlaceholderSubType3",
   "354": "PlaceholderSubType4",
   "355": "PlaceholderSubType5"
-};
+} as const;
 
-const FailureReason = {
+const FailureReason: Record<string, string> = {
   "0": "",
   "1": "Request made with out of date game state.",
   "2": "Player has acted out of turn.",
@@ -556,26 +574,26 @@ const FailureReason = {
   "14": "The message received was not expected by the GRE.",
   "15":
     "Player input is below a specified minimum or above a specified maximum."
-};
+} as const;
 
-const Phase = {
+const Phase: Record<string, string> = {
   "0": "",
   "1": "Beginning",
   "2": "1st Main",
   "3": "Combat",
   "4": "2nd Main",
   "5": "Ending"
-};
+} as const;
 
-const MatchState = {
+const MatchState: Record<string, string> = {
   "0": "",
   "1": "Game In Progress",
   "2": "Game Complete, Match In Progress",
   "3": "Match Complete",
   "4": "Sideboarding"
-};
+} as const;
 
-const Step = {
+const Step: Record<string, string> = {
   "0": "",
   "1": "Untap",
   "2": "Upkeep",
@@ -588,9 +606,9 @@ const Step = {
   "9": "End",
   "10": "Cleanup",
   "11": "First Strike Damage"
-};
+} as const;
 
-const CardType = {
+const CardType: Record<string, string> = {
   "1": "Artifact",
   "2": "Creature",
   "3": "Enchantment",
@@ -603,17 +621,17 @@ const CardType = {
   "10": "Sorcery",
   "11": "Tribal",
   "12": "Vanguard"
-};
+} as const;
 
-const Color = {
+const Color: Record<string, string> = {
   "1": "White",
   "2": "Blue",
   "3": "Black",
   "4": "Red",
   "5": "Green"
-};
+} as const;
 
-export const ENUMS = {
+const _ENUMS = {
   CounterType,
   SuperType,
   ResultCode,
@@ -624,17 +642,19 @@ export const ENUMS = {
   Step,
   CardType,
   Color
-};
+} as const;
 
-export const FACE_NONE = 0;
+export const LANDS_HACK = -100;
+
+//export const FACE_NONE = 0;
 export const FACE_DFC_BACK = 1;
 export const FACE_DFC_FRONT = 2;
 export const FACE_SPLIT_FULL = 6;
-export const FACE_SPLIT = 5;
-export const FACE_ADVENTURE = 7;
+//export const FACE_SPLIT = 5;
+//export const FACE_ADVENTURE = 7;
 export const FACE_ADVENTURE_MAIN = 8;
 
-export const FORMATS = {
+export const FORMATS: Record<string, string> = {
   Standard: "Standard",
   TraditionalStandard: "Traditional Standard",
   Historic: "Historic",
@@ -655,9 +675,20 @@ export const FORMATS = {
   GRN: "Ravnica Constructed",
   XLN: "Ixalan Constructed"
 };
+// TODO use a label handler for PlayerInventory.GetFormats instead of this manual constant
+export const STANDARD_CUTOFF_DATE = "2018-10-04"; // day before GRN release
 
-export const COLORS_ALL = ["w", "u", "b", "r", "g", "c"];
-export const COLORS_BRIEF = ["w", "u", "b", "r", "g"];
+export const COLORS_ALL = ["w", "u", "b", "r", "g", "c", "m"] as const;
+export const COLORS_BRIEF = ["w", "u", "b", "r", "g"] as const;
+export const COLORS_LONG = [
+  "white",
+  "blue",
+  "black",
+  "red",
+  "green",
+  "colorless",
+  "multi"
+] as const;
 export const RANKS = [
   "Bronze",
   "Silver",
@@ -665,8 +696,7 @@ export const RANKS = [
   "Platinum",
   "Diamond",
   "Mythic"
-];
-export const CONSTRUCTED_EVENTS = ["Ladder", "Traditional_Ladder"];
+] as const;
 export const OVERLAY_FULL = 0;
 export const OVERLAY_LEFT = 1;
 export const OVERLAY_ODDS = 2;
@@ -681,103 +711,6 @@ export const OVERLAY_DRAFT_MODES = [OVERLAY_DRAFT, OVERLAY_DRAFT_BREW];
 export const ARENA_MODE_IDLE = 0;
 export const ARENA_MODE_MATCH = 1;
 export const ARENA_MODE_DRAFT = 2;
-
-export const CARD_TYPE_CODES = [
-  "cre",
-  "lan",
-  "ins",
-  "sor",
-  "enc",
-  "art",
-  "pla"
-];
-
-export const CARD_TYPES = [
-  "Creatures",
-  "Lands",
-  "Instants",
-  "Sorceries",
-  "Enchantments",
-  "Artifacts",
-  "Planeswalkers"
-];
-
-export const CARD_RARITIES = ["common", "uncommon", "rare", "mythic", "land"];
-
-export const WILDCARD_RARITIES = ["common", "uncommon", "rare", "mythic"];
-
-export const MANA_COLORS = [
-  "#E7CA8E",
-  "#AABEDF",
-  "#A18E87",
-  "#DD8263",
-  "#B7C89E",
-  "#E3E3E3"
-];
-
-export const MANA = {
-  0: "",
-  1: "white",
-  2: "blue",
-  3: "black",
-  4: "red",
-  5: "green",
-  6: "colorless",
-  7: "",
-  8: "x"
-};
-
-export const RANKS_SORT = {
-  Begginer: 0,
-  Bronze: 1,
-  Silver: 2,
-  Gold: 3,
-  Platinum: 4,
-  Diamond: 5,
-  Mythic: 6
-};
-
-export const PACK_SIZES: Record<string, number> = {
-  "Ravnica Allegiance": 14,
-  "Guilds of Ravnica": 14,
-  "Ikoria: Lair of Behemoths": 15,
-  "Core Set 2020": 15
-} as const;
-
-export const DEFAULT_TILE = 67003;
-export const CARD_TILE_ARENA = 0;
-export const CARD_TILE_FLAT = 1;
-export const EASING_DEFAULT = "cubicBezier(0.570, 0.165, 0.210, 0.990)";
-
-export const MAIN_LOGIN = -2;
-export const MAIN_HOME = -1;
-export const MAIN_DECKS = 0;
-export const MAIN_HISTORY = 1;
-export const MAIN_EVENTS = 2;
-export const MAIN_EXPLORE = 3;
-export const MAIN_ECONOMY = 4;
-export const MAIN_COLLECTION = 5;
-export const MAIN_SETTINGS = 6;
-export const MAIN_TIMELINE = 7;
-export const MAIN_UPDATE = 9;
-export const MAIN_CONSTRUCTED = 10;
-export const MAIN_LIMITED = 11;
-
-export const SETTINGS_BEHAVIOUR = 1;
-export const SETTINGS_ARENA_DATA = 2;
-export const SETTINGS_OVERLAY = 3;
-export const SETTINGS_VISUAL = 4;
-export const SETTINGS_SHORTCUTS = 5;
-export const SETTINGS_PRIVACY = 6;
-export const SETTINGS_ABOUT = 7;
-export const SETTINGS_LOGIN = 8;
-
-// Date constants
-export const DATE_LAST_DAY = "Last 24 Hours";
-
-export const DATE_LAST_30 = "Last 30 Days";
-export const DATE_SEASON = "Current Season";
-export const DATE_ALL_TIME = "All Time";
 
 export const DRAFT_RANKS = [
   "F",
@@ -810,4 +743,153 @@ export const DRAFT_RANKS_LOLA = [
   "D",
   "D-",
   "F"
+];
+
+export const CARD_TYPE_CODES = [
+  "cre",
+  "lan",
+  "ins",
+  "sor",
+  "enc",
+  "art",
+  "pla"
+] as const;
+
+export const CARD_TYPES = [
+  "Creatures",
+  "Lands",
+  "Instants",
+  "Sorceries",
+  "Enchantments",
+  "Artifacts",
+  "Planeswalkers"
+] as const;
+
+export const CARD_RARITIES = [
+  "token",
+  "common",
+  "uncommon",
+  "rare",
+  "mythic",
+  "land"
+] as const;
+
+export const MANA_COLORS = [
+  "#E7CA8E",
+  "#AABEDF",
+  "#A18E87",
+  "#DD8263",
+  "#B7C89E",
+  "#E3E3E3"
+] as const;
+
+export const MANA: { [key: number]: string } = {
+  0: "",
+  1: "white",
+  2: "blue",
+  3: "black",
+  4: "red",
+  5: "green",
+  6: "colorless",
+  7: "",
+  8: "x"
+} as const;
+
+const _RANKS_SORT: Record<string, number> = {
+  Begginer: 0,
+  Bronze: 1,
+  Silver: 2,
+  Gold: 3,
+  Platinum: 4,
+  Diamond: 5,
+  Mythic: 6
+} as const;
+
+export const DEFAULT_PACK_SIZE = 14;
+
+export const PACK_SIZES: Record<string, number> = {
+  "Ravnica Allegiance": 14,
+  "Guilds of Ravnica": 14,
+  "Core Set 2020": 15
+} as const;
+
+export const DEFAULT_TILE = 67003;
+export const EASING_DEFAULT = "cubicBezier(0.570, 0.165, 0.210, 0.990)";
+
+//export const MAIN_OFFLINE = 1;
+//export const MAIN_LOGIN = 2;
+export const MAIN_HOME = 3;
+export const MAIN_DECKS = 4;
+export const MAIN_MATCHES = 5;
+export const MAIN_EVENTS = 6;
+export const MAIN_EXPLORE = 7;
+export const MAIN_ECONOMY = 8;
+export const MAIN_COLLECTION = 9;
+export const MAIN_SETTINGS = 10;
+export const MAIN_TIMELINE = 11;
+//export const MAIN_UPDATE = 12;
+export const MAIN_CONSTRUCTED = 13;
+export const MAIN_LIMITED = 14;
+
+export const SUB_DECK = 1;
+export const SUB_MATCH = 2;
+export const SUB_DRAFT = 3;
+
+export const SHORTCUT_NAMES: Record<string, string> = {
+  shortcut_overlay_1: "Toggle Overlay 1",
+  shortcut_overlay_2: "Toggle Overlay 2",
+  shortcut_overlay_3: "Toggle Overlay 3",
+  shortcut_overlay_4: "Toggle Overlay 4",
+  shortcut_overlay_5: "Toggle Overlay 5",
+  shortcut_editmode: "Toggle Edit Overlay Positions",
+  shortcut_devtools_main: "Toggle Developer Tools (main)",
+  shortcut_devtools_overlay: "Toggle Developer Tools (overlays)"
+} as const;
+
+export const SETTINGS_BEHAVIOUR = 1;
+export const SETTINGS_ARENA_DATA = 2;
+export const SETTINGS_OVERLAY = 3;
+export const SETTINGS_VISUAL = 4;
+export const SETTINGS_SHORTCUTS = 5;
+export const SETTINGS_PRIVACY = 6;
+export const SETTINGS_ABOUT = 7;
+export const SETTINGS_LOGIN = 8;
+
+// Date constants
+export const DATE_LAST_DAY = "Last 24 Hours";
+
+export const DATE_LAST_30 = "Last 30 Days";
+export const DATE_SEASON = "Current Season";
+export const DATE_ALL_TIME = "All Time";
+
+export const ECONOMY_LIST_MODE = "List View";
+export const ECONOMY_TABLE_MODE = "Table View";
+export const ECONOMY_TABLE_MODES = [ECONOMY_LIST_MODE, ECONOMY_TABLE_MODE];
+
+export const EVENTS_LIST_MODE = "List View";
+export const EVENTS_TABLE_MODE = "Table View";
+export const EVENTS_TABLE_MODES = [EVENTS_LIST_MODE, EVENTS_TABLE_MODE];
+
+export const MATCHES_LIST_MODE = "List View";
+export const MATCHES_TABLE_MODE = "Table View";
+export const MATCHES_TABLE_MODES = [MATCHES_LIST_MODE, MATCHES_TABLE_MODE];
+
+export const DECKS_ART_MODE = "Deck Art View";
+const DECKS_LIST_MODE = "List View";
+export const DECKS_TABLE_MODE = "Table View";
+export const DECKS_TABLE_MODES = [
+  DECKS_LIST_MODE,
+  DECKS_ART_MODE,
+  DECKS_TABLE_MODE
+];
+
+export const COLLECTION_CARD_MODE = "Card View";
+const COLLECTION_CHART_MODE = "Chart View";
+const COLLECTION_TABLE_MODE = "Table View";
+const COLLECTION_SETS_MODE = "Sets View";
+const _COLLECTION_TABLE_MODES = [
+  COLLECTION_CARD_MODE,
+  COLLECTION_CHART_MODE,
+  COLLECTION_TABLE_MODE,
+  COLLECTION_SETS_MODE
 ];

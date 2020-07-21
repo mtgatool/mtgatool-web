@@ -30,29 +30,29 @@
 }
 
 .type-art {
-  background-image: url(../../cssimages/type_artifact.png);
+  background-image: url(../../assets/cssimages/type_artifact.png);
 }
 
 .type-cre {
-  background-image: url(../../cssimages/type_creature.png);
+  background-image: url(../../assets/cssimages/type_creature.png);
 }
 
 .type-enc {
-  background-image: url(../../cssimages/type_enchantment.png);
+  background-image: url(../../assets/cssimages/type_enchantment.png);
 }
 
 .type-ins {
-  background-image: url(../../cssimages/type_instant.png);
+  background-image: url(../../assets/cssimages/type_instant.png);
 }
 
 .type-lan {
-  background-image: url(../../cssimages/type_land.png);
+  background-image: url(../../assets/cssimages/type_land.png);
 }
 
 .type-pla {
-  background-image: url(../../cssimages/type_planeswalker.png);
+  background-image: url(../../assets/cssimages/type_planeswalker.png);
 }
 
 .type-sor {
-  background-image: url(../../cssimages/type_sorcery.png);
+  background-image: url(../../assets/cssimages/type_sorcery.png);
 }

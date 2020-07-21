@@ -24,17 +24,17 @@
 }
 
 .wc-common {
-  background-image: url(../../cssimages/wc_common.png);
+  background-image: url(../../assets/cssimages/wc_common.png);
 }
 
 .wc-uncommon {
-  background-image: url(../../cssimages/wc_uncommon.png);
+  background-image: url(../../assets/cssimages/wc_uncommon.png);
 }
 
 .wc-rare {
-  background-image: url(../../cssimages/wc_rare.png);
+  background-image: url(../../assets/cssimages/wc_rare.png);
 }
 
 .wc-mythic {
-  background-image: url(../../cssimages/wc_mythic.png);
+  background-image: url(../../assets/cssimages/wc_mythic.png);
 }

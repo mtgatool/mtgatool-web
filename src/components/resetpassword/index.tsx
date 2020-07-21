@@ -5,7 +5,7 @@ import crypto from "crypto";
 import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import regcss from "../register/register.css";
-import keyArt from "../../images/key-art.jpg";
+import keyArt from "../../assets/images/key-art.jpg";
 import { ExportViewProps } from "../../web-types/shared";
 
 function ResetPassword(props: ExportViewProps): JSX.Element {

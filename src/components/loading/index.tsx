@@ -1,10 +1,6 @@
 import React from "react";
 import css from "./loading.css";
-import {
-  STATE_IDLE,
-  STATE_DOWNLOAD,
-  STATE_ERROR
-} from "../../shared/constants";
+import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
 

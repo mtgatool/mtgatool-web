@@ -12,11 +12,12 @@ import { WrapperInner, WrapperOuter } from "../wrapper";
 import db from "../../shared/database";
 import Deck from "../../shared/deck";
 import { utf8Decode } from "../../shared/util";
-import keyArt from "../../images/key-art.jpg";
+import keyArt from "../../assets/images/key-art.jpg";
 import { ExportViewProps, ServerDeck } from "../../web-types/shared";
 import { InternalDeck } from "../../types/Deck";
 import { animated, useSpring } from "react-spring";
 import useRequest from "../../hooks/useRequest";
+import Section from "../Section";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -287,50 +288,60 @@ function Metagame(props: ExportViewProps): JSX.Element {
     <NotFound setImage={setImage} />
   ) : (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
-      <TopTitle
-        title={
-          metagameData
-            ? `${
-                formats.filter(f => f.id == metagameData.format)[0].name
-              } Metagame (${new Date(metagameData.date).toUTCString()})`
-            : "Metagame"
-        }
-        subtitle={
-          metagameData
-            ? `Contains data from the last ${metagameData.days} days`
-            : ""
-        }
-      />
-      <MetagameNav format={formatMatch} />
       <WrapperInner>
-        {metagameData && metagameData.meta && archMatch ? (
-          <ArchetypeDecks
-            setImage={setImage}
-            deckToDraw={deckToDraw}
-            archMatch={archMatch}
-            archName={archMatch.params.arch}
-            opened={deckMatch ? parseInt(deckMatch.params.deck) : undefined}
-            metagame={metagameData}
+        <Section
+          style={{
+            marginTop: "6em",
+            marginBottom: "1em",
+            flexDirection: "column"
+          }}
+        >
+          <TopTitle
+            title={
+              metagameData
+                ? `${
+                    formats.filter(f => f.id == metagameData.format)[0].name
+                  } Metagame (${new Date(metagameData.date).toUTCString()})`
+                : "Metagame"
+            }
+            subtitle={
+              metagameData
+                ? `Contains data from the last ${metagameData.days} days`
+                : ""
+            }
           />
-        ) : (
-          <div className={css["metagame-div"]}>
-            {metagameData && metagameData.meta ? (
-              metagameData.meta.sort(sortArchetypes).map(
-                (arch: Archetype, index: number): JSX.Element => {
-                  return (
-                    <ArchetypeTile
-                      id={metagameData._id}
-                      key={arch.name + index}
-                      arch={arch}
-                    />
-                  );
-                }
-              )
-            ) : (
-              <></>
-            )}
-          </div>
-        )}
+          <MetagameNav format={formatMatch} />
+        </Section>
+        <Section style={{ padding: "16px", marginBottom: "1em" }}>
+          {metagameData && metagameData.meta && archMatch ? (
+            <ArchetypeDecks
+              setImage={setImage}
+              deckToDraw={deckToDraw}
+              archMatch={archMatch}
+              archName={archMatch.params.arch}
+              opened={deckMatch ? parseInt(deckMatch.params.deck) : undefined}
+              metagame={metagameData}
+            />
+          ) : (
+            <div className={css["metagame-div"]}>
+              {metagameData && metagameData.meta ? (
+                metagameData.meta.sort(sortArchetypes).map(
+                  (arch: Archetype, index: number): JSX.Element => {
+                    return (
+                      <ArchetypeTile
+                        id={metagameData._id}
+                        key={arch.name + index}
+                        arch={arch}
+                      />
+                    );
+                  }
+                )
+              ) : (
+                <></>
+              )}
+            </div>
+          )}
+        </Section>
       </WrapperInner>
     </WrapperOuter>
   );

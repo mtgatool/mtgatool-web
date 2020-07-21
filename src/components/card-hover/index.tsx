@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import css from "./cardhover.css";
 import db from "../../shared/database";
-import NotFound from "../../cssimages/notfound.png";
+import NotFound from "../../assets/cssimages/notfound.png";
 
 import { FACE_DFC_BACK, FACE_DFC_FRONT } from "../../shared/constants";
 import { useSelector } from "react-redux";

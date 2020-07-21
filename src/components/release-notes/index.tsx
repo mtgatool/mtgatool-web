@@ -3,7 +3,7 @@
 import React from "react";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./releasenotes.css";
-import keyArt from "../../images/key-art.jpg";
+import keyArt from "../../assets/images/key-art.jpg";
 import Title from "../title";
 import { ExportViewProps } from "../../web-types/shared";
 

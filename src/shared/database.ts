@@ -1,7 +1,6 @@
 import _ from "lodash";
 import { Metadata, DbCardData, CardSet } from "../types/Metadata";
 
-// Some other things should go here later, like updating from MTGA Servers themselves.
 class Database {
   private static instance: Database;
   public metadata: Metadata | undefined;
@@ -11,8 +10,6 @@ class Database {
     this.card = this.card.bind(this);
     this.ability = this.ability.bind(this);
     this.eventName = this.eventName.bind(this);
-    //const defaultDb = fs.readFileSync(dbUri, "utf8");
-    //this.setDatabase(defaultDb);
   }
 
   static getInstance(): Database {
@@ -30,14 +27,7 @@ class Database {
       console.log("Error parsing metadata", e);
     }
   }
-  /*
-  updateCache(data) {
-    try {
-    } catch (e) {
-      console.log("Error updating cache", e);
-    }
-  }
-  */
+
   card(grpId: number): DbCardData | undefined {
     return this.metadata && this.metadata.cards
       ? this.metadata.cards[grpId]
@@ -63,6 +53,10 @@ class Database {
 
   get version(): number {
     return this.metadata ? this.metadata.version : 0;
+  }
+
+  event(id: string): string | undefined {
+    return this.metadata?.events[id];
   }
 
   eventName(evid: string): string {

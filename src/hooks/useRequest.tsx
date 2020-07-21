@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { reduxAction } from "../redux/webRedux";
-import { STATE_IDLE, STATE_ERROR, STATE_DOWNLOAD } from "../shared/constants";
+import { STATE_IDLE, STATE_ERROR, STATE_DOWNLOAD } from "../constants";
 
 export default function useRequest(
   defaultUrl: string

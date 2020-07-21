@@ -1,15 +1,9 @@
-@media screen and (min-width: 750px) {
-  .top-title-container {
-    margin: 4em auto auto auto !important;
-  }
-}
-
 .top-title-container {
   height: 32px;
   line-height: 32px;
   text-align: center;
   font-size: 1.33em;
-  margin: 7em auto auto auto;
+  margin: 1em auto 0 auto;
   height: auto;
   color: #fae5d2;
   padding-bottom: 16px;

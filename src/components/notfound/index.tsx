@@ -2,7 +2,7 @@
 import React from "react";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./notfound.css";
-import notFoundImage from "../../images/404.jpg";
+import notFoundImage from "../../assets/images/404.jpg";
 import { ExportViewProps } from "../../web-types/shared";
 
 function NotFound(props: ExportViewProps): JSX.Element {

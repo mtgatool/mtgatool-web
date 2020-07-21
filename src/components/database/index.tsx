@@ -1,9 +1,5 @@
 import React, { useCallback } from "react";
-import {
-  STATE_IDLE,
-  STATE_DOWNLOAD,
-  STATE_ERROR
-} from "../../shared/constants";
+import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 import db from "../../shared/database";
 import { reduxAction } from "../../redux/webRedux";
 import { useDispatch } from "react-redux";

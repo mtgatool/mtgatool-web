@@ -27,21 +27,23 @@ import { WrapperOuter } from "./components/wrapper";
 
 // Import once so all CSS can use it thanks to webpack magic
 import css from "./app.css";
-import keyArt from "./images/key-art.jpg";
-import notFoundArt from "./images/404.jpg";
+import keyArt from "./assets/images/key-art.jpg";
+import notFoundArt from "./assets/images/404.jpg";
 import { DbCardData } from "./types/Metadata";
 import { useSelector } from "react-redux";
 import { AppState } from "./redux/stores/webStore";
 
 function App(): JSX.Element {
-  const [artData, setArtData] = React.useState("Bedevil by Seb Mckinnon");
+  const [artData, setArtData] = React.useState(
+    "Sublime Epiphany by Lindsey Look"
+  );
   const [imageUrl, setImageUrl] = React.useState(keyArt);
   const { databaseVersion } = useSelector((state: AppState) => state.web);
 
   const setImage = (cardObj: DbCardData | string): void => {
     if (cardObj == keyArt) {
       setImageUrl(keyArt);
-      setArtData("Bedevil by Seb Mckinnon");
+      setArtData("Sublime Epiphany by Lindsey Look");
     } else if (cardObj == notFoundArt) {
       setImageUrl(notFoundArt);
       setArtData("Totally Lost by David Palumbo");

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { STATE_IDLE } from "../../shared/constants";
+import { STATE_IDLE } from "../../constants";
 
 const initialWebState = {
   loadingState: STATE_IDLE,

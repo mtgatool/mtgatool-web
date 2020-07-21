@@ -1,0 +1,17 @@
+
+.rank-small {
+  display: flex;
+}
+
+.constructed-rank {
+  background: url(../../assets/cssimages/ranks_constructed_48.png);
+}
+
+.limited-rank {
+  background: url(../../assets/cssimages/ranks_limited_48.png);
+}
+
+.constructed-rank, .limited-rank {
+  width: 48px;
+  height: 48px;
+}

@@ -3,7 +3,8 @@
   margin: 150px 0 0 0;
   display: flex;
   flex-grow: 1;
-  background-color: var(--color-light);
+  background-color: var(--color-base);
+  min-height: calc(100vh - 69px);
 }
 
 @media screen and (min-width: 750px) {
@@ -21,7 +22,7 @@
   margin-left: 24px;
   flex-direction: column;
   justify-content: space-between;
-  border-right: solid 1px var(--color-mid-66);
+  border-right: solid 1px var(--color-line-sep);
 }
 
 .docs-sidebar-dragger {
@@ -39,7 +40,7 @@
   font-family: var(--main-font-name);
   font-size: 16px;
   margin: 0 32px 24px 32px;
-  color: var(--color-back);
+  color: var(--color-text);
 }
 
 .docs-main img {
@@ -53,7 +54,7 @@
   cursor: pointer;
   text-decoration: none;
   margin: 0 4px;
-  color: #efae4e;
+  color: var(--color-text-link);
   font-size: inherit;
   display: inline-block;
   font-family: inherit;
@@ -65,20 +66,20 @@
 }
 
 .docs-main code {
-  background-color: var(--color-mid-20);
+  background-color: var(--color-section);
   padding: 1px 4px;
   border-radius: 2px;
 }
 
 .docs-main blockquote {
   padding: 0 1em;
-  color: var(--color-b);
+  color: var(--color-text-dark);
   margin: 1em 0;
-  border-left: .25em solid var(--color-mid-40);
+  border-left: 0.25em solid var(--color-line-sep);
 }
 
 .anchor-link {
-  background-image: url(../../cssimages/link.svg);
+  background-image: url(../../assets/cssimages/link.svg);
   background-repeat: no-repeat;
   background-position: center 4px;
   background-size: contain;
@@ -106,7 +107,7 @@
 }
 
 .docs-section-title {
-  color: var(--color-back);
+  color: var(--color-text);
   border-radius: 2px;
   font-family: var(--main-font-name-bold);
   height: 32px;
@@ -127,17 +128,18 @@
   text-align: left;
   margin: 0 8px;
   text-decoration: none;
-  color: var(--color-back);
+  color: var(--color-text);
   font-family: var(--main-font-name);
   line-height: 32px;
 }
 
 .docs-section-link:hover {
   opacity: 1;
+  background-color: var(--color-section-hover);
 }
 
 .docs-section-link-active {
-  background-color: var(--color-mid-20);
+  background-color: var(--color-section-active) !important;
 }
 
 .docs-code {

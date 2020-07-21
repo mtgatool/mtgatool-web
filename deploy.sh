@@ -5,4 +5,5 @@ chmod 644 -R build
 /bin/rm -r ../html/fonts/*
 /bin/rm -r ../html/images/*
 /bin/rm -r ../html/js/*
+/bin/rm -r ../html/assets/*
 /bin/cp -r build/* ../html

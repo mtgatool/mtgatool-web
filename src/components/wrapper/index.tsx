@@ -42,3 +42,12 @@ export function WrapperOuterLight(props: WrapperProps): JSX.Element {
     </div>
   );
 }
+
+export function WrapperOuterDark(props: WrapperProps): JSX.Element {
+  const { children, style } = props;
+  return (
+    <div style={style} className={css.wrapperOuterDark}>
+      {children}
+    </div>
+  );
+}

@@ -20,7 +20,7 @@
 }
 
 .wrapper-image:after {
-  background: url("./cssimages/background_overlay.png");
+  background: url("./assets/cssimages/background_overlay.png");
   content: ' ';
   top: 0;
   left: 0;
@@ -29,10 +29,11 @@
   position: absolute;
   background-size: 100% 100%;
   z-index: -5;
+  opacity: 0.25;
 }
 
 .home-desc {
-  padding: 140px 0 16px 0;
+  padding: 32px;
   justify-content: center;
   flex-direction: column;
   display: flex;
@@ -57,8 +58,8 @@
   text-align: center;
   text-decoration: none;
   border-radius: 2px;
-  background-color: var(--color-r);
-  color: white !important;
+  background-color: var(--color-button);
+  color: var(--color-text-button) !important;
   transform: translateY(0);
   -webkit-transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;

@@ -10,12 +10,12 @@
 }
 
 .footer-main {
-  background-image: url(../../cssimages/riboon.png);
+  background-image: url(../../assets/cssimages/riboon.png);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100% 5px;
   top: 0;
-  background-color: rgba(51, 40, 30, 0.9);
+  background-color: var(--color-section);
   padding-top: 24px;
 }
 
@@ -44,21 +44,21 @@
   font-family: var(--sub-font-name);
   line-height: 2em;
   font-size: 0.9em;
-  color: var(--color-light-66);
+  color: var(--color-text);
   text-decoration: none;
 }
 
 .footer-column a:hover {
-  color: var(--color-light);
+  color: var(--color-text);
   text-decoration: underline;
 }
 
 .footer-column-title {
-  border-bottom: 1px solid var(--color-mid-66);
+  border-bottom: 1px solid var(--color-line-sep);
   font-family: var(--sub-font-name-bold);
   line-height: 2em;
   font-size: 0.9em;
-  color: var(--color-light-66);
+  color: var(--color-text);
 }
 
 .footer-logo {
@@ -71,7 +71,7 @@
   text-align: center;
   font-family: var(--main-font-name-it);
   font-size: 1rem;
-  color: var(--color-light-75);
+  color: var(--color-text-dark);
 }
 
 br {

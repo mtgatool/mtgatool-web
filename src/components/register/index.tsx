@@ -4,7 +4,7 @@ import crypto from "crypto";
 import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./register.css";
-import keyArt from "../../images/key-art.jpg";
+import keyArt from "../../assets/images/key-art.jpg";
 import { ExportViewProps } from "../../web-types/shared";
 
 function Register(props: ExportViewProps): JSX.Element {
@@ -124,7 +124,6 @@ function Register(props: ExportViewProps): JSX.Element {
               onChange={handleCaptchaChange}
               sitekey="6LesQnQUAAAAABMfGoGiJRgWJLYlBJI6_6sSKaDL"
             />
-            ,
             <button className={css.formButton} type="submit" id="submit">
               Register
             </button>

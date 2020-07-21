@@ -2,13 +2,13 @@
 import React from "react";
 import css from "./footer.css";
 /*
-import logoDiscord from "../../images/discord_logo.png";
-import logoTwitter from "../../images/twitter_logo.png";
-import logoGithub from "../../images/github_logo.png";
-import logoPatreon from "../../images/patreon_logo.png";
-import logoArena from "../../images/arena_logo.png";
+import logoDiscord from "../../assets/images/discord_logo.png";
+import logoTwitter from "../../assets/images/twitter_logo.png";
+import logoGithub from "../../assets/images/github_logo.png";
+import logoPatreon from "../../assets/images/patreon_logo.png";
+import logoArena from "../../assets/images/arena_logo.png";
 */
-import logoTool from "../../cssimages/icon-256.png";
+import logoTool from "../../assets/cssimages/icon-256.png";
 
 function Footer(): JSX.Element {
   return (

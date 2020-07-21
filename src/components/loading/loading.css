@@ -1,6 +1,6 @@
 .loading-div {
   pointer-events: none;
-  background-image: url(../../cssimages/icon-256.png);
+  background-image: url(../../assets/cssimages/icon-256.png);
   background-size: contain;
   z-index: 50;
   width: 4em;
