@@ -252,7 +252,7 @@ function Metagame(props: ExportViewProps): JSX.Element {
   // Deck number match
   useEffect(() => {
     const archetypeData = metagameData
-      ? metagameData.meta.filter(arch => arch.name == archMatch?.params.arch)[0]
+      ? metagameData.meta.filter(arch => arch.name == deckMatch?.params.arch)[0]
       : null;
     if (archetypeData && !deckMatch) {
       setDeckToDraw(archetypeData.best_deck);
@@ -396,7 +396,7 @@ function ArchetypeDecks(props: ArchetypeDecksProps): JSX.Element {
         {deckToDraw && deckWinrate ? (
           <>
             <div className={css["deck-desc"]}>
-              {deckName} by {deckOwner}
+              {utf8Decode(deckName)} by {deckOwner}
             </div>
             <div className={css["deck-desc-b"]}>
               {deckWinrate.toFixed(2)}% winrate across {deckMatches} matches.
