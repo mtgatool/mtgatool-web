@@ -28,7 +28,7 @@ export default function ShowcaseOverlay(): JSX.Element {
         display: "flex",
         width: "466.1px",
         height: "400.15px",
-        margin: "0 auto"
+        margin: "0px 4em 0px auto"
       }}
     >
       <OverlayDetails

@@ -16,6 +16,9 @@ import { reduxAction } from "../../redux/webRedux";
 import Section from "../Section";
 import Flex from "../flex";
 import ShowcaseOverlay from "./ShowcaseOverlay";
+import ShowcaseStats from "./ShowcaseStats";
+import Feature from "./Feature";
+import FeatureRight from "./FeatureRight";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -35,41 +38,6 @@ function makeDownloadURL(versionTag: string): string {
   return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/${versionTag}/MTG-Arena-Tool-${versionTag.slice(
     1
   )}.${extension}`;
-}
-
-interface FeatureProps {
-  title: string;
-  subtitle: string;
-}
-
-function Feature(props: FeatureProps): JSX.Element {
-  const { title, subtitle } = props;
-  return (
-    <div
-      style={{
-        backgroundColor: "var(--color-section)",
-        borderLeft: "4px solid var(--color-g)",
-        borderRadius: "4px",
-        padding: "16px",
-        maxWidth: "32em",
-        height: "11em",
-        margin: "auto"
-      }}
-    >
-      <div
-        style={{
-          fontSize: "1.7em",
-          color: "var(--color-text)",
-          fontFamily: "var(--main-font-name-bold)"
-        }}
-      >
-        {title}
-      </div>
-      <div style={{ fontFamily: "var(--sub-font-name)", marginTop: "1em" }}>
-        {subtitle}
-      </div>
-    </div>
-  );
 }
 
 function Home(props: ExportViewProps): JSX.Element {
@@ -118,12 +86,25 @@ function Home(props: ExportViewProps): JSX.Element {
 
       <WrapperOuter>
         <WrapperInner>
-          <Flex style={{ height: "100vh", flexDirection: "column" }}>
-            <Flex>
+          <Flex style={{ height: "150vh", flexDirection: "column" }}>
+            <Flex style={{ margin: "4em auto" }}>
               <ShowcaseOverlay />
               <Feature
                 title="In-game Deck tracker"
                 subtitle="The best and most cusotmizable overlay you will find. Enable up to 5 different overlays and customize them to suit your needs. You can change their color, position, size and more!"
+              />
+            </Flex>
+            <Flex style={{ margin: "4em auto" }}>
+              <FeatureRight
+                title="Complete Statistics"
+                subtitle="Want to know your decks winrate? how about a specific card performance? MTG Arena Tool can do that and much, much more."
+              />
+              <ShowcaseStats />
+            </Flex>
+            <Flex style={{ margin: "4em auto" }}>
+              <Feature
+                title="Analyse Your Collection"
+                subtitle="Take a deep look at the cards you have, how much of a set you are missing and how many drafts it would take you to complete them."
               />
             </Flex>
             <div className={homeCss.contMargin}>
