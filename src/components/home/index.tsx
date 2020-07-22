@@ -1,42 +1,23 @@
 /* eslint-disable react/prop-types */
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback } from "react";
 import sharedcss from "../../shared.css";
 
 import keyArt from "../../assets/images/key-art.jpg";
-
-import show00 from "../../assets/images/showcase/00.png";
-import show01 from "../../assets/images/showcase/01.png";
-import show02 from "../../assets/images/showcase/02.png";
-import show03 from "../../assets/images/showcase/03.png";
-import show04 from "../../assets/images/showcase/04.png";
-
-const showCase = [show00, show01, show02, show03, show04];
-
-import showHistory from "../../assets/images/showcase/history.png";
-import showCollection from "../../assets/images/showcase/collection.png";
 
 import css from "../../app.css";
 import homeCss from "./home.css";
 
 import MatchFeed from "../match-feed";
-import { WrapperInner, WrapperOuter, WrapperOuterDark } from "../wrapper";
+import { WrapperInner, WrapperOuter } from "../wrapper";
 import { ExportViewProps } from "../../web-types/shared";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
 import { reduxAction } from "../../redux/webRedux";
 import Section from "../Section";
+import Flex from "../flex";
+import ShowcaseOverlay from "./ShowcaseOverlay";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
-
-const FEATURE_A_TITLE = `Track your deck, beautifully.`;
-const FEATURE_A_TEXT_A = `Enable up to five completely customizable overlay windows, with options like background color, position, size, and what elements to display.`;
-const FEATURE_A_TEXT_B = `The combinations are endless.`;
-
-const FEATURE_B_TITLE = `Collection viewer`;
-const FEATURE_B_TEXT = `Excellent for rare-drafting, or to review your collection at a glance. Browse every detail of your collection easily.`;
-
-const FEATURE_C_TITLE = `Matches History`;
-const FEATURE_C_TEXT = `Get every detail from your play sessions. review old drafts, see the cards your opponent played and much more!`;
 
 function getCurrentOSName(): string {
   const platform = window.navigator.platform;
@@ -54,6 +35,41 @@ function makeDownloadURL(versionTag: string): string {
   return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/${versionTag}/MTG-Arena-Tool-${versionTag.slice(
     1
   )}.${extension}`;
+}
+
+interface FeatureProps {
+  title: string;
+  subtitle: string;
+}
+
+function Feature(props: FeatureProps): JSX.Element {
+  const { title, subtitle } = props;
+  return (
+    <div
+      style={{
+        backgroundColor: "var(--color-section)",
+        borderLeft: "4px solid var(--color-g)",
+        borderRadius: "4px",
+        padding: "16px",
+        maxWidth: "32em",
+        height: "11em",
+        margin: "auto"
+      }}
+    >
+      <div
+        style={{
+          fontSize: "1.7em",
+          color: "var(--color-text)",
+          fontFamily: "var(--main-font-name-bold)"
+        }}
+      >
+        {title}
+      </div>
+      <div style={{ fontFamily: "var(--sub-font-name)", marginTop: "1em" }}>
+        {subtitle}
+      </div>
+    </div>
+  );
 }
 
 function Home(props: ExportViewProps): JSX.Element {
@@ -76,7 +92,7 @@ function Home(props: ExportViewProps): JSX.Element {
 
   return (
     <>
-      <WrapperOuter style={{ height: "125vh" }}>
+      <WrapperOuter style={{ height: "120vh" }}>
         <WrapperInner>
           <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
             <div className={css.homeDesc}>
@@ -100,106 +116,30 @@ function Home(props: ExportViewProps): JSX.Element {
         </WrapperInner>
       </WrapperOuter>
 
-      <WrapperOuterDark>
+      <WrapperOuter>
         <WrapperInner>
-          <div className={homeCss.contMargin}>
-            <div className={homeCss.showcaseContainer}>
-              <div className={homeCss.showcaseDesc}>
-                <div className={homeCss.showcaseTitleRight}>
-                  {FEATURE_A_TITLE}
-                </div>
-                <div className={homeCss.showcaseDescriptionRight}>
-                  {FEATURE_A_TEXT_A}
-                </div>
-                <div className={homeCss.showcaseDescriptionRight}>
-                  {FEATURE_A_TEXT_B}
-                </div>
-              </div>
-              <div className={homeCss.showcaseDesc}>
-                <ShowcaseOverlay />
+          <Flex style={{ height: "100vh", flexDirection: "column" }}>
+            <Flex>
+              <ShowcaseOverlay />
+              <Feature
+                title="In-game Deck tracker"
+                subtitle="The best and most cusotmizable overlay you will find. Enable up to 5 different overlays and customize them to suit your needs. You can change their color, position, size and more!"
+              />
+            </Flex>
+            <div className={homeCss.contMargin}>
+              <div className={homeCss.showcaseDownloadContainer}>
+                <a
+                  style={{ margin: "auto 0px" }}
+                  className={css.downloadButton}
+                  href={makeDownloadURL(versionTag)}
+                >
+                  Download for {getCurrentOSName()}
+                </a>
               </div>
             </div>
-          </div>
+          </Flex>
         </WrapperInner>
-      </WrapperOuterDark>
-
-      <WrapperOuter>
-        <div className={homeCss.contMargin}>
-          <div className={homeCss.showcaseContainer}>
-            <div className={homeCss.showcaseDesc}>
-              <ShowcaseImage align="right" image={showCollection} />
-            </div>
-            <div className={homeCss.showcaseDesc}>
-              <div className={homeCss.showcaseTitleLeft}>{FEATURE_B_TITLE}</div>
-              <div className={homeCss.showcaseDescriptionLeft}>
-                {FEATURE_B_TEXT}
-              </div>
-            </div>
-          </div>
-        </div>
       </WrapperOuter>
-
-      <WrapperOuterDark>
-        <div className={homeCss.contMargin}>
-          <div className={homeCss.showcaseContainer}>
-            <div className={homeCss.showcaseDesc}>
-              <div className={homeCss.showcaseTitleLeft}>{FEATURE_C_TITLE}</div>
-              <div className={homeCss.showcaseDescriptionRight}>
-                {FEATURE_C_TEXT}
-              </div>
-            </div>
-            <div className={homeCss.showcaseDesc}>
-              <ShowcaseImage align="left" image={showHistory} />
-            </div>
-          </div>
-        </div>
-      </WrapperOuterDark>
-
-      <WrapperOuter>
-        <div className={homeCss.contMargin}>
-          <div className={homeCss.showcaseDownloadContainer}>
-            <a
-              style={{ margin: "auto 0px" }}
-              className={css.downloadButton}
-              href={makeDownloadURL(versionTag)}
-            >
-              Download for {getCurrentOSName()}
-            </a>
-          </div>
-        </div>
-      </WrapperOuter>
-    </>
-  );
-}
-
-function ShowcaseImage(props): JSX.Element {
-  const { image, align } = props;
-  const imageRef = React.useRef<HTMLImageElement>(null);
-  const scroll = useSelector((state: AppState) => state.web.scroll);
-
-  const offset = imageRef.current ? imageRef.current.offsetTop - scroll : -999;
-  const style: React.CSSProperties = {
-    backgroundImage: `url(${image})`,
-    alignSelf: align == "left" ? "flex-start" : "flex-end",
-    transform: `translateY(${offset / 2}px)`
-  };
-
-  return <div ref={imageRef} style={style} className={homeCss.showcaseImage} />;
-}
-
-function ShowcaseOverlay(): JSX.Element {
-  //const back = Math.round(ctx.webContext.scroll / 30) % showCase.length;
-  const back = useMemo(() => Math.floor(Math.random() * showCase.length), []);
-
-  const getStyle = useCallback(() => {
-    return {
-      backgroundImage: `url(${showCase[back]})`
-    };
-  }, [back]);
-
-  return (
-    <>
-      <div style={getStyle()} className={homeCss.showcaseOverlayCont} />
     </>
   );
 }

@@ -174,7 +174,7 @@
   text-overflow: ellipsis;
   text-decoration: inherit;
   width: min-content;
-  color: #fae5d2;
+  color: var(--colo-text);
   margin-left: 8px;
   margin-right: 4px;
   overflow: hidden;
@@ -184,7 +184,7 @@
   white-space: nowrap;
   text-decoration: inherit;
   width: min-content;
-  color: #fae5d2;
+  color: var(--colo-text);
   margin-left: auto;
   overflow: hidden;
 }
@@ -198,7 +198,7 @@
   font-family: var(--main-font-name);
   text-align: center;
   margin: auto;
-  color: #fae5d2;
+  color: var(--colo-text);
   margin-bottom: 8px;
 }
 
@@ -208,7 +208,7 @@
   font-size: 14px;
   text-align: center;
   margin: auto;
-  color: #fae5d2;
+  color: var(--colo-text);
   margin-bottom: 16px;
 }
 
@@ -222,7 +222,7 @@
 }
 
 .deck-name {
-  color: #fae5d2;
+  color: var(--colo-text);
   text-align: center;
   cursor: pointer;
   margin: 4px;

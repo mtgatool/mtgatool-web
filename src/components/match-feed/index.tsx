@@ -68,7 +68,11 @@ function MatchFeed(): JSX.Element {
   return (
     <Section style={{ padding: "16px", display: "block" }}>
       <Flex
-        style={{ flexDirection: "column", height: "592px", overflow: "hidden" }}
+        style={{
+          flexDirection: "column",
+          height: "592px",
+          overflow: "hidden"
+        }}
       >
         {matches ? (
           matches
@@ -109,7 +113,7 @@ function MatchBrief(props: MatchBriefProps): JSX.Element {
   return (
     <div
       className={css.matchBrief + (animate ? " " + css.matchBriefOpen : "")}
-      style={{ zIndex: index }}
+      style={{ zIndex: index, top: index * 74 }}
     >
       <ListItemMatchBrief match={match} key={"match-brief-" + index} />
     </div>

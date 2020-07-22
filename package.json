@@ -88,6 +88,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@babel/register": "7.7.4",
     "@babel/runtime": "7.7.4",
+    "@svgr/webpack": "^5.4.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/bytebuffer": "^5.0.41",
     "@types/lodash": "^4.14.157",

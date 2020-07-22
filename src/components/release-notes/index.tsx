@@ -6,6 +6,7 @@ import css from "./releasenotes.css";
 import keyArt from "../../assets/images/key-art.jpg";
 import Title from "../title";
 import { ExportViewProps } from "../../web-types/shared";
+import Section from "../Section";
 
 const CHANGELOG =
   "https://raw.githubusercontent.com/mtgatool/mtgatool-web/master/src/components/release-notes/releasenotes.txt";
@@ -71,33 +72,41 @@ function ReleaseNotes(props: ExportViewProps): JSX.Element {
 
   return (
     <WrapperOuter>
-      <WrapperInner>
-        <Title title="Release Notes" />
-        <div className={css["releases-container"]}>
-          <div className={css["releases-container-line"]} />
-          {parsedNotes.map((line, index) => {
-            let ret;
-            if (line.type === TYPE_RELEASE) {
-              ret = (
-                <Version
-                  key={index}
-                  version={line.version || ""}
-                  date={line.date || ""}
-                />
-              );
-            } else {
-              ret = (
-                <Commit
-                  key={index}
-                  event={line.event}
-                  desc={line.desc}
-                  commit={line.commit}
-                />
-              );
-            }
-            return ret;
-          })}
-        </div>
+      <WrapperInner style={{ maxWidth: "900px" }}>
+        <Section
+          style={{
+            flexDirection: "column",
+            marginTop: "6em",
+            marginBottom: "1em"
+          }}
+        >
+          <Title title="Release Notes" />
+          <div className={css["releases-container"]}>
+            <div className={css["releases-container-line"]} />
+            {parsedNotes.map((line, index) => {
+              let ret;
+              if (line.type === TYPE_RELEASE) {
+                ret = (
+                  <Version
+                    key={index}
+                    version={line.version || ""}
+                    date={line.date || ""}
+                  />
+                );
+              } else {
+                ret = (
+                  <Commit
+                    key={index}
+                    event={line.event}
+                    desc={line.desc}
+                    commit={line.commit}
+                  />
+                );
+              }
+              return ret;
+            })}
+          </div>
+        </Section>
       </WrapperInner>
     </WrapperOuter>
   );

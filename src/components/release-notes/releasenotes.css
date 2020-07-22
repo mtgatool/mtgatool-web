@@ -1,38 +1,6 @@
 .releases-container {
-  /*max-width: fit-content;*/
-  padding-top: 16px;
-  padding: 16px 8px 24px 8px;
-  /* margin-left: 13px; */
   margin: auto;
   display: block;
-  background: -moz-linear-gradient(
-    left,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 8%,
-    var(--color-mid-40) 8%,
-    var(--color-mid-40) 9%,
-    rgba(0, 0, 0, 0) 9%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  background: -webkit-gradient(
-    left top,
-    right top,
-    color-stop(0%, rgba(0, 0, 0, 0)),
-    color-stop(8%, rgba(0, 0, 0, 0)),
-    color-stop(8%, var(--color-mid-40)),
-    color-stop(9%, var(--color-mid-40)),
-    color-stop(9%, rgba(0, 0, 0, 0)),
-    color-stop(100%, rgba(0, 0, 0, 0))
-  );
-  background: -webkit-linear-gradient(
-    left,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 8%,
-    var(--color-mid-40) 8%,
-    var(--color-mid-40) 9%,
-    rgba(0, 0, 0, 0) 9%,
-    rgba(0, 0, 0, 0) 100%
-  );
 }
 
 .releases-container-line {
@@ -50,14 +18,14 @@
 
 .version-div {
   color: rgb(0, 0, 0);
-  margin: 1em 0.25em;
+  margin: 1em 0 1em 0.5em;
   align-items: center;
   height: 2em;
   display: flex;
 }
 
 .version-number {
-  background-color: rgba(231, 202, 142, 1);
+  background-color: var(--color-button);
   font-size: 0.8rem;
   text-align: center;
   line-height: 2em;
@@ -70,7 +38,7 @@
 .version-release {
   font-size: 1rem;
   margin-left: 1em;
-  color: #ffeedcc9;
+  color: var(--color-text);
   font-family: var(--sub-font-name-it);
 }
 
@@ -91,7 +59,7 @@
 }
 
 .commit-div a {
-  color: rgba(231, 202, 142, 1);
+  color: var(--color-text-link);
   font-size: 1rem;
   font-family: var(--sub-font-name-it);
   margin-top: 0;
@@ -136,6 +104,6 @@
 .commit-desc {
   margin: 0 10px;
   font-size: 1rem;
-  color: white;
+  color: var(--color-text);
   font-family: var(--sub-font-name-it);
 }

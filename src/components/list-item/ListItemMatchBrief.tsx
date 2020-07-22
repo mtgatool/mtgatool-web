@@ -9,6 +9,7 @@ import { DEFAULT_TILE } from "../../shared/constants";
 import { ManaCost } from "../card-tile";
 import CardTileCss from "../card-tile/CardTile.css";
 import Flex from "../flex";
+import { utf8Decode } from "../../shared/util";
 
 interface MatchBriefProps {
   match: InternalMatch;
@@ -46,7 +47,7 @@ export default function ListItemMatchBrief({
         <Column>
           <FlexTop>
             <div className={css.listDeckName}>
-              {match.playerDeck.name || ""}
+              {utf8Decode(match.playerDeck.name || "")}
             </div>
           </FlexTop>
           <FlexBottom>

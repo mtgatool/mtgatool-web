@@ -5,7 +5,7 @@
   font-size: 1.33em;
   margin: 1em auto 0 auto;
   height: auto;
-  color: #fae5d2;
+  color: var(--color-text);
   padding-bottom: 16px;
   font-family: var(--sub-font-name-it);
 }
@@ -17,7 +17,7 @@
   font-size: 1em;
   margin: auto;
   height: auto;
-  color: #fae5d2;
+  color: var(--color-text);
   padding-bottom: 8px;
   font-family: var(--sub-font-name-it);
 }

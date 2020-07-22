@@ -57,6 +57,10 @@
   --color-card-tile-active: #c2d9ffc;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     padding: 0;
