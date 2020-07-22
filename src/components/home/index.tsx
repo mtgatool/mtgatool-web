@@ -20,6 +20,7 @@ import ShowcaseStats from "./ShowcaseStats";
 import Feature from "./Feature";
 import FeatureRight from "./FeatureRight";
 import useRequest from "../../hooks/useRequest";
+import ShowcaseCollection from "./ShowcaseCollection";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -160,6 +161,7 @@ function Home(props: ExportViewProps): JSX.Element {
               <ShowcaseStats />
             </Flex>
             <Flex style={{ margin: "4em auto" }}>
+              <ShowcaseCollection />
               <Feature
                 title="Analyse Your Collection"
                 subtitle="Take a deep look at the cards you have, how much of a set you are missing and how many drafts it would take you to complete them."
