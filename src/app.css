@@ -81,3 +81,26 @@
   color: var(--color-r);
   margin: auto;
 }
+
+.patreon-button {
+  cursor: pointer;
+  margin: 8px auto;
+  width: 16em;
+  height: 2.5em;
+  line-height: 2.5em;
+  font-size: 1em !important;
+  font-family: var(--main-font-name) !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  background-color: #F96854;
+  color: white !important;
+  transform: translateY(0);
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.patreon-button:hover {
+  box-shadow: 0px 4px 4px 0px #0000006b;
+  transform: translateY(2px);
+}

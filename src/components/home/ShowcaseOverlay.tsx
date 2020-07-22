@@ -16,7 +16,7 @@ export default function ShowcaseOverlay(): JSX.Element {
     : 0;
 
   const defaultStyle: CSSProperties = {
-    transition: "all 0.2s ease-in-out 0s",
+    transition: "all 0.1s ease-in 0s",
     height: "42.01px",
     position: "absolute"
   };

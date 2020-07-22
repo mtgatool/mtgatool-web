@@ -49,7 +49,7 @@
 
 .showcase-download-container {
   width: 100%;
-  height: 30vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
 }
@@ -92,4 +92,62 @@
   font-family: var(--main-font-name);
   font-size: 2rem;
   padding: 0 0 0.25em 0;
+}
+
+.comunity-support {
+  font-family: var(--main-font-name-it);
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.community-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1em;
+}
+
+.patreon-icon {
+  cursor: pointer;
+  margin: 0.6em;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  background-size: contain;
+  background-position: center;
+}
+
+.contributor {
+  cursor: pointer;
+  margin: 0.5em;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background-size: contain;
+  background-position: center;
+  border: 1px solid var(--color-section-hover);
+}
+
+.contributor:hover {
+  border-color: var(--color-button);
+}
+
+.patreon-icon:hover {
+  border-color: var(--color-button);
+}
+
+.icon-casual {
+  border: 2px solid var(--color-b);
+}
+
+.icon-standard {
+  border: 2px solid var(--color-mythic);
+}
+
+.icon-modern {
+  border: 2px solid var(--color-rare);
+}
+
+.icon-legacy {
+  border: 2px solid var(--color-uncommon);
 }

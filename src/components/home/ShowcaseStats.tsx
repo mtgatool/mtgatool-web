@@ -12,11 +12,11 @@ export default function ShowcaseStats(): JSX.Element {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const scroll = useSelector((state: AppState) => state.web.scroll);
   const offset = containerRef.current
-    ? containerRef.current.offsetTop + 210 - window.innerHeight / 2 - scroll
+    ? containerRef.current.offsetTop + 150 - window.innerHeight / 2 - scroll
     : 0;
 
   const defaultStyle: CSSProperties = {
-    transition: "all 0.2s ease-in-out 0s",
+    transition: "all 0.1s ease-in 0s",
     position: "absolute"
   };
 
@@ -34,16 +34,16 @@ export default function ShowcaseStats(): JSX.Element {
         style={{
           width: "608.52px",
           height: "414.52px",
-          position: "absolute",
-          transform: `translate3d(0x, ${Math.round(-offset / 6)}px, 0)`
+          transform: `translate3d(0px, ${Math.round(-offset / 8)}px, 0)`,
+          ...defaultStyle
         }}
       />
       <StatsBack
         style={{
           width: "462.89px",
           height: "308.59px",
-          position: "absolute",
-          transform: `translate3d(68px, 50px, 0px)`
+          transform: `translate3d(68px, 50px, 0px)`,
+          ...defaultStyle
         }}
       />
       <StatsCenter
@@ -61,7 +61,7 @@ export default function ShowcaseStats(): JSX.Element {
           width: "462.5px",
           height: "64.95px",
           transform: `translate3d(0px, ${Math.round(
-            60 + Math.max(0, offset / 8.2)
+            60 + Math.max(0, offset / 13)
           )}px, 0)`,
           ...defaultStyle
         }}

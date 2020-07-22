@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import sharedcss from "../../shared.css";
 
 import keyArt from "../../assets/images/key-art.jpg";
@@ -19,6 +19,7 @@ import ShowcaseOverlay from "./ShowcaseOverlay";
 import ShowcaseStats from "./ShowcaseStats";
 import Feature from "./Feature";
 import FeatureRight from "./FeatureRight";
+import useRequest from "../../hooks/useRequest";
 
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -40,6 +41,35 @@ function makeDownloadURL(versionTag: string): string {
   )}.${extension}`;
 }
 
+interface PatreonUser {
+  name: string;
+  amount: number;
+  thumb_url?: string;
+  url?: string;
+}
+
+interface Contributor {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_id: string;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: string;
+  site_admin: boolean;
+  contributions: number;
+}
+
 function Home(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
   React.useEffect(() => {
@@ -47,6 +77,9 @@ function Home(props: ExportViewProps): JSX.Element {
   }, [setImage]);
   const { versionTag } = useSelector((state: AppState) => state.web);
   const position = React.useRef(window);
+  const [patreons, setPatreons] = useState<PatreonUser[]>([]);
+  const [contributors, setContributors] = useState<Contributor[]>([]);
+
   const dispatch = useDispatch();
 
   const handleScroll = useCallback((): void => {
@@ -57,6 +90,31 @@ function Home(props: ExportViewProps): JSX.Element {
     window.addEventListener("scroll", handleScroll);
     return (): void => window.removeEventListener("scroll", handleScroll);
   }, [position, handleScroll]);
+
+  const patreonsRequest = useRequest("https://mtgatool.com/api/supporters.php");
+  const contribRequest = useRequest(
+    "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/contributors?q=contributions&order=desc"
+  );
+
+  useEffect(() => {
+    if (patreonsRequest.status == null) {
+      patreonsRequest.start();
+    }
+    if (patreonsRequest.response && patreons.length == 0) {
+      const json = JSON.parse(patreonsRequest.response);
+      setPatreons(json);
+    }
+  }, [patreons.length, patreonsRequest]);
+
+  useEffect(() => {
+    if (contribRequest.status == null) {
+      contribRequest.start();
+    }
+    if (contribRequest.response && patreons.length == 0) {
+      const json = JSON.parse(contribRequest.response);
+      setContributors(json);
+    }
+  }, [patreons.length, contribRequest]);
 
   return (
     <>
@@ -86,7 +144,7 @@ function Home(props: ExportViewProps): JSX.Element {
 
       <WrapperOuter>
         <WrapperInner>
-          <Flex style={{ height: "150vh", flexDirection: "column" }}>
+          <Flex style={{ marginBottom: "2em", flexDirection: "column" }}>
             <Flex style={{ margin: "4em auto" }}>
               <ShowcaseOverlay />
               <Feature
@@ -107,7 +165,63 @@ function Home(props: ExportViewProps): JSX.Element {
                 subtitle="Take a deep look at the cards you have, how much of a set you are missing and how many drafts it would take you to complete them."
               />
             </Flex>
-            <div className={homeCss.contMargin}>
+            <Section
+              style={{
+                flexDirection: "column",
+                padding: "1em",
+                maxWidth: "1000px",
+                margin: "0 auto"
+              }}
+            >
+              <div className={homeCss.comunitySupport}>
+                Maintained thanks to our backers!
+              </div>
+              <div className={homeCss.communityIcons}>
+                {patreons
+                  .sort((a, b) => b.amount - a.amount)
+                  .map((user, index: number) => {
+                    let borderClass = homeCss.iconCasual;
+                    if (user.amount >= 500) borderClass = homeCss.iconStandard;
+                    if (user.amount >= 1000) borderClass = homeCss.iconModern;
+                    if (user.amount >= 2000) borderClass = homeCss.iconLegacy;
+                    return user.thumb_url && user.url ? (
+                      <a
+                        key={"patreon-id-" + index}
+                        title={user.name}
+                        className={`${homeCss.patreonIcon} ${borderClass}`}
+                        href={user.url}
+                        style={{ backgroundImage: `url(${user.thumb_url})` }}
+                      />
+                    ) : (
+                      <></>
+                    );
+                  })}
+              </div>
+              <div className={homeCss.showcaseDownloadContainer}>
+                <a
+                  style={{ margin: "auto 0px" }}
+                  className={css.patreonButton}
+                  href="https://www.patreon.com/mtgatool"
+                >
+                  Become a Backer!
+                </a>
+              </div>
+              <div className={homeCss.comunitySupport}>GitHub Contributors</div>
+              <div className={homeCss.communityIcons}>
+                {contributors.map((contrib, index: number) => {
+                  return (
+                    <a
+                      key={"contributor-id-" + index}
+                      title={contrib.login}
+                      className={`${homeCss.contributor}`}
+                      href={contrib.html_url}
+                      style={{
+                        backgroundImage: `url(${contrib.avatar_url})`
+                      }}
+                    />
+                  );
+                })}
+              </div>
               <div className={homeCss.showcaseDownloadContainer}>
                 <a
                   style={{ margin: "auto 0px" }}
@@ -117,7 +231,7 @@ function Home(props: ExportViewProps): JSX.Element {
                   Download for {getCurrentOSName()}
                 </a>
               </div>
-            </div>
+            </Section>
           </Flex>
         </WrapperInner>
       </WrapperOuter>

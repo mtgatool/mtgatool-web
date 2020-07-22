@@ -1,7 +1,22 @@
 declare namespace HomeCssNamespace {
   export interface IHomeCss {
+    "community-icons": string;
+    communityIcons: string;
+    "comunity-support": string;
+    comunitySupport: string;
     "cont-margin": string;
     contMargin: string;
+    contributor: string;
+    "icon-casual": string;
+    "icon-legacy": string;
+    "icon-modern": string;
+    "icon-standard": string;
+    iconCasual: string;
+    iconLegacy: string;
+    iconModern: string;
+    iconStandard: string;
+    "patreon-icon": string;
+    patreonIcon: string;
     "showcase-container": string;
     "showcase-desc": string;
     "showcase-description-left": string;

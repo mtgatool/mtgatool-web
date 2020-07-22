@@ -10,6 +10,8 @@ declare namespace AppCssNamespace {
     homeDesc: string;
     homeDescSmall: string;
     loading: string;
+    "patreon-button": string;
+    patreonButton: string;
     "wrapper-image": string;
     wrapperImage: string;
   }
