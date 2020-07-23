@@ -3,21 +3,21 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, Link, match } from "react-router-dom";
 import css from "./metagame.css";
-import topNavCss from "../topnav/topnav.css";
 import { ManaCost } from "../card-tile";
-import DeckList from "../decklist";
 import NotFound from "../notfound";
 import TopTitle from "../title";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import db from "../../shared/database";
-import Deck from "../../shared/deck";
-import { utf8Decode } from "../../shared/util";
-import keyArt from "../../assets/images/key-art.jpg";
 import { ExportViewProps, ServerDeck } from "../../web-types/shared";
 import { InternalDeck } from "../../types/Deck";
 import { animated, useSpring } from "react-spring";
 import useRequest from "../../hooks/useRequest";
 import Section from "../Section";
+import ListItemMetagameDeck from "../list-item/ListItemMetagameDeck";
+import DeckViewNew from "../deck-view-new";
+import Button from "../button";
+import Deck from "../../shared/deck";
+import Flex from "../flex";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -36,7 +36,7 @@ interface Archetype {
   winrate: string;
 }
 
-interface DeckLink {
+export interface DeckLink {
   best: {
     name: string;
     dev: number;
@@ -48,6 +48,9 @@ interface DeckLink {
   owner: string;
   wr: number;
   wrt: number;
+  tile: number;
+  rank: string;
+  tier: number;
 }
 
 interface MetagameData {
@@ -174,7 +177,6 @@ function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
 }
 
 function Metagame(props: ExportViewProps): JSX.Element {
-  const [currentMatchId, setCurrentMatchId] = useState("");
   const formatMatch = useRouteMatch<{ format: string }>("/metagame/:format");
   const dayMatch = useRouteMatch<{ format: string; day: string }>(
     "/metagame/:format/:day"
@@ -193,8 +195,12 @@ function Metagame(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
   const [metagameData, setMetagameData] = useState<MetagameData | null>(null);
   const [archetype, setArchetype] = useState<string | null>(null);
-  const [deckToDraw, setDeckToDraw] = useState<InternalDeck | null>(null);
 
+  const isDeckView = !!deckMatch;
+  const isResultsView = !!archMatch && !isDeckView;
+  const isArchetypesView = !isResultsView && !isDeckView;
+
+  // Requests and triggers
   let URL = METAGAME_URL;
   if (dayMatch) {
     URL = `${METAGAME_URL}?event=${dayMatch.params.format.toUpperCase()}&days=${
@@ -215,22 +221,6 @@ function Metagame(props: ExportViewProps): JSX.Element {
     }
   }, [metagameRequest, metagameData]);
 
-  const ArchURL = `https://mtgatool.com/api/get_match_deck.php?id=${currentMatchId}`;
-  const archRequest = useRequest(ArchURL);
-
-  useEffect(() => {
-    if (archRequest.status == null && currentMatchId !== "") {
-      archRequest.start(ArchURL);
-    } else if (archRequest.response) {
-      const deckData = JSON.parse(
-        decodeURIComponent(escape(archRequest.response))
-      );
-      if (deckData.id !== (deckToDraw?.id || "")) {
-        setDeckToDraw(deckData);
-      }
-    }
-  }, [ArchURL, archRequest, currentMatchId, deckToDraw]);
-
   // format ID match
   useEffect(() => {
     if (
@@ -250,32 +240,9 @@ function Metagame(props: ExportViewProps): JSX.Element {
     }
   }, [archMatch, archetype]);
 
-  // Deck number match
-  useEffect(() => {
-    const archetypeData = metagameData
-      ? metagameData.meta.filter(arch => arch.name == deckMatch?.params.arch)[0]
-      : null;
-    if (archetypeData && !deckMatch) {
-      setDeckToDraw(archetypeData.best_deck);
-    }
-    if (deckMatch && metagameData && metagameData.meta) {
-      const openedDeck = parseInt(deckMatch.params.deck);
-
-      if (archetypeData && openedDeck < archetypeData.decks.length) {
-        const matchId = archetypeData.decks[openedDeck].match;
-        if (currentMatchId !== matchId) {
-          setCurrentMatchId(matchId);
-          archRequest.reset();
-        }
-      }
-    } else if (currentMatchId !== null) {
-      setCurrentMatchId("");
-    }
-  }, [archetype, deckMatch, metagameData, currentMatchId, archRequest]);
-
-  React.useEffect(() => {
-    setImage(keyArt);
-  }, [setImage]);
+  const currentArchetype = archMatch
+    ? metagameData?.meta.filter(arch => arch.name == archMatch.params.arch)[0]
+    : undefined;
 
   return archMatch &&
     metagameData &&
@@ -312,36 +279,65 @@ function Metagame(props: ExportViewProps): JSX.Element {
           />
           <MetagameNav format={formatMatch} />
         </Section>
-        <Section style={{ padding: "16px", marginBottom: "1em" }}>
-          {metagameData && metagameData.meta && archMatch ? (
-            <ArchetypeDecks
-              setImage={setImage}
-              deckToDraw={deckToDraw}
-              archMatch={archMatch}
-              archName={archMatch.params.arch}
-              opened={deckMatch ? parseInt(deckMatch.params.deck) : undefined}
-              metagame={metagameData}
-            />
-          ) : (
-            <div className={css["metagame-div"]}>
-              {metagameData && metagameData.meta ? (
-                metagameData.meta.sort(sortArchetypes).map(
-                  (arch: Archetype, index: number): JSX.Element => {
-                    return (
-                      <ArchetypeTile
-                        id={metagameData._id}
-                        key={arch.name + index}
-                        arch={arch}
-                      />
-                    );
-                  }
-                )
+        {isDeckView ? (
+          <ArchetypeDeck metagame={metagameData} />
+        ) : (
+          <Section style={{ padding: "16px", marginBottom: "1em" }}>
+            {isArchetypesView ? (
+              metagameData && metagameData.meta ? (
+                <div className={css.metagameDiv}>
+                  {metagameData.meta.sort(sortArchetypes).map(
+                    (arch: Archetype, index: number): JSX.Element => {
+                      return (
+                        <ArchetypeTile
+                          id={metagameData._id}
+                          key={arch.name + index}
+                          arch={arch}
+                        />
+                      );
+                    }
+                  )}
+                </div>
               ) : (
                 <></>
-              )}
-            </div>
-          )}
-        </Section>
+              )
+            ) : (
+              <></>
+            )}
+            {isResultsView && currentArchetype && archMatch ? (
+              <>
+                <div className={css.archetypeDecksListDiv}>
+                  <Link to=".">
+                    <Button
+                      style={{ margin: "0 auto 16px auto" }}
+                      onClick={(): void => {}}
+                      text="Back"
+                    />
+                  </Link>
+                  {currentArchetype.decks
+                    .sort(sortDeckLinks)
+                    .map((deck, index) => {
+                      return (
+                        <Link
+                          to={(): string =>
+                            `/metagame/${archMatch.params.format}/${archMatch.params.day}/${archMatch.params.arch}/${index}`
+                          }
+                          key={deck.name + "-" + index}
+                        >
+                          <ListItemMetagameDeck
+                            key={"metagame-id-" + index}
+                            decklink={deck}
+                          />
+                        </Link>
+                      );
+                    })}
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+          </Section>
+        )}
       </WrapperInner>
     </WrapperOuter>
   );
@@ -350,100 +346,80 @@ function Metagame(props: ExportViewProps): JSX.Element {
 export default Metagame;
 
 interface ArchetypeDecksProps {
-  setImage: ExportViewProps["setImage"];
-  deckToDraw: InternalDeck | null;
-  archMatch: match<{
+  metagame: MetagameData | null;
+}
+
+function ArchetypeDeck(props: ArchetypeDecksProps): JSX.Element {
+  const { metagame } = props;
+  const [deckToDraw, setDeckToDraw] = useState<InternalDeck | undefined>(
+    undefined
+  );
+
+  const deckMatch = useRouteMatch<{
     format: string;
     day: string;
     arch: string;
-  }>;
-  archName: string;
-  opened: number | undefined;
-  metagame: MetagameData;
-}
+    deck: string;
+  }>("/metagame/:format/:day/:arch/:deck");
 
-function ArchetypeDecks(props: ArchetypeDecksProps): JSX.Element {
-  const { setImage, deckToDraw, archName, archMatch, metagame, opened } = props;
-  const archetype = metagame.meta.filter(arch => arch.name == archName)[0];
+  const arch =
+    metagame && metagame.meta && deckMatch
+      ? metagame.meta.filter(arch => arch.name == deckMatch.params.arch)[0]
+      : null;
 
-  let deckName, deckOwner, deckWinrate, deckMatches;
-  if (!opened) {
-    deckName = archetype.best_deck.name;
-    deckOwner = archetype.best_deck.owner;
-    deckWinrate = archetype.best_deck_wr * 100;
-    deckMatches = archetype.best_deck_wrt;
-  } else {
-    deckName = archetype.decks[opened].name;
-    deckOwner = archetype.decks[opened].owner;
-    deckWinrate = archetype.decks[opened].wr * 100;
-    deckMatches = archetype.decks[opened].wrt;
-  }
+  const sortedDecks = arch ? arch.decks.sort(sortDeckLinks) : undefined;
 
-  if (deckToDraw) {
-    try {
-      const cardObj = db.card(deckToDraw.deckTileId);
-      if (cardObj && cardObj.images.art_crop) {
-        setImage(cardObj);
-      }
-    } catch (e) {
-      console.log("Card image not found ", e);
+  const currentDeck = deckMatch ? parseInt(deckMatch.params.deck) : 0;
+
+  const deckLink: DeckLink | null = sortedDecks
+    ? sortedDecks[currentDeck]
+    : null;
+
+  const currentMatchId =
+    deckLink?.match ||
+    (sortedDecks ? sortedDecks[currentDeck].match : null) ||
+    "";
+  const deckUrl = `https://mtgatool.com/api/get_match_deck.php?id=${currentMatchId}`;
+  const deckRequest = useRequest(deckUrl);
+
+  useEffect(() => {
+    if (deckRequest.status == null && currentMatchId !== "") {
+      deckRequest.start(deckUrl);
+    } else if (deckRequest.response && deckToDraw == undefined) {
+      const deckData = JSON.parse(decodeURIComponent(deckRequest.response));
+      console.log(deckData);
+      setDeckToDraw(deckData);
     }
-  }
+  }, [deckRequest, currentMatchId, deckToDraw, deckUrl]);
 
   const copyDeck = React.useCallback(() => {
-    let str = "";
-    if (deckToDraw) {
-      str = new Deck(deckToDraw).getExportArena();
-    }
+    const str = deckToDraw ? new Deck(deckToDraw).getExportArena() : "";
     navigator.clipboard.writeText(str);
   }, [deckToDraw]);
 
-  return (
-    <div className={css["archetype-decks-div"]}>
-      <div className={css["decklist-div"]}>
-        <Link className={topNavCss["nav-link-a"]} to="..">
-          {"< Go Back"}
-        </Link>
-        {deckToDraw && deckWinrate ? (
-          <>
-            <div className={css["deck-desc"]}>
-              {utf8Decode(deckName)} by {deckOwner}
-            </div>
-            <div className={css["deck-desc-b"]}>
-              {deckWinrate.toFixed(2)}% winrate across {deckMatches} matches.
-            </div>
-            <div onClick={copyDeck} className={css["button-simple"]}>
-              Copy to clipboard
-            </div>
-            <DeckList deck={deckToDraw} />
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
-      <div className={css["archetype-decks-list-div"]}>
-        {archetype.decks.sort(sortDeckLinks).map((deck, index) => {
-          return (
-            <Link
-              to={(): string =>
-                `/metagame/${archMatch.params.format}/${archMatch.params.day}/${archMatch.params.arch}/${index}`
-              }
-              key={deck.name + "-" + index}
-              className={css["deck-link"]}
-            >
-              <ManaCost colors={deck.colors} />
-              <div className={css["deck-link-desc"]}>
-                {utf8Decode(deck.name + " by " + deck.owner)}
-              </div>
-              <div className={css["deck-link-wr"]}>
-                {Math.round(deck.wr * deck.wrt)} -{" "}
-                {Math.round(deck.wrt - deck.wr * deck.wrt)} (
-                {(deck.wr * 100).toFixed(2)}%)
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
+  return deckToDraw ? (
+    <>
+      <Section
+        style={{
+          flexDirection: "column",
+          marginBottom: "16px",
+          paddingBottom: "16px"
+        }}
+      >
+        <TopTitle
+          title={deckToDraw ? deckToDraw.name : ""}
+          subtitle={deckToDraw ? "by " + deckLink?.owner : ""}
+        />
+        <Flex style={{ justifyContent: "space-around" }}>
+          <Link to=".">
+            <Button onClick={(): void => {}} text="Back" />
+          </Link>
+          <Button onClick={copyDeck} text="Copy to clipboard" />
+        </Flex>
+      </Section>
+      <DeckViewNew deck={deckToDraw} />
+    </>
+  ) : (
+    <></>
   );
 }

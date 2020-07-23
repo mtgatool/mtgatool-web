@@ -80,7 +80,9 @@ export default function ListItemMatchBrief({
 
         <Column>
           <FlexTop>
-            <div className={css.listMatchTitle}>{match.opponent.name}</div>
+            <div className={css.listMatchTitle}>
+              {utf8Decode(match.opponent.name)}
+            </div>
           </FlexTop>
           <FlexBottom
             style={{ justifyContent: "flex-end", marginRight: "8px" }}

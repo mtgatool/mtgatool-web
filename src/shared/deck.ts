@@ -11,6 +11,7 @@ import Colors from "./colors";
 import { DEFAULT_TILE } from "../shared/constants";
 import db from "./database";
 import { compareCards, getSetCode, objectClone } from "./util";
+import sha1 from "./utils/sha1";
 
 class Deck {
   private mainboard: CardsList;
@@ -18,6 +19,7 @@ class Deck {
   private readonly arenaMain: Readonly<v2cardsList>;
   private readonly arenaSide: Readonly<v2cardsList>;
   private commandZoneGRPIds: number[];
+  private companionGRPId: number | null;
   private name: string;
   public id: string;
   public lastUpdated: string;
@@ -47,6 +49,7 @@ class Deck {
     this.arenaMain = Deck.toLoggedList(arenaMain);
     this.arenaSide = Deck.toLoggedList(arenaSide);
     this.commandZoneGRPIds = mtgaDeck.commandZoneGRPIds ?? [];
+    this.companionGRPId = mtgaDeck.companionGRPId ?? null;
     this.name = mtgaDeck.name ?? "";
     this.id = mtgaDeck.id ?? "";
     this.lastUpdated = mtgaDeck.lastUpdated ?? "";
@@ -78,7 +81,7 @@ class Deck {
       for (const id of list) {
         if (lastObj === undefined || lastObj.id !== id) {
           Object.freeze(lastObj);
-          lastObj = { id: id, quantity: 1 };
+          lastObj = { id: id, quantity: 1 } as CardObject;
           loggedList.push(lastObj);
         } else {
           lastObj.quantity++;
@@ -101,7 +104,6 @@ class Deck {
    * Sort the mainboard of this deck.
    * @param func sort function.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sortMainboard(func: any): void {
     this.mainboard.get().sort(func);
   }
@@ -110,7 +112,6 @@ class Deck {
    * Sort the sideboard of this deck.
    * @param func sort function.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sortSideboard(func: any): void {
     this.sideboard.get().sort(func);
   }
@@ -159,6 +160,13 @@ class Deck {
    */
   getCommanders(): number[] {
     return this.commandZoneGRPIds;
+  }
+
+  /**
+   * Return the raw commandZoneGRPIds array for later use.
+   */
+  getCompanion(): number | null {
+    return this.companionGRPId;
   }
 
   /**
@@ -310,6 +318,7 @@ class Deck {
       tags: this.tags || [],
       custom: this.custom,
       commandZoneGRPIds: this.commandZoneGRPIds,
+      companionGRPId: this.companionGRPId || undefined,
       format: this.format,
       type: "InternalDeck",
       description: this.description
@@ -336,6 +345,18 @@ class Deck {
     }
 
     return str;
+  }
+
+  /**
+   * Returns this deck's SHA1 hash based on getUniqueString()
+   * @param checkSide whether or not to use the sideboard (default: true)
+   */
+  getHash(checkSide = true): string {
+    this.getMainboard().removeDuplicates(true);
+    this.getSideboard().removeDuplicates(true);
+    this.getMainboard().removeZeros(true);
+    this.getSideboard().removeZeros(true);
+    return sha1(this.getUniqueString(checkSide));
   }
 }
 

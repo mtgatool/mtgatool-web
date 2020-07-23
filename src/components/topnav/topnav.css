@@ -90,12 +90,10 @@
   font-family: var(--main-font-name);
   line-height: 32px;
   margin: auto 8px;
-  opacity: 0.8;
   text-decoration: none;
 }
 
 .nav-link-a:hover {
   text-decoration: underline;
   cursor: pointer;
-  opacity: 1;
 }

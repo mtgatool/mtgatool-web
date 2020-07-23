@@ -1,23 +1,18 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
-import DeckList from "../decklist";
 import TopTitle from "../title";
-import { WrapperOuter } from "../wrapper";
-import css from "./deckview.css";
-import metacss from "../metagame/metagame.css";
+import { WrapperOuter, WrapperInner } from "../wrapper";
 import Deck from "../../shared/deck";
-import DeckManaCurve from "../deck-mana-curve";
-import DeckTypesStats from "../deck-types-stats";
-import DeckWildcards from "../deck-wildcards";
-import db from "../../shared/database";
 import NotFound from "../notfound";
 
-import { ExportViewProps, ServerDeck } from "../../web-types/shared";
+import { ServerDeck } from "../../web-types/shared";
 import useRequest from "../../hooks/useRequest";
+import DeckViewNew from "../deck-view-new";
+import Section from "../Section";
+import Button from "../button";
 
-function DeckView(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
+function DeckView(): JSX.Element {
   const deckMatch = useRouteMatch<{ deckid: string }>("/deck/:deckid");
   const [deckToDraw, setDeckToDraw] = React.useState<ServerDeck | null>(null);
 
@@ -36,40 +31,32 @@ function DeckView(props: ExportViewProps): JSX.Element {
     } else if (response && deckToDraw == null) {
       const deckData = JSON.parse(response);
       setDeckToDraw(deckData);
-      try {
-        const cardObj = deckData ? db.card(deckData.deckTileId) : undefined;
-        if (cardObj?.images.art_crop) {
-          setImage(cardObj);
-        }
-      } catch (e) {
-        console.log("Card image not found ", e);
-      }
     }
-  }, [deckMatch, deckToDraw, response, setImage, start, status]);
+  }, [deckMatch, deckToDraw, response, start, status]);
 
   return (
     <>
       {deckToDraw && deckToDraw.error ? (
-        <NotFound setImage={setImage} />
+        <NotFound setImage={(): void => {}} />
       ) : (
         <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
-          <TopTitle
-            title={deckToDraw ? deckToDraw.name : ""}
-            subtitle={deckToDraw ? "by " + deckToDraw.user : ""}
-          />
-          {deckToDraw ? (
-            <div className={css["deckview-div"]}>
-              <div onClick={copyDeck} className={metacss["button-simple"]}>
-                Copy to clipboard
-              </div>
-              <DeckWildcards deck={new Deck(deckToDraw)} />
-              <DeckTypesStats deck={new Deck(deckToDraw)} />
-              <DeckManaCurve deck={deckToDraw} />
-              <DeckList deck={deckToDraw} />
-            </div>
-          ) : (
-            <></>
-          )}
+          <WrapperInner>
+            <Section
+              style={{
+                marginTop: "6em",
+                marginBottom: "1em",
+                flexDirection: "column",
+                paddingBottom: "16px"
+              }}
+            >
+              <TopTitle
+                title={deckToDraw ? deckToDraw.name : ""}
+                subtitle={deckToDraw ? "by " + deckToDraw.user : ""}
+              />
+              <Button onClick={copyDeck} text="Copy to clipboard" />
+            </Section>
+            {deckToDraw ? <DeckViewNew deck={deckToDraw} /> : <></>}
+          </WrapperInner>
         </WrapperOuter>
       )}
     </>

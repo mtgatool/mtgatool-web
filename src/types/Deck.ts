@@ -8,6 +8,7 @@ export interface ArenaV3Deck extends BasicDeck {
   cardSkins: CardSkin[];
   cardBack: null | string;
   commandZoneGRPIds: [];
+  companionGRPId: number;
   type: "ArenaV3Deck";
 }
 
@@ -24,20 +25,10 @@ export interface InternalDeck extends BasicDeck {
   type: "InternalDeck";
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function isInternalDeck(deck: any): deck is InternalDeck {
-  return (
-    deck &&
-    typeof deck === "object" &&
-    "type" in deck &&
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (deck as any).type === "InternalDeck"
-  );
-}
-
-export interface BasicDeck {
+interface BasicDeck {
   id: string;
   commandZoneGRPIds?: number[];
+  companionGRPId?: number;
   mainDeck: anyCardsList;
   sideboard: anyCardsList;
   name: string;
@@ -69,7 +60,7 @@ export function isV2CardsList(
 
 export type anyCardsList = v2cardsList | v3cardsList;
 
-export interface CardSkin {
+interface CardSkin {
   grpId: number;
   ccv: string;
 }
@@ -82,6 +73,24 @@ export interface DeckChange {
   changesSide: CardObject[];
   previousMain: v2cardsList;
   previousSide: v2cardsList;
+  newDeckHash: string;
+}
+
+export interface ColorsAmmount {
+  total: number;
+  w: number;
+  u: number;
+  b: number;
+  r: number;
+  g: number;
+  c: number;
+}
+
+export interface MissingWildcards {
+  rare: number;
+  common: number;
+  uncommon: number;
+  mythic: number;
 }
 
 // Formats can be added to the logs cosntantly

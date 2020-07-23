@@ -39,8 +39,8 @@
   flex-grow: 2;
 }
 
-.wrapper-outer a {
-  color: rgba(231, 202, 142, 1);
+.link {
+  color: var(--color-text-link);
   margin-top: 10px;
   font-size: 1rem;
   font-family: var(--sub-font-name);

@@ -27,7 +27,7 @@ export default function ShowcaseCollection(): JSX.Element {
         display: "flex",
         width: "509.87px",
         height: "360.01px",
-        margin: "0 auto 0 4em"
+        margin: "0px 4em 0px auto"
       }}
     >
       <CollectionDetails

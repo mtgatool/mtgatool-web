@@ -3,50 +3,60 @@ import _ from "lodash";
 import React from "react";
 import db from "../../shared/database";
 import { cardType } from "../../shared/cardTypes";
-import css from "./decklist.css";
 
 import CardTile from "../card-tile";
-import { InternalDeck } from "../../types/Deck";
 import { DbCardData } from "../../types/Metadata";
 
-/*
-function compareQuantity(a, b) {
-  if (b.quantity - a.quantity < 0) return -1;
-  if (b.quantity - a.quantity > 0) return 1;
-  return 0;
-}
-*/
+import Separator from "./Separator";
+import Deck from "../../shared/deck";
 
-interface SeparatorProps {
-  children: JSX.Element | string;
-}
-
-function Separator(props: SeparatorProps): JSX.Element {
-  const { children } = props;
-  return <div className={css.cardTileSeparator}>{children}</div>;
-}
-
-function getDeckComponents(deck: InternalDeck): JSX.Element[] {
-  //console.log(deck);
+function getDeckComponents(deck: Deck): JSX.Element[] {
   const components: JSX.Element[] = [];
-  if (deck.commandZoneGRPIds && deck.commandZoneGRPIds.length > 0) {
+  const comp = deck.getCompanion();
+  if (comp) {
+    const companionGrpId = comp;
+    components.push(<Separator key="sep_commander">Companion</Separator>);
+    const cardObj = db.card(companionGrpId || 0);
+    if (cardObj) {
+      components.push(
+        <CardTile
+          indent="a"
+          isHighlighted={false}
+          isSideboard={false}
+          deck={deck}
+          card={cardObj}
+          key={"companioncardtile-" + companionGrpId}
+          quantity={1}
+        />
+      );
+    }
+  }
+
+  if (deck.getCommanders() && deck.getCommanders().length > 0) {
     components.push(<Separator key="sep_commander">Commander</Separator>);
 
-    deck.commandZoneGRPIds.forEach((id, index) => {
+    deck.getCommanders().forEach((id: number, index: number) => {
       if (index % 2 == 0) {
-        components.push(
-          <CardTile
-            grpId={id}
-            key={"commandercardtile" + index + "_" + id}
-            quantity={1}
-          />
-        );
+        const card = db.card(id);
+        if (card) {
+          components.push(
+            <CardTile
+              indent="a"
+              isHighlighted={false}
+              isSideboard={false}
+              deck={deck}
+              card={card}
+              key={"commandercardtile" + index + "_" + id}
+              quantity={1}
+            />
+          );
+        }
       }
     });
   }
 
   // draw maindeck grouped by cardType
-  const cardsByGroup = _(deck.mainDeck)
+  const cardsByGroup = _(deck.getMainboard().get())
     .map(card => ({ data: db.card(card.id), ...card }))
     .filter(card => card.data !== undefined)
     .groupBy(card => {
@@ -96,7 +106,11 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
         .forEach((card, index) => {
           components.push(
             <CardTile
-              grpId={card.id}
+              indent="b"
+              isHighlighted={false}
+              isSideboard={false}
+              deck={deck}
+              card={card.data as DbCardData}
               key={"mainboardcardtile" + index + "_" + card.id}
               quantity={card.quantity}
             />
@@ -104,21 +118,32 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
         });
     });
 
-  const sideboardSize = _.sumBy(deck.sideboard, "quantity");
+  let sideboardSize = _.sumBy(deck.getSideboard().get(), "quantity");
   if (sideboardSize) {
     // draw a separator for the sideboard
     components.push(
       <Separator key="sep_side">{`Sideboard (${sideboardSize})`}</Separator>
     );
 
+    const comp = deck.getCompanion();
+    if (comp) {
+      sideboardSize -= 1;
+      deck.getSideboard().remove(comp);
+    }
+
     // draw the cards
-    _(deck.sideboard)
+    _(deck.getSideboard().get())
+      .map(card => ({ data: db.card(card.id), ...card }))
       .filter(card => card.quantity > 0)
       .orderBy(["data.cmc", "data.name"])
       .forEach((card, index) => {
         components.push(
           <CardTile
-            grpId={card.id}
+            indent="a"
+            isHighlighted={false}
+            isSideboard={true}
+            deck={deck}
+            card={card.data as DbCardData}
             key={"sideboardcardtile" + index + "_" + card.id}
             quantity={card.quantity}
           />
@@ -130,13 +155,11 @@ function getDeckComponents(deck: InternalDeck): JSX.Element[] {
 }
 
 interface DeckListProps {
-  deck: InternalDeck;
+  deck: Deck;
 }
 
 export default function DeckList(props: DeckListProps): JSX.Element {
   const { deck } = props;
   if (!deck || db.version == 0) return <></>;
-
-  const renderComponents = getDeckComponents(deck);
-  return <div className="decklist">{renderComponents}</div>;
+  return <>{getDeckComponents(deck)}</>;
 }

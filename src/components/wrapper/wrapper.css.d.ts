@@ -1,5 +1,6 @@
 declare namespace WrapperCssNamespace {
   export interface IWrapperCss {
+    link: string;
     "wrapper-inner": string;
     "wrapper-inner-centered": string;
     "wrapper-outer": string;

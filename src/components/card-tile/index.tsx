@@ -78,7 +78,6 @@ interface CardTileProps {
   isHighlighted: boolean;
   isSideboard: boolean;
   quantity: CardTileQuantity;
-  showWildcards: boolean;
 }
 
 function CostSymbols(props: {
