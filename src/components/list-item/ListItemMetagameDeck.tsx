@@ -5,7 +5,7 @@ import css from "./ListItem.css";
 import RankIcon from "../rank-icon";
 import { DEFAULT_TILE } from "../../shared/constants";
 import { ManaCost } from "../card-tile";
-import CardTileCss from "../card-tile/CardTile.css";
+import CardTileCss from "../card-tile/cardtile.css";
 import { utf8Decode } from "../../shared/util";
 import { DeckLink } from "../metagame";
 import MetaCss from "../metagame/metagame.css";

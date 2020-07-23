@@ -7,7 +7,7 @@ import RankIcon from "../rank-icon";
 import getEventPrettyName from "../../shared/utils/getEventPrettyName";
 import { DEFAULT_TILE } from "../../shared/constants";
 import { ManaCost } from "../card-tile";
-import CardTileCss from "../card-tile/CardTile.css";
+import CardTileCss from "../card-tile/cardtile.css";
 import Flex from "../flex";
 import { utf8Decode } from "../../shared/util";
 

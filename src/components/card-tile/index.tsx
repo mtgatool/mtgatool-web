@@ -6,7 +6,7 @@ import {
   LANDS_HACK
 } from "../../shared/constants";
 import Deck from "../../shared/deck";
-import css from "./CardTile.css";
+import css from "./cardtile.css";
 
 import typeLand from "../../assets/cssimages/type_land.png";
 import useHoverCard from "../../hooks/useHoverCard";
