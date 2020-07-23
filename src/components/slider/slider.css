@@ -1,3 +1,44 @@
+input[type='range'] {
+  margin: 0;
+  overflow: unset;
+  -webkit-appearance: none;
+  width: 100%;
+  border-radius: 16px;
+  height: 4px;
+  background: var(--color-section);
+  outline: none;
+  opacity: 1;
+  transition: all 0.2s cubic-bezier(0.35, 0.12, 0.5, 1.0);
+  z-index: 1;
+}
+
+input[type='range']:active, input[type='range']:focus {
+  border: none !important;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.35, 0.12, 0.5, 1.0);
+  z-index: 1;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  background: var(--color-text-hover);
+  box-shadow: 0 0 0px 8px var(--color-button-shade-20);
+  z-index: 1;
+}
+
+input[type='range']::-webkit-slider-thumb:active {
+  background: var(--color-text-hover);
+  box-shadow: 0 0 0px 12px var(--color-button-shade-40);
+  z-index: 1;
+}
 
 .slidecontainer {
   overflow: unset;
@@ -6,46 +47,6 @@
   display: flex;
   flex-direction: column;
 }
-
-.slider {
-  margin: 0;
-  overflow: unset;
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  border-radius: 16px;
-  height: 4px;
-  background: var(--color-mid-50);
-  outline: none;
-  opacity: 1;
-  transition: all 0.2s cubic-bezier(0.35, 0.12, 0.5, 1.0);
-}
-
-.slider:hover {
-  background: var(--color-mid-66);
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 8px;
-  background: var(--color-mid);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.35, 0.12, 0.5, 1.0);
-}
-
-.slider::-webkit-slider-thumb:hover {
-  background: var(--color-light);
-  box-shadow: 0 0 0px 8px var(--color-light-20);
-}
-
-.slider::-webkit-slider-thumb:active {
-  background: var(--color-light);
-  box-shadow: 0 0 0px 12px var(--color-light-40);
-}
-
 
 .slider_mark_outer {
   display: flex;
@@ -58,7 +59,7 @@
 .slider_mark_text {
   margin-top: 6px;
   white-space: nowrap;
-  color: var(--color-light);
+  color: var(--color-text);
   font-size: 14px;
   opacity: 0.9;
   font-family: var(--sub-font-name-bold);
@@ -68,7 +69,7 @@
   width: calc(100% - 14px);
   margin: 4px 7px 0 7px;
   height: 4px;
-  z-index: -1;
+  z-index: 0;
   display: flex;
   justify-content: space-between;
 }

@@ -84,7 +84,7 @@ function App(): JSX.Element {
               <ReleaseNotes setImage={setImage} />
             </Route>
             <Route path="/deck">
-              <DeckView setImage={setImage} />
+              <DeckView />
             </Route>
             <Route path="/action-log">
               <ActionLog setImage={setImage} />

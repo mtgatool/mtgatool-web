@@ -6,7 +6,7 @@ export class SliderPosition {
   public hide: boolean;
   public color: string;
 
-  constructor(_text = "", _hide = false, _color = "var(--color-light-50)") {
+  constructor(_text = "", _hide = false, _color = "var(--color-text-dark)") {
     this.text = _text;
     this.hide = _hide;
     this.color = _color;
@@ -55,10 +55,14 @@ export default function Slider(props: SliderProps): JSX.Element {
     setValue(props.value);
   }, [props.value]);
 
+  const percent = (100 / (max - min)) * ((value || 0) - min);
+
   return (
     <div style={props.containerStyle} className={css.slidecontainer}>
       <input
-        className={css.slider}
+        style={{
+          background: `linear-gradient(90deg, var(--color-button) ${percent}%, var(--color-section) ${percent}%)`
+        }}
         type="range"
         value={value || 0}
         min={min}
@@ -67,7 +71,7 @@ export default function Slider(props: SliderProps): JSX.Element {
         onChange={handleOnChange}
         onInput={handleOnInput}
       ></input>
-      <div className="slider_marks_container_hor">
+      <div className={css.sliderMarksContainerHor}>
         {posArray.map((c: SliderPosition, i: number) => {
           return (
             <div className={css.sliderMarkOuter} key={c.text + "-" + i}>
@@ -76,7 +80,7 @@ export default function Slider(props: SliderProps): JSX.Element {
                 style={{ backgroundColor: c.color, opacity: c.hide ? 0 : 1 }}
               />
               {c.text !== "" && (
-                <div className="slider_mark_text">{c.text}</div>
+                <div className={css.sliderMarkText}>{c.text}</div>
               )}
             </div>
           );

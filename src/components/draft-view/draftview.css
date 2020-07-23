@@ -1,18 +1,27 @@
-.draft-title {
-  margin: auto;
-  height: 32px;
-  line-height: 32px;
+.draft-view-grid {
+  margin-bottom: 1em;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 16px;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "controls controls"
+    "draft deck";
+}
+
+.draft_title {
+  margin-bottom: 8px;
+  height: 24px;
+  line-height: 24px;
   text-align: center;
   font-size: 1.33em;
-  color: #fae5d2;
-  padding: 8px;
+  color: var(--color-text);
   font-family: var(--sub-font-name-it);
 }
 
 .draft-container {
   flex-direction: column;
   display: flex;
-  margin: 8px 48px;
   flex-grow: 2;
 }
 
@@ -26,11 +35,9 @@
 }
 
 .draft-view {
-  display: flex;
-  height: fit-content;
+  display: grid;
+  height: auto;
   justify-content: center;
-  flex-wrap: wrap;
-  flex-grow: 2;
 }
 
 .draft-deck-view {
@@ -38,10 +45,8 @@
 }
 
 .draft-card {
-  width: 170px;
-  height: 237px;
   border-radius: 9px;
-  margin: 8px;
+  margin: 8px auto;
   background-size: contain;
   cursor: pointer;
   -webkit-transition: all .15s ease-in-out;
@@ -50,7 +55,7 @@
 
 .draft-card-picked {
   border: 2px solid var(--color-r);
-  margin: 6px;
+  margin: 6px auto;
 }
 
 .draft-card:hover {
@@ -58,3 +63,18 @@
   filter: brightness(1.1);
 }
 
+.draft-card-cont {
+  display: block;
+}
+
+.draft-card-rank {
+  margin: auto;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-back);
+  text-align: center;
+  line-height: 24px;
+  border: 1px solid var(--color-mid-20);
+  border-radius: 2px;
+}
