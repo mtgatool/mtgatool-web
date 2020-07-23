@@ -87,10 +87,10 @@ function App(): JSX.Element {
               <DeckView />
             </Route>
             <Route path="/action-log">
-              <ActionLog setImage={setImage} />
+              <ActionLog />
             </Route>
             <Route path="/draft">
-              <DraftView setImage={setImage} />
+              <DraftView />
             </Route>
             <Route path="/docs">
               <Docs setImage={setImage} />

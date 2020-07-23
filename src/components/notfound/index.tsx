@@ -9,7 +9,9 @@ function NotFound(props: ExportViewProps): JSX.Element {
   const { setImage } = props;
 
   React.useEffect(() => {
-    setImage(notFoundImage);
+    if (setImage) {
+      setImage(notFoundImage);
+    }
   }, [setImage]);
 
   return (

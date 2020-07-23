@@ -13,7 +13,6 @@ import {
   DRAFT_RANKS_LOLA
 } from "../../shared/constants";
 import Deck from "../../shared/deck";
-import { ExportViewProps } from "../../web-types/shared";
 import { InternalDraftv2 } from "../../types/draft";
 import useHoverCard from "../../hooks/useHoverCard";
 import useRequest from "../../hooks/useRequest";
@@ -83,8 +82,7 @@ function DraftCard(props: DraftCardProps): JSX.Element {
   );
 }
 
-function DraftView(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
+function DraftView(): JSX.Element {
   const draftMatch = useRouteMatch<{ draftId: string }>("/draft/:draftId");
   const [draft, setDraft] = React.useState<InternalDraftv2 | null>(null);
   const [error, setError] = React.useState<any>(null);
@@ -108,7 +106,7 @@ function DraftView(props: ExportViewProps): JSX.Element {
       console.log(draftData);
       setDraft(draftData);
     }
-  }, [draftMatch, draft, response, setImage, start, status]);
+  }, [draftMatch, draft, response, start, status]);
 
   const downHandler = React.useCallback(
     (event: KeyboardEvent): void => {
@@ -184,7 +182,7 @@ function DraftView(props: ExportViewProps): JSX.Element {
   return (
     <>
       {draft && error ? (
-        <NotFound setImage={setImage} />
+        <NotFound />
       ) : draft ? (
         <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
           <WrapperInnerCentered>
