@@ -29,8 +29,8 @@ export default function ListItemMetagameDeck({
         <RankIcon
           rank={decklink.rank}
           tier={decklink.tier}
-          percentile={0}
-          leaderboardPlace={0}
+          percentile={decklink.percentile}
+          leaderboardPlace={decklink.leaderboardPlace}
         />
       </HoverTile>
       <div

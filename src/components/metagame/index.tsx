@@ -51,6 +51,8 @@ export interface DeckLink {
   tile: number;
   rank: string;
   tier: number;
+  percentile: number;
+  leaderboardPlace: number;
 }
 
 interface MetagameData {
