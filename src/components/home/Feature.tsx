@@ -15,7 +15,7 @@ export default function Feature(props: FeatureProps): JSX.Element {
         borderRadius: "4px",
         padding: "16px",
         maxWidth: "32em",
-        height: "11em",
+        height: "9em",
         margin: "auto"
       }}
     >
