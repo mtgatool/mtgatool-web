@@ -1,3 +1,15 @@
+.log-view-grid {
+  margin-bottom: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "controls controls"
+    "deck log";
+}
+
+
 .deckview-div {
 	width: calc(100% - 48px);
     margin: 24px auto;

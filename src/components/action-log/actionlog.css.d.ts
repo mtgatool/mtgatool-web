@@ -14,6 +14,7 @@ declare namespace ActionlogCssNamespace {
     "log-ability": string;
     "log-card": string;
     "log-text": string;
+    "log-view-grid": string;
     logAbility: string;
     logCard: string;
     logP1: string;
@@ -22,6 +23,7 @@ declare namespace ActionlogCssNamespace {
     logPlayer1: string;
     logPlayer2: string;
     logText: string;
+    logViewGrid: string;
     "log_p-1": string;
     "log_p-2": string;
     log_player0: string;
