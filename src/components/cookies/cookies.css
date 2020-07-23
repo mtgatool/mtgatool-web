@@ -31,13 +31,14 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 3px 3px 0px 0px;
-  background-color: var(--color-light);
+  background-color: var(--color-section);
   z-index: 100;
+  border: 1px solid var(--color-line-sep);
 }
 
 .cookie-text {
   font-size: 1.2em;
-  color: var(--color-back);
+  color: var(--color-text);
   font-family: var(--main-font-name-it);
   text-align: center;
 }

@@ -27,7 +27,7 @@ import { WrapperOuter } from "./components/wrapper";
 
 // Import once so all CSS can use it thanks to webpack magic
 import css from "./app.css";
-import keyArt from "./assets/images/key-art.jpg";
+import keyArt from "./assets/images/key-art-new.jpg";
 import notFoundArt from "./assets/images/404.jpg";
 import { DbCardData } from "./types/Metadata";
 import { useSelector } from "react-redux";

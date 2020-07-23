@@ -4,7 +4,7 @@ import crypto from "crypto";
 import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./register.css";
-import keyArt from "../../assets/images/key-art.jpg";
+import keyArt from "../../assets/images/key-art-new.jpg";
 import { ExportViewProps } from "../../web-types/shared";
 
 function Register(props: ExportViewProps): JSX.Element {

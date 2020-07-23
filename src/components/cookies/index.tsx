@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback } from "react";
 import css from "./cookies.css";
-import metaCss from "../metagame/metagame.css";
+import Button from "../button";
 
 function CookiesSign(): JSX.Element {
   const [show, setShow] = React.useState(true);
@@ -27,9 +27,7 @@ function CookiesSign(): JSX.Element {
             services. By using this website you agree with our Privacy policy
             and terms of service.
           </div>
-          <div onClick={hide} className={metaCss.buttonSimple}>
-            I agree
-          </div>
+          <Button onClick={hide} text="I agree" />
         </div>
       ) : (
         <></>

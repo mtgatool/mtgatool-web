@@ -1,5 +1,5 @@
-declare namespace CardTileCssNamespace {
-  export interface ICardTileCss {
+declare namespace CardtileCssNamespace {
+  export interface ICardtileCss {
     cardTile: string;
     cardTileContainer: string;
     cardTileContainerFlat: string;
@@ -126,9 +126,9 @@ declare namespace CardTileCssNamespace {
   }
 }
 
-declare const CardTileCssModule: CardTileCssNamespace.ICardTileCss & {
+declare const CardtileCssModule: CardtileCssNamespace.ICardtileCss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: CardTileCssNamespace.ICardTileCss;
+  locals: CardtileCssNamespace.ICardtileCss;
 };
 
-export = CardTileCssModule;
+export = CardtileCssModule;

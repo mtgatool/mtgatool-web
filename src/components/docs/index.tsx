@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouteMatch, useLocation, Link } from "react-router-dom";
 import { WrapperOuter } from "../wrapper";
 import css from "./docs.css";
-import keyArt from "../../assets/images/key-art.jpg";
+import keyArt from "../../assets/images/key-art-new.jpg";
 
 // Docs
 import docs from "./index.yml";

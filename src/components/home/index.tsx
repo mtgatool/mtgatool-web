@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import sharedcss from "../../shared.css";
 
-import keyArt from "../../assets/images/key-art.jpg";
+import keyArt from "../../assets/images/key-art-new.jpg";
 
 import css from "../../app.css";
 import homeCss from "./home.css";
@@ -119,7 +119,7 @@ function Home(props: ExportViewProps): JSX.Element {
 
   return (
     <>
-      <WrapperOuter style={{ height: "120vh" }}>
+      <WrapperOuter style={{ marginBottom: "4em" }}>
         <WrapperInner>
           <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
             <div className={css.homeDesc}>
