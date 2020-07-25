@@ -1,0 +1,24 @@
+language: node_js
+
+services:
+  - docker
+
+node_js:
+  - '11'
+
+cache: npm
+
+filter_secrets: false
+
+jobs:
+  include:
+    - stage: Tests
+      os: Linux
+      env: YARN_GPG=no
+      script:
+        - npm test
+    - stage: Build
+      os: linux
+      env: YARN_GPG=no
+      script:
+        - npm run build
