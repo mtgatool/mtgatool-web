@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 
-import db from "../../shared/database";
+import { database as db, Deck, constants } from "mtgatool-shared";
+const { WILDCARD_RARITIES } = constants;
 import css from "./deckwildcards.css";
-import Deck from "../../shared/deck";
-import { WILDCARD_RARITIES } from "../../constants";
 
 function getDeckWildcards(
   deck: Deck

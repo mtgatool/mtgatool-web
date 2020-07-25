@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
+import { database as db } from "mtgatool-shared";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
-import db from "../../shared/database";
 import { reduxAction } from "../../redux/webRedux";
 import { useDispatch } from "react-redux";
 

@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
 
-import { CARD_TYPES, CARD_TYPE_CODES } from "../../shared/constants";
-import db from "../../shared/database";
+import { constants, database as db, Deck } from "mtgatool-shared";
+const { CARD_TYPES, CARD_TYPE_CODES } = constants;
 import css from "./decktypesstats.css";
-import Deck from "../../shared/deck";
 
 interface DeckTypes {
   art: number;

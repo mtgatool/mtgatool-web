@@ -1,16 +1,16 @@
 import React, { useCallback, useState, CSSProperties } from "react";
-import {
+import { Deck, constants } from "mtgatool-shared";
+const {
   COLORS_ALL,
   FACE_SPLIT_FULL,
   FACE_ADVENTURE_MAIN,
   LANDS_HACK
-} from "../../shared/constants";
-import Deck from "../../shared/deck";
+} = constants;
 import css from "./cardtile.css";
 
 import typeLand from "../../assets/cssimages/type_land.png";
 import useHoverCard from "../../hooks/useHoverCard";
-import { DbCardData } from "../../types/Metadata";
+import { DbCardData } from "mtgatool-shared/dist/types/metadata";
 
 const mana: Record<string, string> = {};
 mana["w"] = css.mana_w;

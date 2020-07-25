@@ -1,19 +1,23 @@
 import React from "react";
-import { InternalDeck } from "../../types/Deck";
 import Section from "../Section";
 
 import css from "./index.css";
 import DeckList from "../decklist";
-import Deck from "../../shared/deck";
 import Separator from "../decklist/Separator";
 import DeckTypesStats from "../deck-types-stats";
 import DeckManaCurve from "../deck-mana-curve";
 import ReactSvgPieChart from "react-svg-piechart";
 import WildcardsCostPreset from "../wildcards-cost-preset";
-import getDeckColorsAmmount from "../../shared/utils/getDeckColorsAmmount";
-import getDeckLandsAmmount from "../../shared/utils/getDeckLandsAmmount";
-import { MANA_COLORS } from "../../shared/constants";
-import getDeckRaritiesCount from "../../shared/utils/getDeckRaritiesCount";
+
+import {
+  constants,
+  Deck,
+  getDeckColorsAmmount,
+  getDeckLandsAmmount,
+  getDeckRaritiesCount
+} from "mtgatool-shared";
+import { InternalDeck } from "mtgatool-shared/dist/types/deck";
+const { MANA_COLORS } = constants;
 
 interface DeckViewNewProps {
   deck: InternalDeck;

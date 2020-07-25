@@ -3,15 +3,15 @@ import React from "react";
 import { Column, FlexBottom, FlexTop, HoverTile, ListItem } from "./ListItem";
 import css from "./ListItem.css";
 import RankIcon from "../rank-icon";
-import { DEFAULT_TILE } from "../../shared/constants";
+import { constants, formatPercent } from "mtgatool-shared";
+const { DEFAULT_TILE } = constants;
 import { ManaCost } from "../card-tile";
 import CardTileCss from "../card-tile/cardtile.css";
-import { utf8Decode } from "../../shared/util";
 import { DeckLink } from "../metagame";
 import MetaCss from "../metagame/metagame.css";
 import Flex from "../flex";
 import { getWinrateClass } from "../../shared/utils/getWinrateClass";
-import formatPercent from "../../shared/utils/formatPercent";
+import utf8Decode from "../../shared/utils/utf8Decode";
 
 interface ListItemMetagameDeckProps {
   decklink: DeckLink;

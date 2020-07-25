@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback } from "react";
 import css from "./cardhover.css";
-import db from "../../shared/database";
+import { database as db, constants } from "mtgatool-shared";
 import NotFound from "../../assets/cssimages/notfound.png";
-
-import { FACE_DFC_BACK, FACE_DFC_FRONT } from "../../shared/constants";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
+const { FACE_DFC_BACK, FACE_DFC_FRONT } = constants;
 
 function CardHover(): JSX.Element {
   const hoverState = useSelector((state: AppState) => state.hover);
@@ -33,7 +32,8 @@ function CardHover(): JSX.Element {
     if (
       cardObj &&
       (cardObj.dfc == FACE_DFC_BACK || cardObj.dfc == FACE_DFC_FRONT) &&
-      cardObj.dfcId
+      cardObj.dfcId &&
+      cardObj.dfcId !== true
     ) {
       cardObj = db.card(cardObj.dfcId);
       try {

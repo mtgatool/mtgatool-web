@@ -29,9 +29,9 @@ import { WrapperOuter } from "./components/wrapper";
 import css from "./app.css";
 import keyArt from "./assets/images/key-art-new.jpg";
 import notFoundArt from "./assets/images/404.jpg";
-import { DbCardData } from "./types/Metadata";
 import { useSelector } from "react-redux";
 import { AppState } from "./redux/stores/webStore";
+import { DbCardData } from "mtgatool-shared/dist/types/metadata";
 
 function App(): JSX.Element {
   const [artData, setArtData] = React.useState(
@@ -93,7 +93,7 @@ function App(): JSX.Element {
               <DraftView />
             </Route>
             <Route path="/docs">
-              <Docs setImage={setImage} />
+              <Docs />
             </Route>
             <Route>
               <NotFound setImage={setImage} />

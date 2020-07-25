@@ -7,16 +7,14 @@ import { ManaCost } from "../card-tile";
 import NotFound from "../notfound";
 import TopTitle from "../title";
 import { WrapperInner, WrapperOuter } from "../wrapper";
-import db from "../../shared/database";
+import { database as db, Deck } from "mtgatool-shared";
 import { ExportViewProps, ServerDeck } from "../../web-types/shared";
-import { InternalDeck } from "../../types/Deck";
 import { animated, useSpring } from "react-spring";
 import useRequest from "../../hooks/useRequest";
 import Section from "../Section";
 import ListItemMetagameDeck from "../list-item/ListItemMetagameDeck";
 import DeckViewNew from "../deck-view-new";
 import Button from "../button";
-import Deck from "../../shared/deck";
 import Flex from "../flex";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";

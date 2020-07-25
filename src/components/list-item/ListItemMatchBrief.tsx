@@ -2,14 +2,15 @@ import _ from "lodash";
 import React from "react";
 import { Column, FlexBottom, FlexTop, HoverTile, ListItem } from "./ListItem";
 import css from "./ListItem.css";
-import { InternalMatch } from "../../types/match";
+
 import RankIcon from "../rank-icon";
-import getEventPrettyName from "../../shared/utils/getEventPrettyName";
-import { DEFAULT_TILE } from "../../shared/constants";
 import { ManaCost } from "../card-tile";
 import CardTileCss from "../card-tile/cardtile.css";
 import Flex from "../flex";
-import { utf8Decode } from "../../shared/util";
+import { getEventPrettyName, constants } from "mtgatool-shared";
+const { DEFAULT_TILE } = constants;
+import { InternalMatch } from "mtgatool-shared/dist/types/match";
+import utf8Decode from "../../shared/utils/utf8Decode";
 
 interface MatchBriefProps {
   match: InternalMatch;

@@ -1,14 +1,11 @@
 /* eslint-disable react/prop-types */
 import _ from "lodash";
 import React from "react";
-import db from "../../shared/database";
-import { cardType } from "../../shared/cardTypes";
+import { database as db, cardType, Deck } from "mtgatool-shared";
+import { DbCardData } from "mtgatool-shared/dist/types/metadata";
 
 import CardTile from "../card-tile";
-import { DbCardData } from "../../types/Metadata";
-
 import Separator from "./Separator";
-import Deck from "../../shared/deck";
 
 function getDeckComponents(deck: Deck): JSX.Element[] {
   const components: JSX.Element[] = [];

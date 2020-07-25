@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import TopTitle from "../title";
 import { WrapperOuter, WrapperInner } from "../wrapper";
-import Deck from "../../shared/deck";
+import { Deck } from "mtgatool-shared";
 import NotFound from "../notfound";
 
 import { ServerDeck } from "../../web-types/shared";

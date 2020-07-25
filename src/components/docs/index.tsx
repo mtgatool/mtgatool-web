@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouteMatch, useLocation, Link } from "react-router-dom";
 import { WrapperOuter } from "../wrapper";
 import css from "./docs.css";
-import keyArt from "../../assets/images/key-art-new.jpg";
 
 // Docs
 import docs from "./index.yml";
@@ -23,7 +22,6 @@ import filterBoosters from "../../assets/images/docs/collection-filter-boosters.
 import viewSets from "../../assets/images/docs/collection-view-sets.png";
 
 import ReactMarkdown from "react-markdown";
-import { ExportViewProps } from "../../web-types/shared";
 
 const resources = {
   introduction: introduction,
@@ -96,17 +94,11 @@ const HeadRenderer = (props): JSX.Element => {
   );
 };
 
-export default function Docs(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
-
+export default function Docs(): JSX.Element {
   const sectionMatch = useRouteMatch<{ section: string }>("/docs/:section");
   const resource = sectionMatch
     ? resources[sectionMatch.params.section]
     : resources.introduction;
-
-  React.useEffect(() => {
-    setImage(keyArt);
-  }, [setImage]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>

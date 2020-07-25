@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 
 import css from "./matchfeed.css";
-import { InternalMatch } from "../../types/match";
+
 import ListItemMatchBrief from "../list-item/ListItemMatchBrief";
 import Flex from "../flex";
 import Section from "../Section";

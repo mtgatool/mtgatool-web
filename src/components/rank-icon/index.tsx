@@ -1,6 +1,7 @@
 import React from "react";
-import { getRankIndex } from "../../shared/util";
+
 import css from "./index.css";
+import { getRankIndex } from "mtgatool-shared";
 
 interface RankIconProps {
   rank: string;
