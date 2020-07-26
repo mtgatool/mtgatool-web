@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STATE_IDLE } from "../../constants";
+import keyArt from "../../assets/images/key-art-new.jpg";
+import { DbCardData } from "mtgatool-shared/dist/types/metadata";
 
 const initialWebState = {
   loadingState: STATE_IDLE,
   scroll: window.scrollY,
   databaseVersion: 0,
-  versionTag: "v5.4.0"
+  versionTag: "v5.4.0",
+  backImage: keyArt as DbCardData | string
 };
 
 type Web = typeof initialWebState;
@@ -25,6 +28,12 @@ const webSlice = createSlice({
     },
     setScroll: (state: Web, action: PayloadAction<number>): void => {
       state.scroll = action.payload;
+    },
+    setBackImage: (
+      state: Web,
+      action: PayloadAction<DbCardData | string>
+    ): void => {
+      state.backImage = action.payload;
     }
   }
 });
@@ -33,7 +42,8 @@ export const {
   setLoading,
   setDbVersion,
   setVersionTag,
-  setScroll
+  setScroll,
+  setBackImage
 } = webSlice.actions;
 
 export default webSlice;

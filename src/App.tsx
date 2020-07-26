@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 
@@ -31,27 +31,26 @@ import keyArt from "./assets/images/key-art-new.jpg";
 import notFoundArt from "./assets/images/404.jpg";
 import { useSelector } from "react-redux";
 import { AppState } from "./redux/stores/webStore";
-import { DbCardData } from "mtgatool-shared/dist/types/metadata";
 
 function App(): JSX.Element {
-  const [artData, setArtData] = React.useState(
-    "Sublime Epiphany by Lindsey Look"
+  const [artData, setArtData] = React.useState("");
+  const { databaseVersion, backImage } = useSelector(
+    (state: AppState) => state.web
   );
-  const [imageUrl, setImageUrl] = React.useState(keyArt);
-  const { databaseVersion } = useSelector((state: AppState) => state.web);
+  const [imageUrl, setImageUrl] = React.useState(backImage);
 
-  const setImage = (cardObj: DbCardData | string): void => {
-    if (cardObj == keyArt) {
+  useEffect(() => {
+    if (backImage == keyArt || backImage == "") {
       setImageUrl(keyArt);
       setArtData("Sublime Epiphany by Lindsey Look");
-    } else if (cardObj == notFoundArt) {
+    } else if (backImage == notFoundArt) {
       setImageUrl(notFoundArt);
       setArtData("Totally Lost by David Palumbo");
-    } else if (cardObj && typeof cardObj !== "string") {
-      setImageUrl("https://img.scryfall.com/cards" + cardObj.images.art_crop);
-      setArtData(cardObj.name + " by " + cardObj.artist);
+    } else if (backImage && typeof backImage !== "string") {
+      setImageUrl("https://img.scryfall.com/cards" + backImage.images.art_crop);
+      setArtData(backImage.name + " by " + backImage.artist);
     }
-  };
+  }, [backImage]);
 
   const wrapperStyle = {
     backgroundImage: `url("${imageUrl}")`
@@ -69,19 +68,19 @@ function App(): JSX.Element {
         {databaseVersion !== 0 ? (
           <Switch>
             <Route exact path="/">
-              <Home setImage={setImage} />
+              <Home />
             </Route>
             <Route path="/metagame">
-              <Metagame setImage={setImage} />
+              <Metagame />
             </Route>
             <Route exact path="/register">
-              <Register setImage={setImage} />
+              <Register />
             </Route>
             <Route path="/resetpassword">
-              <ResetPassword setImage={setImage} />
+              <ResetPassword />
             </Route>
             <Route exact path="/release-notes">
-              <ReleaseNotes setImage={setImage} />
+              <ReleaseNotes />
             </Route>
             <Route path="/deck">
               <DeckView />
@@ -96,7 +95,7 @@ function App(): JSX.Element {
               <Docs />
             </Route>
             <Route>
-              <NotFound setImage={setImage} />
+              <NotFound />
             </Route>
           </Switch>
         ) : (

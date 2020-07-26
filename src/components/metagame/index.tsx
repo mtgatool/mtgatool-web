@@ -8,7 +8,7 @@ import NotFound from "../notfound";
 import TopTitle from "../title";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import { database as db, Deck } from "mtgatool-shared";
-import { ExportViewProps, ServerDeck } from "../../web-types/shared";
+import { ServerDeck } from "../../web-types/shared";
 import { animated, useSpring } from "react-spring";
 import useRequest from "../../hooks/useRequest";
 import Section from "../Section";
@@ -16,6 +16,9 @@ import ListItemMetagameDeck from "../list-item/ListItemMetagameDeck";
 import DeckViewNew from "../deck-view-new";
 import Button from "../button";
 import Flex from "../flex";
+import { InternalDeck } from "mtgatool-shared/dist/types/deck";
+import { useDispatch } from "react-redux";
+import { reduxAction } from "../../redux/webRedux";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
@@ -176,7 +179,11 @@ function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
   );
 }
 
-function Metagame(props: ExportViewProps): JSX.Element {
+function Metagame(): JSX.Element {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: "" });
+  }, [dispatch]);
   const formatMatch = useRouteMatch<{ format: string }>("/metagame/:format");
   const dayMatch = useRouteMatch<{ format: string; day: string }>(
     "/metagame/:format/:day"
@@ -192,7 +199,6 @@ function Metagame(props: ExportViewProps): JSX.Element {
     arch: string;
     deck: string;
   }>("/metagame/:format/:day/:arch/:deck");
-  const { setImage } = props;
   const [metagameData, setMetagameData] = useState<MetagameData | null>(null);
   const [archetype, setArchetype] = useState<string | null>(null);
 
@@ -252,7 +258,7 @@ function Metagame(props: ExportViewProps): JSX.Element {
       (deckMatch &&
         metagameData.meta.filter(arch => arch.name == archMatch.params.arch)[0]
           .decks.length <= parseInt(deckMatch.params.deck))) ? (
-    <NotFound setImage={setImage} />
+    <NotFound />
   ) : (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <WrapperInner>

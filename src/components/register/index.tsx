@@ -4,11 +4,14 @@ import crypto from "crypto";
 import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./register.css";
-import keyArt from "../../assets/images/key-art-new.jpg";
-import { ExportViewProps } from "../../web-types/shared";
+import { useDispatch } from "react-redux";
+import { reduxAction } from "../../redux/webRedux";
 
-function Register(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
+function Register(): JSX.Element {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: "" });
+  }, [dispatch]);
   const [errorMessage, setErrorMessage] = React.useState("");
   const [formData, setFormData] = React.useState({
     email: "",
@@ -78,10 +81,6 @@ function Register(props: ExportViewProps): JSX.Element {
     }
     event.preventDefault();
   };
-
-  React.useEffect(() => {
-    setImage(keyArt);
-  }, [setImage]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>

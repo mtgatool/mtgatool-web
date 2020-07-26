@@ -1,15 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback, useEffect, useState } from "react";
 import sharedcss from "../../shared.css";
-
-import keyArt from "../../assets/images/key-art-new.jpg";
-
 import css from "../../app.css";
 import homeCss from "./home.css";
 
 import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter } from "../wrapper";
-import { ExportViewProps } from "../../web-types/shared";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
 import { reduxAction } from "../../redux/webRedux";
@@ -71,11 +67,7 @@ interface Contributor {
   contributions: number;
 }
 
-function Home(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
-  React.useEffect(() => {
-    setImage(keyArt);
-  }, [setImage]);
+function Home(): JSX.Element {
   const { versionTag } = useSelector((state: AppState) => state.web);
   const position = React.useRef(window);
   const [patreons, setPatreons] = useState<PatreonUser[]>([]);
@@ -111,11 +103,11 @@ function Home(props: ExportViewProps): JSX.Element {
     if (contribRequest.status == null) {
       contribRequest.start();
     }
-    if (contribRequest.response && patreons.length == 0) {
+    if (contribRequest.response && contributors.length == 0) {
       const json = JSON.parse(contribRequest.response);
       setContributors(json);
     }
-  }, [patreons.length, contribRequest]);
+  }, [contribRequest, contributors.length]);
 
   return (
     <>

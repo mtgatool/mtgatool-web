@@ -1,28 +1,29 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { WrapperInner, WrapperOuter } from "../wrapper";
+import { WrapperOuter } from "../wrapper";
 import css from "./notfound.css";
+import Section from "../Section";
 import notFoundImage from "../../assets/images/404.jpg";
-import { ExportViewProps } from "../../web-types/shared";
+import { reduxAction } from "../../redux/webRedux";
+import { useDispatch } from "react-redux";
 
-function NotFound(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
-
+function NotFound(): JSX.Element {
+  const dispatch = useDispatch();
   React.useEffect(() => {
-    if (setImage) {
-      setImage(notFoundImage);
-    }
-  }, [setImage]);
+    reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: notFoundImage });
+  }, [dispatch]);
 
   return (
-    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
-      <WrapperInner>
-        <div className={css["title-notfound"]}>Uh, oh..</div>
-        <div className={css["subtitle-notfound"]}>
+    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)", display: "flex" }}>
+      <Section
+        style={{ flexDirection: "column", margin: "auto", padding: "1em 3em" }}
+      >
+        <div className={css.titleNotfound}>Uh, oh..</div>
+        <div className={css.subtitleNotfound}>
           We have totally lost this page..
         </div>
-        <div className={css["subtitle-errorcode"]}>HTTP 404</div>
-      </WrapperInner>
+        <div className={css.subtitleErrorcode}>HTTP 404</div>
+      </Section>
     </WrapperOuter>
   );
 }

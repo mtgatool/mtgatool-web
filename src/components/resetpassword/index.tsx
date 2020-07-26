@@ -5,11 +5,8 @@ import crypto from "crypto";
 import ReCAPTCHA from "react-google-recaptcha";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import regcss from "../register/register.css";
-import keyArt from "../../assets/images/key-art-new.jpg";
-import { ExportViewProps } from "../../web-types/shared";
 
-function ResetPassword(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
+function ResetPassword(): JSX.Element {
   const [errorMessage, setErrorMessage] = React.useState("");
   const [formData, setFormData] = React.useState({
     email: "",
@@ -94,10 +91,6 @@ function ResetPassword(props: ExportViewProps): JSX.Element {
     }
     event.preventDefault();
   };
-
-  React.useEffect(() => {
-    setImage(keyArt);
-  }, [setImage]);
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>

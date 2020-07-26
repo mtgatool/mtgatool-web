@@ -22,6 +22,8 @@ import filterBoosters from "../../assets/images/docs/collection-filter-boosters.
 import viewSets from "../../assets/images/docs/collection-view-sets.png";
 
 import ReactMarkdown from "react-markdown";
+import { useDispatch } from "react-redux";
+import { reduxAction } from "../../redux/webRedux";
 
 const resources = {
   introduction: introduction,
@@ -95,6 +97,10 @@ const HeadRenderer = (props): JSX.Element => {
 };
 
 export default function Docs(): JSX.Element {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: "" });
+  }, [dispatch]);
   const sectionMatch = useRouteMatch<{ section: string }>("/docs/:section");
   const resource = sectionMatch
     ? resources[sectionMatch.params.section]

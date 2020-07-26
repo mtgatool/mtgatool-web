@@ -7,7 +7,7 @@
 }
 
 .subtitle-notfound {
-  color: var(--color-light-75);
+  color: var(--color-text);
   font-size: 18px;
   font-family: var(--main-font-name-it);
   text-align: center;
@@ -15,7 +15,7 @@
 }
 
 .subtitle-errorcode {
-  color: var(--color-light-75);
+  color: var(--color-text-dark);
   font-size: 18px;
   font-family: var(--main-font-name-it);
   text-align: center;

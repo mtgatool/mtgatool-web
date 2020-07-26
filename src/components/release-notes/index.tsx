@@ -3,10 +3,10 @@
 import React from "react";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import css from "./releasenotes.css";
-import keyArt from "../../assets/images/key-art-new.jpg";
 import Title from "../title";
-import { ExportViewProps } from "../../web-types/shared";
 import Section from "../Section";
+import { useDispatch } from "react-redux";
+import { reduxAction } from "../../redux/webRedux";
 
 const CHANGELOG =
   "https://raw.githubusercontent.com/mtgatool/mtgatool-web/master/src/components/release-notes/releasenotes.txt";
@@ -23,8 +23,11 @@ interface Note {
   date?: string;
 }
 
-function ReleaseNotes(props: ExportViewProps): JSX.Element {
-  const { setImage } = props;
+function ReleaseNotes(): JSX.Element {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: "" });
+  }, [dispatch]);
   const [notes, setNotes] = React.useState<string[]>([]);
   const [parsedNotes, setParsedNotes] = React.useState<Note[]>([]);
 
@@ -43,8 +46,7 @@ function ReleaseNotes(props: ExportViewProps): JSX.Element {
 
   React.useEffect(() => {
     getReleaseNotes();
-    setImage(keyArt);
-  }, [setImage]);
+  }, []);
 
   React.useEffect(() => {
     const newNotes: Note[] = [];
