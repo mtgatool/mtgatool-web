@@ -9,7 +9,8 @@
     "format": "prettier --write 'packages/**/*.js'",
     "eslint": "eslint src/ --ext ts --ext tsx",
     "eslint:fix": "eslint src/ --ext ts --ext tsx --fix",
-    "test": "npm run eslint && jest --watchAll --coverage"
+    "test": "npm run eslint && jest",
+    "test:watch": "jest --watchAll --coverage"
   },
   "lint-staged": {
     "*.{ts,tsx,jsx}": [
