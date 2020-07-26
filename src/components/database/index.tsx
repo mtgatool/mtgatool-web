@@ -9,7 +9,7 @@ const LATEST_URL = "https://mtgatool.com/database/latest/";
 const GH_LATEST =
   "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest";
 
-function Database(): JSX.Element {
+export default function Database(): JSX.Element {
   const dispatch = useDispatch();
 
   const setQueryState = useCallback(
@@ -131,5 +131,3 @@ function Database(): JSX.Element {
 
   return <></>;
 }
-
-export default Database;

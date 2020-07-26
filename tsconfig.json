@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
+      "module": "CommonJS",
       // Target latest version of ECMAScript.
-      "target": "es2018",
+      "target": "es2020",
       // Search under node_modules for non-relative imports.
       "moduleResolution": "node",
       // Process & infer types from .js files.
@@ -13,6 +14,7 @@
       // Import non-ES modules as default imports.
       "esModuleInterop": true,
       "noImplicitAny": false,
+      "types": ["react", "jest"],
       "jsx": "react",
       "lib": ["dom", "es2020.string"]
     },

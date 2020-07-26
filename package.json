@@ -22,29 +22,6 @@
       "pre-commit": "lint-staged"
     }
   },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "moduleDirectories": [
-      "src",
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.(jpg|gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
-    },
-    "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest",
-      ".+\\.(css|styl|less|sass|scss)$": "<rootDir>/node_modules/jest-css-modules-transform"
-    },
-    "setupTestFrameworkScriptFile": "<rootDir>/setupTests.js",
-    "moduleFileExtensions": [
-      "css",
-      "scss",
-      "js",
-      "json",
-      "jsx"
-    ]
-  },
   "author": "Manuel-777",
   "license": "GPL",
   "private": false,
@@ -86,13 +63,14 @@
     "@babel/plugin-transform-destructuring": "^7.10.4",
     "@babel/plugin-transform-spread": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "7.7.4",
+    "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.10.4",
     "@babel/register": "7.7.4",
     "@babel/runtime": "7.7.4",
     "@svgr/webpack": "^5.4.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/bytebuffer": "^5.0.41",
+    "@types/jest": "^26.0.7",
     "@types/lodash": "^4.14.158",
     "@types/long": "^4.0.1",
     "@types/react": "^16.9.43",
@@ -103,7 +81,7 @@
     "@typescript-eslint/parser": "^2.34.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
-    "babel-jest": "24.9.0",
+    "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
     "babel-plugin-lodash": "3.3.4",
     "babel-preset-react-optimize": "1.0.1",
@@ -112,8 +90,6 @@
     "connect-history-api-fallback": "1.6.0",
     "cross-env": "6.0.3",
     "css-loader": "3.2.1",
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.15.1",
     "eslint": "6.7.2",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-prettier": "6.7.0",
@@ -142,11 +118,13 @@
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1",
+    "react-test-renderer": "^16.13.1",
     "sass-loader": "8.0.0",
     "script-ext-html-webpack-plugin": "2.1.4",
     "source-map-loader": "^0.2.4",
     "style-loader": "1.0.1",
     "terser-webpack-plugin": "2.2.1",
+    "ts-jest": "^26.1.3",
     "ts-loader": "^6.2.2",
     "typescript": "^3.9.7",
     "webpack": "4.41.2",
