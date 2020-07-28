@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import _ from "lodash";
 import React from "react";
-import { database as db, cardType, Deck } from "mtgatool-shared";
-import { DbCardData } from "mtgatool-shared/dist/types/metadata";
+import { database as db, cardType, Deck, DbCardData } from "mtgatool-shared";
 
 import CardTile from "../card-tile";
 import Separator from "./Separator";

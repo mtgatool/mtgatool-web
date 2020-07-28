@@ -27,6 +27,7 @@
     "no-cond-assign": 0,
     "no-console": "off",
     "no-redeclare": "warn",
+    "no-duplicate-imports": "warn",
     "no-undef": "error",
     "no-global-assign": "warn",
     "no-empty": "warn",

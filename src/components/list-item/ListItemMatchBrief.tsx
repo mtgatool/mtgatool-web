@@ -7,9 +7,8 @@ import RankIcon from "../rank-icon";
 import { ManaCost } from "../card-tile";
 import CardTileCss from "../card-tile/cardtile.css";
 import Flex from "../flex";
-import { getEventPrettyName, constants } from "mtgatool-shared";
+import { getEventPrettyName, constants, InternalMatch } from "mtgatool-shared";
 const { DEFAULT_TILE } = constants;
-import { InternalMatch } from "mtgatool-shared/dist/types/match";
 import utf8Decode from "../../shared/utils/utf8Decode";
 
 interface MatchBriefProps {

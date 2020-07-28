@@ -6,7 +6,12 @@ import { WrapperOuter, WrapperInnerCentered } from "../wrapper";
 import DeckList from "../decklist";
 import NotFound from "../notfound";
 import Slider, { SliderPosition } from "../slider";
-import { database as db, constants, Deck } from "mtgatool-shared";
+import {
+  database as db,
+  constants,
+  Deck,
+  InternalDraftv2
+} from "mtgatool-shared";
 const { PACK_SIZES, DRAFT_RANKS, DRAFT_RANKS_LOLA } = constants;
 import useHoverCard from "../../hooks/useHoverCard";
 import useRequest from "../../hooks/useRequest";
@@ -14,7 +19,6 @@ import urlDecode from "../../shared/urlDecode";
 import Section from "../Section";
 import { getCardImage } from "../../shared/utils/getCardArtCrop";
 import { getRankColorClass } from "../../shared/utils/getRankColorClass";
-import { InternalDraftv2 } from "mtgatool-shared/dist/types/draft";
 
 interface PickPack {
   pack: number;

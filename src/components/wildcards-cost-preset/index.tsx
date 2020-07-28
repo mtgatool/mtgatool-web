@@ -2,8 +2,7 @@ import React from "react";
 import _ from "lodash";
 import css from "./index.css";
 import { WILDCARD_RARITIES } from "../../constants";
-import { MissingWildcards } from "mtgatool-shared/dist/types/deck";
-import { getBoosterCountEstimate } from "mtgatool-shared";
+import { MissingWildcards, getBoosterCountEstimate } from "mtgatool-shared";
 
 const wcIcon: Record<string, string> = {};
 wcIcon["common"] = css.wcCommon;

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STATE_IDLE } from "../../constants";
 import keyArt from "../../assets/images/key-art-new.jpg";
-import { DbCardData } from "mtgatool-shared/dist/types/metadata";
+import { DbCardData } from "mtgatool-shared";
 
 const initialWebState = {
   loadingState: STATE_IDLE,

@@ -7,7 +7,7 @@ import { ManaCost } from "../card-tile";
 import NotFound from "../notfound";
 import TopTitle from "../title";
 import { WrapperInner, WrapperOuter } from "../wrapper";
-import { database as db, Deck } from "mtgatool-shared";
+import { database as db, Deck, InternalDeck } from "mtgatool-shared";
 import { ServerDeck } from "../../web-types/shared";
 import { animated, useSpring } from "react-spring";
 import useRequest from "../../hooks/useRequest";
@@ -16,7 +16,6 @@ import ListItemMetagameDeck from "../list-item/ListItemMetagameDeck";
 import DeckViewNew from "../deck-view-new";
 import Button from "../button";
 import Flex from "../flex";
-import { InternalDeck } from "mtgatool-shared/dist/types/deck";
 import { useDispatch } from "react-redux";
 import { reduxAction } from "../../redux/webRedux";
 

@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { database as db, constants } from "mtgatool-shared";
+import { database as db, constants, InternalDeck } from "mtgatool-shared";
 const { MANA_COLORS } = constants;
 import css from "./deckmanacurve.css";
-import { InternalDeck } from "mtgatool-shared/dist/types/deck";
 
 function getDeckCurve(deck: InternalDeck): number[][] {
   const curve: number[][] = [];

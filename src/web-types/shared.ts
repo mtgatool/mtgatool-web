@@ -1,4 +1,4 @@
-import { InternalDeck } from "mtgatool-shared/dist/types/deck";
+import { InternalDeck } from "mtgatool-shared";
 
 export interface ServerDeck extends InternalDeck {
   owner: string;

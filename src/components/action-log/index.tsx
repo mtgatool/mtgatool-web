@@ -5,12 +5,11 @@ import DeckList from "../decklist";
 import TopTitle from "../title";
 import { WrapperOuter, WrapperInnerCentered } from "../wrapper";
 import css from "./actionlog.css";
-import { database as db, Deck } from "mtgatool-shared";
+import { database as db, Deck, InternalMatch } from "mtgatool-shared";
 import useHoverCard from "../../hooks/useHoverCard";
 import useRequest from "../../hooks/useRequest";
 import Button from "../button";
 import Section from "../Section";
-import { InternalMatch } from "mtgatool-shared/dist/types/match";
 
 function ActionLogView(): JSX.Element {
   const logMatch = useRouteMatch<{ logId: string }>("/action-log/:logId");

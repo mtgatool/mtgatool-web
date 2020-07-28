@@ -14,9 +14,9 @@ import {
   Deck,
   getDeckColorsAmmount,
   getDeckLandsAmmount,
-  getDeckRaritiesCount
+  getDeckRaritiesCount,
+  InternalDeck
 } from "mtgatool-shared";
-import { InternalDeck } from "mtgatool-shared/dist/types/deck";
 const { MANA_COLORS } = constants;
 
 interface DeckViewNewProps {
