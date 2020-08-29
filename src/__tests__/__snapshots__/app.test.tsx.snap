@@ -105,7 +105,7 @@ Array [
     className="card-hover-main"
     style={
       Object {
-        "backgroundImage": "url(https://img.scryfall.com/cardsundefined",
+        "backgroundImage": "url(undefined",
         "opacity": 0,
       }
     }
