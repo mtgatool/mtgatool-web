@@ -57,7 +57,7 @@ function openScryfallCard(card: DbCardData): void {
 
 export function getCardArtCrop(cardObj: DbCardData): string {
   try {
-    return "https://img.scryfall.com/cards" + cardObj.images.art_crop;
+    return cardObj.images.art_crop;
   } catch (e) {
     console.log("Cant find card art crop: ", cardObj);
     return "../assets/images/notfound.png";

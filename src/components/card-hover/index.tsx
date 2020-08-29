@@ -15,7 +15,7 @@ function CardHover(): JSX.Element {
 
     let newImg;
     try {
-      newImg = `url(https://img.scryfall.com/cards${cardObj?.images.normal}`;
+      newImg = `url(${cardObj?.images.normal}`;
     } catch (e) {
       newImg = `url(${NotFound})`;
     }
@@ -37,7 +37,7 @@ function CardHover(): JSX.Element {
     ) {
       cardObj = db.card(cardObj.dfcId);
       try {
-        newImg = `url(https://img.scryfall.com/cards${cardObj?.images.normal}`;
+        newImg = `url(${cardObj?.images.normal}`;
       } catch (e) {
         newImg = `url(${NotFound})`;
       }

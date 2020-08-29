@@ -47,7 +47,7 @@ function App(): JSX.Element {
       setImageUrl(notFoundArt);
       setArtData("Totally Lost by David Palumbo");
     } else if (backImage && typeof backImage !== "string") {
-      setImageUrl("https://img.scryfall.com/cards" + backImage.images.art_crop);
+      setImageUrl(backImage.images.art_crop);
       setArtData(backImage.name + " by " + backImage.artist);
     }
   }, [backImage]);

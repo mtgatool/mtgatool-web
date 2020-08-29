@@ -21,21 +21,6 @@ import { reduxAction } from "../../redux/webRedux";
 
 const METAGAME_URL = "https://mtgatool.com/api/get_metagame.php";
 
-interface Archetype {
-  best_deck: ServerDeck;
-  best_deck_wr: number;
-  best_deck_wrt: number;
-  colors: number[];
-  decks: DeckLink[];
-  loss: number;
-  name: string;
-  share: string;
-  tile: number;
-  total: number;
-  win: number;
-  winrate: string;
-}
-
 export interface DeckLink {
   best: {
     name: string;
@@ -53,6 +38,21 @@ export interface DeckLink {
   tier: number;
   percentile: number;
   leaderboardPlace: number;
+}
+
+interface Archetype {
+  best_deck: ServerDeck;
+  best_deck_wr: number;
+  best_deck_wrt: number;
+  colors: number[];
+  decks: DeckLink[];
+  loss: number;
+  name: string;
+  share: string;
+  tile: number;
+  total: number;
+  win: number;
+  winrate: string;
 }
 
 interface MetagameData {
@@ -131,7 +131,7 @@ function ArchetypeTile(props: ArchetypeTileProps): JSX.Element {
   });
 
   const cardImage = cardObj
-    ? `https://img.scryfall.com/cards${cardObj.images.art_crop}`
+    ? cardObj.images.art_crop
     : "https://gamepedia.cursecdn.com/mtgsalvation_gamepedia/thumb/c/c4/Fblthp.jpg/250px-Fblthp.jpg";
   const tileStyle = {
     backgroundImage: `url(${cardImage})`
