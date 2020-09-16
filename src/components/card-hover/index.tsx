@@ -5,7 +5,12 @@ import { database as db, constants } from "mtgatool-shared";
 import NotFound from "../../assets/cssimages/notfound.png";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
-const { FACE_DFC_BACK, FACE_DFC_FRONT } = constants;
+const {
+  FACE_DFC_BACK,
+  FACE_DFC_FRONT,
+  FACE_MODAL_BACK,
+  FACE_MODAL_FRONT
+} = constants;
 
 function CardHover(): JSX.Element {
   const hoverState = useSelector((state: AppState) => state.hover);
@@ -31,7 +36,10 @@ function CardHover(): JSX.Element {
     let opacity = hoverState.opacity;
     if (
       cardObj &&
-      (cardObj.dfc == FACE_DFC_BACK || cardObj.dfc == FACE_DFC_FRONT) &&
+      (cardObj.dfc == FACE_DFC_BACK ||
+        cardObj.dfc == FACE_DFC_FRONT ||
+        cardObj.dfc == FACE_MODAL_BACK ||
+        cardObj.dfc == FACE_MODAL_FRONT) &&
       cardObj.dfcId &&
       cardObj.dfcId !== true
     ) {
