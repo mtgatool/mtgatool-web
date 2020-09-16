@@ -1,8 +1,8 @@
 # Introduction
 
-Welcome to our Documentation! here you will find all resources you need to get started with the app and (hopefully) answer any questions you might have about its features and functionality. All of these docs are [open source](https://github.com/mtgatool/mtgatool-web/), we love corrections and improvements!
+Welcome to our Documentation! Here you will find all resources you need to get started with the app and (hopefully) answer any questions you might have about its features and functionality. All of these docs are [open source](https://github.com/mtgatool/mtgatool-web/), we love corrections and improvements!
 
-To describe it quickly, MTG Arena Tool is a collection viewer, deck tracker and statistics manager. But thats fair and simple, and under those words we hide a lot of features;
+To describe it quickly, MTG Arena Tool is a collection viewer, deck tracker and statistics manager. But that's fair and simple, and under those words we hide a lot of features:
 - In-game deck tracking overlay
   - Action log
   - Cards seen
@@ -18,7 +18,7 @@ To describe it quickly, MTG Arena Tool is a collection viewer, deck tracker and 
 
 # Bugs
 
-Bugs in the app can be submitted directly to [our Discord](https://discord.gg/K9bPkJy) or to [GitHub issues tracker](https://github.com/Manuel-777/MTG-Arena-Tool/issues), we prefer the later so we can have it persisted, but we also love chatting to our users!
+Bugs in the app can be submitted directly to [our Discord](https://discord.gg/K9bPkJy) or to [GitHub issues tracker](https://github.com/Manuel-777/MTG-Arena-Tool/issues). We prefer the latter so we can have it persisted, but we also love chatting to our users!
 
 Currently MTG Arena Tool logs can be found at the following locations, please do not share these publicly as they may contain sensitive data;
 
@@ -29,7 +29,7 @@ on macOS: `~/Library/Logs/MTG-Arena-Tool/`
 on Windows: `%USERPROFILE%\AppData\Roaming\MTG-Arena-Tool\logs\`
 
 
-If an update of MTG Arena broke everything, we feel you. You can inspect GitHub Issues if the issue in question has already been submitted or Discord, we try to fix these as quickly as it is humanly possible and we got quite good at it, but some times things break unexpectedly and it can take some time for us to figure out something was not working.
+If an update of MTG Arena broke everything, we feel you. You can inspect GitHub Issues if the issue in question has already been submitted or Discord. We try to fix these as quickly as humanly possible and we got quite good at it, but some times things break unexpectedly and it can take some time for us to figure out something was not working.
 
 # Disclaimer
 
