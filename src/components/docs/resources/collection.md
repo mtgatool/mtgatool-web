@@ -4,7 +4,7 @@ In the Collection tab you can browse all cards available in the game. We try to 
 
 In this tab you can find any card, be it by text search or by using the column filters. One commonly used filter is the boosters filter:
 
-![Boostesr Filter](collection-filter-boosters)
+![Boosters Filter](collection-filter-boosters)
 
 Enable the Red marker to allow *any* card to show in the results. Enable the Green marker to allow cards that can only be obtained by cracking booster packs. 
 
