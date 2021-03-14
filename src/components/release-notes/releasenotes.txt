@@ -1,4 +1,157 @@
 version
+5.5.10
+March 10th, 2020
+fixed
+Fix active events listing
+023f6bf3749ee914177d3e810ec38cf93841708e
+fixed
+Archiving filter bug
+a3d65fd190f243048d32dbb908bb79e84e49d460
+improved
+codebase cleanup
+94eb1a33a152a53e8528962d661d898e567f9c60
+improved
+Improved devtools
+b5f36996bd375715285901e73db49f04aaf40f55
+
+version
+5.5.7
+January 2nd, 2021
+fixed
+Events not loading
+e05387af5ce7dfdbb21054bd17611ec5e26d2d24
+fixed
+Sort draft pack by rarity and color (#1210) 
+ba62e2a97bec6f8bc23a6c0a2ec5166cfa05c9cd
+fixed
+Added pointer-events to the overlay panel's top buttons (#1207)
+0993b9b5b2b28d0b2af034cda81be936456519b8
+
+version
+5.5.6
+November 29th, 2020
+fixed
+Fixed small typo in Patreon ad message (#1204)
+6177b7c6c021de1ed10dfe7c5a25d67a071f2134
+improved
+Sort decks before export
+81a6f21a36e776d96f8421241281ee2f9786a53d
+improved
+Update getClosestMatch.ts filter limited/brawl (#1202)
+72dc93be81426efbb145ac662e23f69cf725b8d3
+improved
+Update EventsTab.tsx add state "able to complete" (#1201)
+72dc93be81426efbb145ac662e23f69cf725b8d3
+
+
+version
+5.5.5
+November 13th, 2020
+added
+Added sample hand to DeckView (#1197) 
+04954bf8eee996d6bc45fab6d11787656fd7c20d
+added
+Added rank-winrate to TimelineTab (#1198)
+24a4cbd236aa06d08c27a4f2161e10368161aa21
+improved
+Changed to remove duplicate cards from Combined View (#1200) 
+e47c646b285c77a4266c3e2a6db51c63d6adc6f2
+improved
+DateFilter "Last 7 Days" (#1195) 
+19278c71c58008eb103ca20fa7f58362b8c285e7
+improved
+Update saveMatch.ts search tags the user has tagged (#1192)
+aca08dc353224fb6863e7cf06c5a3829d6d4d8a2
+improved
+Update NeDbDatabase.ts database backup (#1193)
+bef50ea697f5e48cde5b73cca0867cc5b9716663
+
+version
+5.5.4
+October 25th, 2020
+added
+Sort rank by rank + Fix typing. (#1178)
+3405e2d9cde811cbcdec8d724c6356c7555ff20f
+fixed
+Active events handler
+d105c965ec3691dd94a7f8387fb661cb9d3ab60b
+improved
+Changed to login with Enter key
+7b642dd3b45303981facef4636d6fd067f704667
+improved
+Open a popup when clicking buttons in Match View (#1179)
+cf50b3ea0adec51f0a72eb50e7018db2d25733d1
+improved
+UI improvements (#1185)
+5b4aff3b66171bc8d2d22f485dd34d38c32fc65c
+
+version
+5.5.0
+August 16th, 2020
+added
+Cards tab
+5c24dbf537e88c1c3ec20bca3e18933e846d29a8
+fixed
+AKR Collection display
+d8431dbd0a334d3a3ca85071d855f2630c82fa45
+fixed
+Card odds display
+219cde23838dcf4a7fc2c8cce0d1f2ada78ef373
+improved
+Remove unused codes
+9fcd9e3bf713c50b324a40118d41d52b7048f101
+improved
+Add speed tests
+5cc0b4fea99dab1c6b2bb50860d85665fc2bb0eb
+improved
+Add tests for match parsing
+b13f019a31da5c78a391245f6f0db4de31acc055
+improved
+Use mtgatool-shared package
+7ad7b6b65c8694356f2a8f18822e6cc18a27eace
+
+version
+5.4.2
+July 27th, 2020
+added
+Identify patreons on Explore
+14c79e7c98f9967ee559e940009f16d53cd50b5a
+added
+q:owned collection filter
+72ce5c3c6bccaaf406a88b31761d0564ab9e02eb
+fixed
+Uploading on Bo3 matches
+bbdad8629d329c332f4176669a1a0a737dbfacaa
+fixed
+Mana curve background on overlay
+3f560179aab9bc633d782c231b2f1ba4284f2acb
+fixed
+Drafts not saving
+513930cf8c0a2b28c3b0e2e56a6022309947aca1
+fixed
+Detect Jumpstart opp deck
+f87fb2eaf85bc407fa9b2adf9578de73b29c9b53
+improved
+Use lands as JMP identifier
+07cc3ea62fee4f3d9a0749273cabd4d3549720c7
+
+version
+5.4.1
+July 17th, 2020
+fixed
+LogLoop prefill
+bd22dd0ffdcbd7af60ef2e5698e6c2a1be246e91
+fixed
+Basic lands infinity icon
+d14f4f9cdbc15c45b58793dc543ff2b778847fbe
+fixed
+Format filter for reprints
+16be24cada6f0bdea7230f995f56b5de2736d936
+fixed
+Jumpstart key cards
+d387f750c0b43e3fa26117be6da3332c6a97455a
+
+version
 5.4.0
 July 16th, 2020
 added

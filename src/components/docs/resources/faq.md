@@ -21,3 +21,9 @@ This is a renderer error. We do our best to catch these, but some are simply fat
 ## Black Overlays / Black screen with overlays enabled
 
 To fix this issue, if you are on Windows, you should enable Transparency (on Windows 10) or Aero Effects (on Windows 7 and Vista). If your PC does not support transparency, overlays will not function correctly.
+
+## "player.log contains no player data" error on startup
+
+This issue is caused by the logs not having any user data (arena id) on them, This began happening after Historic Anthology 4 MTGA update due to a portion of the logs containing this information being removed by WoTC. Easiest workaround is to start a match to force the logs to have this information.
+
+If you are a new or offline user (from whom we dont have any previous data or information) you will have to do this before starting tool in order for it to know who you are in MTG Arena.
