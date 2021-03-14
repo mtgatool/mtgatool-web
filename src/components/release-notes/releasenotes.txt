@@ -1,4 +1,41 @@
 version
+5.5.13
+March 12th, 2020
+added
+Add collapse button to overlay (#1212) 
+13389e747648d86eeafb8695f6e4453fc507147b
+fixed
+Ha4 update fixes (#1228) 
+101059bec94966d35678a6c5729d6583c142e869
+fixed
+Fix handling of deck selection (#1224)
+02312adcef827a4a68d80ae449a83263fe023be2
+fixed
+Add GitHub Actions CI build (#1222)
+5011a2971580b48444ec69e916db07a6d141c10e
+fixed
+GitHub Actions release (#1225) 
+80aaff0fe582e0d3e2c58ff5f9237667e73228c4
+fixed
+Fix basic snow lands count
+d522d72876094ffe92318cf29cc4bb13c2bf8688
+fixed
+Fix click outside selectors
+641d1d96d69155b9369be3675118865b55766003
+fixed
+fix wrong events on explore list (deprecates archived list)
+0576ade5707adc0dda4db18a388c8b777ca910a8
+improved
+Don't trigger CI builds on tags (#1226)
+18d4f000b8da877fe99de88683cc5e2e6f8745a3
+improved
+Create release if it doesn't exist (#1227)
+e0fbe67e859add3d9253f151e2aaf442f3f88605
+improved
+Show explore time
+ba0e259663b74b5aa73c3bb0898c187e6ff1f80b
+
+version
 5.5.10
 March 10th, 2020
 fixed
