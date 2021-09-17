@@ -6,6 +6,7 @@ import css from "./matchfeed.css";
 import ListItemMatchBrief from "../list-item/ListItemMatchBrief";
 import Flex from "../flex";
 import Section from "../Section";
+import { InternalMatch } from "mtgatool-shared";
 
 const FEED_URL = "https://mtgatool.com/api/get_match_feed.php";
 
