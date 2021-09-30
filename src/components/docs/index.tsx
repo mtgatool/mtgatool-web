@@ -1,8 +1,9 @@
+/* eslint-disable import/no-webpack-loader-syntax */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef, useEffect } from "react";
 import { useRouteMatch, useLocation, Link } from "react-router-dom";
 import { WrapperOuter } from "../wrapper";
-import css from "./docs.css";
+import "./docs.css";
 
 // Docs
 import docs from "./index.yml";
@@ -32,12 +33,13 @@ const resources = {
   privacy: privacy,
   decks: decks,
   collection: collection,
-  overlays: overlays
+  overlays: overlays,
 };
 
-const scrollToRef = (ref): void => window.scrollTo(0, ref.current.offsetTop);
+const scrollToRef = (ref: any): void =>
+  window.scrollTo(0, ref.current.offsetTop);
 
-const imageTransform = (img): string => {
+const imageTransform = (img: string): string => {
   switch (img) {
     case "deck-archive":
       return deckArchive;
@@ -54,12 +56,12 @@ const imageTransform = (img): string => {
   }
 };
 
-function Heading({ children, ...props }): JSX.Element {
+function Heading({ children, ...props }: any): JSX.Element {
   const { level } = props;
   return React.createElement("h" + level, props, children);
 }
 
-const HeadRenderer = (props): JSX.Element => {
+const HeadRenderer = (props: any): JSX.Element => {
   const { nodeKey, children, level } = props;
   const linkRef = useRef(null);
   const id = children[0].props.value.replace(/\s+/g, "-").toLowerCase();
@@ -70,7 +72,7 @@ const HeadRenderer = (props): JSX.Element => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (location.hash == "#" + id) {
+      if (location.hash === "#" + id) {
         executeScroll();
       }
     }, 500);
@@ -87,7 +89,7 @@ const HeadRenderer = (props): JSX.Element => {
         {children}
         <a id={id} href={`#${id}`}>
           <div
-            className={css["anchor-link"] + " " + css["anchor-h" + level]}
+            className={"anchor-link anchor-h " + level}
             style={{ opacity: op }}
           ></div>
         </a>
@@ -103,26 +105,26 @@ export default function Docs(): JSX.Element {
   }, [dispatch]);
   const sectionMatch = useRouteMatch<{ section: string }>("/docs/:section");
   const resource = sectionMatch
-    ? resources[sectionMatch.params.section]
+    ? (resources as any)[sectionMatch.params.section]
     : resources.introduction;
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
-      <div className={css["docs-wrapper-top"]}></div>
-      <div className={css.docsWrapper}>
-        <div className={css.docsSidebar}>
-          <div className={css.docsSidebarContent}>
-            {docs.docs.map(title => {
+      <div className={"docs-wrapper-top"}></div>
+      <div className={"docs-wrapper"}>
+        <div className={"docs-sidebar"}>
+          <div className={"docs-sidebar-content"}>
+            {docs.docs.map((title: any) => {
               const path = docs[title].path;
               const isActive =
-                sectionMatch && sectionMatch.params.section == path;
+                sectionMatch && sectionMatch.params.section === path;
 
-              if (docs[title].type == "section") {
+              if (docs[title].type === "section") {
                 return (
                   <div
                     className={
-                      css.docsSectionLink +
-                      (isActive ? " " + css.docsSectionLinkActive : "")
+                      "docs-section-link" +
+                      (isActive ? " docs-section-link-active" : "")
                     }
                     key={title + "-side"}
                   >
@@ -130,20 +132,21 @@ export default function Docs(): JSX.Element {
                   </div>
                 );
               }
-              if (docs[title].type == "title") {
+              if (docs[title].type === "title") {
                 return (
                   <div
-                    className={css.docsSectionTitle}
+                    className={"docs-section-title"}
                     key={title + "-side-title"}
                   >
                     {title}
                   </div>
                 );
               }
+              return <></>;
             })}
           </div>
         </div>
-        <div className={css.docsMain}>
+        <div className={"docs-main"}>
           {resource ? (
             <ReactMarkdown
               transformImageUri={imageTransform}

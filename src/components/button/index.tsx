@@ -1,5 +1,5 @@
 import React from "react";
-import css from "./index.css";
+import "./index.css";
 
 interface ButtonProps {
   onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -10,15 +10,15 @@ interface ButtonProps {
 }
 
 export default function Button(props: ButtonProps): JSX.Element {
-  const disabled = props.disabled && props.disabled == true;
+  const disabled = props.disabled && props.disabled === true;
   return (
     <div
       style={props.style || {}}
       onClick={disabled ? (): void => {} : props.onClick}
       className={
         disabled
-          ? css.buttonSimpleDisabled
-          : props.className ?? css.buttonSimple
+          ? "button-simple-disabled"
+          : props.className ?? "button-simple"
       }
     >
       {props.text}

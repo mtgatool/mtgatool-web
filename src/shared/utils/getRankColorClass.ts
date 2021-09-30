@@ -1,25 +1,25 @@
-import sharedCss from "../../shared.css";
+import "../../shared.css";
 
 export function getRankColorClass(rank: string): string {
   switch (rank) {
     case "A+":
     case "A":
-      return sharedCss.blue;
+      return "blue";
     case "A-":
     case "B+":
     case "B":
-      return sharedCss.green;
+      return "green";
     case "B-":
     case "C+":
     case "C":
     default:
-      return sharedCss.white;
+      return "white";
     case "C-":
     case "D+":
     case "D":
-      return sharedCss.orange;
+      return "orange";
     case "D-":
     case "F":
-      return sharedCss.red;
+      return "red";
   }
 }

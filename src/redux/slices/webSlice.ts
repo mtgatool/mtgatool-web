@@ -7,8 +7,8 @@ const initialWebState = {
   loadingState: STATE_IDLE,
   scroll: window.scrollY,
   databaseVersion: 0,
-  versionTag: "v5.4.0",
-  backImage: keyArt as DbCardData | string
+  versionTag: "6.0.10",
+  backImage: keyArt as DbCardData | string,
 };
 
 type Web = typeof initialWebState;
@@ -34,8 +34,8 @@ const webSlice = createSlice({
       action: PayloadAction<DbCardData | string>
     ): void => {
       state.backImage = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -43,7 +43,7 @@ export const {
   setDbVersion,
   setVersionTag,
   setScroll,
-  setBackImage
+  setBackImage,
 } = webSlice.actions;
 
 export default webSlice;

@@ -1,10 +1,10 @@
 import React, { CSSProperties } from "react";
-import CardUgin from "../../assets/images/svg/overlay-ugin.svg";
-import CardForest from "../../assets/images/svg/overlay-forest.svg";
-import CardGrowth from "../../assets/images/svg/overlay-growth-spiral.svg";
-import CardHydroid from "../../assets/images/svg/overlay-hydroid-krasis.svg";
-import OverlayBack from "../../assets/images/svg/overlay-back.svg";
-import OverlayDetails from "../../assets/images/svg/overlay-details.svg";
+import {ReactComponent as CardUgin } from "../../assets/images/svg/overlay-ugin.svg";
+import {ReactComponent as CardForest } from "../../assets/images/svg/overlay-forest.svg";
+import {ReactComponent as CardGrowth } from "../../assets/images/svg/overlay-growth-spiral.svg";
+import {ReactComponent as CardHydroid } from "../../assets/images/svg/overlay-hydroid-krasis.svg";
+import {ReactComponent as OverlayBack } from "../../assets/images/svg/overlay-back.svg";
+import {ReactComponent as OverlayDetails } from "../../assets/images/svg/overlay-details.svg";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
 

@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-import css from "./wrapper.css";
+
+import "./wrapper.css";
 
 interface WrapperProps {
   children: JSX.Element | JSX.Element[];
@@ -10,7 +9,7 @@ interface WrapperProps {
 export function WrapperInner(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={css.wrapperInner}>
+    <div style={style} className={"wrapper-inner"}>
       {children}
     </div>
   );
@@ -19,7 +18,7 @@ export function WrapperInner(props: WrapperProps): JSX.Element {
 export function WrapperInnerCentered(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={css.wrapperInnerCentered}>
+    <div style={style} className={"wrapper-inner-centered"}>
       {children}
     </div>
   );
@@ -28,7 +27,7 @@ export function WrapperInnerCentered(props: WrapperProps): JSX.Element {
 export function WrapperOuter(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={css.wrapperOuter}>
+    <div style={style} className={"wrapper-outer"}>
       {children}
     </div>
   );
@@ -37,7 +36,7 @@ export function WrapperOuter(props: WrapperProps): JSX.Element {
 export function WrapperOuterLight(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={css.wrapperOuterLight}>
+    <div style={style} className={"wrapper-outer-light"}>
       {children}
     </div>
   );
@@ -46,7 +45,7 @@ export function WrapperOuterLight(props: WrapperProps): JSX.Element {
 export function WrapperOuterDark(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={css.wrapperOuterDark}>
+    <div style={style} className={"wrapper-outer-dark"}>
       {children}
     </div>
   );

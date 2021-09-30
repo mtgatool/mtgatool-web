@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable react/prop-types */
 import React, { useCallback, useEffect, useState } from "react";
-import sharedcss from "../../shared.css";
-import css from "../../app.css";
-import homeCss from "./home.css";
+import "../../shared.css";
+import "../../App.css";
+import "./home.css";
 
 import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter } from "../wrapper";
@@ -93,7 +94,7 @@ function Home(): JSX.Element {
     if (patreonsRequest.status == null) {
       patreonsRequest.start();
     }
-    if (patreonsRequest.response && patreons.length == 0) {
+    if (patreonsRequest.response && patreons.length === 0) {
       const json = JSON.parse(patreonsRequest.response);
       setPatreons(json);
     }
@@ -103,7 +104,7 @@ function Home(): JSX.Element {
     if (contribRequest.status == null) {
       contribRequest.start();
     }
-    if (contribRequest.response && contributors.length == 0) {
+    if (contribRequest.response && contributors.length === 0) {
       const json = JSON.parse(contribRequest.response);
       setContributors(json);
     }
@@ -114,14 +115,14 @@ function Home(): JSX.Element {
       <WrapperOuter style={{ marginBottom: "4em" }}>
         <WrapperInner>
           <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
-            <div className={css.homeDesc}>
+            <div className={"home-desc"}>
               <div
-                className={`${sharedcss.textDescription} ${sharedcss.textLight}`}
+                className={`${"text-description"} ${"text-light"}`}
               >
                 {DESCRIPTION_TEXT}
               </div>
               <a
-                className={css.downloadButton}
+                className={"download-button"}
                 href={makeDownloadURL(versionTag)}
               >
                 Download for {getCurrentOSName()}
@@ -164,22 +165,22 @@ function Home(): JSX.Element {
                 margin: "0 auto"
               }}
             >
-              <div className={homeCss.comunitySupport}>
+              <div className={"comunity-support"}>
                 Maintained thanks to our backers!
               </div>
-              <div className={homeCss.communityIcons}>
+              <div className={"community-icons"}>
                 {patreons
                   .sort((a, b) => b.amount - a.amount)
                   .map((user, index: number) => {
-                    let borderClass = homeCss.iconCasual;
-                    if (user.amount >= 500) borderClass = homeCss.iconStandard;
-                    if (user.amount >= 1000) borderClass = homeCss.iconModern;
-                    if (user.amount >= 2000) borderClass = homeCss.iconLegacy;
+                    let borderClass = "icon-casual";
+                    if (user.amount >= 500) borderClass = "icon-standard";
+                    if (user.amount >= 1000) borderClass = "icon-modern";
+                    if (user.amount >= 2000) borderClass = "icon-legacy";
                     return user.thumb_url && user.url ? (
                       <a
                         key={"patreon-id-" + index}
                         title={user.name}
-                        className={`${homeCss.patreonIcon} ${borderClass}`}
+                        className={`${"patreon-icon"} ${borderClass}`}
                         href={user.url}
                         style={{ backgroundImage: `url(${user.thumb_url})` }}
                       />
@@ -188,23 +189,23 @@ function Home(): JSX.Element {
                     );
                   })}
               </div>
-              <div className={homeCss.showcaseDownloadContainer}>
+              <div className={"showcase-download-container"}>
                 <a
                   style={{ margin: "auto 0px" }}
-                  className={css.patreonButton}
+                  className={"patreon-button"}
                   href="https://www.patreon.com/mtgatool"
                 >
                   Become a Backer!
                 </a>
               </div>
-              <div className={homeCss.comunitySupport}>GitHub Contributors</div>
-              <div className={homeCss.communityIcons}>
+              <div className={"comunity-support"}>GitHub Contributors</div>
+              <div className={"community-icons"}>
                 {contributors.map((contrib, index: number) => {
                   return (
                     <a
                       key={"contributor-id-" + index}
                       title={contrib.login}
-                      className={`${homeCss.contributor}`}
+                      className={`${"contributor"}`}
                       href={contrib.html_url}
                       style={{
                         backgroundImage: `url(${contrib.avatar_url})`
@@ -213,10 +214,10 @@ function Home(): JSX.Element {
                   );
                 })}
               </div>
-              <div className={homeCss.showcaseDownloadContainer}>
+              <div className={"showcase-download-container"}>
                 <a
                   style={{ margin: "auto 0px" }}
-                  className={css.downloadButton}
+                  className={"download-button"}
                   href={makeDownloadURL(versionTag)}
                 >
                   Download for {getCurrentOSName()}

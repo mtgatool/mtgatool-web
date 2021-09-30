@@ -29,7 +29,7 @@ export default function Database(): JSX.Element {
   const fetchGHTag = useCallback((): void => {
     const xhr = new XMLHttpRequest();
     xhr.onload = (): void => {
-      if (xhr.status == 200) {
+      if (xhr.status === 200) {
         try {
           const response = JSON.parse(xhr.responseText);
           console.log("Latest GitHub: " + response.tag_name);

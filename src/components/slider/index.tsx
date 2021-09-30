@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import css from "./slider.css";
+import "./slider.css";
 
 export class SliderPosition {
   public text: string;
@@ -58,7 +58,7 @@ export default function Slider(props: SliderProps): JSX.Element {
   const percent = (100 / (max - min)) * ((value || 0) - min);
 
   return (
-    <div style={props.containerStyle} className={css.slidecontainer}>
+    <div style={props.containerStyle} className={"slidecontainer"}>
       <input
         style={{
           background: `linear-gradient(90deg, var(--color-button) ${percent}%, var(--color-section) ${percent}%)`
@@ -71,16 +71,16 @@ export default function Slider(props: SliderProps): JSX.Element {
         onChange={handleOnChange}
         onInput={handleOnInput}
       ></input>
-      <div className={css.sliderMarksContainerHor}>
+      <div className={"slider-marks-container-hor"}>
         {posArray.map((c: SliderPosition, i: number) => {
           return (
-            <div className={css.sliderMarkOuter} key={c.text + "-" + i}>
+            <div className={"slider-mark-outer"} key={c.text + "-" + i}>
               <div
-                className={css.sliderMarkHor}
+                className={"slider-mark-hor"}
                 style={{ backgroundColor: c.color, opacity: c.hide ? 0 : 1 }}
               />
               {c.text !== "" && (
-                <div className={css.sliderMarkText}>{c.text}</div>
+                <div className={"slider-mark-text"}>{c.text}</div>
               )}
             </div>
           );

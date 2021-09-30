@@ -17,6 +17,7 @@ export function getCardImage(
       : card;
   try {
     const url = cardObj?.images[quality];
+    // eslint-disable-next-line no-throw-literal
     if (url === undefined || url === "") throw "Undefined url";
     return cardObj?.images[quality] || notFound;
   } catch (e) {
@@ -29,6 +30,6 @@ export function getCardImage(
 
 export function getCardArtCrop(card?: DbCardData | number): string {
   const art = getCardImage(card, "art_crop");
-  if (art == notFound) return notFoundArt;
+  if (art === notFound) return notFoundArt;
   else return art;
 }

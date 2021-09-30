@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-import css from "./footer.css";
+
+import "./footer.css";
 /*
 import logoDiscord from "../../assets/images/discord_logo.png";
 import logoTwitter from "../../assets/images/twitter_logo.png";
@@ -12,18 +11,18 @@ import logoTool from "../../assets/cssimages/icon-256.png";
 
 function Footer(): JSX.Element {
   return (
-    <div className={css.footerMain}>
-      <div className={css.footerWrapper}>
-        <div className={css.footerColumn}>
+    <div className={"footer-main"}>
+      <div className={"footer-wrapper"}>
+        <div className={"footer-column"}>
           <img
             style={{ margin: "auto " }}
             alt="MTG Arena Tool"
-            className={css.footerLogo}
+            className={"footer-logo"}
             src={logoTool}
           />
         </div>
-        <div className={css.footerColumn}>
-          <div className={css.footerColumnTitle}>MTG Arena Tool</div>
+        <div className={"footer-column"}>
+          <div className={"footer-column-title"}>MTG Arena Tool</div>
           <FooterLink url="mailto:mtgatool@gmail.com">Contact</FooterLink>
           <FooterLink url="https://mtgatool.com/database/">Database</FooterLink>
           <FooterLink url="https://mtgatool.com/docs/">
@@ -33,8 +32,8 @@ function Footer(): JSX.Element {
             Releases
           </FooterLink>
         </div>
-        <div className={css.footerColumn}>
-          <div className={css.footerColumnTitle}>Support us</div>
+        <div className={"footer-column"}>
+          <div className={"footer-column-title"}>Support us</div>
           <FooterLink url="https://www.paypal.me/ManuelEtchegaray/10">
             Donate
           </FooterLink>
@@ -42,8 +41,8 @@ function Footer(): JSX.Element {
             Patreon
           </FooterLink>
         </div>
-        <div className={css.footerColumn}>
-          <div className={css.footerColumnTitle}>Developers</div>
+        <div className={"footer-column"}>
+          <div className={"footer-column-title"}>Developers</div>
           <FooterLink url="https://github.com/Manuel-777/MTG-Arena-Tool">
             App Github
           </FooterLink>
@@ -51,8 +50,8 @@ function Footer(): JSX.Element {
             Website Github
           </FooterLink>
         </div>
-        <div className={css.footerColumn}>
-          <div className={css.footerColumnTitle}>Places</div>
+        <div className={"footer-column"}>
+          <div className={"footer-column-title"}>Places</div>
           <FooterLink url="https://discord.gg/K9bPkJy">Discord</FooterLink>
           <FooterLink url="https://twitter.com/MEtchegaray7">
             Twitter
@@ -62,8 +61,8 @@ function Footer(): JSX.Element {
           </FooterLink>
         </div>
       </div>
-      <div className={css.footerWrapper}>
-        <div className={css.footerText}>
+      <div className={"footer-wrapper"}>
+        <div className={"footer-text"}>
           Portions of MTG Arena Tool are unofficial Fan Content permitted under
           the Fan Content Policy.
           <br></br>

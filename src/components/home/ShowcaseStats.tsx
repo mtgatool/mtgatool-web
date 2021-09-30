@@ -1,9 +1,9 @@
 import React, { CSSProperties } from "react";
-import MatchA from "../../assets/images/svg/stats-match-a.svg";
-import MatchB from "../../assets/images/svg/stats-match-b.svg";
-import StatsCenter from "../../assets/images/svg/stats-center.svg";
-import StatsBack from "../../assets/images/svg/stats-back.svg";
-import StatsDetails from "../../assets/images/svg/stats-details.svg";
+import {ReactComponent as MatchA } from "../../assets/images/svg/stats-match-a.svg";
+import {ReactComponent as MatchB } from "../../assets/images/svg/stats-match-b.svg";
+import {ReactComponent as StatsCenter } from "../../assets/images/svg/stats-center.svg";
+import {ReactComponent as StatsBack } from "../../assets/images/svg/stats-back.svg";
+import {ReactComponent as StatsDetails } from "../../assets/images/svg/stats-details.svg";
 
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";

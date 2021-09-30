@@ -1,6 +1,4 @@
-import React from "react";
-
-import css from "./index.css";
+import "./index.css";
 import { getRankIndex } from "mtgatool-shared";
 
 interface RankIconProps {
@@ -20,14 +18,14 @@ export default function RankIcon(props: RankIconProps): JSX.Element {
   };
 
   const rankClass =
-    !format || format == "constructed"
-      ? css["constructed-rank"]
-      : css["limited-rank"];
+    !format || format === "constructed"
+      ? "constructed-rank"
+      : "limited-rank";
 
   const mythicRankTitle =
     rank +
-    (leaderboardPlace == 0 ? ` ${percentile}%` : ` #${leaderboardPlace}`);
-  const rankTitle = rank == "Mythic" ? mythicRankTitle : rank + " " + tier;
+    (leaderboardPlace === 0 ? ` ${percentile}%` : ` #${leaderboardPlace}`);
+  const rankTitle = rank === "Mythic" ? mythicRankTitle : rank + " " + tier;
 
   return <div title={rankTitle} className={rankClass} style={rankStyle}></div>;
 }

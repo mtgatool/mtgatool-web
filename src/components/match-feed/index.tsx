@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback } from "react";
 
-import css from "./matchfeed.css";
+import "./matchfeed.css";
 
 import ListItemMatchBrief from "../list-item/ListItemMatchBrief";
 import Flex from "../flex";
@@ -16,7 +16,7 @@ function MatchFeed(): JSX.Element {
   const nextLoad = useCallback((): void => {
     const xhr = new XMLHttpRequest();
     xhr.onload = (): void => {
-      if (xhr.status == 200) {
+      if (xhr.status === 200) {
         try {
           const response = xhr.responseText;
           const addMatch = JSON.parse(response);
@@ -42,7 +42,7 @@ function MatchFeed(): JSX.Element {
   const firstLoad = (): void => {
     const xhr = new XMLHttpRequest();
     xhr.onload = (): void => {
-      if (xhr.status == 200) {
+      if (xhr.status === 200) {
         try {
           const response = xhr.responseText;
           const addMatch = JSON.parse(response);
@@ -113,7 +113,7 @@ function MatchBrief(props: MatchBriefProps): JSX.Element {
 
   return (
     <div
-      className={css.matchBrief + (animate ? " " + css.matchBriefOpen : "")}
+      className={"match-brief" + (animate ? " match-brief-open" : "")}
       style={{ zIndex: index, top: index * 74 }}
     >
       <ListItemMatchBrief match={match} key={"match-brief-" + index} />

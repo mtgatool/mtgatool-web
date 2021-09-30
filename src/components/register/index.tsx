@@ -1,11 +1,11 @@
-/* eslint-disable react/prop-types */
-import React from "react";
+
 
 import { WrapperInner, WrapperOuter } from "../wrapper";
-import css from "./register.css";
+import "./register.css";
 import { useDispatch } from "react-redux";
 import { reduxAction } from "../../redux/webRedux";
 import { sha1 } from "tool-db";
+import { useEffect, useState } from "react";
 
 function signup(username: string, password: string): Promise<any> {
   return window.toolDb.signUp(username, password).then(msg => {
@@ -23,11 +23,11 @@ function signup(username: string, password: string): Promise<any> {
 
 function Register(): JSX.Element {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: "" });
   }, [dispatch]);
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const [formData, setFormData] = React.useState({
+  const [errorMessage, setErrorMessage] = useState("");
+  const [formData, setFormData] = useState({
     username: "",
     pass: "",
     passc: "",
@@ -36,19 +36,19 @@ function Register(): JSX.Element {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-  const handleUsernameChange = (event): void => {
+  const handleUsernameChange = (event: any): void => {
     setFormData({ ...formData, username: event.target.value });
   };
 
-  const handlePassChange = (event): void => {
+  const handlePassChange = (event: any): void => {
     setFormData({ ...formData, pass: event.target.value });
   };
 
-  const handlePassConfirmationChange = (event): void => {
+  const handlePassConfirmationChange = (event: any): void => {
     setFormData({ ...formData, passc: event.target.value });
   };
 
-  const onSubmit = (event): void => {
+  const onSubmit = (event: any): void => {
     // Submit the form
     if (formData.username.length < 5) {
       setErrorMessage("Username must be at least 5 characters long");
@@ -70,11 +70,11 @@ function Register(): JSX.Element {
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <WrapperInner>
-        <div className={css.formAuthenticate}>
-          <div className={css.formIcon} />
+        <div className={"form-authenticate"}>
+          <div className={"form-icon"} />
           <form onSubmit={onSubmit} id="registerform" method="POST">
-            <label className={css.formLabel}>Username</label>
-            <div className={css.formInputContainer}>
+            <label className={"form-label"}>Username</label>
+            <div className={"form-input-container"}>
               <input
                 onChange={handleUsernameChange}
                 type="username"
@@ -82,8 +82,8 @@ function Register(): JSX.Element {
                 autoComplete="off"
               />
             </div>
-            <label className={css.formLabel}>Password</label>
-            <div className={css.formInputContainer}>
+            <label className={"form-label"}>Password</label>
+            <div className={"form-input-container"}>
               <input
                 onChange={handlePassChange}
                 type="password"
@@ -91,10 +91,10 @@ function Register(): JSX.Element {
                 autoComplete="off"
               />
             </div>
-            <label className={css.formLabel}>Confirm Password</label>
+            <label className={"form-label"}>Confirm Password</label>
             <div
               style={{ paddingBottom: "20px" }}
-              className={css.formInputContainer}
+              className={"form-input-container"}
             >
               <input
                 onChange={handlePassConfirmationChange}
@@ -103,10 +103,10 @@ function Register(): JSX.Element {
                 autoComplete="off"
               />
             </div>
-            <button className={css.formButton} type="submit" id="submit">
+            <button className={"form-button"} type="submit" id="submit">
               Signup
             </button>
-            <div className={css.formError}>{errorMessage}</div>
+            <div className={"form-error"}>{errorMessage}</div>
           </form>
         </div>
       </WrapperInner>

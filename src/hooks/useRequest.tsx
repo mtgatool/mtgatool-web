@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useCallback, useState } from "react";
 
 import { useDispatch } from "react-redux";
@@ -41,7 +40,7 @@ export default function useRequest(
       const xhr = new XMLHttpRequest();
       xhr.onload = (): void => {
         if (xhr.status !== status) setStatus(xhr.status);
-        if (xhr.status == 200) {
+        if (xhr.status === 200) {
           try {
             //console.log(xhr.responseText);
             setQueryState(STATE_IDLE);

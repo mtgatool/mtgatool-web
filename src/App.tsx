@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { hot } from "react-hot-loader/root";
 
 import TopNav from "./components/topnav";
 import Footer from "./components/footer";
@@ -12,18 +11,24 @@ import NotFound from "./components/notfound";
 import ReleaseNotes from "./components/release-notes";
 // import Metagame from "./components/metagame";
 import Register from "./components/register";
-import ResetPassword from "./components/resetpassword";
+
 import Docs from "./components/docs";
-import DeckView from "./components/deck-view";
-import ActionLog from "./components/action-log";
-import DraftView from "./components/draft-view";
+
 import Database from "./components/database";
 
-import CardHover from "./components/card-hover";
 import Loading from "./components/loading";
 import CookiesSign from "./components/cookies";
 
 import { WrapperOuter } from "./components/wrapper";
+
+// Import once so all CSS can use it thanks to webpack magic
+import "./App.css";
+import keyArt from "./assets/images/key-art-new.jpg";
+import notFoundArt from "./assets/images/404.jpg";
+import { useSelector } from "react-redux";
+import { AppState } from "./redux/stores/webStore";
+import { ToolDbClient } from "tool-db";
+import { DB_SERVER } from "./constants";
 
 declare global {
   interface Window {
@@ -32,16 +37,7 @@ declare global {
   }
 }
 
-// Import once so all CSS can use it thanks to webpack magic
-import css from "./app.css";
-import keyArt from "./assets/images/key-art-new.jpg";
-import notFoundArt from "./assets/images/404.jpg";
-import { useSelector } from "react-redux";
-import { AppState } from "./redux/stores/webStore";
-import { ToolDbClient } from "tool-db";
-import { DB_SERVER } from "./constants";
-
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   const [artData, setArtData] = React.useState("");
   const { databaseVersion, backImage } = useSelector(
     (state: AppState) => state.web
@@ -56,10 +52,10 @@ function App(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (backImage == keyArt || backImage == "") {
+    if (backImage === keyArt || backImage === "") {
       setImageUrl(keyArt);
       setArtData("Sublime Epiphany by Lindsey Look");
-    } else if (backImage == notFoundArt) {
+    } else if (backImage === notFoundArt) {
       setImageUrl(notFoundArt);
       setArtData("Totally Lost by David Palumbo");
     } else if (backImage && typeof backImage !== "string") {
@@ -69,7 +65,7 @@ function App(): JSX.Element {
   }, [backImage]);
 
   const wrapperStyle = {
-    backgroundImage: `url("${imageUrl}")`
+    backgroundImage: `url("${imageUrl}")`,
   };
 
   return (
@@ -78,34 +74,19 @@ function App(): JSX.Element {
       <Loading />
       <CookiesSign />
       <Router>
-        <div style={wrapperStyle} className={css.wrapperImage} />
+        <div style={wrapperStyle} className={"wrapper-image"} />
         <TopNav artist={artData} />
-        <CardHover />
+
         {databaseVersion !== 0 ? (
           <Switch>
             <Route exact path="/">
               <Home />
             </Route>
-            {/* <Route path="/metagame">
-              <Metagame />
-            </Route> */}
             <Route exact path="/register">
               <Register />
             </Route>
-            <Route path="/resetpassword">
-              <ResetPassword />
-            </Route>
             <Route exact path="/release-notes">
               <ReleaseNotes />
-            </Route>
-            <Route path="/deck">
-              <DeckView />
-            </Route>
-            <Route path="/action-log">
-              <ActionLog />
-            </Route>
-            <Route path="/draft">
-              <DraftView />
             </Route>
             <Route path="/docs">
               <Docs />
@@ -116,7 +97,7 @@ function App(): JSX.Element {
           </Switch>
         ) : (
           <WrapperOuter>
-            <div className={css.loading}>Loading..</div>
+            <div className={"loading"}>Loading..</div>
           </WrapperOuter>
         )}
         <Footer />
@@ -124,5 +105,3 @@ function App(): JSX.Element {
     </>
   );
 }
-
-export default hot(App);

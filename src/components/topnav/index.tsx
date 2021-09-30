@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-import React from "react";
+
 import { Link } from "react-router-dom";
-import css from "./topnav.css";
+import "./topnav.css";
 
 interface TopNavProps {
   artist: string;
@@ -11,24 +10,24 @@ export function TopNav(props: TopNavProps): JSX.Element {
   const { artist } = props;
 
   return (
-    <div className={css.topNavContainer}>
-      <div className={css.topNav}>
-        <div className={css.navLogoContainer}>
-          <Link to="/" className={css.navLogo} />
+    <div className={"top-nav-container"}>
+      <div className={"top-nav"}>
+        <div className={"nav-logo-container"}>
+          <Link to="/" className={"nav-logo"} />
         </div>
-        <div className={css.navArtist}>{artist}</div>
-        <div className={css.navDivider}></div>
-        <div className={css.navLinks}>
-          {/* <Link to="/metagame" className={css.navLinkA}>
+        <div className={"nav-artist"}>{artist}</div>
+        <div className={"nav-divider"}></div>
+        <div className={"nav-links"}>
+          {/* <Link to="/metagame" className={"nav-link-a"}>
             Metagame
           </Link> */}
-          <Link to="/register" className={css.navLinkA}>
+          <Link to="/register" className={"nav-link-a"}>
             Register
           </Link>
-          <Link to="/release-notes" className={css.navLinkA}>
+          <Link to="/release-notes" className={"nav-link-a"}>
             Release Notes
           </Link>
-          <Link to="/docs" className={css.navLinkA}>
+          <Link to="/docs" className={"nav-link-a"}>
             Docs
           </Link>
         </div>

@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
-import React from "react";
+
 // import { Link } from 'react-router-dom';
-import css from "./title.css";
+import "./title.css";
 
 interface TopTitleProps {
   subtitle?: string;
@@ -12,9 +11,9 @@ function TopTitle(props: TopTitleProps): JSX.Element {
   const { subtitle, title } = props;
   return (
     <>
-      <div className={css.topTitleContainer}>{title}</div>
+      <div className={"top-title-container"}>{title}</div>
       {subtitle ? (
-        <div className={css.topSubtitleContainer}>{subtitle}</div>
+        <div className={"top-subtitle-container"}>{subtitle}</div>
       ) : (
         <></>
       )}

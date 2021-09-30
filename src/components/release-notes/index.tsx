@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable react/prop-types */
-import React from "react";
+
 import { WrapperInner, WrapperOuter } from "../wrapper";
-import css from "./releasenotes.css";
+import "./releasenotes.css";
 import Title from "../title";
 import Section from "../Section";
 import { useDispatch } from "react-redux";
 import { reduxAction } from "../../redux/webRedux";
+import { useEffect, useState } from "react";
 
 const CHANGELOG =
   "https://raw.githubusercontent.com/mtgatool/mtgatool-web/master/src/components/release-notes/releasenotes.txt";
@@ -25,11 +25,11 @@ interface Note {
 
 function ReleaseNotes(): JSX.Element {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: "" });
   }, [dispatch]);
-  const [notes, setNotes] = React.useState<string[]>([]);
-  const [parsedNotes, setParsedNotes] = React.useState<Note[]>([]);
+  const [notes, setNotes] = useState<string[]>([]);
+  const [parsedNotes, setParsedNotes] = useState<Note[]>([]);
 
   const getReleaseNotes = (): void => {
     // const lines = textFile.split("\n");
@@ -44,11 +44,11 @@ function ReleaseNotes(): JSX.Element {
     xhr.send();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getReleaseNotes();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const newNotes: Note[] = [];
     const lines = /(fixed|improved|removed|added)/g;
     notes.forEach((line, index) => {
@@ -83,8 +83,8 @@ function ReleaseNotes(): JSX.Element {
           }}
         >
           <Title title="Release Notes" />
-          <div className={css["releases-container"]}>
-            <div className={css["releases-container-line"]} />
+          <div className={"releases-container"}>
+            <div className={"releases-container-line"} />
             {parsedNotes.map((line, index) => {
               let ret;
               if (line.type === TYPE_RELEASE) {
@@ -123,22 +123,22 @@ function Version(props: VersionProps): JSX.Element {
   const { version, date } = props;
 
   return (
-    <div className={css.versionDiv}>
-      <div className={css.versionNumber}>{version}</div>
-      <div className={css.versionRelease}>{date}</div>
+    <div className={"version-div"}>
+      <div className={"version-number"}>{version}</div>
+      <div className={"version-release"}>{date}</div>
     </div>
   );
 }
 
-function Commit(props): JSX.Element {
+function Commit(props: any): JSX.Element {
   const { event, desc, commit } = props;
 
   return (
-    <div className={css.commitDiv}>
-      <div className={css.commitType + " type-" + event}>
+    <div className={"commit-div"}>
+      <div className={"commit-type type-" + event}>
         {event.toUpperCase()}
       </div>
-      <div className={css.commitDesc}>{desc}</div>
+      <div className={"commit-desc"}>{desc}</div>
       <a href={"https://github.com/Manuel-777/MTG-Arena-Tool/commit/" + commit}>
         {commit.substr(0, 6)}
       </a>

@@ -1,9 +1,9 @@
 import React, { CSSProperties } from "react";
-import CollectionDetails from "../../assets/images/svg/collection-details.svg";
-import CollectionBack from "../../assets/images/svg/collection-back.svg";
-import CollectionBar from "../../assets/images/svg/collection-bar.svg";
-import CollectionSet from "../../assets/images/svg/collection-set.svg";
-import CollectionStats from "../../assets/images/svg/collection-stats.svg";
+import {ReactComponent as CollectionDetails} from "../../assets/images/svg/collection-details.svg";
+import {ReactComponent as CollectionBack} from "../../assets/images/svg/collection-back.svg";
+import {ReactComponent as CollectionBar} from "../../assets/images/svg/collection-bar.svg";
+import {ReactComponent as CollectionSet} from "../../assets/images/svg/collection-set.svg";
+import {ReactComponent as CollectionStats} from "../../assets/images/svg/collection-stats.svg";
 
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";

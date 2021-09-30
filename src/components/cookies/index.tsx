@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback } from "react";
-import css from "./cookies.css";
+import "./cookies.css";
 import Button from "../button";
 
 function CookiesSign(): JSX.Element {
@@ -20,8 +20,8 @@ function CookiesSign(): JSX.Element {
   return (
     <>
       {show ? (
-        <div className={css.cookieBanner}>
-          <div className={css.cookieText}>
+        <div className={"cookie-banner"}>
+          <div className={"cookie-text"}>
             This website uses cookies to improve use experience by storing data
             on your browser and uses analytics data of Google Analytics
             services. By using this website you agree with our Privacy policy

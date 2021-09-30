@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="stats-center.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    id="svg8"
    version="1.1"
    viewBox="0 0 35.056267 9.28302"
@@ -24,42 +15,9 @@
        x="0"
        y="0" />
   </defs>
-  <sodipodi:namedview
-     inkscape:window-maximized="0"
-     inkscape:window-y="0"
-     inkscape:window-x="234"
-     inkscape:window-height="1040"
-     inkscape:window-width="1375"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="mm"
-     inkscape:cy="29.961315"
-     inkscape:cx="66.678405"
-     inkscape:zoom="3.6912599"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base" />
-  <metadata
-     id="metadata5">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <g
      transform="translate(-55.457158,-156.73708)"
-     id="layer1"
-     inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
+     id="layer1">
     <path
        style="fill:#202021;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.264583"
        d="m 55.881425,156.73708 h 34.207732 c 0.2368,0 0.424268,0.20492 0.424268,0.44059 v 8.40184 c 0,0.24591 -0.187468,0.44059 -0.424268,0.44059 H 55.881425 c -0.226934,0 -0.424267,-0.19468 -0.424267,-0.44059 v -8.40184 c 0,-0.23567 0.197333,-0.44059 0.424267,-0.44059 z"

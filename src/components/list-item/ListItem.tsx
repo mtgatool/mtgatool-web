@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { getCardArtCrop } from "../../shared/utils/getCardArtCrop";
 
-import css from "./ListItem.css";
+import "./ListItem.css";
 
 interface ListItemProps extends JSX.ElementChildrenAttribute {
   click: VoidFunction;
@@ -10,7 +10,7 @@ interface ListItemProps extends JSX.ElementChildrenAttribute {
 export function ListItem(props: PropsWithChildren<ListItemProps>): JSX.Element {
   const { click } = props;
   return (
-    <div onClick={click} className={css.listItemContainer}>
+    <div onClick={click} className={"list-item-container"}>
       {props.children}
     </div>
   );
@@ -27,7 +27,7 @@ export function HoverTile(
 
   return (
     <div
-      className={css.listItemImage}
+      className={"list-item-image"}
       style={{ backgroundImage: `url(${getCardArtCrop(grpId)})` }}
     >
       {props.children}

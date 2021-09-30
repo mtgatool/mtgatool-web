@@ -16,5 +16,5 @@ export function reduxAction<K extends ActionKeys>(
   dispatch: Dispatch<AnyAction>,
   action: DispatchParameter<K>
 ): void {
-  dispatch(actions[action.type](action.arg));
+  dispatch((actions as any)[action.type](action.arg));
 }
