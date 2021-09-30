@@ -12,7 +12,8 @@ function signup(username: string, password: string): Promise<any> {
     console.log(msg);
     return new Promise(resolve => {
       window.toolDb
-        .putData("userids", {}, true)
+        .signIn(username, password)
+        .then(() => window.toolDb.putData("userids", {}, true))
         .then(() => window.toolDb.putData("decksIndex", {}, true))
         .then(() => window.toolDb.putData("matchesIndex", [], true))
         .then(() => resolve(msg));
