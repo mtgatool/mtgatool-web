@@ -19,9 +19,9 @@ export function TopNav(props: TopNavProps): JSX.Element {
         <div className={css.navArtist}>{artist}</div>
         <div className={css.navDivider}></div>
         <div className={css.navLinks}>
-          <Link to="/metagame" className={css.navLinkA}>
+          {/* <Link to="/metagame" className={css.navLinkA}>
             Metagame
-          </Link>
+          </Link> */}
           <Link to="/register" className={css.navLinkA}>
             Register
           </Link>

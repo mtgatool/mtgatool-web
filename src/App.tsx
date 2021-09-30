@@ -10,7 +10,7 @@ import Footer from "./components/footer";
 import Home from "./components/home";
 import NotFound from "./components/notfound";
 import ReleaseNotes from "./components/release-notes";
-import Metagame from "./components/metagame";
+// import Metagame from "./components/metagame";
 import Register from "./components/register";
 import ResetPassword from "./components/resetpassword";
 import Docs from "./components/docs";
@@ -25,12 +25,21 @@ import CookiesSign from "./components/cookies";
 
 import { WrapperOuter } from "./components/wrapper";
 
+declare global {
+  interface Window {
+    toolDb: ToolDbClient;
+    toolDbInitialized: boolean;
+  }
+}
+
 // Import once so all CSS can use it thanks to webpack magic
 import css from "./app.css";
 import keyArt from "./assets/images/key-art-new.jpg";
 import notFoundArt from "./assets/images/404.jpg";
 import { useSelector } from "react-redux";
 import { AppState } from "./redux/stores/webStore";
+import { ToolDbClient } from "tool-db";
+import { DB_SERVER } from "./constants";
 
 function App(): JSX.Element {
   const [artData, setArtData] = React.useState("");
@@ -38,6 +47,13 @@ function App(): JSX.Element {
     (state: AppState) => state.web
   );
   const [imageUrl, setImageUrl] = React.useState(backImage);
+
+  useEffect(() => {
+    if (!window.toolDbInitialized) {
+      window.toolDb = new ToolDbClient(DB_SERVER);
+      window.toolDbInitialized = true;
+    }
+  }, []);
 
   useEffect(() => {
     if (backImage == keyArt || backImage == "") {
@@ -70,9 +86,9 @@ function App(): JSX.Element {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/metagame">
+            {/* <Route path="/metagame">
               <Metagame />
-            </Route>
+            </Route> */}
             <Route exact path="/register">
               <Register />
             </Route>

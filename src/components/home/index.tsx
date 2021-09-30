@@ -84,7 +84,7 @@ function Home(): JSX.Element {
     return (): void => window.removeEventListener("scroll", handleScroll);
   }, [position, handleScroll]);
 
-  const patreonsRequest = useRequest("https://mtgatool.com/api/supporters.php");
+  const patreonsRequest = useRequest("https://mtgatool.com/patreons/get");
   const contribRequest = useRequest(
     "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/contributors?q=contributions&order=desc"
   );
@@ -126,9 +126,6 @@ function Home(): JSX.Element {
               >
                 Download for {getCurrentOSName()}
               </a>
-              <div className={css.homeDescSmall}>
-                <i>* No account required</i>
-              </div>
             </div>
           </Section>
           <MatchFeed />

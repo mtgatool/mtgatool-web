@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 const DATABASE_URL = "https://mtgatool.com/database/";
 const LATEST_URL = "https://mtgatool.com/database/latest/";
 const GH_LATEST =
-  "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/releases/latest";
+  "https://api.github.com/repos/mtgatool/mtgatool-desktop/releases/latest";
 
 export default function Database(): JSX.Element {
   const dispatch = useDispatch();
