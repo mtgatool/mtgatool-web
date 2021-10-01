@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import ReactGA from "react-ga";
+import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ToolDbClient } from "tool-db";
@@ -40,6 +42,7 @@ export default function App(): JSX.Element {
 
   useEffect(() => {
     if (!window.toolDbInitialized) {
+      ReactGA.initialize("177305473");
       window.toolDb = new ToolDbClient(DB_SERVER);
       window.toolDbInitialized = true;
     }
@@ -64,6 +67,13 @@ export default function App(): JSX.Element {
 
   return (
     <>
+      <Helmet>
+        <title>MTG Arena Tool</title>
+        <meta
+          name="description"
+          content="A deck tracker and statistics manager for MTG Arena."
+        />
+      </Helmet>
       <Database />
       <Loading />
       <CookiesSign />
