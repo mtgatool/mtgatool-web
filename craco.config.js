@@ -1,4 +1,4 @@
-const rawLoader = require('craco-raw-loader');
+const rawLoader = require("craco-raw-loader");
 
 module.exports = {
   webpack: {
@@ -16,9 +16,8 @@ module.exports = {
     plugins: [
       {
         plugin: rawLoader,
-        options: { test: /\.frag$/ }
-      }
-    ]
-  }
-}
-
+        options: { test: /\.frag$/ },
+      },
+    ],
+  },
+};
