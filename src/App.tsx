@@ -1,34 +1,28 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ToolDbClient } from "tool-db";
+
+import { AppState } from "./redux/stores/webStore";
 
 import TopNav from "./components/topnav";
 import Footer from "./components/footer";
-
-// Pages
 import Home from "./components/home";
 import NotFound from "./components/notfound";
 import ReleaseNotes from "./components/release-notes";
-// import Metagame from "./components/metagame";
 import Register from "./components/register";
-
 import Docs from "./components/docs";
-
 import Database from "./components/database";
-
 import Loading from "./components/loading";
 import CookiesSign from "./components/cookies";
-
 import { WrapperOuter } from "./components/wrapper";
 
-// Import once so all CSS can use it thanks to webpack magic
-import "./App.css";
+import { DB_SERVER } from "./constants";
+
 import keyArt from "./assets/images/key-art-new.jpg";
 import notFoundArt from "./assets/images/404.jpg";
-import { useSelector } from "react-redux";
-import { AppState } from "./redux/stores/webStore";
-import { ToolDbClient } from "tool-db";
-import { DB_SERVER } from "./constants";
+import "./App.css";
 
 declare global {
   interface Window {
