@@ -42,7 +42,7 @@ function makeDownloadURL(versionTag: string): string {
   if (platform.indexOf("Mac") > -1) extension = "pkg";
   if (platform.indexOf("Linux") > -1) extension = "AppImage";
 
-  return `https://github.com/Manuel-777/MTG-Arena-Tool/releases/download/${versionTag}/MTG-Arena-Tool-${versionTag.slice(
+  return `https://github.com/mtgatool/mtgatool-desktop/releases/download/${versionTag}/mtgatool-desktop-${versionTag.slice(
     1
   )}.${extension}`;
 }
@@ -127,9 +127,20 @@ function Home(): JSX.Element {
               <div className={`${"text-description"} ${"text-light"}`}>
                 {DESCRIPTION_TEXT}
               </div>
-              <a className="download-button" href={makeDownloadURL(versionTag)}>
-                Download for {getCurrentOSName()}
-              </a>
+              <Flex style={{ justifyContent: "center" }}>
+                <a
+                  className="download-button"
+                  href={makeDownloadURL(versionTag)}
+                >
+                  Download for {getCurrentOSName()}
+                </a>
+                <a
+                  className="open-web-button"
+                  href="https://app.mtgatool.com/auth"
+                >
+                  Open in your browser
+                </a>
+              </Flex>
             </div>
           </Section>
           <MatchFeed />

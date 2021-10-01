@@ -90,7 +90,7 @@ export default function App(): JSX.Element {
             </Route>
           </Switch>
         ) : (
-          <WrapperOuter>
+          <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
             <div className="loading">Loading..</div>
           </WrapperOuter>
         )}

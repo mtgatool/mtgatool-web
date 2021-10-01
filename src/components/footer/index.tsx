@@ -42,7 +42,7 @@ function Footer(): JSX.Element {
           <FooterLink url="https://mtgatool.com/docs/">
             Documentation
           </FooterLink>
-          <FooterLink url="https://github.com/Manuel-777/MTG-Arena-Tool/releases">
+          <FooterLink url="https://github.com/mtgatool/mtgatool-desktop/releases">
             Releases
           </FooterLink>
         </div>
@@ -57,11 +57,14 @@ function Footer(): JSX.Element {
         </div>
         <div className="footer-column">
           <div className="footer-column-title">Developers</div>
-          <FooterLink url="https://github.com/Manuel-777/MTG-Arena-Tool">
+          <FooterLink url="https://github.com/mtgatool/mtgatool-desktop/">
             App Github
           </FooterLink>
           <FooterLink url="https://github.com/mtgatool/mtgatool-web/">
             Website Github
+          </FooterLink>
+          <FooterLink url="https://github.com/mtgatool/mtgatool-metadata/">
+            Metadata Github
           </FooterLink>
         </div>
         <div className="footer-column">

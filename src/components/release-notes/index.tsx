@@ -102,7 +102,7 @@ function ReleaseNotes(): JSX.Element {
   }, [notes]);
 
   return (
-    <WrapperOuter>
+    <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <WrapperInner style={{ maxWidth: "900px" }}>
         <Section
           style={{
