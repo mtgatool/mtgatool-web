@@ -8,7 +8,7 @@ export const actions = {
   SET_DB_VERSION: WebSlice.setDbVersion,
   SET_VERSION_TAG: WebSlice.setVersionTag,
   SET_SCROLL: WebSlice.setScroll,
-  SET_BACK_IMAGE: WebSlice.setBackImage
+  SET_BACK_IMAGE: WebSlice.setBackImage,
 };
 
 export type ActionKeys = keyof typeof actions;

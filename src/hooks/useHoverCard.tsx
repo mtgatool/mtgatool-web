@@ -10,12 +10,12 @@ export default function useHoverCard(card: number): HoverCardHook {
   const hoverIn = useCallback((): void => {
     reduxAction(dispatcher, {
       type: "SET_HOVER_IN",
-      arg: { grpId: card }
+      arg: { grpId: card },
     });
   }, [card, dispatcher]);
 
   const hoverOut = useCallback((): void => {
-    reduxAction(dispatcher, { type: "SET_HOVER_OUT", arg: {} });
+    reduxAction(dispatcher, { type: "SET_HOVER_OUT", arg: undefined });
   }, [dispatcher]);
 
   return [hoverIn, hoverOut];

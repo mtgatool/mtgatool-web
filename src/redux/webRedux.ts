@@ -12,6 +12,7 @@ type DispatchParameter<K extends ActionKeys> = {
  * @param type Action type
  * @param arg argument / object
  */
+// eslint-disable-next-line import/prefer-default-export
 export function reduxAction<K extends ActionKeys>(
   dispatch: Dispatch<AnyAction>,
   action: DispatchParameter<K>

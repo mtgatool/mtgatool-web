@@ -1,4 +1,3 @@
-
 import "./wrapper.css";
 
 interface WrapperProps {
@@ -9,7 +8,7 @@ interface WrapperProps {
 export function WrapperInner(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={"wrapper-inner"}>
+    <div style={style} className="wrapper-inner">
       {children}
     </div>
   );
@@ -18,7 +17,7 @@ export function WrapperInner(props: WrapperProps): JSX.Element {
 export function WrapperInnerCentered(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={"wrapper-inner-centered"}>
+    <div style={style} className="wrapper-inner-centered">
       {children}
     </div>
   );
@@ -27,7 +26,7 @@ export function WrapperInnerCentered(props: WrapperProps): JSX.Element {
 export function WrapperOuter(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={"wrapper-outer"}>
+    <div style={style} className="wrapper-outer">
       {children}
     </div>
   );
@@ -36,7 +35,7 @@ export function WrapperOuter(props: WrapperProps): JSX.Element {
 export function WrapperOuterLight(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={"wrapper-outer-light"}>
+    <div style={style} className="wrapper-outer-light">
       {children}
     </div>
   );
@@ -45,7 +44,7 @@ export function WrapperOuterLight(props: WrapperProps): JSX.Element {
 export function WrapperOuterDark(props: WrapperProps): JSX.Element {
   const { children, style } = props;
   return (
-    <div style={style} className={"wrapper-outer-dark"}>
+    <div style={style} className="wrapper-outer-dark">
       {children}
     </div>
   );

@@ -14,14 +14,14 @@ export default function FeatureRight(props: FeatureProps): JSX.Element {
         padding: "16px",
         maxWidth: "32em",
         height: "11em",
-        margin: "auto"
+        margin: "auto",
       }}
     >
       <div
         style={{
           fontSize: "1.7em",
           color: "var(--color-text)",
-          fontFamily: "var(--main-font-name-bold)"
+          fontFamily: "var(--main-font-name-bold)",
         }}
       >
         {title}

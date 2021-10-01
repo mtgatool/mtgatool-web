@@ -1,4 +1,3 @@
-import React from "react";
 import "./index.css";
 
 interface ButtonProps {
@@ -10,18 +9,24 @@ interface ButtonProps {
 }
 
 export default function Button(props: ButtonProps): JSX.Element {
-  const disabled = props.disabled && props.disabled === true;
+  const { disabled, text, className, style, onClick } = props;
+
+  const _disabled = disabled && disabled === true;
   return (
     <div
-      style={props.style || {}}
-      onClick={disabled ? (): void => {} : props.onClick}
+      style={style || {}}
+      onClick={
+        _disabled
+          ? (): void => {
+              //
+            }
+          : onClick
+      }
       className={
-        disabled
-          ? "button-simple-disabled"
-          : props.className ?? "button-simple"
+        _disabled ? "button-simple-disabled" : className ?? "button-simple"
       }
     >
-      {props.text}
+      {text}
     </div>
   );
 }

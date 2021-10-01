@@ -1,11 +1,20 @@
+/* eslint-disable react/no-array-index-key */
+import {
+  getEventPrettyName,
+  constants,
+  InternalMatch,
+  Colors,
+} from "mtgatool-shared";
+
 import { Column, FlexBottom, FlexTop, HoverTile, ListItem } from "./ListItem";
 import "./ListItem.css";
 
 import RankIcon from "../rank-icon";
 
 import Flex from "../flex";
-import { getEventPrettyName, constants, InternalMatch, Colors } from "mtgatool-shared";
+
 import utf8Decode from "../../shared/utils/utf8Decode";
+
 const { DEFAULT_TILE, COLORS_ALL } = constants;
 
 interface MatchBriefProps {
@@ -24,7 +33,7 @@ export function ManaCost(props: {
       {colors.map((mana, index) => {
         return (
           <div
-            key={mana + "_" + index}
+            key={`${mana}_${index}`}
             className={`${newclass} flex_end mana_${COLORS_ALL[mana - 1]}`}
           />
         );
@@ -34,17 +43,21 @@ export function ManaCost(props: {
 }
 
 export default function ListItemMatchBrief({
-  match
+  match,
 }: MatchBriefProps): JSX.Element {
   return (
-    <ListItem click={(): void => { }}>
+    <ListItem
+      click={() => {
+        //
+      }}
+    >
       <div
-        className={"list-item-left-indicator"}
+        className="list-item-left-indicator"
         style={{
           backgroundColor:
             match.player.wins > match.opponent.wins
               ? `var(--color-g)`
-              : `var(--color-r)`
+              : `var(--color-r)`,
         }}
       />
       <HoverTile grpId={match.playerDeck.deckTileId || DEFAULT_TILE}>
@@ -59,28 +72,30 @@ export default function ListItemMatchBrief({
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
-          flexGrow: 2
+          flexGrow: 2,
         }}
       >
         <Column>
           <FlexTop>
-            <div className={"list-deck-name"}>
+            <div className="list-deck-name">
               {utf8Decode(match.playerDeck.name || "")}
             </div>
           </FlexTop>
           <FlexBottom>
             <ManaCost
-              newclass={"mana-s20"}
-              colors={new Colors().addFromBits(match.playerDeck.colors || 0).get()}
+              newclass="mana-s20"
+              colors={new Colors()
+                .addFromBits(match.playerDeck.colors || 0)
+                .get()}
             />
           </FlexBottom>
         </Column>
 
         <Column>
           <Flex
-            className={"list-deck-name-it"}
+            className="list-deck-name-it"
             style={{
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             {getEventPrettyName(match.eventId)}
@@ -89,7 +104,7 @@ export default function ListItemMatchBrief({
             style={{
               fontSize: "22px",
               fontFamily: "var(--main-font-name-bold)",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             {`${match.player.wins} - ${match.opponent.wins}`}
@@ -98,7 +113,7 @@ export default function ListItemMatchBrief({
 
         <Column>
           <FlexTop>
-            <div className={"list-match-title"}>
+            <div className="list-match-title">
               {utf8Decode(match.opponent.name)}
             </div>
           </FlexTop>
@@ -106,7 +121,7 @@ export default function ListItemMatchBrief({
             style={{ justifyContent: "flex-end", marginRight: "8px" }}
           >
             <ManaCost
-              newclass={"mana-s20"}
+              newclass="mana-s20"
               colors={new Colors().addFromBits(match.oppDeck.colors || 0).get()}
             />
           </FlexBottom>

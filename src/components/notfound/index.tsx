@@ -1,11 +1,10 @@
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { WrapperOuter } from "../wrapper";
 import "./notfound.css";
 import Section from "../Section";
 import notFoundImage from "../../assets/images/404.jpg";
 import { reduxAction } from "../../redux/webRedux";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 function NotFound(): JSX.Element {
   const dispatch = useDispatch();
@@ -18,11 +17,11 @@ function NotFound(): JSX.Element {
       <Section
         style={{ flexDirection: "column", margin: "auto", padding: "1em 3em" }}
       >
-        <div className={"title-notfound"}>Uh, oh..</div>
-        <div className={"subtitle-notfound"}>
+        <div className="title-notfound">Uh, oh..</div>
+        <div className="subtitle-notfound">
           We have totally lost this page..
         </div>
-        <div className={"subtitle-errorcode"}>HTTP 404</div>
+        <div className="subtitle-errorcode">HTTP 404</div>
       </Section>
     </WrapperOuter>
   );

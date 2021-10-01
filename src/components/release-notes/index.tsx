@@ -1,12 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import "./releasenotes.css";
 import Title from "../title";
 import Section from "../Section";
-import { useDispatch } from "react-redux";
 import { reduxAction } from "../../redux/webRedux";
-import { useEffect, useState } from "react";
 
 const CHANGELOG =
   "https://raw.githubusercontent.com/mtgatool/mtgatool-web/master/src/components/release-notes/releasenotes.txt";
@@ -21,6 +20,36 @@ interface Note {
   commit?: string;
   version?: string;
   date?: string;
+}
+
+interface VersionProps {
+  version: string;
+  date: string;
+}
+
+function Version(props: VersionProps): JSX.Element {
+  const { version, date } = props;
+
+  return (
+    <div className="version-div">
+      <div className="version-number">{version}</div>
+      <div className="version-release">{date}</div>
+    </div>
+  );
+}
+
+function Commit(props: any): JSX.Element {
+  const { event, desc, commit } = props;
+
+  return (
+    <div className="commit-div">
+      <div className={`commit-type type-${event}`}>{event.toUpperCase()}</div>
+      <div className="commit-desc">{desc}</div>
+      <a href={`https://github.com/Manuel-777/MTG-Arena-Tool/commit/${commit}`}>
+        {commit.substr(0, 6)}
+      </a>
+    </div>
+  );
 }
 
 function ReleaseNotes(): JSX.Element {
@@ -56,7 +85,7 @@ function ReleaseNotes(): JSX.Element {
         newNotes.push({
           type: TYPE_RELEASE,
           version: notes[index + 1],
-          date: notes[index + 2]
+          date: notes[index + 2],
         });
       }
       if (lines.test(line)) {
@@ -64,10 +93,10 @@ function ReleaseNotes(): JSX.Element {
           type: TYPE_EVENT,
           event: line,
           desc: notes[index + 1],
-          commit: notes[index + 2]
+          commit: notes[index + 2],
         });
       }
-      //console.log(newNotes);
+      // console.log(newNotes);
       setParsedNotes(newNotes);
     });
   }, [notes]);
@@ -79,12 +108,12 @@ function ReleaseNotes(): JSX.Element {
           style={{
             flexDirection: "column",
             marginTop: "6em",
-            marginBottom: "1em"
+            marginBottom: "1em",
           }}
         >
           <Title title="Release Notes" />
-          <div className={"releases-container"}>
-            <div className={"releases-container-line"} />
+          <div className="releases-container">
+            <div className="releases-container-line" />
             {parsedNotes.map((line, index) => {
               let ret;
               if (line.type === TYPE_RELEASE) {
@@ -111,38 +140,6 @@ function ReleaseNotes(): JSX.Element {
         </Section>
       </WrapperInner>
     </WrapperOuter>
-  );
-}
-
-interface VersionProps {
-  version: string;
-  date: string;
-}
-
-function Version(props: VersionProps): JSX.Element {
-  const { version, date } = props;
-
-  return (
-    <div className={"version-div"}>
-      <div className={"version-number"}>{version}</div>
-      <div className={"version-release"}>{date}</div>
-    </div>
-  );
-}
-
-function Commit(props: any): JSX.Element {
-  const { event, desc, commit } = props;
-
-  return (
-    <div className={"commit-div"}>
-      <div className={"commit-type type-" + event}>
-        {event.toUpperCase()}
-      </div>
-      <div className={"commit-desc"}>{desc}</div>
-      <a href={"https://github.com/Manuel-777/MTG-Arena-Tool/commit/" + commit}>
-        {commit.substr(0, 6)}
-      </a>
-    </div>
   );
 }
 

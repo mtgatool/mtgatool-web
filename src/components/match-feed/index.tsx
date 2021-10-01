@@ -1,17 +1,42 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import "./matchfeed.css";
 
+import { InternalMatch } from "mtgatool-shared";
 import ListItemMatchBrief from "../list-item/ListItemMatchBrief";
 import Flex from "../flex";
 import Section from "../Section";
-import { InternalMatch } from "mtgatool-shared";
 
 const FEED_URL = "https://mtgatool.com/api/get_match_feed.php";
 
+interface MatchBriefProps {
+  match: InternalMatch;
+  index: number;
+}
+
+function MatchBrief(props: MatchBriefProps): JSX.Element {
+  const { match, index } = props;
+  const [animate, setAnimate] = useState(index > 0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimate(true);
+    }, 500);
+  }, []);
+
+  return (
+    <div
+      className={`match-brief${animate ? " match-brief-open" : ""}`}
+      style={{ zIndex: index, top: index * 74 }}
+    >
+      <ListItemMatchBrief match={match} key={`match-brief-${index}`} />
+    </div>
+  );
+}
+
 function MatchFeed(): JSX.Element {
-  const [matches, setMatches] = React.useState<InternalMatch[] | null>(null);
+  const [matches, setMatches] = useState<InternalMatch[] | null>(null);
 
   const nextLoad = useCallback((): void => {
     const xhr = new XMLHttpRequest();
@@ -35,7 +60,7 @@ function MatchFeed(): JSX.Element {
         }
       }
     };
-    xhr.open("GET", FEED_URL + "?n=1");
+    xhr.open("GET", `${FEED_URL}?n=1`);
     xhr.send();
   }, [matches]);
 
@@ -56,11 +81,11 @@ function MatchFeed(): JSX.Element {
     xhr.send();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(firstLoad, 1000);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (matches) {
       setTimeout(nextLoad, 1500);
     }
@@ -72,7 +97,7 @@ function MatchFeed(): JSX.Element {
         style={{
           flexDirection: "column",
           height: "592px",
-          overflow: "hidden"
+          overflow: "hidden",
         }}
       >
         {matches ? (
@@ -93,31 +118,6 @@ function MatchFeed(): JSX.Element {
         )}
       </Flex>
     </Section>
-  );
-}
-
-interface MatchBriefProps {
-  match: InternalMatch;
-  index: number;
-}
-
-function MatchBrief(props: MatchBriefProps): JSX.Element {
-  const { match, index } = props;
-  const [animate, setAnimate] = React.useState(index > 0);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setAnimate(true);
-    }, 500);
-  }, []);
-
-  return (
-    <div
-      className={"match-brief" + (animate ? " match-brief-open" : "")}
-      style={{ zIndex: index, top: index * 74 }}
-    >
-      <ListItemMatchBrief match={match} key={"match-brief-" + index} />
-    </div>
   );
 }
 

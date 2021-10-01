@@ -1,4 +1,3 @@
-
 // import { Link } from 'react-router-dom';
 import "./title.css";
 
@@ -11,9 +10,9 @@ function TopTitle(props: TopTitleProps): JSX.Element {
   const { subtitle, title } = props;
   return (
     <>
-      <div className={"top-title-container"}>{title}</div>
+      <div className="top-title-container">{title}</div>
       {subtitle ? (
-        <div className={"top-subtitle-container"}>{subtitle}</div>
+        <div className="top-subtitle-container">{subtitle}</div>
       ) : (
         <></>
       )}

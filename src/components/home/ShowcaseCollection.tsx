@@ -1,15 +1,15 @@
-import React, { CSSProperties } from "react";
-import {ReactComponent as CollectionDetails} from "../../assets/images/svg/collection-details.svg";
-import {ReactComponent as CollectionBack} from "../../assets/images/svg/collection-back.svg";
-import {ReactComponent as CollectionBar} from "../../assets/images/svg/collection-bar.svg";
-import {ReactComponent as CollectionSet} from "../../assets/images/svg/collection-set.svg";
-import {ReactComponent as CollectionStats} from "../../assets/images/svg/collection-stats.svg";
-
+import { CSSProperties, useRef } from "react";
 import { useSelector } from "react-redux";
+import { ReactComponent as CollectionDetails } from "../../assets/images/svg/collection-details.svg";
+import { ReactComponent as CollectionBack } from "../../assets/images/svg/collection-back.svg";
+import { ReactComponent as CollectionBar } from "../../assets/images/svg/collection-bar.svg";
+import { ReactComponent as CollectionSet } from "../../assets/images/svg/collection-set.svg";
+import { ReactComponent as CollectionStats } from "../../assets/images/svg/collection-stats.svg";
+
 import { AppState } from "../../redux/stores/webStore";
 
 export default function ShowcaseCollection(): JSX.Element {
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const scroll = useSelector((state: AppState) => state.web.scroll);
   const offset = containerRef.current
     ? containerRef.current.offsetTop + 150 - window.innerHeight / 2 - scroll
@@ -17,7 +17,7 @@ export default function ShowcaseCollection(): JSX.Element {
 
   const defaultStyle: CSSProperties = {
     transition: "all 0.1s ease-in 0s",
-    position: "absolute"
+    position: "absolute",
   };
 
   return (
@@ -27,7 +27,7 @@ export default function ShowcaseCollection(): JSX.Element {
         display: "flex",
         width: "509.87px",
         height: "360.01px",
-        margin: "0px 4em 0px auto"
+        margin: "0px 4em 0px auto",
       }}
     >
       <CollectionDetails
@@ -35,7 +35,7 @@ export default function ShowcaseCollection(): JSX.Element {
           width: "509.87px",
           height: "360.01px",
           transform: `translate3d(0px, ${Math.round(-offset / 8)}px, 0)`,
-          ...defaultStyle
+          ...defaultStyle,
         }}
       />
       <CollectionBack
@@ -43,7 +43,7 @@ export default function ShowcaseCollection(): JSX.Element {
           width: "393.48px",
           height: "274.3px",
           transform: `translate3d(58px, 33px, 0px)`,
-          ...defaultStyle
+          ...defaultStyle,
         }}
       />
       <CollectionBar
@@ -53,7 +53,7 @@ export default function ShowcaseCollection(): JSX.Element {
           transform: `translate3d(12px, ${Math.round(
             75 + Math.max(0, offset / 10)
           )}px, 0)`,
-          ...defaultStyle
+          ...defaultStyle,
         }}
       />
       <CollectionStats
@@ -63,7 +63,7 @@ export default function ShowcaseCollection(): JSX.Element {
           transform: `translate3d(173px, ${Math.round(
             130 + Math.max(0, offset / 8)
           )}px, 0)`,
-          ...defaultStyle
+          ...defaultStyle,
         }}
       />
       <CollectionSet
@@ -73,7 +73,7 @@ export default function ShowcaseCollection(): JSX.Element {
           transform: `translate3d(45px, ${Math.round(
             120 + Math.max(0, offset / 9)
           )}px, 0)`,
-          ...defaultStyle
+          ...defaultStyle,
         }}
       />
     </div>

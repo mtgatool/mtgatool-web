@@ -6,3 +6,5 @@ export interface ServerDeck extends InternalDeck {
   user?: string;
   error?: string;
 }
+
+export type VoidFunction = () => void;

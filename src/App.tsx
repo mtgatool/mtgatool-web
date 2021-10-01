@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ToolDbClient } from "tool-db";
@@ -32,11 +32,11 @@ declare global {
 }
 
 export default function App(): JSX.Element {
-  const [artData, setArtData] = React.useState("");
+  const [artData, setArtData] = useState("");
   const { databaseVersion, backImage } = useSelector(
     (state: AppState) => state.web
   );
-  const [imageUrl, setImageUrl] = React.useState(backImage);
+  const [imageUrl, setImageUrl] = useState(backImage);
 
   useEffect(() => {
     if (!window.toolDbInitialized) {
@@ -54,7 +54,7 @@ export default function App(): JSX.Element {
       setArtData("Totally Lost by David Palumbo");
     } else if (backImage && typeof backImage !== "string") {
       setImageUrl(backImage.images.art_crop);
-      setArtData(backImage.name + " by " + backImage.artist);
+      setArtData(`${backImage.name} by ${backImage.artist}`);
     }
   }, [backImage]);
 
@@ -68,7 +68,7 @@ export default function App(): JSX.Element {
       <Loading />
       <CookiesSign />
       <Router>
-        <div style={wrapperStyle} className={"wrapper-image"} />
+        <div style={wrapperStyle} className="wrapper-image" />
         <TopNav artist={artData} />
 
         {databaseVersion !== 0 ? (
@@ -91,7 +91,7 @@ export default function App(): JSX.Element {
           </Switch>
         ) : (
           <WrapperOuter>
-            <div className={"loading"}>Loading..</div>
+            <div className="loading">Loading..</div>
           </WrapperOuter>
         )}
         <Footer />

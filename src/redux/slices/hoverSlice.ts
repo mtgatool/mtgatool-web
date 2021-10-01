@@ -1,8 +1,9 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialHover = {
   grpId: 0,
-  opacity: 0
+  opacity: 0,
 };
 
 type Hover = typeof initialHover;
@@ -11,7 +12,7 @@ const hoverSlice = createSlice({
   name: "hover",
   initialState: {
     grpId: 0,
-    opacity: 0
+    opacity: 0,
   },
   reducers: {
     setHoverIn: (
@@ -21,13 +22,13 @@ const hoverSlice = createSlice({
       const { grpId } = action.payload;
       Object.assign(state, {
         grpId: grpId,
-        opacity: 1
+        opacity: 1,
       });
     },
-    setHoverOut: (state: Hover, _action: PayloadAction<{}>): void => {
+    setHoverOut: (state: Hover, _action: PayloadAction<undefined>): void => {
       state.opacity = 0;
-    }
-  }
+    },
+  },
 });
 
 export const { setHoverIn, setHoverOut } = hoverSlice.actions;

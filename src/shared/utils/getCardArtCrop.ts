@@ -1,6 +1,7 @@
+/* eslint-disable no-nested-ternary */
+import { database, DbCardData } from "mtgatool-shared";
 import notFound from "../../assets/images/notfound.png";
 import notFoundArt from "../../assets/images/notFoundArt.png";
-import { database, DbCardData } from "mtgatool-shared";
 
 export function getCardImage(
   card: DbCardData | number | undefined,
@@ -31,5 +32,5 @@ export function getCardImage(
 export function getCardArtCrop(card?: DbCardData | number): string {
   const art = getCardImage(card, "art_crop");
   if (art === notFound) return notFoundArt;
-  else return art;
+  return art;
 }

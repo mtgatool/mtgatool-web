@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { database as db } from "mtgatool-shared";
+import { useDispatch } from "react-redux";
 import { STATE_IDLE, STATE_DOWNLOAD, STATE_ERROR } from "../../constants";
 import { reduxAction } from "../../redux/webRedux";
-import { useDispatch } from "react-redux";
 
 const DATABASE_URL = "https://mtgatool.com/database/";
 const LATEST_URL = "https://mtgatool.com/database/latest/";
@@ -32,10 +32,10 @@ export default function Database(): JSX.Element {
       if (xhr.status === 200) {
         try {
           const response = JSON.parse(xhr.responseText);
-          console.log("Latest GitHub: " + response.tag_name);
+          console.log(`Latest GitHub: ${response.tag_name}`);
           reduxAction(dispatch, {
             type: "SET_VERSION_TAG",
-            arg: response.tag_name
+            arg: response.tag_name,
           });
         } catch (e) {
           console.log(e);
@@ -89,10 +89,8 @@ export default function Database(): JSX.Element {
       } else {
         try {
           const response = JSON.parse(xhr.responseText);
-          console.log(
-            "Latest: " + response.latest + ", current: " + db.version
-          );
-          if (parseInt(db.version + "") < parseInt(response.latest)) {
+          console.log(`Latest: ${response.latest}, current: ${db.version}`);
+          if (parseInt(`${db.version}`) < parseInt(response.latest)) {
             load();
           } else {
             setQueryState(STATE_IDLE);
@@ -115,11 +113,11 @@ export default function Database(): JSX.Element {
     xhr.send();
   }, [load, setQueryState]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Load from cache
     if (localStorage.databaseTime) {
       const dbJson = JSON.parse(localStorage.database);
-      console.log("database from cache: v" + dbJson.version);
+      console.log(`database from cache: v${dbJson.version}`);
       db.setDatabase(localStorage.database);
       setDatabaseVersion(dbJson.version);
     }

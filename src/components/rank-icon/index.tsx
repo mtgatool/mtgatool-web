@@ -14,18 +14,16 @@ export default function RankIcon(props: RankIconProps): JSX.Element {
   const rankIndex = getRankIndex(rank, tier);
 
   const rankStyle = {
-    backgroundPosition: rankIndex * -48 + "px 0px"
+    backgroundPosition: `${rankIndex * -48}px 0px`,
   };
 
   const rankClass =
-    !format || format === "constructed"
-      ? "constructed-rank"
-      : "limited-rank";
+    !format || format === "constructed" ? "constructed-rank" : "limited-rank";
 
   const mythicRankTitle =
     rank +
     (leaderboardPlace === 0 ? ` ${percentile}%` : ` #${leaderboardPlace}`);
-  const rankTitle = rank === "Mythic" ? mythicRankTitle : rank + " " + tier;
+  const rankTitle = rank === "Mythic" ? mythicRankTitle : `${rank} ${tier}`;
 
-  return <div title={rankTitle} className={rankClass} style={rankStyle}></div>;
+  return <div title={rankTitle} className={rankClass} style={rankStyle} />;
 }

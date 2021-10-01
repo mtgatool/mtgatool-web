@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DbCardData } from "mtgatool-shared";
 import { STATE_IDLE } from "../../constants";
 import keyArt from "../../assets/images/key-art-new.jpg";
-import { DbCardData } from "mtgatool-shared";
 
 const initialWebState = {
   loadingState: STATE_IDLE,

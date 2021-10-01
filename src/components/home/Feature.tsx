@@ -1,5 +1,3 @@
-import React from "react";
-
 interface FeatureProps {
   title: string;
   subtitle: string;
@@ -16,14 +14,14 @@ export default function Feature(props: FeatureProps): JSX.Element {
         padding: "16px",
         maxWidth: "32em",
         height: "9em",
-        margin: "auto"
+        margin: "auto",
       }}
     >
       <div
         style={{
           fontSize: "1.7em",
           color: "var(--color-text)",
-          fontFamily: "var(--main-font-name-bold)"
+          fontFamily: "var(--main-font-name-bold)",
         }}
       >
         {title}

@@ -1,5 +1,6 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { getCardArtCrop } from "../../shared/utils/getCardArtCrop";
+import { VoidFunction } from "../../web-types/shared";
 
 import "./ListItem.css";
 
@@ -8,10 +9,10 @@ interface ListItemProps extends JSX.ElementChildrenAttribute {
 }
 
 export function ListItem(props: PropsWithChildren<ListItemProps>): JSX.Element {
-  const { click } = props;
+  const { click, children } = props;
   return (
-    <div onClick={click} className={"list-item-container"}>
-      {props.children}
+    <div onClick={click} className="list-item-container">
+      {children}
     </div>
   );
 }
@@ -23,31 +24,28 @@ interface HoverTileProps {
 export function HoverTile(
   props: PropsWithChildren<HoverTileProps>
 ): JSX.Element {
-  const { grpId } = props;
+  const { grpId, children } = props;
 
   return (
     <div
-      className={"list-item-image"}
+      className="list-item-image"
       style={{ backgroundImage: `url(${getCardArtCrop(grpId)})` }}
     >
-      {props.children}
+      {children}
     </div>
   );
 }
 
 interface ColumnProps extends JSX.ElementChildrenAttribute {
   style?: React.CSSProperties;
-  class?: string;
+  className?: string;
 }
 
 export function Column(props: PropsWithChildren<ColumnProps>): JSX.Element {
-  const style = props.style || {};
+  const { style, className, children } = props;
   return (
-    <div
-      style={{ ...style, flexDirection: "column" }}
-      className={props.class || ""}
-    >
-      {props.children}
+    <div style={{ ...style, flexDirection: "column" }} className={className}>
+      {children}
     </div>
   );
 }
@@ -59,17 +57,18 @@ interface FlexProps extends JSX.ElementChildrenAttribute {
 }
 
 export function FlexTop(props: PropsWithChildren<FlexProps>): JSX.Element {
-  const style = props.style || {};
+  const { style, innerClass, title, children } = props;
+
   return (
     <div
       style={{ height: "50%", display: "flex", lineHeight: "32px", ...style }}
     >
-      {props.innerClass ? (
-        <div title={props.title} className={props.innerClass}>
-          {props.children}
+      {innerClass ? (
+        <div title={title} className={innerClass}>
+          {children}
         </div>
       ) : (
-        props.children
+        children
       )}
     </div>
   );

@@ -1,16 +1,14 @@
-
-
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { sha1 } from "tool-db";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import "./register.css";
-import { useDispatch } from "react-redux";
 import { reduxAction } from "../../redux/webRedux";
-import { sha1 } from "tool-db";
-import { useEffect, useState } from "react";
 
 function signup(username: string, password: string): Promise<any> {
-  return window.toolDb.signUp(username, password).then(msg => {
+  return window.toolDb.signUp(username, password).then((msg) => {
     console.log(msg);
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       window.toolDb
         .signIn(username, password)
         .then(() => window.toolDb.putData("userids", {}, true))
@@ -31,7 +29,7 @@ function Register(): JSX.Element {
     username: "",
     pass: "",
     passc: "",
-    recaptcha: ""
+    recaptcha: "",
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -62,7 +60,7 @@ function Register(): JSX.Element {
         .then(() => {
           setErrorMessage("Sign up sucessful!");
         })
-        .catch(err => setErrorMessage(err.message));
+        .catch((err) => setErrorMessage(err.message));
     }
     event.preventDefault();
   };
@@ -70,11 +68,11 @@ function Register(): JSX.Element {
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <WrapperInner>
-        <div className={"form-authenticate"}>
-          <div className={"form-icon"} />
+        <div className="form-authenticate">
+          <div className="form-icon" />
           <form onSubmit={onSubmit} id="registerform" method="POST">
-            <label className={"form-label"}>Username</label>
-            <div className={"form-input-container"}>
+            <label className="form-label">Username</label>
+            <div className="form-input-container">
               <input
                 onChange={handleUsernameChange}
                 type="username"
@@ -82,8 +80,8 @@ function Register(): JSX.Element {
                 autoComplete="off"
               />
             </div>
-            <label className={"form-label"}>Password</label>
-            <div className={"form-input-container"}>
+            <label className="form-label">Password</label>
+            <div className="form-input-container">
               <input
                 onChange={handlePassChange}
                 type="password"
@@ -91,10 +89,10 @@ function Register(): JSX.Element {
                 autoComplete="off"
               />
             </div>
-            <label className={"form-label"}>Confirm Password</label>
+            <label className="form-label">Confirm Password</label>
             <div
               style={{ paddingBottom: "20px" }}
-              className={"form-input-container"}
+              className="form-input-container"
             >
               <input
                 onChange={handlePassConfirmationChange}
@@ -103,10 +101,10 @@ function Register(): JSX.Element {
                 autoComplete="off"
               />
             </div>
-            <button className={"form-button"} type="submit" id="submit">
+            <button className="form-button" type="submit" id="submit">
               Signup
             </button>
-            <div className={"form-error"}>{errorMessage}</div>
+            <div className="form-error">{errorMessage}</div>
           </form>
         </div>
       </WrapperInner>

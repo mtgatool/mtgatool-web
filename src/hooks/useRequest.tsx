@@ -4,9 +4,7 @@ import { useDispatch } from "react-redux";
 import { reduxAction } from "../redux/webRedux";
 import { STATE_IDLE, STATE_ERROR, STATE_DOWNLOAD } from "../constants";
 
-export default function useRequest(
-  defaultUrl: string
-): {
+export default function useRequest(defaultUrl: string): {
   response: string | undefined;
   status: number | null;
   start: (url?: string) => void;
@@ -42,7 +40,7 @@ export default function useRequest(
         if (xhr.status !== status) setStatus(xhr.status);
         if (xhr.status === 200) {
           try {
-            //console.log(xhr.responseText);
+            // console.log(xhr.responseText);
             setQueryState(STATE_IDLE);
             setResponse(xhr.responseText);
           } catch (e) {

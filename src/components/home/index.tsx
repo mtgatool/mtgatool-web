@@ -1,13 +1,21 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable react/prop-types */
-import React, { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import "../../shared.css";
 import "../../App.css";
 import "./home.css";
 
+import { useSelector, useDispatch } from "react-redux";
 import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter } from "../wrapper";
-import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../redux/stores/webStore";
 import { reduxAction } from "../../redux/webRedux";
 import Section from "../Section";
@@ -22,14 +30,14 @@ import ShowcaseCollection from "./ShowcaseCollection";
 const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
 function getCurrentOSName(): string {
-  const platform = window.navigator.platform;
+  const { platform } = window.navigator;
   if (platform.indexOf("Mac") > -1) return "Mac";
   if (platform.indexOf("Linux") > -1) return "Linux";
   return "Windows";
 }
 
 function makeDownloadURL(versionTag: string): string {
-  const platform = window.navigator.platform;
+  const { platform } = window.navigator;
   let extension = "exe";
   if (platform.indexOf("Mac") > -1) extension = "pkg";
   if (platform.indexOf("Linux") > -1) extension = "AppImage";
@@ -70,7 +78,7 @@ interface Contributor {
 
 function Home(): JSX.Element {
   const { versionTag } = useSelector((state: AppState) => state.web);
-  const position = React.useRef(window);
+  const position = useRef(window);
   const [patreons, setPatreons] = useState<PatreonUser[]>([]);
   const [contributors, setContributors] = useState<Contributor[]>([]);
 
@@ -80,7 +88,7 @@ function Home(): JSX.Element {
     reduxAction(dispatch, { type: "SET_SCROLL", arg: window.scrollY });
   }, [dispatch]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return (): void => window.removeEventListener("scroll", handleScroll);
   }, [position, handleScroll]);
@@ -115,16 +123,11 @@ function Home(): JSX.Element {
       <WrapperOuter style={{ marginBottom: "4em" }}>
         <WrapperInner>
           <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
-            <div className={"home-desc"}>
-              <div
-                className={`${"text-description"} ${"text-light"}`}
-              >
+            <div className="home-desc">
+              <div className={`${"text-description"} ${"text-light"}`}>
                 {DESCRIPTION_TEXT}
               </div>
-              <a
-                className={"download-button"}
-                href={makeDownloadURL(versionTag)}
-              >
+              <a className="download-button" href={makeDownloadURL(versionTag)}>
                 Download for {getCurrentOSName()}
               </a>
             </div>
@@ -162,13 +165,13 @@ function Home(): JSX.Element {
                 flexDirection: "column",
                 padding: "1em",
                 maxWidth: "1000px",
-                margin: "0 auto"
+                margin: "0 auto",
               }}
             >
-              <div className={"comunity-support"}>
+              <div className="comunity-support">
                 Maintained thanks to our backers!
               </div>
-              <div className={"community-icons"}>
+              <div className="community-icons">
                 {patreons
                   .sort((a, b) => b.amount - a.amount)
                   .map((user, index: number) => {
@@ -178,7 +181,7 @@ function Home(): JSX.Element {
                     if (user.amount >= 2000) borderClass = "icon-legacy";
                     return user.thumb_url && user.url ? (
                       <a
-                        key={"patreon-id-" + index}
+                        key={`patreon-id-${index}`}
                         title={user.name}
                         className={`${"patreon-icon"} ${borderClass}`}
                         href={user.url}
@@ -189,35 +192,35 @@ function Home(): JSX.Element {
                     );
                   })}
               </div>
-              <div className={"showcase-download-container"}>
+              <div className="showcase-download-container">
                 <a
                   style={{ margin: "auto 0px" }}
-                  className={"patreon-button"}
+                  className="patreon-button"
                   href="https://www.patreon.com/mtgatool"
                 >
                   Become a Backer!
                 </a>
               </div>
-              <div className={"comunity-support"}>GitHub Contributors</div>
-              <div className={"community-icons"}>
+              <div className="comunity-support">GitHub Contributors</div>
+              <div className="community-icons">
                 {contributors.map((contrib, index: number) => {
                   return (
                     <a
-                      key={"contributor-id-" + index}
+                      key={`contributor-id-${index}`}
                       title={contrib.login}
                       className={`${"contributor"}`}
                       href={contrib.html_url}
                       style={{
-                        backgroundImage: `url(${contrib.avatar_url})`
+                        backgroundImage: `url(${contrib.avatar_url})`,
                       }}
                     />
                   );
                 })}
               </div>
-              <div className={"showcase-download-container"}>
+              <div className="showcase-download-container">
                 <a
                   style={{ margin: "auto 0px" }}
-                  className={"download-button"}
+                  className="download-button"
                   href={makeDownloadURL(versionTag)}
                 >
                   Download for {getCurrentOSName()}

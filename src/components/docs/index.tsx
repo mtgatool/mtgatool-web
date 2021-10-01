@@ -1,7 +1,10 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-webpack-loader-syntax */
 /* eslint-disable react/prop-types */
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment, createElement } from "react";
 import { useRouteMatch, useLocation, Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import { useDispatch } from "react-redux";
 import { WrapperOuter } from "../wrapper";
 import "./docs.css";
 
@@ -22,8 +25,6 @@ import detailedLogsImg from "../../assets/images/docs/detailed-logs.png";
 import filterBoosters from "../../assets/images/docs/collection-filter-boosters.png";
 import viewSets from "../../assets/images/docs/collection-view-sets.png";
 
-import ReactMarkdown from "react-markdown";
-import { useDispatch } from "react-redux";
 import { reduxAction } from "../../redux/webRedux";
 
 const resources = {
@@ -58,7 +59,7 @@ const imageTransform = (img: string): string => {
 
 function Heading({ children, ...props }: any): JSX.Element {
   const { level } = props;
-  return React.createElement("h" + level, props, children);
+  return createElement(`h${level}`, props, children);
 }
 
 const HeadRenderer = (props: any): JSX.Element => {
@@ -72,15 +73,16 @@ const HeadRenderer = (props: any): JSX.Element => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (location.hash === "#" + id) {
+      if (location.hash === `#${id}`) {
         executeScroll();
       }
     }, 500);
   }, [id, linkRef, location]);
 
   return (
-    <React.Fragment key={nodeKey}>
+    <Fragment key={nodeKey}>
       <Heading
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         ref={linkRef}
         onMouseEnter={(): void => setOp(0.8)}
@@ -89,18 +91,18 @@ const HeadRenderer = (props: any): JSX.Element => {
         {children}
         <a id={id} href={`#${id}`}>
           <div
-            className={"anchor-link anchor-h " + level}
+            className={`anchor-link anchor-h ${level}`}
             style={{ opacity: op }}
-          ></div>
+          />
         </a>
       </Heading>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
 export default function Docs(): JSX.Element {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     reduxAction(dispatch, { type: "SET_BACK_IMAGE", arg: "" });
   }, [dispatch]);
   const sectionMatch = useRouteMatch<{ section: string }>("/docs/:section");
@@ -110,33 +112,32 @@ export default function Docs(): JSX.Element {
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
-      <div className={"docs-wrapper-top"}></div>
-      <div className={"docs-wrapper"}>
-        <div className={"docs-sidebar"}>
-          <div className={"docs-sidebar-content"}>
+      <div className="docs-wrapper-top" />
+      <div className="docs-wrapper">
+        <div className="docs-sidebar">
+          <div className="docs-sidebar-content">
             {docs.docs.map((title: any) => {
-              const path = docs[title].path;
+              const { path } = docs[title];
               const isActive =
                 sectionMatch && sectionMatch.params.section === path;
 
               if (docs[title].type === "section") {
                 return (
                   <div
-                    className={
-                      "docs-section-link" +
-                      (isActive ? " docs-section-link-active" : "")
-                    }
-                    key={title + "-side"}
+                    className={`docs-section-link${
+                      isActive ? " docs-section-link-active" : ""
+                    }`}
+                    key={`${title}-side`}
                   >
-                    <Link to={"/docs/" + path}>{title}</Link>
+                    <Link to={`/docs/${path}`}>{title}</Link>
                   </div>
                 );
               }
               if (docs[title].type === "title") {
                 return (
                   <div
-                    className={"docs-section-title"}
-                    key={title + "-side-title"}
+                    className="docs-section-title"
+                    key={`${title}-side-title`}
                   >
                     {title}
                   </div>
@@ -146,13 +147,13 @@ export default function Docs(): JSX.Element {
             })}
           </div>
         </div>
-        <div className={"docs-main"}>
+        <div className="docs-main">
           {resource ? (
             <ReactMarkdown
               transformImageUri={imageTransform}
               renderers={{ heading: HeadRenderer }}
               source={resource}
-            ></ReactMarkdown>
+            />
           ) : (
             <></>
           )}
