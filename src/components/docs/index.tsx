@@ -27,8 +27,6 @@ import viewSets from "../../assets/images/docs/collection-view-sets.png";
 
 import { reduxAction } from "../../redux/webRedux";
 
-console.log("docs yml", docs);
-
 const resources = {
   introduction: introduction,
   installation: installation,
@@ -112,6 +110,8 @@ export default function Docs(): JSX.Element {
     ? (resources as any)[sectionMatch.params.section]
     : resources.introduction;
 
+  console.log(resource);
+
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <div className="docs-wrapper-top" />
@@ -154,8 +154,9 @@ export default function Docs(): JSX.Element {
             <ReactMarkdown
               transformImageUri={imageTransform}
               renderers={{ heading: HeadRenderer }}
-              source={resource}
-            />
+            >
+              {resource}
+            </ReactMarkdown>
           ) : (
             <></>
           )}
