@@ -1,19 +1,14 @@
 module.exports = {
   env: {
-    "cypress/globals": true,
     browser: true,
     commonjs: true,
     es6: true,
-    jest: true,
-    node: true,
   },
   globals: {
     page: true,
     browser: true,
     React: true,
     JSX: true,
-    NodeJS: true,
-    Electron: true,
   },
   parserOptions: {
     ecmaFeatures: {
@@ -85,7 +80,6 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
   },
   settings: {
-    "import/core-modules": ["electron"],
     "import/resolver": {
       node: {
         extensions: [".js", ".jsx", ".ts", ".tsx"],

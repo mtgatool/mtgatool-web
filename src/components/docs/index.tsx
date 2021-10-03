@@ -1,5 +1,5 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-webpack-loader-syntax */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 import { useState, useRef, useEffect, Fragment, createElement } from "react";
 import { useRouteMatch, useLocation, Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import { WrapperOuter } from "../wrapper";
 import "./docs.css";
 
 // Docs
-import docs from "./index.yml";
+import docs from "./docs.yml";
 import introduction from "!!raw-loader!./resources/introduction.md";
 import installation from "!!raw-loader!./resources/installation.md";
 import outputLogs from "!!raw-loader!./resources/output-logs.md";
@@ -26,6 +26,8 @@ import filterBoosters from "../../assets/images/docs/collection-filter-boosters.
 import viewSets from "../../assets/images/docs/collection-view-sets.png";
 
 import { reduxAction } from "../../redux/webRedux";
+
+console.log("docs yml", docs);
 
 const resources = {
   introduction: introduction,

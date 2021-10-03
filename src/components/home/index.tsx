@@ -27,7 +27,7 @@ import FeatureRight from "./FeatureRight";
 import useRequest from "../../hooks/useRequest";
 import ShowcaseCollection from "./ShowcaseCollection";
 
-const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
+export const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
 function getCurrentOSName(): string {
   const { platform } = window.navigator;

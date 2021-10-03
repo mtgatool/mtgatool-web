@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable import/no-webpack-loader-syntax */
 import { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
@@ -10,7 +11,7 @@ import { AppState } from "./redux/stores/webStore";
 
 import TopNav from "./components/topnav";
 import Footer from "./components/footer";
-import Home from "./components/home";
+import Home, { DESCRIPTION_TEXT } from "./components/home";
 import NotFound from "./components/notfound";
 import ReleaseNotes from "./components/release-notes";
 import Register from "./components/register";
@@ -22,6 +23,8 @@ import { WrapperOuter } from "./components/wrapper";
 
 import { DB_SERVER } from "./constants";
 
+import icon from "./assets/cssimages/icon-256.png";
+import favicon from "./assets/images/favicon.ico";
 import keyArt from "./assets/images/key-art-new.jpg";
 import notFoundArt from "./assets/images/404.jpg";
 import "./App.css";
@@ -42,7 +45,7 @@ export default function App(): JSX.Element {
 
   useEffect(() => {
     if (!window.toolDbInitialized) {
-      ReactGA.initialize("177305473");
+      ReactGA.initialize("UA-121056395-1");
       window.toolDb = new ToolDbClient(DB_SERVER);
       window.toolDbInitialized = true;
     }
@@ -65,14 +68,24 @@ export default function App(): JSX.Element {
     backgroundImage: `url("${imageUrl}")`,
   };
 
+  <link rel="canonical" href="http://www.example.com/" />;
+
   return (
     <>
       <Helmet>
         <title>MTG Arena Tool</title>
-        <meta
-          name="description"
-          content="A deck tracker and statistics manager for MTG Arena."
-        />
+        <meta name="title" content="MTG Arena Tool" />
+        <meta name="description" content={DESCRIPTION_TEXT} />
+        <meta name="og:title" content="MTG Arena Tool" />
+        <meta name="og:description" content={DESCRIPTION_TEXT} />
+        <meta name="og:site:name" content="MTG Arena Tool" />
+        <meta name="og:image" content={icon} />
+        <meta name="og:image:width" content="256" />
+        <meta name="og:image:height" content="256" />
+        <meta name="og:image:alt" content="MTG Arena Tool Logo" />
+        <meta name="twitter:site" content="@MEtchegaray7" />
+        <link rel="canonical" href="https://mtgatool.com/" />
+        <link rel="icon" href={favicon} />
       </Helmet>
       <Database />
       <Loading />
