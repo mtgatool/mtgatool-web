@@ -110,8 +110,6 @@ export default function Docs(): JSX.Element {
     ? (resources as any)[sectionMatch.params.section]
     : resources.introduction;
 
-  console.log(resource);
-
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <div className="docs-wrapper-top" />
