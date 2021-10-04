@@ -2,6 +2,7 @@ docs: [
   "Resources",
   "Introduction",
   "Installation",
+  "Migration",
   "Output logs",
   "Sections",
   "Decks",
@@ -19,6 +20,10 @@ Introduction:
 Installation:
   type: section
   path: installation
+
+Migration:
+  type: section
+  path: migration
 
 Output logs:
   type: section

@@ -1,6 +1,6 @@
 # Installation
 
-Currently for Windows we provide an `.exe` installer, it is built with default installation settings and installs to `%APPDATA%/mtg-arena-tool/`, where you can see and backup your user data if needed.
+Currently for Windows we provide an `.exe` installer, it is built with default installation settings and installs to `%APPDATA%/mtgatool-desktop/`, where you can see and backup your user data if needed.
 
 On Linux systems we provide [.AppImage](https://appimage.org/) binaries, altrough you can run from source with very little efforts following our [instructions](https://github.com/Manuel-777/MTG-Arena-Tool/blob/master/CONTRIBUTING.md#running-from-source)
 

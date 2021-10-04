@@ -91,7 +91,7 @@ function Footer(): JSX.Element {
           <br />
           ©Wizards of the Coast LLC.
           <br />
-          All other content ©2020 MTG Arena Tool.
+          All other content ©{new Date().getFullYear()} MTG Arena Tool.
         </div>
       </div>
     </div>

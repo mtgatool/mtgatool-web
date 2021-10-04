@@ -13,6 +13,7 @@ import docs from "./docs.yml";
 import introduction from "!!raw-loader!./resources/introduction.md";
 import installation from "!!raw-loader!./resources/installation.md";
 import outputLogs from "!!raw-loader!./resources/output-logs.md";
+import migration from "!!raw-loader!./resources/migration.md";
 import privacy from "!!raw-loader!./resources/privacy.md";
 import decks from "!!raw-loader!./resources/decks.md";
 import collection from "!!raw-loader!./resources/collection.md";
@@ -31,14 +32,18 @@ const resources = {
   introduction: introduction,
   installation: installation,
   "output-logs": outputLogs,
+  migration: migration,
   privacy: privacy,
   decks: decks,
   collection: collection,
   overlays: overlays,
 };
 
-const scrollToRef = (ref: any): void =>
-  window.scrollTo(0, ref.current.offsetTop);
+const scrollToRef = (ref: any): void => {
+  if (ref.current) {
+    window.scrollTo(0, ref.current.offsetTop);
+  }
+};
 
 const imageTransform = (img: string): string => {
   switch (img) {
@@ -65,7 +70,8 @@ function Heading({ children, ...props }: any): JSX.Element {
 const HeadRenderer = (props: any): JSX.Element => {
   const { nodeKey, children, level } = props;
   const linkRef = useRef(null);
-  const id = children[0].props.value.replace(/\s+/g, "-").toLowerCase();
+
+  const id = children[0].replace(/\s+/g, "-").toLowerCase();
   const [op, setOp] = useState(0);
   const location = useLocation();
 
@@ -91,7 +97,7 @@ const HeadRenderer = (props: any): JSX.Element => {
         {children}
         <a id={id} href={`#${id}`}>
           <div
-            className={`anchor-link anchor-h ${level}`}
+            className={`anchor-link anchor-h${level}`}
             style={{ opacity: op }}
           />
         </a>
@@ -151,7 +157,7 @@ export default function Docs(): JSX.Element {
           {resource ? (
             <ReactMarkdown
               transformImageUri={imageTransform}
-              renderers={{ heading: HeadRenderer }}
+              components={{ h1: HeadRenderer }}
             >
               {resource}
             </ReactMarkdown>
