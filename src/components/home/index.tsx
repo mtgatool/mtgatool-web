@@ -14,7 +14,7 @@ import "../../App.css";
 import "./home.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import MatchFeed from "../match-feed";
+// import MatchFeed from "../match-feed";
 import { WrapperInner, WrapperOuter } from "../wrapper";
 import { AppState } from "../../redux/stores/webStore";
 import { reduxAction } from "../../redux/webRedux";
@@ -39,12 +39,10 @@ function getCurrentOSName(): string {
 function makeDownloadURL(versionTag: string): string {
   const { platform } = window.navigator;
   let extension = "exe";
-  if (platform.indexOf("Mac") > -1) extension = "pkg";
+  if (platform.indexOf("Mac") > -1) extension = "dmg";
   if (platform.indexOf("Linux") > -1) extension = "AppImage";
 
-  return `https://github.com/mtgatool/mtgatool-desktop/releases/download/${versionTag}/mtgatool-desktop-${versionTag.slice(
-    1
-  )}.${extension}`;
+  return `https://github.com/mtgatool/mtgatool-desktop/releases/download/v${versionTag}/mtgatool-desktop-${versionTag}.${extension}`;
 }
 
 interface PatreonUser {
@@ -81,6 +79,7 @@ function Home(): JSX.Element {
   const position = useRef(window);
   const [patreons, setPatreons] = useState<PatreonUser[]>([]);
   const [contributors, setContributors] = useState<Contributor[]>([]);
+  // const [notice, setNotice] = useState("");
 
   const dispatch = useDispatch();
 
@@ -97,6 +96,10 @@ function Home(): JSX.Element {
   const contribRequest = useRequest(
     "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/contributors?q=contributions&order=desc"
   );
+
+  // const noticeRequest = useRequest(
+  //   "https://raw.githubusercontent.com/mtgatool/mtgatool-desktop/dev/.gitignore"
+  // );
 
   useEffect(() => {
     if (patreonsRequest.status == null) {
@@ -117,6 +120,15 @@ function Home(): JSX.Element {
       setContributors(json);
     }
   }, [contribRequest, contributors.length]);
+
+  // useEffect(() => {
+  //   if (noticeRequest.status == null) {
+  //     noticeRequest.start();
+  //   }
+  //   if (noticeRequest.response) {
+  //     setNotice(noticeRequest.response);
+  //   }
+  // }, [noticeRequest]);
 
   return (
     <>
@@ -143,7 +155,6 @@ function Home(): JSX.Element {
               </Flex>
             </div>
           </Section>
-          <MatchFeed />
         </WrapperInner>
       </WrapperOuter>
 
