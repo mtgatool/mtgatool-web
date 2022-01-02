@@ -1,6 +1,6 @@
 # Output Logs
 
-Output logs are stored by default on `%APPDATA%\..\LocalLow\Wizards Of The Coast\MTGA\output_log.txt`, all trackers need to read this file to know what happens in MTG Arena while you play, see [Enable Detailed Logs](./installation#enable-detailed-logs).
+Output logs are stored by default on `%APPDATA%\..\LocalLow\Wizards Of The Coast\MTGA\Player.log`, all trackers need to read this file to know what happens in MTG Arena while you play, see [Enable Detailed Logs](./installation#enable-detailed-logs).
 
 This file will be cleared when the game starts, so make sure you either run MTG Arena Tool before they are cleared, or that you have the app running alongside the game for it to read them.
 
