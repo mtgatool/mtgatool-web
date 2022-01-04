@@ -39,8 +39,14 @@ function getCurrentOSName(): string {
 function makeDownloadURL(versionTag: string): string {
   const { platform } = window.navigator;
   let extension = "exe";
-  if (platform.indexOf("Mac") > -1) extension = "dmg";
-  if (platform.indexOf("Linux") > -1) extension = "AppImage";
+  if (platform.indexOf("Mac") > -1) {
+    extension = "dmg";
+  }
+  if (platform.indexOf("Linux") > -1) {
+    // eslint-disable-next-line no-param-reassign
+    versionTag = "linux-installer";
+    extension = "tar.gz";
+  }
 
   return `https://github.com/mtgatool/mtgatool-desktop/releases/download/v${versionTag}/mtgatool-desktop-${versionTag}.${extension}`;
 }
