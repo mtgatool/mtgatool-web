@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: "Install modules"
-      run: "npm run install:ci"
+      run: "npm install"
 
     - name: Install CRACO
       run: "npm install -g @craco/craco"
