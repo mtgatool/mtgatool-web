@@ -9,7 +9,7 @@ We used [Magic Community Set Rewview](https://www.mtgcommunityreview.com/) up un
 
 ## Where can I submit issues / suggestions?
 
-We are always on [our Discord](https://discord.gg/K9bPkJy), but we use [GitHub issues tracker](https://github.com/Manuel-777/MTG-Arena-Tool/issues) too.
+We are always on [our Discord](https://discord.gg/K9bPkJy), but we use [GitHub issues tracker](https://github.com/mtgatool/mtgatool-desktop/issues) too.
 
 ## I get a black window.
 
@@ -22,8 +22,10 @@ This is a renderer error. We do our best to catch these, but some are simply fat
 
 To fix this issue, if you are on Windows, you should enable Transparency (on Windows 10) or Aero Effects (on Windows 7 and Vista). If your PC does not support transparency, overlays will not function correctly.
 
-## "player.log contains no player data" error on startup
+## Application is not tracking anything
 
-This issue is caused by the logs not having any user data (arena id) on them, This began happening after Historic Anthology 4 MTGA update due to a portion of the logs containing this information being removed by WoTC. Easiest workaround is to start a match to force the logs to have this information.
+It could be the log is not properly set, you can check in settings (both in the login screen and main settings page). Both show the state of the log; if its located where the app is looking for and if it is being parsed at all.
 
-If you are a new or offline user (from whom we dont have any previous data or information) you will have to do this before starting tool in order for it to know who you are in MTG Arena.
+If the log is set properly then you can make sure the app is parsing it properly entering a match in MTGA and checking if the overlays work, just make sure you have at least one overlay enabled in Overlay settings (most times this is all true)
+
+If you are still having issues you can open devtools using `Alt + Shift + D` as explained above, to seek for any errors.

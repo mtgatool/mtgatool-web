@@ -8,13 +8,14 @@ To describe it quickly, MTG Arena Tool is a collection viewer, deck tracker and 
   - Cards seen
   - Draft helper
   - Odds of card drawing
-- Collection viewer
-- Collection completion estimator (for drafters)
+- Collection viewer *
+- Collection completion estimator (for drafters) *
 - Deck stats
-- Draft replays
-- Events History
+- Draft replays *
 - Match History (with filters!)
 - Winrate viewer, with filters of colors, deck, formats, events and more!
+
+\* *Version 6 was a complete rewrite of the application, and some data like cards/collection was removed from the logs in August 2020, so these features are still not re-implemented.*
 
 # Bugs
 

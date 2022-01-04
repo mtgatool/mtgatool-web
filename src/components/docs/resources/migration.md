@@ -4,8 +4,11 @@ version 6 introduced a new account and database system, thus data from version 5
 
 You will need to locate your .db file. This file contains all of your data from v5;
 
+
 On windows: `%APPDATA%/Mtg-Arena-Tool/{uuid}.db`
+
 On Linux: `~/.config/Mtg-Arena-Tool/{uuid}.db`
+
 On OSX: `~/Library/Mtg-Arena/Tool/{uuid}.db`
 
 Where {uuid} is your Wizards account user id. Something like "BB3D57B43268D3D1". Notice you might have multiple if you had many accounts.
