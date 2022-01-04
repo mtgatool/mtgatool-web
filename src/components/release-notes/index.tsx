@@ -45,7 +45,7 @@ function Commit(props: any): JSX.Element {
     <div className="commit-div">
       <div className={`commit-type type-${event}`}>{event.toUpperCase()}</div>
       <div className="commit-desc">{desc}</div>
-      <a href={`https://github.com/Manuel-777/MTG-Arena-Tool/commit/${commit}`}>
+      <a href={`https://github.com/mtgatool/mtgatool-desktop/commit/${commit}`}>
         {commit.substr(0, 6)}
       </a>
     </div>

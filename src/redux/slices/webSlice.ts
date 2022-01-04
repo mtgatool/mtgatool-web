@@ -8,7 +8,7 @@ const initialWebState = {
   loadingState: STATE_IDLE,
   scroll: window.scrollY,
   databaseVersion: 0,
-  versionTag: "6.0.10",
+  versionTag: "6.1.25",
   backImage: keyArt as string,
 };
 

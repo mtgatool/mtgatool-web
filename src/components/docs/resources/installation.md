@@ -2,7 +2,7 @@
 
 Currently for Windows we provide an `.exe` installer, it is built with default installation settings and installs to `%APPDATA%/mtgatool-desktop/`, where you can see and backup your user data if needed.
 
-On Linux systems we provide [.AppImage](https://appimage.org/) binaries, altrough you can run from source with very little efforts following our [instructions](https://github.com/Manuel-777/MTG-Arena-Tool/blob/master/CONTRIBUTING.md#running-from-source)
+On Linux systems we provide [.AppImage](https://appimage.org/) binaries, altrough you can run from source with very little efforts following our [instructions](https://github.com/mtgatool/mtgatool-desktop/blob/dev/README.md)
 
 For Mac users we provide `.dmg` installers, but we currently cannot actively support it at the moment.
 

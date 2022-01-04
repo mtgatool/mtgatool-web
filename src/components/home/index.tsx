@@ -100,7 +100,10 @@ function Home(): JSX.Element {
 
   const patreonsRequest = useRequest("https://mtgatool.com/patreons/get");
   const contribRequest = useRequest(
-    "https://api.github.com/repos/Manuel-777/MTG-Arena-Tool/contributors?q=contributions&order=desc"
+    "https://api.github.com/repos/Manwe-777/MTG-Arena-Tool/contributors?q=contributions&order=desc"
+  );
+  const releasesRequest = useRequest(
+    "https://api.github.com/repos/mtgatool/mtgatool-desktop/releases/latest"
   );
 
   // const noticeRequest = useRequest(
@@ -126,6 +129,16 @@ function Home(): JSX.Element {
       setContributors(json);
     }
   }, [contribRequest, contributors.length]);
+
+  useEffect(() => {
+    if (releasesRequest.status == null) {
+      releasesRequest.start();
+    }
+    if (releasesRequest.response && contributors.length === 0) {
+      const json = JSON.parse(releasesRequest.response);
+      reduxAction(dispatch, { type: "SET_VERSION_TAG", arg: json.name });
+    }
+  }, [releasesRequest]);
 
   // useEffect(() => {
   //   if (noticeRequest.status == null) {
