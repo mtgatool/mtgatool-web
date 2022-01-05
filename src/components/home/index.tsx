@@ -43,9 +43,7 @@ function makeDownloadURL(versionTag: string): string {
     extension = "dmg";
   }
   if (platform.indexOf("Linux") > -1) {
-    // eslint-disable-next-line no-param-reassign
-    versionTag = "linux-installer";
-    extension = "tar.gz";
+    return `https://github.com/mtgatool/mtgatool-desktop/releases/download/v${versionTag}/mtgatool-desktop-linux-installer.tar.gz`;
   }
 
   return `https://github.com/mtgatool/mtgatool-desktop/releases/download/v${versionTag}/mtgatool-desktop-${versionTag}.${extension}`;
@@ -148,6 +146,7 @@ function Home(): JSX.Element {
   //     setNotice(noticeRequest.response);
   //   }
   // }, [noticeRequest]);
+  const { platform } = window.navigator;
 
   return (
     <>
@@ -155,7 +154,7 @@ function Home(): JSX.Element {
         <WrapperInner>
           <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
             <div className="home-desc">
-              <div className={`${"text-description"} ${"text-light"}`}>
+              <div className="text-description text-light">
                 {DESCRIPTION_TEXT}
               </div>
               <Flex style={{ justifyContent: "center" }}>
@@ -172,6 +171,21 @@ function Home(): JSX.Element {
                   Open in your browser
                 </a>
               </Flex>
+              {platform.indexOf("Linux") !== -1 && (
+                <Flex
+                  style={{ justifyContent: "center" }}
+                  className="text-light"
+                >
+                  <a
+                    className="nav-link-a"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://github.com/mtgatool/mtgatool-desktop/blob/dev/README.md#install-on-linux"
+                  >
+                    How to install on Linux
+                  </a>
+                </Flex>
+              )}
             </div>
           </Section>
         </WrapperInner>
