@@ -1,3 +1,13 @@
+paths: [
+  "introduction",
+  "installation",
+  "migration",
+  "logs",
+  "decks",
+  "overlays",
+  "collection"
+]
+
 docs: [
   "resources",
   "introduction",

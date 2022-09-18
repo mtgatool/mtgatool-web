@@ -132,7 +132,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const allDocs: string[] = docs.docs;
+  const allDocs: string[] = docs.paths;
 
   return {
     paths: allDocs.map((post) => {
