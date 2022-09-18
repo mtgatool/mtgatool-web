@@ -1,0 +1,56 @@
+docs: [
+  "resources",
+  "introduction",
+  "installation",
+  "migration",
+  "logs",
+  "sections",
+  "decks",
+  "overlays",
+  "collection"
+]
+
+resources:
+  type: "title"
+  name: "Resources"
+
+introduction:
+  type: "section"
+  name: "Introduction"
+  path: "introduction"
+
+installation:
+  type: "section"
+  name: "Installation"
+  path: "installation"
+
+migration:
+  type: "section"
+  name: "Migration"
+  path: "migration"
+
+logs:
+  type: "section"
+  name: "Output Logs"
+  path: "logs"
+
+sections:
+  type: "title"
+  name: "Sections"
+
+decks:
+  type: "section"
+  name: "Decks"
+  path: "decks"
+
+overlays:
+  type: "section"
+  name: "Overlays"
+  path: "overlays"
+
+collection:
+  type: "section"
+  name: "Collection"
+  path: "collection"
+      
+  

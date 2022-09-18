@@ -20,9 +20,6 @@ jobs:
 
     - name: "Install modules"
       run: "npm install"
-
-    - name: Install CRACO
-      run: "npm install -g @craco/craco"
   
     - name: Build web
       run: npm run build
@@ -33,6 +30,6 @@ jobs:
         server: ${{ secrets.server }}
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
-        local-dir: ./build/
+        local-dir: ./.next/
         dangerous-clean-slate: true
-        server-dir: /var/www/mtgatool-web/build/
+        server-dir: /var/www/mtgatool-web/.next/

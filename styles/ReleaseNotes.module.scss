@@ -1,0 +1,109 @@
+.releasesContainer {
+  margin: auto;
+  display: block;
+}
+
+.releasesContainerLine {
+  background-color: #e7ca8e;
+  width: 4px;
+  opacity: 0.5;
+  margin-left: 2.3em;
+  z-index: -1;
+}
+
+.releasesTitle {
+  border-bottom: solid #b1896554 1px;
+  padding-bottom: 1em;
+}
+
+.versionDiv {
+  color: rgb(0, 0, 0);
+  margin: 1em 0 1em 0.5em;
+  align-items: center;
+  height: 2em;
+  display: flex;
+}
+
+.versionNumber {
+  background-color: var(--color-button);
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 2em;
+  width: 5.5em;
+  height: 2em;
+  border-radius: 0.25em;
+  font-family: var(--sub-font-name);
+}
+
+.versionRelease {
+  font-size: 1rem;
+  margin-left: 1em;
+  color: var(--color-text);
+  font-family: var(--sub-font-name-it);
+}
+
+.versionEnd {
+  height: 2em;
+}
+
+.commitDiv {
+  color: rgb(0, 0, 0);
+  margin-top: 0.5em;
+  display: flex;
+}
+
+@media screen and (min-width: 500px) {
+  .commitDiv {
+    margin-left: 4em;
+  }
+}
+
+.commitDiv a {
+  color: var(--color-text-link);
+  font-size: 1rem;
+  font-family: var(--sub-font-name-it);
+  margin-top: 0;
+}
+
+.commitType {
+  font-size: 0.8rem;
+  text-align: center;
+  min-width: 6.5em;
+  height: 2em;
+  line-height: 2em;
+  border-radius: 0.25em;
+  font-family: var(--sub-font-name);
+}
+
+.typeAdded {
+  background-color: rgba(183, 200, 158, 1) !important;
+}
+
+.typeFixed {
+  background-color: rgba(170, 190, 223, 1) !important;
+}
+
+.typeRemoved {
+  background-color: rgba(221, 130, 99, 1) !important;
+}
+
+.typeBreaking {
+  background-color: rgb(161, 142, 135) !important;
+}
+
+.typeImproved {
+  background-color: rgba(220, 170, 220, 1) !important;
+}
+
+.typeError {
+  font-size: 1rem;
+  color: rgba(221, 130, 99, 1) !important;
+  text-align: center;
+}
+
+.commitDesc {
+  margin: 0 10px;
+  font-size: 1rem;
+  color: var(--color-text);
+  font-family: var(--sub-font-name-it);
+}

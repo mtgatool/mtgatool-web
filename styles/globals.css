@@ -1,0 +1,433 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrapperImage {
+  background-color: black;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  /*-webkit-filter: blur(2px);*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: url(/images/key-art-new.jpg);
+  background-size: cover;
+}
+
+.wrapperImage:after {
+  background: url(/cssimages/background_overlay.png);
+  content: " ";
+  top: 0;
+  left: 0;
+  width: calc(100% - 0px);
+  height: calc(100% - 0px);
+  position: absolute;
+  background-size: 100% 100%;
+  z-index: -5;
+  opacity: 0.75;
+}
+
+.homeDesc {
+  padding: 32px;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}
+
+.homeDescSmall {
+  width: 100%;
+  text-align: center;
+  font-family: var(--main-font-name);
+  font-size: 1rem;
+  color: var(--color-light);
+}
+
+.downloadButton {
+  cursor: pointer;
+  margin: 8px 8px;
+  width: 16em;
+  height: 2.5em;
+  line-height: 2.5em;
+  font-size: 1em !important;
+  font-family: var(--main-font-name) !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  background-color: var(--color-button);
+  color: var(--color-text-button) !important;
+  transform: translateY(0);
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.downloadButton:hover {
+  box-shadow: 0px 4px 4px 0px #0000006b;
+  transform: translateY(2px);
+}
+
+.openWebButton {
+  cursor: pointer;
+  margin: 8px 8px;
+  width: 16em;
+  height: 2.5em;
+  line-height: 2.5em;
+  font-size: 1em !important;
+  font-family: var(--main-font-name) !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  background-color: var(--color-b);
+  color: var(--color-text-hover) !important;
+  transform: translateY(0);
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.openWebButton:hover {
+  box-shadow: 0px 4px 4px 0px #0000006b;
+  transform: translateY(2px);
+}
+
+.downloadImg {
+  width: 12em;
+  display: block;
+}
+
+.loading {
+  font-size: 2em;
+  font-family: var(--main-font-name-it);
+  color: var(--color-r);
+  margin: auto;
+}
+
+.patreonButton {
+  cursor: pointer;
+  margin: 8px auto;
+  width: 16em;
+  height: 2.5em;
+  line-height: 2.5em;
+  font-size: 1em !important;
+  font-family: var(--main-font-name) !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  background-color: #f96854;
+  color: white !important;
+  transform: translateY(0);
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.patreonButton:hover {
+  box-shadow: 0px 4px 4px 0px #0000006b;
+  transform: translateY(2px);
+}
+
+:root {
+  --wc-common-png: url(/wc_common.png);
+  --wc-uncommon-png: url(/wc_uncommon.png);
+  --wc-rare-png: url(/wc_rare.png);
+  --wc-mythic-png: url(/wc_mythic.png);
+  --booster-png: url(/booster.png);
+
+  --main-font-name: "lato", sans-serif;
+  --main-font-name-it: "lato-italic", sans-serif;
+  --main-font-name-bold: "lato-bold", sans-serif;
+  --main-font-name-bold-it: "lato-bold-italic", sans-serif;
+  --sub-font-name: "roboto", sans-serif;
+  --sub-font-name-it: "roboto-italic", sans-serif;
+  --sub-font-name-bold: "roboto-bold", sans-serif;
+  --sub-font-name-bold-it: "roboto-bold-italic", sans-serif;
+  --main-font-style-it: normal;
+
+  --color-w: #e7ca8e;
+  --color-u: #aabedf;
+  --color-b: #a18e87;
+  --color-r: #dd8263;
+  --color-g: #b7c89e;
+  --color-c: #b6a59e;
+  --color-m: #ffcd70;
+
+  --color-common: #e6e6e6;
+  --color-uncommon: #bedbff;
+  --color-rare: #fed71d;
+  --color-mythic: #dd8263;
+
+  --color-base: #282829;
+  --color-hover-base: #252527;
+  --color-dark: #141516;
+  --color-dark-hover: #000000;
+
+  --color-line-sep: #333333;
+  --color-section: #202021;
+  --color-section-hover: #29292b;
+  --color-section-active: #2e3136;
+
+  --color-text: #cccccc;
+  --color-text-hover: #ffffff;
+  --color-text-dark: #929292;
+  --color-text-disabled: #505050;
+  --color-text-link: #94a8ca;
+
+  --color-icon: #ffffff;
+  --color-icon-subtle: #b9c3d9;
+
+  --color-text-button: #333333;
+  --color-text-button-hover: #111111;
+  --color-button: #94a8ca;
+  --color-button-hover: rgba(175, 205, 255, 1);
+  --color-button-shade-20: rgba(175, 205, 255, 0.2);
+  --color-button-shade-40: rgba(175, 205, 255, 0.4);
+
+  --color-shade-75: rgba(0, 0, 0, 0.75);
+  --color-shade-50: rgba(0, 0, 0, 0.5);
+  --color-shade-25: rgba(0, 0, 0, 0.25);
+
+  --color-card-tile: rgba(0, 0, 0, 0.75);
+  --color-card-tile-hover: #3a424ebf;
+  --color-card-tile-active: #c2d9ffc;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  font-family: "Open Sans", sans-serif;
+}
+
+@font-face {
+  font-family: "belerenbold";
+  src: url(/fonts/belerenbold.woff) format("woff");
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url(/fonts/roboto-v18-latin-regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: "roboto-italic";
+  src: url(/fonts/roboto-v18-latin-italic.woff) format("woff");
+}
+
+@font-face {
+  font-family: "roboto-bold";
+  src: url(/fonts/roboto-v18-latin-500.woff) format("woff");
+}
+
+@font-face {
+  font-family: "roboto-bold-italic";
+  src: url(/fonts/roboto-v18-latin-500italic.woff) format("woff");
+}
+
+@font-face {
+  font-family: "lato";
+  src: url(/fonts/Lato-Regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: "lato-italic";
+  src: url(/fonts/Lato-Italic.woff) format("woff");
+}
+
+@font-face {
+  font-family: "lato-bold";
+  src: url(/fonts/Lato-Bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: "lato-bold-italic";
+  src: url(/fonts/Lato-BoldItalic.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Mplantin";
+  src: url(/fonts/Mplantin.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Mplantin-italic";
+  src: url(/fonts/mplantinit.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Mplantin-bold";
+  src: url(/fonts/mplantinbold.woff) format("woff");
+}
+
+@font-face {
+  font-family: "PhyrexianHorizontal";
+  font-weight: normal;
+  font-style: normal;
+  src: url(/fonts/PhyrexianHorizontal.woff2) format("woff2"), url(/fonts/PhyrexianHorizontal.woff) format("woff");
+  font-display: swap;
+}
+
+@media screen and (min-width: 750px) {
+  .textDescription {
+    margin: 0 48px;
+  }
+  .videoContainer {
+    margin: 0 48px;
+  }
+  .buttonPause,
+  .buttonPlay {
+    background-position: calc(100% - 64px) !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .textDescription {
+    width: 1024px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1120px) {
+  .videoContainer {
+    width: 1024px;
+    height: 768px;
+    margin: auto;
+  }
+  .buttonPause,
+  .buttonPlay {
+    background-position: calc(100% - 24px) !important;
+  }
+}
+
+.textlight {
+  color: var(--color-light);
+}
+
+.textDark {
+  color: var(--color-back);
+  /* #33281E; */
+}
+
+.textCentered {
+  display: block;
+  margin: auto;
+}
+
+.textDescription {
+  text-align: center;
+  font-weight: 100;
+  font-family: var(--main-font-name);
+  font-size: 1.5rem;
+  padding-bottom: 0.5em;
+}
+
+.textTitle {
+  width: 100%;
+  text-align: center;
+  font-family: var(--main-font-name);
+  font-size: 2rem;
+  padding: 1em 0 0.25em 0;
+}
+
+.textTitleNopad {
+  width: 100%;
+  text-align: center;
+  font-family: var(--main-font-name);
+  font-size: 2rem;
+}
+
+.blackBright {
+  color: var(--color-b) !important;
+}
+
+.greenBright {
+  color: #d3ebb0 !important;
+}
+
+.blueBright {
+  color: #bdd6ff !important;
+}
+
+.orangeBright {
+  color: #ffba85 !important;
+}
+
+.redBright {
+  color: #ff9b78 !important;
+}
+
+.yellowBright {
+  color: #ffdf9e !important;
+}
+
+.whiteBright {
+  color: white !important;
+}
+
+.blackBrightBg {
+  background-color: var(--color-b) !important;
+}
+
+.greenBrightBg {
+  background-color: #d3ebb0 !important;
+}
+
+.blueBrightBg {
+  background-color: #bdd6ff !important;
+}
+
+.orangeBrightBg {
+  background-color: #ffba85 !important;
+}
+
+.redBrightBg {
+  background-color: #ff9b78 !important;
+}
+
+.yellowBrightBg {
+  background-color: #ffdf9e !important;
+}
+
+.whiteBrightBg {
+  background-color: white !important;
+}
+
+.backGreen {
+  background-color: rgba(183, 200, 158, 1) !important;
+}
+
+.backRed {
+  background-color: rgba(221, 130, 99, 1) !important;
+}
+
+.backBlue {
+  background-color: rgba(170, 190, 223, 1) !important;
+}
+
+.green {
+  color: rgba(183, 200, 158, 1) !important;
+}
+
+.blue {
+  color: rgba(170, 190, 223, 1) !important;
+}
+
+.orange {
+  color: rgba(226, 166, 120, 1) !important;
+}
+
+.red {
+  color: rgba(221, 130, 99, 1) !important;
+}
+
+.white {
+  color: white !important;
+}

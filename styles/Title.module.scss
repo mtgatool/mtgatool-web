@@ -1,0 +1,23 @@
+.topTitleContainer {
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 1.33em;
+  margin: 1em auto 0 auto;
+  height: auto;
+  color: var(--color-text);
+  padding-bottom: 4px;
+  font-family: var(--sub-font-name-it);
+}
+
+.topSubtitleContainer {
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  font-size: 1em;
+  margin: auto;
+  height: auto;
+  color: var(--color-text);
+  padding-bottom: 8px;
+  font-family: var(--sub-font-name-it);
+}

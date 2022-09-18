@@ -20,5 +20,3 @@ jobs:
       run: "npm ci"
     - name: "Build (npm)"
       run: "npm run build"
-    - name: "Test"
-      run: "npm test"

@@ -1,0 +1,42 @@
+version
+6.2.2
+September 7th, 2022
+fixed
+Sanitize user names
+8cbd14a33c84fb4063add0ef981691f8f701bfc4
+fixed
+Clean username display
+e72830e4a931856b5c1985d6fa38f80d0c03d268
+fixed
+Rank updating on initial log read
+8f56cb81e4e1464365d90799987db097e090b156
+
+version
+6.2.1
+September 4th, 2022
+added
+Explore events color codes
+98967107c159a4eecf43bd2d081165d04a0bca8c
+fixed
+Explore cards error
+4f4a323b95eb5ada04cb78376bf914d13127a1a3
+fixed
+Rank as undefined
+fb9814636c334ae773df50f71f83cd1a2a236ca6
+improved
+Blacklist for old Explore events
+9334eb7ee26a5866e9dcec47c8f41f5d4b960f0f
+improved
+Update daemon
+c4d411206b253adb10e43b6d9ce1fde598b83b07
+
+version
+6.2.0
+September 2nd, 2022
+added
+New Explore
+356e551397b18da832613fc064ac9c0e7051bf38
+fixed
+Updated aggregator
+77be00f3a90292f572857cebe4cf76fa16e95f32
+

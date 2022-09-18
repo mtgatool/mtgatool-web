@@ -1,17 +1,22 @@
 ## MTG Arena Tool Website
 
-Based on Webpack React Boilerplate
-MIT - Copyright (c) 2018 Hashem Khalifa
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-* [Webpack 4](https://github.com/webpack/webpack) 
-* [Babel 7](https://github.com/babel/babel) [ transforming JSX and ES6,ES7,ES8 ]
-* [React](https://github.com/facebook/react) `16.8`
-* [Lodash](https://github.com/lodash/lodash)
-* [Jest](https://github.com/facebook/jest) [ Unit test]
-* [Enzyme](http://airbnb.io/enzyme/) for UI testing.
-* [Eslint](https://github.com/eslint/eslint/) with airbnb config
-* [Style](https://github.com/webpack-contrib/style-loader) & [CSS Loader](https://github.com/webpack-contrib/css-loader) & [SASS-loader](https://github.com/webpack-contrib/sass-loader)
-* [CSS modules](https://github.com/css-modules/css-modules) [ Isolated style based on each component ]
-* [Browsers list](https://github.com/browserslist/browserslist) [ Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-preset-env ]
-* [React hot loader](https://github.com/gaearon/react-hot-loader)
-* [Webpack dev serve](https://github.com/webpack/webpack-dev-server) 
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
