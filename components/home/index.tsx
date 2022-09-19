@@ -88,7 +88,7 @@ function Home(): JSX.Element {
     return (): void => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const patreonsRequest = useRequest("https://mtgatool.com/patreons/get");
+  const patreonsRequest = useRequest("https://mtgatool.com/api/patreons/get");
   const contribRequest = useRequest(
     "https://api.github.com/repos/mtgatool/mtgatool-desktop/contributors?q=contributions&order=desc"
   );
