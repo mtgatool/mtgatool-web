@@ -30,7 +30,6 @@ function checkPledges(res: NextApiResponse<Data>, pledges: any) {
       const pid = d.relationships.patron.data.id;
       return {
         name: includedData[pid]?.full_name || "unknown",
-        // email: includedData[pid]?.email || "unknown",
         amount: d.attributes.amount_cents,
         thumb_url: includedData[pid]?.image_url || "",
         url: includedData[pid]?.url || "",
@@ -74,7 +73,7 @@ export default function handler(
           res
             .status(500)
             .json({ ok: false, msg: "Internal Error (/campaigns)" });
-        console.log(process.env.PATREON_ACCESS_TOKEN, body);
+
         const campaignData = JSON.parse(body);
         const campaignId = campaignData.data[0].id;
         getPledges(campaignId).then((d: any) => checkPledges(res, d));
