@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import request from "request";
-import fs from "fs";
 
 interface IPatreon {
   name: string;
@@ -36,7 +35,6 @@ function checkPledges(res: NextApiResponse<Data>, pledges: any) {
       } as IPatreon;
     });
 
-  fs.writeFileSync("patreons.json", JSON.stringify(addedPledges));
   res.json({ ok: true, msg: "ok", data: addedPledges });
 }
 
