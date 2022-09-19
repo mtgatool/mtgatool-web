@@ -34,3 +34,9 @@ export default function handler(
     }
   }
 }
+
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+};

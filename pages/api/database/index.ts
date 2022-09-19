@@ -16,3 +16,9 @@ export default function handler(
   const db = getDatabase(lang, version);
   res.status(200).json(db);
 }
+
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+};
