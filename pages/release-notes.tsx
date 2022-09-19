@@ -1,5 +1,3 @@
-import { Props } from "next/script";
-import { useEffect, useState } from "react";
 import Section from "../components/Section";
 import TopTitle from "../components/title";
 import { WrapperInner, WrapperOuter } from "../components/wrapper";
@@ -66,6 +64,7 @@ type ReleaseNotesProps = {
 
 export default function ReleaseNotes(props: ReleaseNotesProps) {
   const { releaseNotes } = props;
+  console.log(releaseNotes)
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
@@ -116,7 +115,7 @@ export async function getStaticProps() {
   const releaseNotesLines = rawReleaseNotes.split("\r\n");
 
   const newNotes: Note[] = [];
-  const lines = /(fixed|improved|removed|added)/g;
+  const lines = /(fixed|improved|removed|added)$/;
   releaseNotesLines.forEach((line, index) => {
     if (line.startsWith("version")) {
       newNotes.push({
