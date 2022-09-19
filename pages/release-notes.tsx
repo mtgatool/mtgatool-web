@@ -64,7 +64,6 @@ type ReleaseNotesProps = {
 
 export default function ReleaseNotes(props: ReleaseNotesProps) {
   const { releaseNotes } = props;
-  console.log(releaseNotes)
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
@@ -117,7 +116,7 @@ export async function getStaticProps() {
   const newNotes: Note[] = [];
   const lines = /(fixed|improved|removed|added)$/;
   releaseNotesLines.forEach((line, index) => {
-    if (line.startsWith("version")) {
+    if (line === "version") {
       newNotes.push({
         type: TYPE_RELEASE,
         version: releaseNotesLines[index + 1],
