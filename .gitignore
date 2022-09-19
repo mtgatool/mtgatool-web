@@ -16,7 +16,6 @@
 # production
 /build
 .env
-/resources/database/**
 patreons.json
 
 # misc
