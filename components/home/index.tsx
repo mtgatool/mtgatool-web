@@ -102,7 +102,7 @@ function Home(): JSX.Element {
     }
     if (patreonsRequest.response && patreons.length === 0) {
       const json = JSON.parse(patreonsRequest.response);
-      setPatreons(json);
+      setPatreons(json.data);
     }
   }, [patreons.length, patreonsRequest]);
 
