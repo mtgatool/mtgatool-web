@@ -21,7 +21,7 @@ function FooterLink(props: FooterLinkProps): JSX.Element {
 
 function Footer(): JSX.Element {
   return (
-    <div className={styles.footerMain}>
+    <footer className={styles.footerMain}>
       <div className={styles.footerWrapper}>
         <div className={styles.footerColumn}>
           <Image
@@ -91,7 +91,7 @@ function Footer(): JSX.Element {
           All other content ©{new Date().getFullYear()} MTG Arena Tool.
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 
