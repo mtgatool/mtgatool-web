@@ -21,6 +21,7 @@ export const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck 
 
 import styles from "../../styles/Home.module.scss";
 import topnavstyles from "../../styles/Topnav.module.scss";
+import { IPatreon } from "../../pages";
 
 function getCurrentOSName(platform: string): string {
   if (platform.indexOf("Mac") > -1) return "Mac";
@@ -38,13 +39,6 @@ function makeDownloadURL(platform: string, versionTag: string): string {
   }
 
   return `https://github.com/mtgatool/mtgatool-desktop/releases/download/v${versionTag}/mtgatool-desktop-${versionTag}.${extension}`;
-}
-
-interface PatreonUser {
-  name: string;
-  amount: number;
-  thumb_url?: string;
-  url?: string;
 }
 
 interface Contributor {
@@ -69,10 +63,14 @@ interface Contributor {
   contributions: number;
 }
 
-function Home(): JSX.Element {
+interface HomeProps {
+  patreons: IPatreon[];
+}
+
+function Home(props: HomeProps): JSX.Element {
+  const { patreons } = props;
   const platform = usePlatform();
 
-  const [patreons, setPatreons] = useState<PatreonUser[]>([]);
   const [version, setVersion] = useState("");
   const [contributors, setContributors] = useState<Contributor[]>([]);
   // const [notice, setNotice] = useState("");
@@ -88,23 +86,12 @@ function Home(): JSX.Element {
     return (): void => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const patreonsRequest = useRequest("https://mtgatool.com/api/patreons/get");
   const contribRequest = useRequest(
     "https://api.github.com/repos/mtgatool/mtgatool-desktop/contributors?q=contributions&order=desc"
   );
   const releasesRequest = useRequest(
     "https://api.github.com/repos/mtgatool/mtgatool-desktop/releases/latest"
   );
-
-  useEffect(() => {
-    if (patreonsRequest.status == null) {
-      patreonsRequest.start();
-    }
-    if (patreonsRequest.response && patreons.length === 0) {
-      const json = JSON.parse(patreonsRequest.response);
-      setPatreons(json.data);
-    }
-  }, [patreons.length, patreonsRequest]);
 
   useEffect(() => {
     if (contribRequest.status == null) {
