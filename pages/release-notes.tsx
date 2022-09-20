@@ -111,7 +111,11 @@ export default function ReleaseNotes(props: ReleaseNotesProps) {
 export async function getStaticProps() {
   const rawReleaseNotes = getReleaseNotes();
 
-  const releaseNotesLines = rawReleaseNotes.split("\r\n");
+  const newlines = /(\r\n|\n)/;
+
+  const releaseNotesLines = rawReleaseNotes
+    .split(newlines)
+    .filter((l) => !newlines.test(l));
 
   const newNotes: Note[] = [];
   const lines = /(fixed|improved|removed|added)$/;
