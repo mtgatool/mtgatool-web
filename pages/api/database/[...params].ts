@@ -1,12 +1,21 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import NextCors from "nextjs-cors";
+
 import getDatabase from "../../../getDatabase";
 import getLatestJson from "../../../getLatestJson";
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET", "HEAD", "PUT", "POST"],
+    origin: "*",
+    optionsSuccessStatus: 200,
+  });
+
   const { params } = req.query;
   const latestJson = getLatestJson();
 

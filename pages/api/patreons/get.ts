@@ -1,5 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import NextCors from "nextjs-cors";
+
 import request from "request";
 
 interface IPatreon {
@@ -54,10 +56,17 @@ function getPledges(campaignId: number): Promise<any> {
   });
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET", "HEAD", "PUT", "POST"],
+    origin: "*",
+    optionsSuccessStatus: 200,
+  });
+
   if (req.method === "GET") {
     request(
       {
