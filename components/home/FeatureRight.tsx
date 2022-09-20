@@ -17,18 +17,20 @@ export default function FeatureRight(props: FeatureProps): JSX.Element {
         margin: "auto",
       }}
     >
-      <div
+      <h2
         style={{
+          marginBlock: "0",
+          marginInline: "0",
           fontSize: "1.7em",
           color: "var(--color-text)",
           fontFamily: "var(--main-font-name-bold)",
         }}
       >
         {title}
-      </div>
-      <div style={{ fontFamily: "var(--sub-font-name)", marginTop: "1em" }}>
+      </h2>
+      <p style={{ fontFamily: "var(--sub-font-name)", marginTop: "1em" }}>
         {subtitle}
-      </div>
+      </p>
     </div>
   );
 }

@@ -12,23 +12,23 @@ export function TopNav(props: TopNavProps): JSX.Element {
 
   return (
     <div className={styles.topNavContainer}>
-      <div className={styles.topNav}>
-        <div className={styles.navLogoContainer}>
-          <Link href="/">
+      <nav className={styles.topNav}>
+        <Link href="/">
+          <a className={styles.navLogoContainer}>
             <Image src="/cssimages/logo_big.png" alt="" layout="fixed" height={64} width={320} />
-          </Link>
-        </div>
+          </a>
+        </Link>
         <div className={styles.navArtist}>{artist}</div>
         <div className={styles.navDivider} />
         <div className={styles.navLinks}>
           <Link href="/release-notes">
-            <div className={styles.navLinkA}>Release Notes</div>
+            <a className={styles.navLinkA}>Release Notes</a>
           </Link>
           <Link href="/docs/introduction">
-            <div className={styles.navLinkA}>Docs</div>
+            <a className={styles.navLinkA}>Docs</a>
           </Link>
         </div>
-      </div>
+      </nav>
     </div>
   );
 }

@@ -132,9 +132,9 @@ function Home(): JSX.Element {
         <WrapperInner>
           <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
             <div className="homeDesc">
-              <div className={"textDescription TextLight"}>
+              <h1 className={"textDescription TextLight"}>
                 {DESCRIPTION_TEXT}
-              </div>
+              </h1>
               <Flex style={{ justifyContent: "center" }}>
                 <a
                   className="downloadButton"

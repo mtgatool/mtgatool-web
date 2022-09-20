@@ -1,3 +1,4 @@
+
 interface FeatureProps {
   title: string;
   subtitle: string;
@@ -17,18 +18,20 @@ export default function Feature(props: FeatureProps): JSX.Element {
         margin: "auto",
       }}
     >
-      <div
+      <h1
         style={{
+          marginBlock: "0",
+          marginInline: "0",
           fontSize: "1.7em",
           color: "var(--color-text)",
           fontFamily: "var(--main-font-name-bold)",
         }}
       >
         {title}
-      </div>
-      <div style={{ fontFamily: "var(--sub-font-name)", marginTop: "1em" }}>
+      </h1>
+      <p style={{ fontFamily: "var(--sub-font-name)", marginTop: "1em" }}>
         {subtitle}
-      </div>
+      </p>
     </div>
   );
 }
