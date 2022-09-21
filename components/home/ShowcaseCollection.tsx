@@ -5,6 +5,7 @@ import CollectionBack from "../svg/CollectionBack";
 import CollectionBar from "../svg/CollectionBar";
 import CollectionSet from "../svg/CollectionSet";
 import CollectionStats from "../svg/CollectionStats";
+import styles from "../../styles/Home.module.scss";
 
 interface ScrollProps {
   scroll: number
@@ -26,6 +27,7 @@ export default function ShowcaseCollection(props: ScrollProps): JSX.Element {
   return (
     <div
       ref={containerRef}
+      className={styles.showcaseSvg}
       style={{
         display: "flex",
         width: "509.87px",

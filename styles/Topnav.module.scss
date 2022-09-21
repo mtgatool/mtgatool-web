@@ -20,6 +20,17 @@
   }
 }
 
+@media screen and (max-width: 750px) {
+  .navLogoContainer {
+    justify-content: center;
+  }
+
+  .topNav {
+    padding: 0 1em !important;
+  }
+}
+
+
 .topNavContainer {
   position: fixed;
   justify-content: center;

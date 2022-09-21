@@ -6,6 +6,7 @@ import CardGrowth from "../svg/OverlayGrowthSpiral";
 import CardHydroid from "../svg/OverlayHydroidKrasis";
 import OverlayBack from "../svg/OverlayBack";
 import OverlayDetails from "../svg/OverlayDetails";
+import styles from "../../styles/Home.module.scss";
 
 interface ScrollProps {
   scroll: number
@@ -29,6 +30,7 @@ export default function ShowcaseOverlay(props: ScrollProps): JSX.Element {
   return (
     <div
       ref={containerRef}
+      className={styles.showcaseSvg}
       style={{
         display: "flex",
         width: "466.1px",

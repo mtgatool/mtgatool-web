@@ -1,3 +1,4 @@
+import styles from "../../styles/Home.module.scss";
 
 interface FeatureProps {
   title: string;
@@ -7,17 +8,7 @@ interface FeatureProps {
 export default function Feature(props: FeatureProps): JSX.Element {
   const { title, subtitle } = props;
   return (
-    <div
-      style={{
-        backgroundColor: "var(--color-section)",
-        borderLeft: "4px solid var(--color-g)",
-        borderRadius: "4px",
-        padding: "16px",
-        maxWidth: "32em",
-        height: "9em",
-        margin: "auto",
-      }}
-    >
+    <div className={styles.showcaseFeature}>
       <h1
         style={{
           marginBlock: "0",

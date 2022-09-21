@@ -4,6 +4,17 @@
   min-height: 100vh;
 }
 
+
+@media screen and (max-width: 750px) {
+  .topNavMargin {
+    margin-top: 192px !important;
+  }
+}
+
+.topNavMargin {
+  margin-top: 128px;
+}
+
 .wrapperImage {
   background-color: black;
   z-index: -10;

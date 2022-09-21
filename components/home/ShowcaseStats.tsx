@@ -5,6 +5,7 @@ import MatchB from "../svg/StatsMatchB";
 import StatsCenter from "../svg/StatsCenter";
 import StatsBack from "../svg/StatsBack";
 import StatsDetails from "../svg/StatsDetails";
+import styles from "../../styles/Home.module.scss";
 
 interface ScrollProps {
   scroll: number
@@ -26,6 +27,7 @@ export default function ShowcaseStats(props: ScrollProps): JSX.Element {
   return (
     <div
       ref={containerRef}
+      className={styles.showcaseSvg}
       style={{
         display: "flex",
         width: "608.52px",

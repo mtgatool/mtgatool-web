@@ -117,7 +117,7 @@ function Home(props: HomeProps): JSX.Element {
     <>
       <WrapperOuter style={{ marginBottom: "4em" }}>
         <WrapperInner>
-          <Section style={{ display: "block", margin: "128px 0 16px 0" }}>
+          <Section className="topNavMargin" style={{ display: "block", margin: "128px 0 16px 0" }}>
             <div className="homeDesc">
               <h1 className={"textDescription TextLight"}>
                 {DESCRIPTION_TEXT}
@@ -158,22 +158,22 @@ function Home(props: HomeProps): JSX.Element {
 
       <WrapperOuter>
         <WrapperInner>
-          <Flex style={{ marginBottom: "2em", flexDirection: "column" }}>
-            <Flex style={{ margin: "4em auto" }}>
+          <Flex className={styles.descWrapper}>
+            <Flex className={styles.descShowcase}>
               <ShowcaseOverlay scroll={scroll} />
               <Feature
                 title="In-game Deck tracker"
                 subtitle="The best and most cusotmizable overlay you will find. Enable up to 5 different overlays and customize them to suit your needs. You can change their color, position, size and more!"
               />
             </Flex>
-            <Flex style={{ margin: "4em auto" }}>
+            <Flex className={styles.descShowcaseReverse}>
+              <ShowcaseStats scroll={scroll} />
               <FeatureRight
                 title="Complete Statistics"
                 subtitle="Want to know your decks winrate? how about a specific card performance? MTG Arena Tool can do that and much, much more."
               />
-              <ShowcaseStats scroll={scroll} />
             </Flex>
-            <Flex style={{ margin: "4em auto" }}>
+            <Flex className={styles.descShowcase}>
               <ShowcaseCollection scroll={scroll} />
               <Feature
                 title="Analyse Your Collection"

@@ -8,6 +8,13 @@
   min-height: calc(100vh - 69px);
 }
 
+@media screen and (max-width: 750px) {
+  .docsWrapper {
+    padding-top: 128px !important;
+  }
+}
+
+
 .docsSidebar {
   display: flex;
   min-width: 240px;

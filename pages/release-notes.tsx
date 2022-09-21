@@ -69,9 +69,9 @@ export default function ReleaseNotes(props: ReleaseNotesProps) {
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
       <WrapperInner style={{ maxWidth: "900px" }}>
         <Section
+          className="topNavMargin"
           style={{
             flexDirection: "column",
-            marginTop: "6em",
             paddingBottom: "2em",
             marginBottom: "1em",
           }}

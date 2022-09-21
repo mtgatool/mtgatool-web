@@ -1,3 +1,5 @@
+import styles from "../../styles/Home.module.scss";
+
 interface FeatureProps {
   title: string;
   subtitle: string;
@@ -6,17 +8,7 @@ interface FeatureProps {
 export default function FeatureRight(props: FeatureProps): JSX.Element {
   const { title, subtitle } = props;
   return (
-    <div
-      style={{
-        backgroundColor: "var(--color-section)",
-        borderRight: "4px solid var(--color-g)",
-        borderRadius: "4px",
-        padding: "16px",
-        maxWidth: "32em",
-        height: "11em",
-        margin: "auto",
-      }}
-    >
+    <div className={styles.showcaseFeatureRight}>
       <h2
         style={{
           marginBlock: "0",
