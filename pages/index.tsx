@@ -68,11 +68,15 @@ export async function getStaticProps(): Promise<{ props: IndexProps }> {
         },
       },
       (err, _result, body) => {
-        const campaignData = JSON.parse(body);
-        const campaignId = campaignData.data[0].id;
-        getPledges(campaignId).then((d: any) => {
-          resolve({ props: { patreons: checkPledges(d) } });
-        });
+        if (err) {
+          resolve({ props: { patreons: [] } });
+        } else {
+          const campaignData = JSON.parse(body);
+          const campaignId = campaignData.data[0].id;
+          getPledges(campaignId).then((d: any) => {
+            resolve({ props: { patreons: checkPledges(d) } });
+          });
+        }
       }
     );
   });
