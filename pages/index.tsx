@@ -59,7 +59,7 @@ function getPledges(campaignId: number): Promise<any> {
 }
 
 export async function getStaticProps(): Promise<{ props: IndexProps }> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     request(
       {
         url: "https://www.patreon.com/api/oauth2/api/current_user/campaigns",
