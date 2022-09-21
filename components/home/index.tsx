@@ -163,21 +163,21 @@ function Home(props: HomeProps): JSX.Element {
               <ShowcaseOverlay scroll={scroll} />
               <Feature
                 title="In-game Deck tracker"
-                subtitle="The best and most cusotmizable overlay you will find. Enable up to 5 different overlays and customize them to suit your needs. You can change their color, position, size and more!"
+                subtitle="The best and most cusotmizable deck tracker overlay you will find. Enable up to 5 different overlays and customize them to suit your needs. Customize each of them with different data, behaviour, size, and much more!"
               />
             </Flex>
             <Flex className={styles.descShowcaseReverse}>
               <ShowcaseStats scroll={scroll} />
               <FeatureRight
                 title="Complete Statistics"
-                subtitle="Want to know your decks winrate? how about a specific card performance? MTG Arena Tool can do that and much, much more."
+                subtitle="Want to know your decks winrate? how about a specific card's performance? Maybe see what cards you mulligan more often? MTG Arena Tool can do that and much, much more."
               />
             </Flex>
             <Flex className={styles.descShowcase}>
               <ShowcaseCollection scroll={scroll} />
               <Feature
                 title="Analyse Your Collection"
-                subtitle="Take a deep look at the cards you have, how much of a set you are missing and how many drafts it would take you to complete them."
+                subtitle="Take a deep look at the cards you have, how much of a set you are missing and how many drafts it would take you to complete them. MTG Arena Tool's card database is the most comprehensive mtga cards dataset out there."
               />
             </Flex>
             <Section
