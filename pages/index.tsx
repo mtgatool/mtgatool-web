@@ -60,25 +60,29 @@ function getPledges(campaignId: number): Promise<any> {
 
 export async function getStaticProps(): Promise<{ props: IndexProps }> {
   return new Promise((resolve) => {
-    request(
-      {
-        url: "https://www.patreon.com/api/oauth2/api/current_user/campaigns",
-        headers: {
-          Authorization: "Bearer " + process.env.PATREON_ACCESS_TOKEN,
+    if (process.env.PATREON_ACCESS_TOKEN) {
+      request(
+        {
+          url: "https://www.patreon.com/api/oauth2/api/current_user/campaigns",
+          headers: {
+            Authorization: "Bearer " + process.env.PATREON_ACCESS_TOKEN,
+          },
         },
-      },
-      (err, _result, body) => {
-        if (err) {
-          resolve({ props: { patreons: [] } });
-        } else {
-          const campaignData = JSON.parse(body);
-          const campaignId = campaignData.data[0].id;
-          getPledges(campaignId).then((d: any) => {
-            resolve({ props: { patreons: checkPledges(d) } });
-          });
+        (err, _result, body) => {
+          if (err) {
+            resolve({ props: { patreons: [] } });
+          } else {
+            const campaignData = JSON.parse(body);
+            const campaignId = campaignData.data[0].id;
+            getPledges(campaignId).then((d: any) => {
+              resolve({ props: { patreons: checkPledges(d) } });
+            });
+          }
         }
-      }
-    );
+      );
+    } else {
+      resolve({ props: { patreons: [] } });
+    }
   });
 }
 
