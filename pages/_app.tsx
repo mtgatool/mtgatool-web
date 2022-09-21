@@ -20,10 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>{TITLE}</title>
         <meta name="title" content={TITLE} />
         <meta name="description" content={DESCRIPTION_TEXT} />
+        <meta name="keywords" content="mtga decks, mtg arena, mtga, magic the gathering, mtga deck tracker, deck tracker, mtga tracker, companion, mtg:a, Magic: the gathering Arena, magic, magic arena tracker" />
         <meta name="og:title" content={TITLE} />
         <meta name="og:description" content={DESCRIPTION_TEXT} />
         <meta name="og:site:name" content={TITLE} />
         <meta name="og:image" content="/favicon.ico" />
+        <meta name="og:type" content="website" />
+        <meta name="og:local" content="en_US" />
         <meta name="og:image:width" content="256" />
         <meta name="og:image:height" content="256" />
         <meta name="og:image:alt" content="MTG Arena Tool Logo" />
