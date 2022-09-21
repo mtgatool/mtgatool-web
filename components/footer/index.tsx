@@ -35,8 +35,8 @@ function Footer(): JSX.Element {
         <div className={styles.footerColumn}>
           <div className={styles.footerColumnTitle}>MTG Arena Tool</div>
           <FooterLink url="mailto:mtgatool@gmail.com">Contact</FooterLink>
-          <FooterLink url="https://mtgatool.com/database/">Database</FooterLink>
-          <FooterLink url="https://mtgatool.com/docs/">
+          <FooterLink url="https://mtgatool.com/api/database/">Database</FooterLink>
+          <FooterLink url="https://mtgatool.com/docs/introduction">
             Documentation
           </FooterLink>
           <FooterLink url="https://github.com/mtgatool/mtgatool-desktop/releases">
