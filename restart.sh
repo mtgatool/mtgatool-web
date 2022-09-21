@@ -1,5 +1,8 @@
 #!/bin/bash
-git pull
-npm install
-npm run build
-pm2 restart next-js
+git fetch
+if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
+  git pull
+  npm install
+  npm run build
+  pm2 restart next-js
+fi
