@@ -67,7 +67,7 @@ function Footer(): JSX.Element {
         <div className={styles.footerColumn}>
           <div className={styles.footerColumnTitle}>Places</div>
           <FooterLink url="https://discord.gg/K9bPkJy">Discord</FooterLink>
-          <FooterLink url="https://twitter.com/MEtchegaray7">
+          <FooterLink url="https://twitter.com/mtgatool">
             Twitter
           </FooterLink>
           <FooterLink url="https://magic.wizards.com/mtgarena">
