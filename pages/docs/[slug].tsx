@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { useState, useRef, useEffect, Fragment, createElement } from "react";
 
-
 import styles from "../../styles/Docs.module.scss";
 
 import docs from "../../resources/docs.yml";
@@ -75,7 +74,7 @@ export default function Docs({ data }: Props) {
           <div className={styles.docsSidebarContent}>
             {docs.docs.map((title: any) => {
               const sectionData = docs[title];
-              const isActive = router.pathname === sectionData.pathname;
+              const isActive = router.query.slug === sectionData.path;
 
               if (docs[title].type === "section") {
                 return (

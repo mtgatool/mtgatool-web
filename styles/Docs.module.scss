@@ -88,6 +88,10 @@
     border-left: 0.25em solid var(--color-line-sep);
   }
 
+  h1, h2 {
+    border-bottom: 1px solid var(--color-line-sep);
+  }
+
   h1::after {
     background-image: url(/cssimages/link.svg);
     background-repeat: no-repeat;
@@ -103,6 +107,10 @@
       opacity: 0.8;
     }
   }
+
+  h2 {
+    font-size: 1.3em;
+  }
 }
 
 .docsSectionTitle {
@@ -116,11 +124,12 @@
 }
 
 .docsSectionLink {
+  cursor: pointer;
   border-radius: 2px;
   height: 32px;
   line-height: 32px;
   margin: 0 12px;
-  opacity: 0.8;
+  opacity: 0.66;
 
   &:hover {
     opacity: 1;
@@ -138,7 +147,7 @@
 }
 
 .docsSectionLinkActive {
-  background-color: var(--color-section-active) !important;
+  background-color: var(--color-dark) !important;
 }
 
 .docsText {
