@@ -78,15 +78,18 @@ export default function Docs({ data }: Props) {
 
               if (docs[title].type === "section") {
                 return (
-                  <div
-                    className={
-                      styles.docsSectionLink +
-                      (isActive ? " " + styles.docsSectionLinkActive : "")
-                    }
-                    key={`${title}-side`}
-                  >
-                    <Link href={`/docs/${title}`}>{sectionData.name}</Link>
-                  </div>
+                  <Link href={`/docs/${title}`} key={`${title}-side-link`}>
+                    <div
+                      key={`${title}-side`}
+                      className={
+                        styles.docsSectionLink +
+                        (isActive ? " " + styles.docsSectionLinkActive : "")
+                      }
+                      
+                    >
+                      {sectionData.name}
+                    </div>
+                  </Link>
                 );
               }
               if (docs[title].type === "title") {
