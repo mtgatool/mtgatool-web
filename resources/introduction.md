@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to our Documentation! Here you will find all resources you need to get started with the app and (hopefully) answer any questions you might have about its features and functionality. All of these docs are [open source](https://github.com/mtgatool/mtgatool-web/), we love corrections and improvements!
+Welcome to our documentation! Here you will find all resources you need to get started with the app and (hopefully) answer any questions you might have about its features and functionality. All of these docs are [open source](https://github.com/mtgatool/mtgatool-web/), we love corrections and improvements!
 
 To describe it quickly, MTG Arena Tool is a collection viewer, deck tracker and statistics manager. But that's fair and simple, and under those words we hide a lot of features:
 - In-game deck tracking overlay
@@ -34,10 +34,10 @@ If an update of MTG Arena broke everything, we feel you. You can inspect GitHub 
 
 # Disclaimer
 
-Even though no official statement has been made about third party software by MTG Arena developers, I am obliged to put a warning about the use of this software.
+Even though no official statement has been made about third party software by MTG Arena developers, I am obliged to give a warning about the use of this software.
 
-It is not stated if it is legal or allowed by Wizards of the Coast to use Deck Trackers and other tools alike while playing MTG Arena, therefore MTG Arena Tool developers are not responsible if your account gets banned, locked or suspended for using this software. `Use at your own risk.`
+It is not stated if it is legal or allowed by Wizards of the Coast to use Deck Trackers and other tools alike while playing MTG Arena. Therefore, MTG Arena Tool developers are not responsible if your account gets banned, locked or suspended for using this software. `Use at your own risk.`
 
 MtG Arena Tool is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
 
-Please read about [our Privacy Policy and How we use your data here](./privacy)
+Please read about [our Privacy Policy and how we use your data here](./privacy)
