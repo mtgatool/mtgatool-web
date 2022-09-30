@@ -11,6 +11,11 @@ export default function getDatabase(lang: string, version: number) {
 
   const dbPathDirname = path.join(
     __dirname,
+    "..",
+    "..",
+    "..",
+    "..",
+    "..",
     "resources",
     "database",
     `${version}`,
