@@ -3,7 +3,6 @@ import fs from "fs";
 
 export default function getLatestJson() {
   const dbPath = path.join("resources", "database", `latest.json`);
-  console.log(dbPath);
 
   const exists = fs.existsSync(dbPath);
   if (!exists) {
