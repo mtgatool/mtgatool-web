@@ -18,6 +18,7 @@ export default async function handler(
 
   const { params } = req.query;
   const latestJson = getLatestJson();
+  console.log("latestJson", latestJson);
 
   let version = latestJson.version;
   let lang = params && params[1] ? params[1] : "en";
