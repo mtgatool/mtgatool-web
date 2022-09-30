@@ -9,22 +9,8 @@ export default function getDatabase(lang: string, version: number) {
     `v${version}-${lang}-database.json`
   );
 
-  const dbPathDirname = path.join(
-    __dirname,
-    "..",
-    "..",
-    "..",
-    "..",
-    "..",
-    "resources",
-    "database",
-    `${version}`,
-    `v${version}-${lang}-database.json`
-  );
-
+  console.log(dbPath, lang, version);
   const exists = fs.existsSync(dbPath);
-  const existsDirname = fs.existsSync(dbPathDirname);
-  console.log("getDatabase", dbPath, exists, existsDirname, __dirname);
   if (!exists) {
     return null;
   }
