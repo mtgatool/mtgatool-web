@@ -55,13 +55,13 @@ function Footer(): JSX.Element {
         <div className={styles.footerColumn}>
           <div className={styles.footerColumnTitle}>Developers</div>
           <FooterLink url="https://github.com/mtgatool/mtgatool-desktop/">
-            App Github
+            App GitHub
           </FooterLink>
           <FooterLink url="https://github.com/mtgatool/mtgatool-web/">
-            Website Github
+            Website GitHub
           </FooterLink>
           <FooterLink url="https://github.com/mtgatool/mtgatool-metadata/">
-            Metadata Github
+            Metadata GitHub
           </FooterLink>
         </div>
         <div className={styles.footerColumn}>
