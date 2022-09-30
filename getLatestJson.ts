@@ -5,6 +5,7 @@ export default function getLatestJson() {
   const dbPath = path.join("resources", "database", `latest.json`);
 
   const exists = fs.existsSync(dbPath);
+  console.log(__dirname, __filename, exists);
   if (!exists) {
     return null;
   }
