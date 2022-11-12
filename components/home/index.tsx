@@ -107,11 +107,11 @@ function Home(props: HomeProps): JSX.Element {
     if (releasesRequest.status == null) {
       releasesRequest.start();
     }
-    if (releasesRequest.response && contributors.length === 0) {
+    if (releasesRequest.response) {
       const json = JSON.parse(releasesRequest.response);
       setVersion(json.name);
     }
-  }, [releasesRequest, contributors.length]);
+  }, [releasesRequest]);
 
   return (
     <>
