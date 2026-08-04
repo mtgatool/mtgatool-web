@@ -1,6 +1,10 @@
 import type { NextPage } from "next";
 import request from "request";
 import Home from "../components/home";
+import { Contributor, getContributors, getLatestVersion } from "../lib/getGithubHome";
+
+/** Refresh the Patreon and GitHub data hourly without a redeploy. */
+const REVALIDATE_SECONDS = 3600;
 
 export interface IPatreon {
   name: string;
@@ -11,12 +15,16 @@ export interface IPatreon {
 
 interface IndexProps {
   patreons: IPatreon[];
+  contributors: Contributor[];
+  version: string | null;
 }
 
 const Index: NextPage<IndexProps> = (props) => {
-  const { patreons } = props;
+  const { patreons, contributors, version } = props;
 
-  return <Home patreons={patreons} />;
+  return (
+    <Home patreons={patreons} contributors={contributors} version={version} />
+  );
 };
 
 function checkPledges(pledges: any) {
@@ -58,32 +66,55 @@ function getPledges(campaignId: number): Promise<any> {
   });
 }
 
-export async function getStaticProps(): Promise<{ props: IndexProps }> {
+function getPatreons(): Promise<IPatreon[]> {
   return new Promise((resolve) => {
-    if (process.env.PATREON_ACCESS_TOKEN) {
-      request(
-        {
-          url: "https://www.patreon.com/api/oauth2/api/current_user/campaigns",
-          headers: {
-            Authorization: "Bearer " + process.env.PATREON_ACCESS_TOKEN,
-          },
-        },
-        (err, _result, body) => {
-          if (err) {
-            resolve({ props: { patreons: [] } });
-          } else {
-            const campaignData = JSON.parse(body);
-            const campaignId = campaignData.data[0].id;
-            getPledges(campaignId).then((d: any) => {
-              resolve({ props: { patreons: checkPledges(d) } });
-            });
-          }
-        }
-      );
-    } else {
-      resolve({ props: { patreons: [] } });
+    if (!process.env.PATREON_ACCESS_TOKEN) {
+      resolve([]);
+      return;
     }
+
+    request(
+      {
+        url: "https://www.patreon.com/api/oauth2/api/current_user/campaigns",
+        headers: {
+          Authorization: "Bearer " + process.env.PATREON_ACCESS_TOKEN,
+        },
+      },
+      (err, _result, body) => {
+        if (err) {
+          resolve([]);
+          return;
+        }
+
+        try {
+          const campaignData = JSON.parse(body);
+          const campaignId = campaignData.data[0].id;
+          getPledges(campaignId).then((d: any) => resolve(checkPledges(d)));
+        } catch (parseError) {
+          // eslint-disable-next-line no-console
+          console.error("Could not load Patreon backers:", parseError);
+          resolve([]);
+        }
+      }
+    );
   });
+}
+
+export async function getStaticProps(): Promise<{
+  props: IndexProps;
+  revalidate: number;
+}> {
+  // Independent sources; one being slow or down should not hold up the others.
+  const [patreons, contributors, version] = await Promise.all([
+    getPatreons(),
+    getContributors(),
+    getLatestVersion(),
+  ]);
+
+  return {
+    props: { patreons, contributors, version },
+    revalidate: REVALIDATE_SECONDS,
+  };
 }
 
 export default Index;

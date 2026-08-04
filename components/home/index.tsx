@@ -2,8 +2,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
-
 import { WrapperInner, WrapperOuter } from "../wrapper";
 
 import Section from "../Section";
@@ -14,8 +12,9 @@ import Feature from "./Feature";
 import FeatureRight from "./FeatureRight";
 
 import ShowcaseCollection from "./ShowcaseCollection";
-import useRequest from "../../hooks/useRequest";
 import usePlatform from "../../hooks/usePlatform";
+import { Contributor } from "../../lib/getGithubHome";
+import { GITHUB_RELEASES_PAGE } from "../../lib/github";
 
 export const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -29,7 +28,14 @@ function getCurrentOSName(platform: string): string {
   return "Windows";
 }
 
-function makeDownloadURL(platform: string, versionTag: string): string {
+/**
+ * Falls back to the releases page when the version is unknown. Building an
+ * asset URL without one produces a 404 like ".../download/v/mtgatool-.dmg",
+ * so an unknown version must never reach the template.
+ */
+function makeDownloadURL(platform: string, versionTag: string | null): string {
+  if (!versionTag) return GITHUB_RELEASES_PAGE;
+
   let extension = "exe";
   if (platform.indexOf("Mac") > -1) {
     extension = "dmg";
@@ -41,66 +47,15 @@ function makeDownloadURL(platform: string, versionTag: string): string {
   return `https://github.com/mtgatool/mtgatool-desktop/releases/download/v${versionTag}/mtgatool-desktop-${versionTag}.${extension}`;
 }
 
-interface Contributor {
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: string;
-  gravatar_id: string;
-  url: string;
-  html_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  organizations_url: string;
-  repos_url: string;
-  events_url: string;
-  received_events_url: string;
-  type: string;
-  site_admin: boolean;
-  contributions: number;
-}
-
 interface HomeProps {
   patreons: IPatreon[];
+  contributors: Contributor[];
+  version: string | null;
 }
 
 function Home(props: HomeProps): JSX.Element {
-  const { patreons } = props;
+  const { patreons, contributors, version } = props;
   const platform = usePlatform();
-
-  const [version, setVersion] = useState("");
-  const [contributors, setContributors] = useState<Contributor[]>([]);
-  // const [notice, setNotice] = useState("");
-
-  const contribRequest = useRequest(
-    "https://api.github.com/repos/mtgatool/mtgatool-desktop/contributors?q=contributions&order=desc"
-  );
-  const releasesRequest = useRequest(
-    "https://api.github.com/repos/mtgatool/mtgatool-desktop/releases/latest"
-  );
-
-  useEffect(() => {
-    if (contribRequest.status == null) {
-      contribRequest.start();
-    }
-    if (contribRequest.response && contributors.length === 0) {
-      const json = JSON.parse(contribRequest.response);
-      setContributors(json);
-    }
-  }, [contribRequest, contributors.length]);
-
-  useEffect(() => {
-    if (releasesRequest.status == null) {
-      releasesRequest.start();
-    }
-    if (releasesRequest.response) {
-      const json = JSON.parse(releasesRequest.response);
-      setVersion(json.name);
-    }
-  }, [releasesRequest]);
 
   return (
     <>
@@ -210,22 +165,30 @@ function Home(props: HomeProps): JSX.Element {
                   Become a Backer!
                 </a>
               </div>
-              <div className={styles.comunitySupport}>GitHub Contributors</div>
-              <div className={styles.communityIcons}>
-                {contributors.map((contrib, index: number) => {
-                  return (
-                    <a
-                      key={`contributor-id-${index}`}
-                      title={contrib.login}
-                      className={styles.contributor}
-                      href={contrib.html_url}
-                      style={{
-                        backgroundImage: `url(${contrib.avatar_url})`,
-                      }}
-                    />
-                  );
-                })}
-              </div>
+              {/* Hidden entirely when GitHub is unreachable, rather than
+                  leaving the heading standing over an empty row. */}
+              {contributors.length > 0 && (
+                <>
+                  <div className={styles.comunitySupport}>
+                    GitHub Contributors
+                  </div>
+                  <div className={styles.communityIcons}>
+                    {contributors.map((contrib) => (
+                      <a
+                        key={contrib.login}
+                        title={contrib.login}
+                        className={styles.contributor}
+                        href={contrib.htmlUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          backgroundImage: `url(${contrib.avatarUrl})`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
               <div className={styles.showcaseDownloadContainer}>
                 <a
                   style={{ margin: "auto 0px" }}

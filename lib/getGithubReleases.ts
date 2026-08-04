@@ -1,7 +1,5 @@
 import { classifyCommit, cleanSubject, isNoise } from "./classifyCommit";
-
-const REPO = "mtgatool/mtgatool-desktop";
-const API = `https://api.github.com/repos/${REPO}`;
+import { GITHUB_API as API, githubJson as getJson } from "./github";
 
 /**
  * Newest version covered by the static archive in resources/releasenotes.txt.
@@ -38,26 +36,6 @@ interface GithubCommit {
     message: string;
     committer: { date: string };
   };
-}
-
-function headers(): Record<string, string> {
-  const base: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-    "User-Agent": "mtgatool-web",
-  };
-  // Optional: lifts the rate limit from 60/hr to 5000/hr on the build host.
-  if (process.env.GITHUB_TOKEN) {
-    base.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  }
-  return base;
-}
-
-async function getJson<T>(url: string): Promise<T> {
-  const res = await fetch(url, { headers: headers() });
-  if (!res.ok) {
-    throw new Error(`GitHub ${res.status} ${res.statusText} for ${url}`);
-  }
-  return (await res.json()) as T;
 }
 
 const ORDINALS: Record<string, string> = { 1: "st", 2: "nd", 3: "rd" };
