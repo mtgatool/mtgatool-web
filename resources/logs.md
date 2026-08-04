@@ -1,8 +1,37 @@
 # Output Logs
 
-Output logs are stored by default in the log file `%APPDATA%\..\LocalLow\Wizards Of The Coast\MTGA\Player.log`. All trackers need to read this file to know what happens in MTG Arena while you play, see [Enable Detailed Logs](./installation#enable-detailed-logs).
+MTG Arena Tool works by reading MTG Arena's own output log. Everything the application knows about your games comes from that file, so it needs to be able to find it and read it while you play.
 
-This file will be cleared when the game starts, so make sure you either run MTG Arena Tool before they are cleared, or that you have the app running alongside the game for it to read them.
+Before any of this works you must turn on detailed logging in the game — see [Enable Detailed Logs](./installation#enable-detailed-logs).
 
-MTG Arena Tool does not currently track `.html` logs (stored under *Program Files*, where MTG Arena is installed). However, it is possible to edit the files manually to recover data no longer present in the regular output logs as detailed [here]()
+## Where the log lives
 
+By default the application looks for `Player.log` in:
+
+**Windows**
+
+```
+%APPDATA%\..\LocalLow\Wizards Of The Coast\MTGA\Player.log
+```
+
+**macOS**
+
+```
+~/Library/Logs/Wizards Of The Coast/MTGA/Player.log
+```
+
+**Linux** *(MTG Arena running under Wine)*
+
+```
+~/.wine/drive_c/user/<your-user>/AppData/LocalLow/Wizards of the Coast/MTGA/Player.log
+```
+
+If your installation puts the log somewhere else — a different Wine prefix, for example — you can point the application at it under **Settings**.
+
+## The log is cleared when the game starts
+
+MTG Arena empties `Player.log` every time it launches. Keep MTG Arena Tool running alongside the game so it reads events as they happen; anything written before the application was started, in an earlier session, is gone once the game restarts.
+
+## What is not read
+
+MTG Arena Tool does not track the `.html` logs stored under *Program Files*, where MTG Arena is installed.

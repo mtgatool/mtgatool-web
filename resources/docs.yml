@@ -1,66 +1,36 @@
 paths: [
-  "introduction",
   "installation",
-  "migration",
   "logs",
-  "decks",
-  "overlays",
-  "collection"
+  "privacy"
 ]
 
 docs: [
   "resources",
-  "introduction",
   "installation",
-  "migration",
   "logs",
-  "sections",
-  "decks",
-  "overlays",
-  "collection"
+  "legal",
+  "privacy"
 ]
 
 resources:
   type: "title"
   name: "Resources"
 
-introduction:
-  type: "section"
-  name: "Introduction"
-  path: "introduction"
-
 installation:
   type: "section"
   name: "Installation"
   path: "installation"
-
-migration:
-  type: "section"
-  name: "Migration"
-  path: "migration"
 
 logs:
   type: "section"
   name: "Output Logs"
   path: "logs"
 
-sections:
+legal:
   type: "title"
-  name: "Sections"
+  name: "Legal"
 
-decks:
+privacy:
   type: "section"
-  name: "Decks"
-  path: "decks"
-
-overlays:
-  type: "section"
-  name: "Overlays"
-  path: "overlays"
-
-collection:
-  type: "section"
-  name: "Collection"
-  path: "collection"
-      
-  
+  name: "Privacy Policy"
+  path: "privacy"

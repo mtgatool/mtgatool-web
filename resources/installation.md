@@ -4,9 +4,19 @@
 
 Currently for Windows we provide an `.exe` installer. It is built with default installation settings and installs to `%APPDATA%/mtgatool-desktop/`, where you can see and backup your user data if needed.
 
-## OSX
+## macOS
 
-For Mac users, we provide `.dmg` installers, but we currently cannot actively support it.
+For Mac users we provide a `.dmg` installer, built for **Apple Silicon**.
+
+After dragging the app to your Applications folder, run this once in a terminal:
+
+```
+xattr -dr com.apple.quarantine "/Applications/MTG Arena Tool.app"
+```
+
+This is a one time setup, and does **not** require `sudo`. macOS quarantines anything downloaded from the internet and refuses to launch a quarantined app that is not signed with a paid Apple Developer ID, so without this step the app is closed immediately when you start it.
+
+Once that is done the app runs as your normal user and can read MTG Arena while you play.
 
 ## Linux
 

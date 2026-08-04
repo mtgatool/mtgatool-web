@@ -24,7 +24,7 @@ export function TopNav(props: TopNavProps): JSX.Element {
           <Link href="/release-notes">
             <a className={styles.navLinkA}>Release Notes</a>
           </Link>
-          <Link href="/docs/introduction">
+          <Link href="/docs/installation">
             <a className={styles.navLinkA}>Docs</a>
           </Link>
         </div>
