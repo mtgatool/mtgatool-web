@@ -111,3 +111,48 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* Patreon colours sampled from the brand mark: coral disc, navy glyph. */
+.navPatreon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #ff6651;
+  color: #072a47;
+  margin: auto 0 auto 1rem;
+  cursor: pointer;
+  transition: background-color 0.12s ease-out, transform 0.12s ease-out;
+}
+
+.navPatreon svg {
+  display: block;
+  /* The mark is wider than tall and its stem sits on the left edge, so it is
+     nudged right to sit optically centred in the circle. */
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-left: 0.1rem;
+}
+
+.navPatreon:hover {
+  background-color: #ff8270;
+  transform: scale(1.08);
+}
+
+/*
+ * Must come after the base rule above, not with the other mobile overrides at
+ * the top of this file, or equal specificity lets the 2rem default win.
+ *
+ * The links row is only as tall as its 32px line box, so a full height circle
+ * sits flush against the bar's edge; text has leading, this does not. Shrink
+ * the button rather than pad the row, which would move the whole nav down.
+ */
+@media screen and (max-width: 750px) {
+  .navPatreon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}

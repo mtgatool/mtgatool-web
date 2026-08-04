@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import PatreonLogo from "../svg/PatreonLogo";
 import styles from "../../styles/Topnav.module.scss";
 
 interface TopNavProps {
@@ -27,6 +28,16 @@ export function TopNav(props: TopNavProps): JSX.Element {
           <Link href="/docs/installation">
             <a className={styles.navLinkA}>Docs</a>
           </Link>
+          <a
+            className={styles.navPatreon}
+            href="https://www.patreon.com/cw/mtgatool"
+            target="_blank"
+            rel="noreferrer"
+            title="Support MTG Arena Tool on Patreon"
+            aria-label="Support MTG Arena Tool on Patreon"
+          >
+            <PatreonLogo />
+          </a>
         </div>
       </nav>
     </div>
