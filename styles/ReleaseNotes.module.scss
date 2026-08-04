@@ -10,7 +10,15 @@
  */
 $tree-x: 1.75rem; // trunk offset, tucked under the version pill
 $tree-width: 2px;
-$tree-color: rgba(231, 202, 142, 0.4); // --color-w, dimmed to read as structure
+
+/*
+ * Opaque on purpose. The elbow's border-left sits exactly on top of the trunk,
+ * so any alpha makes every join and every cut darker than the rest of the line.
+ * A muted warm tone gets the same understated read without the blending.
+ */
+$tree-color: #7d6f52;
+$rule-color: #5f563f; // separator rules, a step back from the trunk
+$rule-label-color: #cbb587;
 $tree-reach: 2.25rem; // trunk -> commit pill (4rem margin-left)
 $tree-radius: 0.7rem;
 $node-version: 2rem; // row top -> centre of the version pill
@@ -83,13 +91,13 @@ $node-commit: 1.3rem; // row top -> centre of the commit pill
   content: "";
   flex: 1;
   height: 1px;
-  background-color: rgba(231, 202, 142, 0.3);
+  background-color: $rule-color;
 }
 
 .majorSeparatorLabel {
   padding: 0 1em;
   letter-spacing: 0.1em;
-  color: rgba(231, 202, 142, 0.8);
+  color: $rule-label-color;
 }
 
 .releasesTitle {
