@@ -1,5 +1,11 @@
-export const GITHUB_REPO = "mtgatool/mtgatool-desktop";
+export const GITHUB_ORG = "mtgatool";
+export const GITHUB_REPO = `${GITHUB_ORG}/mtgatool-desktop`;
 export const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}`;
+
+/** API base for any repo in the org, e.g. repoApi("mtgatool-metadata"). */
+export function repoApi(repo: string): string {
+  return `https://api.github.com/repos/${GITHUB_ORG}/${repo}`;
+}
 export const GITHUB_RELEASES_PAGE = `https://github.com/${GITHUB_REPO}/releases/latest`;
 export const GITHUB_RELEASES_LIST = `https://github.com/${GITHUB_REPO}/releases`;
 
