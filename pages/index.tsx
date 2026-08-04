@@ -25,7 +25,7 @@ const Index: NextPage<IndexProps> = (props) => {
 
   return (
     <>
-      <Seo path="/" />
+      <Seo path="/" appSchema />
       <Home patreons={patreons} contributors={contributors} version={version} />
     </>
   );

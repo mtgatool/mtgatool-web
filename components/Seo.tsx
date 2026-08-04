@@ -17,7 +17,34 @@ interface SeoProps {
   description?: string;
   /** Path with a leading slash, used for the canonical and og:url. */
   path?: string;
+  /** Emit the SoftwareApplication block. Home page only, so it is not
+      repeated on every page and diluted. */
+  appSchema?: boolean;
 }
+
+const APPLICATION_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: SITE_NAME,
+  applicationCategory: "GameApplication",
+  operatingSystem: "Windows, macOS, Linux",
+  url: SITE_URL,
+  description: DEFAULT_DESCRIPTION,
+  image: OG_IMAGE,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  isAccessibleForFree: true,
+  license: "https://github.com/mtgatool/mtgatool-desktop/blob/master/LICENSE",
+  sameAs: [
+    "https://github.com/mtgatool/mtgatool-desktop",
+    "https://twitter.com/mtgatool",
+    "https://discord.gg/K9bPkJy",
+    "https://www.patreon.com/cw/mtgatool",
+  ],
+};
 
 /**
  * Every page renders this. It is the only place head metadata is set, because
@@ -28,7 +55,7 @@ interface SeoProps {
  * ignore the `name` form, which is how they were previously written.
  */
 export default function Seo(props: SeoProps): JSX.Element {
-  const { title, description, path = "/" } = props;
+  const { title, description, path = "/", appSchema = false } = props;
 
   const fullTitle = title ? `${title} - ${SITE_NAME}` : DEFAULT_TITLE;
   const desc = description || DEFAULT_DESCRIPTION;
@@ -58,6 +85,17 @@ export default function Seo(props: SeoProps): JSX.Element {
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={OG_IMAGE} />
+
+      {appSchema && (
+        <script
+          type="application/ld+json"
+          // Serialised from an object literal, so there is no user input to
+          // escape here.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(APPLICATION_SCHEMA),
+          }}
+        />
+      )}
     </Head>
   );
 }

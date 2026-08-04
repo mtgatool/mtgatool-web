@@ -9,7 +9,7 @@ export default function Feature(props: FeatureProps): JSX.Element {
   const { title, subtitle } = props;
   return (
     <div className={styles.showcaseFeature}>
-      <h1
+      <h2
         style={{
           marginBlock: "0",
           marginInline: "0",
@@ -19,7 +19,7 @@ export default function Feature(props: FeatureProps): JSX.Element {
         }}
       >
         {title}
-      </h1>
+      </h2>
       <p style={{ fontFamily: "var(--sub-font-name)", marginTop: "1em" }}>
         {subtitle}
       </p>
