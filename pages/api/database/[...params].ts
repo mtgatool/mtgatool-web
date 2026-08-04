@@ -2,45 +2,47 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 
-import getDatabase from "../../../getDatabase";
-import getLatestJson from "../../../getLatestJson";
+import {
+  getLatestMeta,
+  normalizeLanguage,
+  streamDatabase,
+} from "../../../lib/getMetadataDatabase";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
   await NextCors(req, res, {
-    // Options
     methods: ["GET", "HEAD", "PUT", "POST"],
     origin: "*",
     optionsSuccessStatus: 200,
   });
 
   const { params } = req.query;
-  const latestJson = getLatestJson();
-  console.log("latestJson", latestJson);
+  const meta = await getLatestMeta();
 
-  let version = latestJson.version;
-  let lang = params && params[1] ? params[1] : "en";
+  if (!meta) {
+    res.status(503).json({ ok: false, msg: "database metadata unavailable" });
+    return;
+  }
 
+  const lang = normalizeLanguage(params && params[1]);
+
+  // "latest" answers from the metadata manifest instead of parsing a 24MB
+  // database to read three fields off it.
   if (params && params[0] === "latest") {
-    const db = getDatabase(lang, version);
-
     res.status(200).json({
-      latest: db.version,
-      lang: db.language.toLowerCase(),
-      updated: db.updated,
+      latest: meta.latest,
+      lang,
+      updated: meta.updated,
     });
-  } else if (params && params[0]) {
-    const db = getDatabase(lang, version);
+    return;
+  }
 
-    if (db) {
-      res.status(200).json(db);
-    } else {
-      res.status(404).json({
-        ok: false,
-        msg: "not found",
-      });
+  if (params && params[0]) {
+    const streamed = await streamDatabase(res, lang, meta.latest);
+    if (!streamed) {
+      res.status(404).json({ ok: false, msg: "not found" });
     }
   }
 }

@@ -2,29 +2,35 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 
-import getDatabase from "../../../getDatabase";
-import getLatestJson from "../../../getLatestJson";
+import {
+  getLatestMeta,
+  normalizeLanguage,
+  streamDatabase,
+} from "../../../lib/getMetadataDatabase";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
   await NextCors(req, res, {
-    // Options
     methods: ["GET", "HEAD", "PUT", "POST"],
     origin: "*",
     optionsSuccessStatus: 200,
   });
 
-  if (req.method == "GET") {
-    const { params } = req.query;
-    const latestJson = getLatestJson();
+  if (req.method !== "GET") return;
 
-    let version = latestJson.version;
-    let lang = params && params[1] ? params[1] : "en";
+  const meta = await getLatestMeta();
+  if (!meta) {
+    res.status(503).json({ ok: false, msg: "database metadata unavailable" });
+    return;
+  }
 
-    const db = getDatabase(lang, version);
-    res.status(200).json(db);
+  const lang = normalizeLanguage(req.query.lang);
+  const streamed = await streamDatabase(res, lang, meta.latest);
+
+  if (!streamed) {
+    res.status(404).json({ ok: false, msg: "not found" });
   }
 }
 
