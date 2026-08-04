@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable react/prop-types */
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { WrapperInner, WrapperOuter } from "../wrapper";
 
@@ -74,17 +74,6 @@ function Home(props: HomeProps): JSX.Element {
   const [version, setVersion] = useState("");
   const [contributors, setContributors] = useState<Contributor[]>([]);
   // const [notice, setNotice] = useState("");
-
-  const [scroll, setScroll] = useState(0);
-
-  const handleScroll = useCallback((): void => {
-    setScroll(window.scrollY);
-  }, []);
-
-  useLayoutEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return (): void => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
 
   const contribRequest = useRequest(
     "https://api.github.com/repos/mtgatool/mtgatool-desktop/contributors?q=contributions&order=desc"
@@ -160,21 +149,21 @@ function Home(props: HomeProps): JSX.Element {
         <WrapperInner>
           <Flex className={styles.descWrapper}>
             <Flex className={styles.descShowcase}>
-              <ShowcaseOverlay scroll={scroll} />
+              <ShowcaseOverlay />
               <Feature
                 title="In-game Deck tracker"
                 subtitle="The best and most cusotmizable deck tracker overlay you will find. Enable up to 5 different overlays and customize them to suit your needs. Customize each of them with different data, behaviour, size, and much more!"
               />
             </Flex>
             <Flex className={styles.descShowcaseReverse}>
-              <ShowcaseStats scroll={scroll} />
+              <ShowcaseStats />
               <FeatureRight
                 title="Complete Statistics"
                 subtitle="Want to know your decks winrate? how about a specific card's performance? Maybe see what cards you mulligan more often? MTG Arena Tool can do that and much, much more."
               />
             </Flex>
             <Flex className={styles.descShowcase}>
-              <ShowcaseCollection scroll={scroll} />
+              <ShowcaseCollection />
               <Feature
                 title="Analyse Your Collection"
                 subtitle="Take a deep look at the cards you have, how much of a set you are missing and how many drafts it would take you to complete them. MTG Arena Tool's card database is the most comprehensive mtga cards dataset out there."

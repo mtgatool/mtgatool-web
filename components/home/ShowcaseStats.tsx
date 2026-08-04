@@ -1,26 +1,17 @@
-import { CSSProperties, useRef } from "react";
+import { CSSProperties } from "react";
 
 import MatchA from "../svg/StatsMatchA";
 import MatchB from "../svg/StatsMatchB";
 import StatsCenter from "../svg/StatsCenter";
 import StatsBack from "../svg/StatsBack";
 import StatsDetails from "../svg/StatsDetails";
+import useParallax from "../../hooks/useParallax";
 import styles from "../../styles/Home.module.scss";
 
-interface ScrollProps {
-  scroll: number
-}
-
-export default function ShowcaseStats(props: ScrollProps): JSX.Element {
-  const { scroll } = props;
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const offset = containerRef.current
-    ? containerRef.current.offsetTop + 150 - window.innerHeight / 2 - scroll
-    : 0;
+export default function ShowcaseStats(): JSX.Element {
+  const containerRef = useParallax(150);
 
   const defaultStyle: CSSProperties = {
-    transition: "all 0.1s ease-in 0s",
     position: "absolute",
   };
 
@@ -39,7 +30,7 @@ export default function ShowcaseStats(props: ScrollProps): JSX.Element {
         style={{
           width: "608.52px",
           height: "414.52px",
-          transform: `translate3d(0px, ${Math.round(-offset / 8)}px, 0)`,
+          transform: `translate3d(0px, calc(var(--parallax, 0px) / -8), 0)`,
           ...defaultStyle,
         }}
       />
@@ -55,9 +46,7 @@ export default function ShowcaseStats(props: ScrollProps): JSX.Element {
         style={{
           width: "419.67px",
           height: "107.01px",
-          transform: `translate3d(89px, ${Math.round(
-            229 + (offset / 10.5)
-          )}px, 0)`,
+          transform: `translate3d(89px, calc(229px + var(--parallax, 0px) / 10.5), 0)`,
           ...defaultStyle,
         }}
       />
@@ -65,9 +54,7 @@ export default function ShowcaseStats(props: ScrollProps): JSX.Element {
         style={{
           width: "462.5px",
           height: "64.95px",
-          transform: `translate3d(0px, ${Math.round(
-            60 + (offset / 13)
-          )}px, 0)`,
+          transform: `translate3d(0px, calc(60px + var(--parallax, 0px) / 13), 0)`,
           ...defaultStyle,
         }}
       />
@@ -75,9 +62,7 @@ export default function ShowcaseStats(props: ScrollProps): JSX.Element {
         style={{
           width: "462.5px",
           height: "64.95px",
-          transform: `translate3d(0px, ${Math.round(
-            140 + (offset / 9.3)
-          )}px, 0)`,
+          transform: `translate3d(0px, calc(140px + var(--parallax, 0px) / 9.3), 0)`,
           ...defaultStyle,
         }}
       />
