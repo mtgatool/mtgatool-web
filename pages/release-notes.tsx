@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import Section from "../components/Section";
 import TopTitle from "../components/title";
 import { WrapperInner, WrapperOuter } from "../components/wrapper";
@@ -60,6 +62,31 @@ function Commit(props: ReleaseCommit): JSX.Element {
   );
 }
 
+interface MajorGroup {
+  major: string;
+  releases: ReleaseSection[];
+}
+
+/**
+ * Consecutive releases sharing a major version form one tree. The connectors
+ * are drawn per group, so a jump like 7.0.0 -> 6.7.5 breaks the trunk instead
+ * of implying the two lineages are continuous.
+ */
+function groupByMajor(releases: ReleaseSection[]): MajorGroup[] {
+  return releases.reduce<MajorGroup[]>((groups, release) => {
+    const major = release.version.split(".")[0];
+    const current = groups[groups.length - 1];
+
+    if (current && current.major === major) {
+      current.releases.push(release);
+    } else {
+      groups.push({ major, releases: [release] });
+    }
+
+    return groups;
+  }, []);
+}
+
 type ReleaseNotesProps = {
   releases: ReleaseSection[];
   liveFailed: boolean;
@@ -81,7 +108,6 @@ export default function ReleaseNotes(props: ReleaseNotesProps): JSX.Element {
         >
           <TopTitle title="Release Notes" />
           <div className={styles.releasesContainer}>
-            <div className={styles.releasesContainerLine} />
             {liveFailed && (
               <Commit
                 type="error"
@@ -89,17 +115,39 @@ export default function ReleaseNotes(props: ReleaseNotesProps): JSX.Element {
                 commit=""
               />
             )}
-            {releases.map((release) => (
-              <div key={release.version}>
-                <Version version={release.version} date={release.date} />
-                {release.commits.map((commit, index) => (
-                  <Commit
-                    key={commit.commit || `${release.version}-${index}`}
-                    type={commit.type}
-                    desc={commit.desc}
-                    commit={commit.commit}
-                  />
-                ))}
+            {groupByMajor(releases).map((group, groupIndex) => (
+              <div key={group.major}>
+                {groupIndex > 0 && (
+                  <div className={styles.majorSeparator}>
+                    <span className={styles.majorSeparatorLabel}>
+                      {group.major}.x
+                    </span>
+                  </div>
+                )}
+                <div>
+                  {group.releases.map((release) => (
+                    <Fragment key={release.version}>
+                      <div className={`${styles.row} ${styles.rowVersion}`}>
+                        <Version
+                          version={release.version}
+                          date={release.date}
+                        />
+                      </div>
+                      {release.commits.map((commit, index) => (
+                        <div
+                          key={commit.commit || `${release.version}-${index}`}
+                          className={`${styles.row} ${styles.rowCommit}`}
+                        >
+                          <Commit
+                            type={commit.type}
+                            desc={commit.desc}
+                            commit={commit.commit}
+                          />
+                        </div>
+                      ))}
+                    </Fragment>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

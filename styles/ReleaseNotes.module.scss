@@ -3,12 +3,93 @@
   display: block;
 }
 
-.releasesContainerLine {
-  background-color: #e7ca8e;
-  width: 4px;
-  opacity: 0.5;
-  margin-left: 2.3em;
-  z-index: -1;
+/*
+ * Folder-tree connectors. A trunk runs down each major version, and every
+ * commit branches off it with an elbow. Geometry is in rem because the pills
+ * set their own font-size, so em here would not match their box.
+ */
+$tree-x: 1.75rem; // trunk offset, tucked under the version pill
+$tree-width: 2px;
+$tree-color: rgba(231, 202, 142, 0.4); // --color-w, dimmed to read as structure
+$tree-reach: 2.25rem; // trunk -> commit pill (4rem margin-left)
+$tree-radius: 0.7rem;
+$node-version: 2rem; // row top -> centre of the version pill
+$node-commit: 1.3rem; // row top -> centre of the commit pill
+
+.row {
+  position: relative;
+}
+
+.rowVersion {
+  padding: 1rem 0;
+}
+
+.rowCommit {
+  padding-top: 0.5rem;
+}
+
+/* Connectors need the commit indent to hang off, which only exists >=500px. */
+@media screen and (min-width: 500px) {
+  /* Trunk. Runs the full row so consecutive rows join seamlessly. */
+  .row::after {
+    content: "";
+    position: absolute;
+    left: $tree-x;
+    top: 0;
+    bottom: 0;
+    width: $tree-width;
+    background-color: $tree-color;
+  }
+
+  /* Start at the first version node rather than above it. */
+  .row:first-child::after {
+    top: $node-version;
+  }
+
+  /* Stop at the last commit node rather than dangling past it. */
+  .row:last-child::after {
+    bottom: auto;
+    height: $node-commit;
+  }
+
+  /* Elbow: down the trunk, then curving out to the commit pill. */
+  .rowCommit::before {
+    content: "";
+    position: absolute;
+    left: $tree-x;
+    top: 0;
+    width: $tree-reach;
+    height: $node-commit;
+    border-left: $tree-width solid $tree-color;
+    border-bottom: $tree-width solid $tree-color;
+    border-bottom-left-radius: $tree-radius;
+  }
+}
+
+/*
+ * Major versions are separate trees, so the trunk must not run between them.
+ * Each group is its own .row sequence, and this rule sits in the gap.
+ */
+.majorSeparator {
+  display: flex;
+  align-items: center;
+  margin: 2.5em 0 1em 0;
+  font-size: 0.95rem;
+  font-family: var(--sub-font-name);
+}
+
+.majorSeparator::before,
+.majorSeparator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: rgba(231, 202, 142, 0.3);
+}
+
+.majorSeparatorLabel {
+  padding: 0 1em;
+  letter-spacing: 0.1em;
+  color: rgba(231, 202, 142, 0.8);
 }
 
 .releasesTitle {
@@ -18,13 +99,16 @@
 
 .versionDiv {
   color: rgb(0, 0, 0);
-  margin: 1em 0 1em 0.5em;
+  margin-left: 0.5em;
   align-items: center;
   height: 2em;
   display: flex;
 }
 
+/* Opaque and above the trunk, so the line breaks cleanly around each node. */
 .versionNumber {
+  position: relative;
+  z-index: 1;
   background-color: var(--color-button);
   font-size: 0.8rem;
   text-align: center;
@@ -48,7 +132,6 @@
 
 .commitDiv {
   color: rgb(0, 0, 0);
-  margin-top: 0.5em;
   display: flex;
 }
 
