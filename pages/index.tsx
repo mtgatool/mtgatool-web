@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import request from "request";
 import Home from "../components/home";
+import Seo from "../components/Seo";
 import { Contributor, getContributors, getLatestVersion } from "../lib/getGithubHome";
 
 /** Refresh the Patreon and GitHub data hourly without a redeploy. */
@@ -23,7 +24,10 @@ const Index: NextPage<IndexProps> = (props) => {
   const { patreons, contributors, version } = props;
 
   return (
-    <Home patreons={patreons} contributors={contributors} version={version} />
+    <>
+      <Seo path="/" />
+      <Home patreons={patreons} contributors={contributors} version={version} />
+    </>
   );
 };
 

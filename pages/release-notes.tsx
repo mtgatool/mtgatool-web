@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import Section from "../components/Section";
+import Seo from "../components/Seo";
 import TopTitle from "../components/title";
 import { WrapperInner, WrapperOuter } from "../components/wrapper";
 import {
@@ -97,6 +98,11 @@ export default function ReleaseNotes(props: ReleaseNotesProps): JSX.Element {
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
+      <Seo
+        title="Release Notes"
+        path="/release-notes"
+        description="Every MTG Arena Tool release, with the changes that went into it. Fixes, additions and improvements for the MTG Arena deck tracker."
+      />
       <WrapperInner style={{ maxWidth: "900px" }}>
         <Section
           className="topNavMargin"

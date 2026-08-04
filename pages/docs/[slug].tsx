@@ -5,7 +5,17 @@ import { useState, useRef, useEffect, Fragment, createElement } from "react";
 
 import styles from "../../styles/Docs.module.scss";
 
+import Seo from "../../components/Seo";
 import docs from "../../resources/docs.yml";
+
+/** Hand-written so each doc gets its own snippet rather than the site default. */
+const DOC_DESCRIPTIONS: Record<string, string> = {
+  installation:
+    "How to install MTG Arena Tool on Windows, macOS and Linux, including the one-time macOS quarantine step and how to enable MTG Arena's detailed logs.",
+  logs: "Where MTG Arena writes Player.log on Windows, macOS and Linux, and why MTG Arena Tool needs to be running while you play.",
+  privacy:
+    "What data MTG Arena Tool collects, how it is used, and the controls you have over it.",
+};
 
 import markdownToHtml from "../../lib/markdownToHtml";
 import { getPostBySlug } from "../../lib/getPostBySlug";
@@ -66,8 +76,16 @@ type Props = {
 export default function Docs({ data }: Props) {
   const router = useRouter();
 
+  const slug = String(router.query.slug || "");
+  const section = docs[slug];
+
   return (
     <>
+      <Seo
+        title={section?.name || "Docs"}
+        path={`/docs/${slug}`}
+        description={DOC_DESCRIPTIONS[slug]}
+      />
       <div className={styles.docsWrapperTop} />
       <div className={styles.docsWrapper}>
         <div className={styles.docsSidebar}>

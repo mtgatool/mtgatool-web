@@ -133,7 +133,7 @@ function Home(props: HomeProps): JSX.Element {
               }}
             >
               <div className={styles.comunitySupport}>
-                Maintained thanks to our backers!
+                Maintained thanks to our patrons!
               </div>
               <div className={styles.communityIcons}>
                 {patreons
