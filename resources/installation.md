@@ -20,11 +20,12 @@ Once that is done the app runs as your normal user and can read MTG Arena while 
 
 ## Linux
 
-On Linux systems, you can use the .AppImage as-is, but the recommended installer takes care of setting up the desktop integrations and daemon services. This is a one time setup. After that, both the daemon and mtgatool appimage can update automatically.
+On Linux systems you can run the `.AppImage` as-is. The installer is recommended instead, as it sets up the desktop integration — a menu entry and icon — so the app behaves like a normally installed one. This is a one time setup.
 
 Head to the downloads page and download the latest `mtgatool-desktop-linux-installer.tar.gz`
 
-In the terminal, navigate to the directory where the tar.gz was downloaded, then extract and install _(requires sudo to install the daemon service)_.
+In the terminal, navigate to the directory where the tar.gz was downloaded, then extract and install. `sudo` is needed because the installer writes to `/usr/share`.
+
 ```
 mkdir mtgatool &&
 tar -xf mtgatool-desktop-linux-installer.tar.gz -C mtgatool &&
@@ -32,11 +33,7 @@ cd mtgatool &&
 sudo ./install.sh
 ```
 
-You can check the *mtga-tracker-daemon* service status using systemctl
-
-```systemctl status mtga-trackerd.service```
-
-or simply [open a browser tab and try the api](http://localhost:6842/status)! You can find more information about it at [mtga-tracker-daemon](https://github.com/frcaton/mtga-tracker-daemon).
+You do **not** need `sudo` to run the application itself.
 
 
 # Enable Detailed Logs
