@@ -1,21 +1,17 @@
 import Section from "../components/Section";
 import TopTitle from "../components/title";
 import { WrapperInner, WrapperOuter } from "../components/wrapper";
-import { getReleaseNotes } from "../lib/getReleaseNotes";
+import {
+  getGithubReleases,
+  ReleaseCommit,
+  ReleaseSection,
+} from "../lib/getGithubReleases";
+import { getArchiveReleases } from "../lib/getReleaseNotes";
 
 import styles from "../styles/ReleaseNotes.module.scss";
 
-const TYPE_RELEASE = 0;
-const TYPE_EVENT = 1;
-
-interface Note {
-  type: number;
-  event?: string;
-  desc?: string;
-  commit?: string;
-  version?: string;
-  date?: string;
-}
+/** Refetch from GitHub hourly; the site itself only rebuilds when it changes. */
+const REVALIDATE_SECONDS = 3600;
 
 interface VersionProps {
   version: string;
@@ -33,8 +29,8 @@ function Version(props: VersionProps): JSX.Element {
   );
 }
 
-function Commit(props: any): JSX.Element {
-  const { event, desc, commit } = props;
+function Commit(props: ReleaseCommit): JSX.Element {
+  const { type, desc, commit } = props;
 
   const cssTypes: Record<string, string> = {
     added: styles.typeAdded,
@@ -47,23 +43,30 @@ function Commit(props: any): JSX.Element {
 
   return (
     <div className={styles.commitDiv}>
-      <div className={`${styles.commitType} ${cssTypes[event]} ${event}`}>
-        {event.toUpperCase()}
+      <div className={`${styles.commitType} ${cssTypes[type]} ${type}`}>
+        {type.toUpperCase()}
       </div>
       <div className={styles.commitDesc}>{desc}</div>
-      <a href={`https://github.com/mtgatool/mtgatool-desktop/commit/${commit}`}>
-        {commit.substr(0, 6)}
-      </a>
+      {commit && (
+        <a
+          href={`https://github.com/mtgatool/mtgatool-desktop/commit/${commit}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {commit.slice(0, 6)}
+        </a>
+      )}
     </div>
   );
 }
 
 type ReleaseNotesProps = {
-  releaseNotes: Note[];
+  releases: ReleaseSection[];
+  liveFailed: boolean;
 };
 
-export default function ReleaseNotes(props: ReleaseNotesProps) {
-  const { releaseNotes } = props;
+export default function ReleaseNotes(props: ReleaseNotesProps): JSX.Element {
+  const { releases, liveFailed } = props;
 
   return (
     <WrapperOuter style={{ minHeight: "calc(100vh - 5px)" }}>
@@ -79,28 +82,26 @@ export default function ReleaseNotes(props: ReleaseNotesProps) {
           <TopTitle title="Release Notes" />
           <div className={styles.releasesContainer}>
             <div className={styles.releasesContainerLine} />
-            {releaseNotes.map((line, index) => {
-              let ret;
-              if (line.type === TYPE_RELEASE) {
-                ret = (
-                  <Version
-                    key={index}
-                    version={line.version || ""}
-                    date={line.date || ""}
-                  />
-                );
-              } else {
-                ret = (
+            {liveFailed && (
+              <Commit
+                type="error"
+                desc="Could not reach GitHub for the latest releases — showing the archived notes below."
+                commit=""
+              />
+            )}
+            {releases.map((release) => (
+              <div key={release.version}>
+                <Version version={release.version} date={release.date} />
+                {release.commits.map((commit, index) => (
                   <Commit
-                    key={index}
-                    event={line.event}
-                    desc={line.desc}
-                    commit={line.commit}
+                    key={commit.commit || `${release.version}-${index}`}
+                    type={commit.type}
+                    desc={commit.desc}
+                    commit={commit.commit}
                   />
-                );
-              }
-              return ret;
-            })}
+                ))}
+              </div>
+            ))}
           </div>
         </Section>
       </WrapperInner>
@@ -108,38 +109,18 @@ export default function ReleaseNotes(props: ReleaseNotesProps) {
   );
 }
 
-export async function getStaticProps() {
-  const rawReleaseNotes = getReleaseNotes();
-
-  const newlines = /(\r\n|\n)/;
-
-  const releaseNotesLines = rawReleaseNotes
-    .split(newlines)
-    .filter((l) => !newlines.test(l));
-
-  const newNotes: Note[] = [];
-  const lines = /(fixed|improved|removed|added)$/;
-  releaseNotesLines.forEach((line, index) => {
-    if (line === "version") {
-      newNotes.push({
-        type: TYPE_RELEASE,
-        version: releaseNotesLines[index + 1],
-        date: releaseNotesLines[index + 2],
-      });
-    }
-    if (lines.test(line)) {
-      newNotes.push({
-        type: TYPE_EVENT,
-        event: line,
-        desc: releaseNotesLines[index + 1],
-        commit: releaseNotesLines[index + 2],
-      });
-    }
-  });
+export async function getStaticProps(): Promise<{
+  props: ReleaseNotesProps;
+  revalidate: number;
+}> {
+  const live = await getGithubReleases();
+  const archive = getArchiveReleases();
 
   return {
     props: {
-      releaseNotes: newNotes,
-    } as ReleaseNotesProps,
+      releases: [...(live || []), ...archive],
+      liveFailed: live === null,
+    },
+    revalidate: REVALIDATE_SECONDS,
   };
 }
