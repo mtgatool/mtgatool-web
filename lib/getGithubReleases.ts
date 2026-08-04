@@ -1,15 +1,14 @@
 import { classifyCommit, cleanSubject, isNoise } from "./classifyCommit";
 import { GITHUB_API as API, githubJson as getJson } from "./github";
 
-/**
- * Newest version covered by the static archive in resources/releasenotes.txt.
- * Everything above it is fetched live; the archive supplies everything below,
- * so the two halves meet without a gap or an overlap.
- */
-export const ARCHIVE_NEWEST_VERSION = "6.2.2";
+/** Release pages are 100 each; the repo has ~107. */
+const MAX_RELEASE_PAGES = 3;
 
-/** Commit pages are 100 each. The whole post-archive range fits in four. */
-const MAX_COMMIT_PAGES = 8;
+/**
+ * Commit pages are 100 each. Covering every release reaches back to 2021, so
+ * this is deliberately generous; the loop stops as soon as a page is short.
+ */
+const MAX_COMMIT_PAGES = 14;
 
 export interface ReleaseCommit {
   type: string;
@@ -61,16 +60,22 @@ function normalizeVersion(release: GithubRelease): string {
  * over the unauthenticated hourly limit), fetch the flat commit list once and
  * bucket it: a commit belongs to the oldest release published at or after it.
  *
- * Returns null if GitHub is unreachable or rate-limited, so the page can fall
- * back to the static archive instead of failing the build.
+ * Returns null if GitHub is unreachable or rate-limited, so the page can show
+ * a link out to GitHub instead of failing the build.
  */
 export async function getGithubReleases(): Promise<ReleaseSection[] | null> {
   try {
-    const raw = await getJson<GithubRelease[]>(
-      `${API}/releases?per_page=100&page=1`
-    );
+    const raw: GithubRelease[] = [];
+    for (let page = 1; page <= MAX_RELEASE_PAGES; page += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      const batch = await getJson<GithubRelease[]>(
+        `${API}/releases?per_page=100&page=${page}`
+      );
+      raw.push(...batch);
+      if (batch.length < 100) break;
+    }
 
-    const releases = raw
+    const live = raw
       .filter((r) => !r.draft && r.published_at)
       .sort(
         (a, b) =>
@@ -78,17 +83,10 @@ export async function getGithubReleases(): Promise<ReleaseSection[] | null> {
           new Date(a.published_at as string).getTime()
       );
 
-    const cutoffIndex = releases.findIndex(
-      (r) => normalizeVersion(r) === ARCHIVE_NEWEST_VERSION
-    );
-    // Keep only what the archive does not already cover.
-    const live =
-      cutoffIndex === -1 ? releases : releases.slice(0, cutoffIndex);
     if (live.length === 0) return [];
 
-    const cutoff = releases[
-      cutoffIndex === -1 ? releases.length - 1 : cutoffIndex
-    ].published_at as string;
+    // Only commits newer than the oldest release can be attributed to one.
+    const cutoff = live[live.length - 1].published_at as string;
 
     const commits: GithubCommit[] = [];
     for (let page = 1; page <= MAX_COMMIT_PAGES; page += 1) {

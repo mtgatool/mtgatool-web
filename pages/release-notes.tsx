@@ -8,7 +8,7 @@ import {
   ReleaseCommit,
   ReleaseSection,
 } from "../lib/getGithubReleases";
-import { getArchiveReleases } from "../lib/getReleaseNotes";
+import { GITHUB_RELEASES_LIST } from "../lib/github";
 
 import styles from "../styles/ReleaseNotes.module.scss";
 
@@ -108,12 +108,20 @@ export default function ReleaseNotes(props: ReleaseNotesProps): JSX.Element {
         >
           <TopTitle title="Release Notes" />
           <div className={styles.releasesContainer}>
+            {/* Nothing is cached locally any more, so an outage leaves the
+                page empty. Send people somewhere useful instead. */}
             {liveFailed && (
-              <Commit
-                type="error"
-                desc="Could not reach GitHub for the latest releases — showing the archived notes below."
-                commit=""
-              />
+              <div className={styles.fallbackNotice}>
+                <div className={`${styles.commitType} ${styles.typeError}`}>
+                  ERROR
+                </div>
+                <div className={styles.commitDesc}>
+                  Could not reach GitHub for the release list.{" "}
+                  <a href={GITHUB_RELEASES_LIST} target="_blank" rel="noreferrer">
+                    View all releases on GitHub
+                  </a>
+                </div>
+              </div>
             )}
             {groupByMajor(releases).map((group, groupIndex) => (
               <div key={group.major}>
@@ -162,11 +170,10 @@ export async function getStaticProps(): Promise<{
   revalidate: number;
 }> {
   const live = await getGithubReleases();
-  const archive = getArchiveReleases();
 
   return {
     props: {
-      releases: [...(live || []), ...archive],
+      releases: live || [],
       liveFailed: live === null,
     },
     revalidate: REVALIDATE_SECONDS,

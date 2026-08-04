@@ -143,6 +143,17 @@ $node-commit: 1.3rem; // row top -> centre of the commit pill
   display: flex;
 }
 
+.fallbackNotice {
+  display: flex;
+  align-items: center;
+  margin: 1em 0;
+}
+
+.fallbackNotice a {
+  color: var(--color-text-link);
+  font-family: var(--sub-font-name-it);
+}
+
 @media screen and (min-width: 500px) {
   .commitDiv {
     margin-left: 4em;

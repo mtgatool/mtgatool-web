@@ -1,6 +1,7 @@
 export const GITHUB_REPO = "mtgatool/mtgatool-desktop";
 export const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}`;
 export const GITHUB_RELEASES_PAGE = `https://github.com/${GITHUB_REPO}/releases/latest`;
+export const GITHUB_RELEASES_LIST = `https://github.com/${GITHUB_REPO}/releases`;
 
 /**
  * All GitHub calls run on the server, never in the browser.
