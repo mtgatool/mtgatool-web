@@ -103,6 +103,43 @@
   transform: translateY(2px);
 }
 
+/* Secondary to the download button: outlined rather than filled, so "get the
+   app" stays the one obvious action on the page. */
+.githubButton {
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  margin: 8px 8px;
+  width: 16em;
+  height: 2.5em;
+  font-size: 1em !important;
+  font-family: var(--main-font-name) !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid var(--color-button);
+  background-color: transparent;
+  color: var(--color-button) !important;
+  transform: translateY(0);
+  -webkit-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.githubButton svg {
+  display: block;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.githubButton:hover {
+  box-shadow: 0px 4px 4px 0px #0000006b;
+  background-color: var(--color-button-shade-20);
+  transform: translateY(2px);
+}
+
 .downloadImg {
   width: 12em;
   display: block;

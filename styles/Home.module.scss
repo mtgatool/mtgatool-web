@@ -137,6 +137,18 @@
   justify-content: center;
 }
 
+/* Closing call to action. Two buttons, so unlike showcaseDownloadContainer it
+   wraps rather than squeezing them both onto one line on a phone. */
+.closingButtons {
+  width: 100%;
+  min-height: 10vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em 1em;
+}
+
 .showcaseOverlayCont {
   background-size: contain;
   background-repeat: no-repeat;
@@ -177,6 +189,85 @@
   font-family: var(--main-font-name);
   font-size: 2rem;
   padding: 0 0 0.25em 0;
+}
+
+/*
+ * Hero strapline under the download buttons. Deliberately quieter than the
+ * buttons — it qualifies them rather than competing with them.
+ */
+.openSourceBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em 1.25em;
+  margin-top: 1.25em;
+  font-family: var(--main-font-name);
+  font-size: 1rem;
+  color: var(--color-text-dark);
+}
+
+.openSourceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  transition: color 0.15s ease-out;
+
+  svg {
+    display: block;
+    width: 1.15em;
+    height: 1.15em;
+  }
+}
+
+.openSourceLink:hover {
+  color: var(--color-text-hover);
+}
+
+/* Hidden once the row wraps, where a vertical rule between stacked lines
+   would read as a stray mark. */
+.openSourceDivider {
+  width: 1px;
+  height: 1.1em;
+  background-color: var(--color-text-dark);
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 440px) {
+  .openSourceDivider {
+    display: none;
+  }
+}
+
+.platformSupport {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+/* Deliberately inert: no hover state, since these are labels for the
+   platforms we support and not links to anywhere. */
+.platformIcon {
+  display: block;
+  width: 1.2em;
+  height: 1.2em;
+  color: var(--color-text);
+  opacity: 0.8;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Tux is a tall, narrow silhouette, so in a box the size of the Windows and
+   Apple marks he reads noticeably smaller. Nudged up to match optically. */
+.platformIconLinux {
+  width: 1.4em;
+  height: 1.4em;
 }
 
 .comunitySupport {

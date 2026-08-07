@@ -112,6 +112,32 @@
   cursor: pointer;
 }
 
+/* The GitHub mark is its own filled disc, so it needs no backing circle —
+   only a matching 2rem box so it lines up with the Patreon button. */
+.navGithub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-text);
+  margin: auto 0 auto 1rem;
+  cursor: pointer;
+  transition: color 0.12s ease-out, transform 0.12s ease-out;
+}
+
+.navGithub svg {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.navGithub:hover {
+  color: var(--color-text-hover);
+  transform: scale(1.08);
+}
+
 /* Patreon colours sampled from the brand mark: coral disc, navy glyph. */
 .navPatreon {
   display: flex;
@@ -151,8 +177,14 @@
  * the button rather than pad the row, which would move the whole nav down.
  */
 @media screen and (max-width: 750px) {
-  .navPatreon {
+  .navPatreon,
+  .navGithub {
     width: 1.75rem;
     height: 1.75rem;
+  }
+
+  .navGithub svg {
+    width: 1.4rem;
+    height: 1.4rem;
   }
 }

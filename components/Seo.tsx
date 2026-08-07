@@ -4,10 +4,10 @@ export const SITE_URL = "https://mtgatool.com";
 export const SITE_NAME = "MTG Arena Tool";
 
 const DEFAULT_TITLE =
-  "MTG Arena Tool - MTG Arena deck tracker and statistics manager";
+  "MTG Arena Tool - Open source MTG Arena deck tracker and statistics manager";
 
 const DEFAULT_DESCRIPTION =
-  "MTG Arena Tool is a free deck tracker, collection browser and statistics manager for Magic: The Gathering Arena. Track your matches, see your winrates and explore what other players are brewing.";
+  "A free and open source deck tracker, collection browser and statistics manager for Magic: The Gathering Arena, on Windows, macOS and Linux. Track your matches, see your winrates and explore what other players are brewing.";
 
 const OG_IMAGE = `${SITE_URL}/images/og-card.jpg`;
 

@@ -6,6 +6,8 @@ export const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}`;
 export function repoApi(repo: string): string {
   return `https://api.github.com/repos/${GITHUB_ORG}/${repo}`;
 }
+export const GITHUB_ORG_PAGE = `https://github.com/${GITHUB_ORG}`;
+export const GITHUB_REPO_PAGE = `https://github.com/${GITHUB_REPO}`;
 export const GITHUB_RELEASES_PAGE = `https://github.com/${GITHUB_REPO}/releases/latest`;
 export const GITHUB_RELEASES_LIST = `https://github.com/${GITHUB_REPO}/releases`;
 

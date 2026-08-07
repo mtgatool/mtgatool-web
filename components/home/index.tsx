@@ -12,11 +12,13 @@ import Feature from "./Feature";
 import FeatureRight from "./FeatureRight";
 
 import ShowcaseCollection from "./ShowcaseCollection";
+import OpenSourceBadge from "./OpenSourceBadge";
+import GithubLogo from "../svg/GithubLogo";
 import usePlatform from "../../hooks/usePlatform";
 import { Contributor } from "../../lib/getGithubHome";
-import { GITHUB_RELEASES_PAGE } from "../../lib/github";
+import { GITHUB_ORG_PAGE, GITHUB_RELEASES_PAGE } from "../../lib/github";
 
-export const DESCRIPTION_TEXT = `MTG Arena Tool is a collection browser, a deck tracker and a statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
+export const DESCRIPTION_TEXT = `MTG Arena Tool is a free and open source collection browser, deck tracker and statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
 import styles from "../../styles/Home.module.scss";
 import topnavstyles from "../../styles/Topnav.module.scss";
@@ -95,6 +97,7 @@ function Home(props: HomeProps): JSX.Element {
                   </a>
                 </Flex>
               )}
+              <OpenSourceBadge />
             </div>
           </Section>
         </WrapperInner>
@@ -170,7 +173,7 @@ function Home(props: HomeProps): JSX.Element {
               {contributors.length > 0 && (
                 <>
                   <div className={styles.comunitySupport}>
-                    GitHub Contributors
+                    Built in the open by our GitHub contributors
                   </div>
                   <div className={styles.communityIcons}>
                     {contributors.map((contrib) => (
@@ -189,7 +192,7 @@ function Home(props: HomeProps): JSX.Element {
                   </div>
                 </>
               )}
-              <div className={styles.showcaseDownloadContainer}>
+              <Flex className={styles.closingButtons}>
                 <a
                   style={{ margin: "auto 0px" }}
                   className="downloadButton"
@@ -197,7 +200,17 @@ function Home(props: HomeProps): JSX.Element {
                 >
                   Download for {getCurrentOSName(platform)}
                 </a>
-              </div>
+                <a
+                  style={{ margin: "auto 0px" }}
+                  className="githubButton"
+                  href={GITHUB_ORG_PAGE}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <GithubLogo />
+                  Browse the source
+                </a>
+              </Flex>
             </Section>
           </Flex>
         </WrapperInner>

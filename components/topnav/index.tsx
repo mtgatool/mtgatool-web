@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import PatreonLogo from "../svg/PatreonLogo";
+import GithubLogo from "../svg/GithubLogo";
+import { GITHUB_ORG_PAGE } from "../../lib/github";
 import styles from "../../styles/Topnav.module.scss";
 
 interface TopNavProps {
@@ -28,6 +30,16 @@ export function TopNav(props: TopNavProps): JSX.Element {
           <Link href="/docs/installation">
             <a className={styles.navLinkA}>Docs</a>
           </Link>
+          <a
+            className={styles.navGithub}
+            href={GITHUB_ORG_PAGE}
+            target="_blank"
+            rel="noreferrer"
+            title="MTG Arena Tool is open source — browse the code on GitHub"
+            aria-label="MTG Arena Tool on GitHub"
+          >
+            <GithubLogo />
+          </a>
           <a
             className={styles.navPatreon}
             href="https://www.patreon.com/cw/mtgatool"
