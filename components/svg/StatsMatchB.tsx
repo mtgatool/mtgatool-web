@@ -16,11 +16,15 @@ export default function SvgComponent(
       style={style}
     >
       <style />
+      {/* Every showcase SVG is inlined into the same document, so clipPath ids
+          are global and must stay unique per file — hence the suffix. These
+          were plain "clipEmfPath1"/"2", which collided with OverlayUgin's and
+          clipped the loss stripe below out of existence. */}
       <defs>
-        <clipPath id="clipEmfPath1">
+        <clipPath id="clipEmfPath1-4">
           <path d="m2.2002-0.39299h140.74c1.4544 0 2.6477 1.2392 2.6477 2.7495v15.8c0 1.5103-1.1933 2.7495-2.6477 2.7495h-140.74c-1.4544 0-2.6477-1.2392-2.6477-2.7495v-15.8c0-1.5103 1.1933-2.7495 2.6477-2.7495z" />
         </clipPath>
-        <clipPath id="clipEmfPath2">
+        <clipPath id="clipEmfPath2-40">
           <path d="m2.2002-0.39299h43.78v21.299h-43.78c-0.074583 0-0.18646 0-0.29833-0.03872v-21.222c0.11187-0.038726 0.22375-0.038726 0.29833-0.038726z" />
         </clipPath>
       </defs>
@@ -33,7 +37,7 @@ export default function SvgComponent(
         <path
           transform="matrix(.26458 0 0 .26458 73.248 70.272)"
           d="m-2.0883 21.487h3.9902v-22.461h-3.9902z"
-          clip-path="url(#clipEmfPath1)"
+          clip-path="url(#clipEmfPath1-4)"
           fill="#dd8263"
           fill-rule="evenodd"
         />
@@ -43,7 +47,7 @@ export default function SvgComponent(
           y="-.93228"
           width="43.817"
           height="22.375"
-          clip-path="url(#clipEmfPath2)"
+          clip-path="url(#clipEmfPath2-40)"
           preserveAspectRatio="none"
           xlinkHref="/images/showcase/statsmatchb-0.webp"
         />

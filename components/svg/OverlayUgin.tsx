@@ -16,7 +16,7 @@ export default function SvgComponent(
       style={style}
     >
       <defs>
-        <clipPath id="clipEmfPath1">
+        <clipPath id="clipEmfPath1-5">
           <path d="m9.9195-0.39299h13.276v13.786h-13.276z" />
         </clipPath>
       </defs>
@@ -59,7 +59,7 @@ export default function SvgComponent(
           y="-.93228"
           width="14.917"
           height="14.917"
-          clip-path="url(#clipEmfPath1)"
+          clip-path="url(#clipEmfPath1-5)"
           preserveAspectRatio="none"
           xlinkHref="/images/showcase/overlayugin-0.webp"
         />
