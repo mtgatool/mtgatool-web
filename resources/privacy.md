@@ -1,6 +1,6 @@
 # Privacy Policy
 
-*Last updated: August 4th, 2026*
+*Last updated: August 7th, 2026*
 
 This policy explains what data MTG Arena Tool ("the application") collects, why we collect it, and the choices you have. It covers the desktop application and this website.
 
@@ -26,6 +26,14 @@ Aggregated and anonymised game data — for example, which decks and cards are b
 
 We do not sell your data, and we do not share it with advertisers or other third parties for their own purposes. We use service providers to host our infrastructure, and they process data only on our behalf in order to run the service.
 
+## Cookies and analytics
+
+This website uses Google Analytics to count visits and see which pages are used, so that we know what is worth working on. It tells us things like which pages were opened, roughly where in the world the visitor was, and what kind of device they used. It is not used for advertising, and we do not use it to identify anyone.
+
+Google Analytics sets cookies, so we ask before it loads. If you decline, it is never loaded and no analytics cookie is set. If you accept, you can change your mind by clearing this site's cookies and site data in your browser, and we will ask again on your next visit.
+
+The desktop application does not use analytics cookies.
+
 ## What other people can see
 
 Some features show your profile publicly to other users, such as your display name, avatar and rank.
@@ -34,6 +42,7 @@ Some features show your profile publicly to other users, such as your display na
 
 ## Your choices
 
+- **Analytics cookies.** Declined or accepted on the banner shown on your first visit to this website, and never loaded unless you accept.
 - **Private mode.** Under **Settings → Account**, to keep your profile from being shown to other users.
 - **Recovery email.** Optional, and can be added or changed under **Settings → Account**.
 - **Deleting matches.** Individual matches can be removed from your history inside the application.
