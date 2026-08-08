@@ -17,6 +17,7 @@ import GithubLogo from "../svg/GithubLogo";
 import usePlatform from "../../hooks/usePlatform";
 import { Contributor } from "../../lib/getGithubHome";
 import { GITHUB_ORG_PAGE, GITHUB_RELEASES_PAGE } from "../../lib/github";
+import { trackDownloadClick, trackOpenWebApp } from "../../lib/analytics";
 
 export const DESCRIPTION_TEXT = `MTG Arena Tool is a free and open source collection browser, deck tracker and statistics manager. Explore which decks you played against and what other players are brewing. MTG Arena Tool is all about improving your Magic Arena experience.`;
 
@@ -72,12 +73,14 @@ function Home(props: HomeProps): JSX.Element {
                 <a
                   className="downloadButton"
                   href={makeDownloadURL(platform, version)}
+                  onClick={() => trackDownloadClick(getCurrentOSName(platform))}
                 >
                   Download for {getCurrentOSName(platform)}
                 </a>
                 <a
                   className="openWebButton"
                   href="https://app.mtgatool.com/auth"
+                  onClick={trackOpenWebApp}
                 >
                   Open in your browser
                 </a>
@@ -197,6 +200,7 @@ function Home(props: HomeProps): JSX.Element {
                   style={{ margin: "auto 0px" }}
                   className="downloadButton"
                   href={makeDownloadURL(platform, version)}
+                  onClick={() => trackDownloadClick(getCurrentOSName(platform))}
                 >
                   Download for {getCurrentOSName(platform)}
                 </a>

@@ -8,6 +8,7 @@ import TopNav from "../components/topnav";
 import Footer from "../components/footer";
 import CookieConsent from "../components/cookieConsent";
 import useCookieConsent from "../hooks/useCookieConsent";
+import { GA_MEASUREMENT_ID } from "../lib/analytics";
 
 const ARTIST = "Thoughtseize by Aleksi Briclot";
 
@@ -19,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {/* Mounted only once the visitor has agreed, so gtag.js is never fetched
           and no cookie is set until then. */}
       {consent === "granted" && (
-        <GoogleAnalytics trackPageViews gaMeasurementId="G-0T0RMGGWLK" />
+        <GoogleAnalytics trackPageViews gaMeasurementId={GA_MEASUREMENT_ID} />
       )}
       {/* Page metadata lives in <Seo>, rendered by each page. */}
       <Head>
