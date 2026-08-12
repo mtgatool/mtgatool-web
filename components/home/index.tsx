@@ -16,6 +16,10 @@ import OpenSourceBadge from "./OpenSourceBadge";
 import GithubLogo from "../svg/GithubLogo";
 import usePlatform from "../../hooks/usePlatform";
 import { Contributor } from "../../lib/getGithubHome";
+import { TopRanks } from "../../lib/getTopRanks";
+import Link from "next/link";
+import { LeaderboardPodium } from "../leaderboard";
+import lbstyles from "../../styles/Leaderboard.module.scss";
 import { GITHUB_ORG_PAGE, GITHUB_RELEASES_PAGE } from "../../lib/github";
 import { trackDownloadClick, trackOpenWebApp } from "../../lib/analytics";
 
@@ -53,17 +57,19 @@ function makeDownloadURL(platform: string, versionTag: string | null): string {
 interface HomeProps {
   patreons: IPatreon[];
   contributors: Contributor[];
+  ranks: TopRanks;
   version: string | null;
 }
 
 function Home(props: HomeProps): JSX.Element {
-  const { patreons, contributors, version } = props;
+  const { patreons, contributors, version, ranks } = props;
   const platform = usePlatform();
 
   return (
     <>
       <WrapperOuter style={{ marginBottom: "4em" }}>
         <WrapperInner>
+          <>
           <Section className="topNavMargin" style={{ display: "block", margin: "128px 0 16px 0" }}>
             <div className="homeDesc">
               <h1 className={"textDescription TextLight"}>
@@ -103,6 +109,29 @@ function Home(props: HomeProps): JSX.Element {
               <OpenSourceBadge />
             </div>
           </Section>
+          {(ranks.constructed.length > 0 || ranks.limited.length > 0) && (
+            <Section
+              style={{
+                flexDirection: "column",
+                padding: "1em",
+                margin: "0 0 16px",
+                width: "100%",
+                boxSizing: "border-box",
+              }}
+            >
+              <div className={styles.comunitySupport}>Top ranked players</div>
+              <LeaderboardPodium
+                constructed={ranks.constructed}
+                limited={ranks.limited}
+              />
+              <div className={lbstyles.podiumMore}>
+                <Link href="/leaderboard">
+                  <a>Full leaderboard →</a>
+                </Link>
+              </div>
+            </Section>
+          )}
+          </>
         </WrapperInner>
       </WrapperOuter>
 

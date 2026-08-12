@@ -24,6 +24,9 @@ export function TopNav(props: TopNavProps): JSX.Element {
         <div className={styles.navArtist}>{artist}</div>
         <div className={styles.navDivider} />
         <div className={styles.navLinks}>
+          <Link href="/leaderboard">
+            <a className={styles.navLinkA}>Leaderboard</a>
+          </Link>
           <Link href="/release-notes">
             <a className={styles.navLinkA}>Release Notes</a>
           </Link>

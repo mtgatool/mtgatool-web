@@ -3,6 +3,7 @@ import request from "request";
 import Home from "../components/home";
 import Seo from "../components/Seo";
 import { Contributor, getContributors, getLatestVersion } from "../lib/getGithubHome";
+import { getTopRanks, TopRanks } from "../lib/getTopRanks";
 
 /** Refresh the Patreon and GitHub data hourly without a redeploy. */
 const REVALIDATE_SECONDS = 3600;
@@ -18,15 +19,21 @@ interface IndexProps {
   patreons: IPatreon[];
   contributors: Contributor[];
   version: string | null;
+  ranks: TopRanks;
 }
 
 const Index: NextPage<IndexProps> = (props) => {
-  const { patreons, contributors, version } = props;
+  const { patreons, contributors, version, ranks } = props;
 
   return (
     <>
       <Seo path="/" appSchema />
-      <Home patreons={patreons} contributors={contributors} version={version} />
+      <Home
+        patreons={patreons}
+        contributors={contributors}
+        version={version}
+        ranks={ranks}
+      />
     </>
   );
 };
@@ -109,14 +116,18 @@ export async function getStaticProps(): Promise<{
   revalidate: number;
 }> {
   // Independent sources; one being slow or down should not hold up the others.
-  const [patreons, contributors, version] = await Promise.all([
+  const [patreons, contributors, version, ranks] = await Promise.all([
     getPatreons(),
     getContributors(),
     getLatestVersion(),
+    getTopRanks(10).catch((e) => {
+      console.error("[index] getTopRanks failed:", e);
+      return { constructed: [], limited: [] };
+    }),
   ]);
 
   return {
-    props: { patreons, contributors, version },
+    props: { patreons, contributors, version, ranks },
     revalidate: REVALIDATE_SECONDS,
   };
 }

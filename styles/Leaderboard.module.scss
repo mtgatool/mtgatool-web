@@ -1,0 +1,220 @@
+.columns {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 24px 0 48px;
+}
+
+.column {
+  flex: 1 1 360px;
+  max-width: 440px;
+}
+
+.columnTitle {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--color-text, #eee);
+  font-style: italic;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 2px 8px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  background-color: var(--color-section, rgba(0, 0, 0, 0.35));
+}
+
+.pos {
+  min-width: 22px;
+  text-align: right;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-text-dark, #999);
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 28px;
+  background-size: cover;
+  background-position: center;
+  margin-left: 12px;
+}
+
+.name {
+  margin-left: 12px;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  color: var(--color-text, #eee);
+}
+
+.mythicLabel {
+  font-size: 13px;
+  color: var(--color-text-dark, #999);
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+/*
+ * The rank sprite sheets from the app: 48px cells, index selected with
+ * background-position (see getRankIndex). Drawn at 0.8 scale — downscaling
+ * the raster stays crisp.
+ */
+.rankIcon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background-repeat: no-repeat;
+  transform: scale(0.8);
+}
+
+.rankConstructed {
+  composes: rankIcon;
+  background-image: url("/images/ranks_constructed_48.png");
+}
+
+.rankLimited {
+  composes: rankIcon;
+  background-image: url("/images/ranks_limited_48.png");
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-text-dark, #999);
+  padding: 24px;
+}
+
+.compact {
+  margin: 12px 0 0;
+
+  .columnTitle {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .row {
+    height: 34px;
+    padding: 2px 6px;
+    margin-bottom: 3px;
+  }
+
+  .avatar {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-left: 8px;
+  }
+
+  .name {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .rankIcon,
+  .rankConstructed,
+  .rankLimited {
+    transform: scale(0.65);
+  }
+}
+
+.podium {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.podiumGroup {
+  flex: 0 1 auto;
+}
+
+.podiumCards {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.podiumCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+  padding: 14px 10px 10px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-top: 3px solid transparent;
+}
+
+.podiumFirst {
+  border-top-color: #f2c14e;
+  order: 2;
+}
+
+.podiumSecond {
+  border-top-color: #bfc4c9;
+  order: 1;
+}
+
+.podiumThird {
+  border-top-color: #cd7f32;
+  order: 3;
+}
+
+.podiumPos {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--color-text-dark, #999);
+}
+
+.podiumAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 6px;
+}
+
+.podiumName {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text, #eee);
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.podiumRankLabel {
+  font-size: 12px;
+  color: var(--color-text-dark, #999);
+}
+
+.podiumMore {
+  text-align: center;
+  margin-top: 10px;
+
+  a {
+    color: var(--color-text-dark, #999);
+    font-size: 13px;
+    font-style: italic;
+
+    &:hover {
+      color: var(--color-text, #eee);
+    }
+  }
+}
