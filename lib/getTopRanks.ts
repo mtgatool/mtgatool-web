@@ -32,6 +32,8 @@ export interface RankSide {
 
 export interface RankedPlayer {
   name: string;
+  /** What app.mtgatool.com/profile/<id> resolves: profile name, or arena id. */
+  profileId: string;
   avatar: string | null;
   rank: RankSide;
 }
@@ -107,6 +109,9 @@ export async function getTopRanks(top = 10): Promise<TopRanks> {
 
   const players = rows.map((r) => ({
     name: cleanUsername(r.username || r.display_name || "-"),
+    // The profile page looks names up against profiles; players who never
+    // made one only resolve by arena id.
+    profileId: r.username || r.arena_id,
     avatar: r.avatar_url || null,
     constructed: side(r.constructed),
     limited: side(r.limited),
@@ -116,7 +121,12 @@ export async function getTopRanks(top = 10): Promise<TopRanks> {
     [...players]
       .sort((a, b) => compareRanks(a[format], b[format]))
       .slice(0, top)
-      .map((p) => ({ name: p.name, avatar: p.avatar, rank: p[format] }));
+      .map((p) => ({
+        name: p.name,
+        profileId: p.profileId,
+        avatar: p.avatar,
+        rank: p[format],
+      }));
 
   return { constructed: pick("constructed"), limited: pick("limited") };
 }

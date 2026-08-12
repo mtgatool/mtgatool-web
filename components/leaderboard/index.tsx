@@ -48,6 +48,13 @@ function RankIcon({
   );
 }
 
+/** The player's public profile on the web app. */
+function profileUrl(player: RankedPlayer): string {
+  return `https://app.mtgatool.com/profile/${encodeURIComponent(
+    player.profileId
+  )}`;
+}
+
 function Row({
   player,
   pos,
@@ -66,7 +73,12 @@ function Row({
       : null;
 
   return (
-    <div className={styles.row}>
+    <a
+      className={styles.row}
+      href={profileUrl(player)}
+      target="_blank"
+      rel="noreferrer"
+    >
       <div className={styles.pos}>{pos}</div>
       <div
         className={styles.avatar}
@@ -77,7 +89,7 @@ function Row({
         <div className={styles.mythicLabel}>{mythicLabel}</div>
       ) : null}
       <RankIcon rank={rank} format={format} />
-    </div>
+    </a>
   );
 }
 
@@ -102,7 +114,12 @@ function PodiumCard({
   ];
 
   return (
-    <div className={`${styles.podiumCard} ${posClass}`}>
+    <a
+      className={`${styles.podiumCard} ${posClass}`}
+      href={profileUrl(player)}
+      target="_blank"
+      rel="noreferrer"
+    >
       <div className={styles.podiumPos}>{pos}</div>
       <div
         className={styles.podiumAvatar}
@@ -111,7 +128,7 @@ function PodiumCard({
       <div className={styles.podiumName}>{player.name}</div>
       <RankIcon rank={rank} format={format} />
       <div className={styles.podiumRankLabel}>{mythicLabel}</div>
-    </div>
+    </a>
   );
 }
 
